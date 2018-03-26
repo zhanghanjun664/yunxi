@@ -1,0 +1,66 @@
+{
+    "resultCode": 0,
+    "resultMsg": "success",
+    "data": {
+        "list": [
+            {
+                "id": "1168786315902201811",
+                "title": "长安福特冬季特惠.....",
+                "image": "https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/jpg/%E9%80%9A%E6%A0%8F38pc.jpg",
+                "type": 1,
+                "readTotal": 11,
+                "commentTotal": 1,
+                "publishTime": "2018-03-10 16:48:00"
+            },
+            {
+                "id": "1168786315902201822",
+                "title": "长安asd福特冬季特惠.....",
+                "image": "https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/jpg/%E9%80%9A%E6%A0%8F38pc.jpg",
+                "type": 1,
+                "readTotal": 11,
+                "commentTotal": 1,
+                "publishTime": "2018-03-10 16:48:00"
+            },
+            {
+                "id": "1168786315902201811",
+                "title": "qq长安福特冬季特惠.....",
+                "image": "https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/jpg/%E9%80%9A%E6%A0%8F38pc.jpg",
+                "type": 4,
+                "readTotal": 11,
+                "commentTotal": 1,
+                "publishTime": "2018-03-10 16:48:00"
+            },
+            {
+                "id": "1168786315902201822",
+                "title": "we长安福特冬季特惠.....",
+                "image": "https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/jpg/%E9%80%9A%E6%A0%8F38pc.jpg",
+                "type": 3,
+                "readTotal": 11,
+                "commentTotal": 1,
+                "publishTime": "2018-03-10 16:48:00"
+            },
+            {
+                "id": "1168786315902201811",
+                "title": "adc长安福特冬季特惠.....",
+                "image": "https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/jpg/%E9%80%9A%E6%A0%8F38pc.jpg",
+                "type": 2,
+                "readTotal": 11,
+                "commentTotal": 1,
+                "publishTime": "2018-03-10 16:48:00"
+            },
+            {
+                "id": "1168786315902201822",
+                "title": "wa长安福特冬季特惠.....",
+                "image": "https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/jpg/%E9%80%9A%E6%A0%8F38pc.jpg",
+                "type": 3,
+                "readTotal": 11,
+                "commentTotal": 1,
+                "publishTime": "2018-03-10 16:48:00"
+            }
+        ],
+        "pageNum": 1,
+        "pageSize": 10,
+        "pages": 1,
+        "total": 2
+    }
+}

@@ -1,0 +1,44 @@
+{
+  "data": {
+    "total": 2,
+    "pages": 1,
+    "pageSize": 10,
+    "pageNum": 1,
+    "list": [
+      {
+        "id": 1,
+        "code":"123454545",
+        "imgUrl": "assets/images/home/car02.png",
+        "name": "福特福克斯 1.5T 三厢 EcoBoost 自动旗舰型",
+        "originalPrice": 16.58,
+        "discountPrice": 5.88
+      },
+      {
+        "id": 2,
+        "code":"123454545",
+        "imgUrl": "assets/images/home/car02.png",
+        "name": "福特福克斯 1.5T 三厢 EcoBoost 自动旗舰型",
+        "originalPrice": 16.58,
+        "discountPrice": 5.88
+      },
+      {
+        "id": 3,
+        "code":"123454545",
+        "imgUrl": "assets/images/home/car02.png",
+        "name": "福特福克斯 1.5T 三厢 EcoBoost 自动旗舰型",
+        "originalPrice": 16.58,
+        "discountPrice": 5.88
+      },
+      {
+        "id": 4,
+        "code":"123454545",
+        "imgUrl": "assets/images/home/car02.png",
+        "name": "福特福克斯 1.5T 三厢 EcoBoost 自动旗舰型",
+        "originalPrice": 16.58,
+        "discountPrice": 5.88
+      }
+    ]
+  },
+  "resultCode": 0,
+  "resultMsg": "success"
+}

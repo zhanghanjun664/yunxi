@@ -1,0 +1,345 @@
+@import "../../../assets/css/commonCss";
+
+.home-page {
+  font-size: 24px;
+  color: #333;
+  padding-top: 108px;
+  /** header **/
+  .home-header {
+    width: 100%;
+    height: 108px;
+    background: #FF843C;
+    background-image: url("@{images}/home/header_bg.png");
+    background-size: 100% 100%;
+    padding: 0 30px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 20;
+
+    .logo {
+      width: 82px;
+      height: 66px;
+      background: #ffffff;
+      opacity: 0.49;
+    }
+
+    .position {
+      color: #ffffff;
+      > i {
+        font-size: 40px;
+        margin-right: 3px;
+      }
+    }
+
+    .input-wrap {
+      padding: 0 16px 0 22px;
+      position: relative;
+      .search-input {
+        border: 0;
+        height: 66px;
+        width: 100%;
+        border-radius: 10px;
+        line-height: 65px;
+        padding: 0 60px 0 20px;
+      }
+      .icon-sousuo {
+        position: absolute;
+        font-size: 40px;
+        color: #ccc;
+        right: 30px;
+        top: 2px;
+      }
+    }
+  }
+  /** 轮播图 **/
+  .banner {
+    .banner-item-wrap {
+      width: 100%;
+      height: 0;
+      padding-bottom: 43.3333%;
+      position: relative;
+      .banner-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  /**导航栏**/
+  .nav-wrap {
+    position: relative;
+    z-index: 2;
+    margin: -28px 30px 0;
+    background: #ffffff;
+    height: 220px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 12px 0 rgba(0,0,0,0.07);
+    border-radius: 10px;
+    .news-wrap {
+      padding: 20px 20.25px 0px;
+
+      .text1 {
+        color: #0F68B0;
+        font-weight: bold;
+      }
+      .text2 {
+        color: #151515;
+        font-weight: bold;
+      }
+      .more-news:before {
+        content: '';
+        display: inline-block;
+        width: 1px;
+        height: 24px;
+        margin-right: 10px;
+        background: #e6e6e6;
+        position: relative;
+        top: 4px;
+      }
+      .news-item {
+        padding: 0px 16px;
+      }
+      .tag {
+        border: 1px solid #FD5C0E;
+        border-radius: 4px;
+        color: #FD5C0E;
+        padding: 0 6px;
+        margin-right: 8px;
+      }
+    }
+    .nav {
+      margin-top: 25px;
+      .nav-item {
+        width: 20%;
+        text-align: center;
+        > img {
+          width: 68px;
+          height: 68px;
+          display: block;
+          margin: 0 auto 10px;
+        }
+      }
+    }
+  }
+
+  /**模块公用样式**/
+  .home-module {
+    background: #FFFFFF;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+    margin-top: 30px;
+    .home-module-head {
+      height: 79px;
+      border: 1px solid #dddddd;
+      color: #FD5C0E;
+      font-size: 30px;
+      background: url("@{images}/home/title_bg.png")
+                  no-repeat
+                  scroll
+                  center center / 100%;
+    }
+    .icon {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+  }
+
+  /**热门车型**/
+  .hot-cars {
+    .icon-hot {
+      background: url("@{images}/home/huoyan.png")
+                  no-repeat
+                  scroll
+                  center center / 100%;
+    }
+    .hot-cars-content {
+      padding: 30px;
+      .car-item {
+        margin-left: 15px;
+        &:first-child {
+          margin-left: 0px;
+        }
+        > img {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  /** 为您推荐 **/
+  .recomment-cars {
+    padding: 20px 20px 20px 30px;
+    .img-wrap {
+      width: 31.43%;
+      height: 0px;
+      padding-bottom: 24.29%;
+      position: relative;
+      > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .jxs-info {
+      margin-left: 30px;
+      .jxs-name {
+        font-size: 30px;
+        color: #0F68B0;
+        line-height: 36px;
+      }
+      .jxs-position {
+        font-size: 24px;
+        color: #999999;
+        line-height: 36px;
+        margin-top: 10px;
+      }
+      .to-here {
+        font-size: 28px;
+        color: #FD5C0E;
+        > span:first-child {
+          font-size: 24px;
+          margin-right: 4px;
+        }
+      }
+      .to-phone {
+        > span:first-child {
+          display: inline-block;
+          width: 1px;
+          height: 38px;
+          background: #cccccc;
+          margin-right: 8px;
+          position: relative;
+          top: 6px;
+        }
+
+        > span:nth-child(2) {
+          color: #FD5C0E;
+          font-size: 40px;
+        }
+      }
+    }
+
+  }
+
+  /**特惠车专区**/
+  .discount-cars {
+    .icon-discount {
+      background: url("@{images}/home/tehuiche.png")
+                  no-repeat
+                  scroll
+                  center center / 100%;
+    }
+    .product-list {
+      .product-item {
+        display: inline-block;
+        width: 50%;
+        padding: 30px;
+        border-bottom: 1px solid #e6e6e6;
+        border-right: 1px solid #e6e6e6;
+        vertical-align: middle;
+        &:nth-child(2n) {
+          border-right: none;
+        }
+
+        .img-wrap {
+          width: 100%;
+          height: 0px;
+          padding-bottom: 82.54%;
+          position: relative;
+          > img {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .product-name {
+          font-size: 24px;
+          color: #333333;
+          line-height: 36px;
+          margin-top: 14px;
+        }
+
+        .product-price {
+          margin-top: 10px;
+          > del {
+            font-size: 20px;
+            color: #999;
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  /**精选视频**/
+  .choose-vedio {
+    .icon-vedio {
+      background: url("@{images}/home/shipin.png")
+                  no-repeat
+                  scroll
+                  center center / 100%;
+    }
+    .vedio-footer {
+      color: #0F68B0;
+    }
+  }
+
+  /**最新优惠活动**/
+  .last-activity {
+    background: transparent;
+    .icon-activity {
+      background: url("@{images}/home/youhuihuodong.png")
+                  no-repeat
+                  scroll
+                  center center / 100%;
+    }
+    .mb-30 {
+      margin-bottom: 30px;
+    }
+    .card {
+      background: #FFFFFF;
+    }
+    .activity-footer {
+      > span:first-child {
+        color: #FD5C0E;
+      }
+      > span:nth-child(2) {
+        color: #151515;
+        margin-left: 24px;
+      }
+    }
+  }
+
+  /**卡片式公用样式**/
+  .card {
+    .card-content {
+      width: 100%;
+      height: 0px;
+      padding-bottom: 48%;
+      position: relative;
+      > img {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .card-footer {
+      height: 90px;
+      line-height: 90px;
+      font-size: 28px;
+      padding: 0 30px;
+    }
+  }
+}

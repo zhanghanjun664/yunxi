@@ -1,0 +1,48 @@
+{
+  "data": {
+    "total": 2,
+    "pages": 1,
+    "pageSize": 10,
+    "list": [
+      {
+        "id": "1169261628992008192",
+        "name": "轿车",
+        "children": [
+          {
+            "id": 1,
+            "name": "福睿斯",
+            "imgUrl": "https://zn-image.oss-cn-shenzhen.aliyuncs.com/supplychain-dev/test/floor/PmQyytGY5R.jpg",
+            "remark": "厂家建议零售价：9.68万起"
+          },
+          {
+            "id": 2,
+            "name": "福克斯",
+            "imgUrl": "https://zn-image.oss-cn-shenzhen.aliyuncs.com/supplychain-dev/test/floor/PmQyytGY5R.jpg",
+            "remark": "厂家建议零售价：19.68万起"
+          }
+        ]
+      },
+      {
+        "id": "1169261628992008181",
+        "name": "SUV",
+        "children": [
+          {
+            "id": 3,
+            "name": "翼博",
+            "imgUrl": "https://zn-image.oss-cn-shenzhen.aliyuncs.com/supplychain-dev/test/floor/PmQyytGY5R.jpg",
+            "remark": "厂家建议零售价：68.68万起"
+          },
+          {
+            "id": 4,
+            "name": "翼虎",
+            "imgUrl": "https://zn-image.oss-cn-shenzhen.aliyuncs.com/supplychain-dev/test/floor/PmQyytGY5R.jpg",
+            "remark": "厂家建议零售价：16.98万起"
+          }
+        ]
+      }
+    ],
+    "pageNum": 1
+  },
+  "resultCode": 0,
+  "resultMsg": "success"
+}

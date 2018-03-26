@@ -1,0 +1,90 @@
+/**
+ * 常用工具类
+ */
+import React, {Component} from 'react';
+
+class util {
+    //判断是安卓还是ios
+    static androidOrios() {
+        var u = navigator.userAgent;
+        if (u.indexOf('Android') > -1 || u.indexOf('Adr') > -1) {
+            return "Android"
+
+        }
+        if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+            return "IOS"
+        }
+    }
+    //给local缓存值
+    static setLocalCache(c_name, value) {
+        localStorage.setItem(c_name, JSON.stringify(value))
+    }
+
+    //取回local
+    static getLocalCache(c_name) {
+        var tem = localStorage.getItem(c_name);
+        return tem;
+    }
+    //设置cookie
+    static getLocalCache(c_name, value, expiredays = 3600000) {
+        var exdate = new Date()
+        exdate.setTime(exdate.getTime() + expiredays)
+        document.cookie = c_name + "=" + escape(value) +
+            ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
+    }
+    //取回cookie
+    static getLocalCache(c_name) {
+        if (document.cookie.length > 0) {
+            var c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                var c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+        }
+        return "";
+    }
+
+    //从url取值
+    static getQueryString(name = '') {
+        var after = window.location.hash.split("?")[1] || '';
+        if (after && name) {
+            var reg = new RegExp("(^|&)" + name.trim() + "=([^&]*)(&|$)");
+            var r = after.trim().match(reg);
+            if (r != null) {
+                return decodeURIComponent(r[2]);
+            }
+            else {
+                return null;
+            }
+        }
+    }
+    //时间转换
+    static formatDate(str) {
+        return str.split(" ")[0].replace(/-/g, '.')
+    }
+    // 评分转换星星
+    static changeStarArr(str) {
+        var str = String(str);
+        var full = Number(str.split(".")[0]),
+            mid = Number(str.split(".")[1]),
+            no = parseInt(Number(str)),
+            arr = [];
+        for (let i = 0; i < 5; i++) {
+            if (i < full) {
+                arr.push('assets/images/productDetail/icon_fullStar.png')
+            } else {
+                arr.push('assets/images/productDetail/icon_noStar.png')
+            }
+        }
+        if (mid == 5) {
+            arr.splice(full, 1, "assets/images/productDetail/icon_midStar.png")
+        }
+        return arr
+    }
+
+}
+
+
+export default util;

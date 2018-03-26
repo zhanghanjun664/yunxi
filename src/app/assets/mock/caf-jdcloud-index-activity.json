@@ -1,0 +1,29 @@
+{
+  "data": {
+    "total": 2,
+    "pages": 1,
+    "pageSize": 10,
+    "list": [
+      {
+        "id":22,
+        "imgUrl":"assets/images/home/car02.png",
+        "name":"长安福特冬季特惠，百城千店联合",
+        "pv":999,
+        "commentNum":888,
+        "beginDate":"2018-03-07 15:28"
+      },
+      {
+        "id":22,
+        "imgUrl":"assets/images/home/car02.png",
+        "name":"长安福特冬季特惠，百城千店联合",
+        "pv":999,
+        "commentNum":888,
+        "beginDate":"2018-03-07 15:28"
+      }
+    ],
+    "pageNum": 1
+  },
+  "resultCode": 0,
+  "resultMsg": "success"
+}
+

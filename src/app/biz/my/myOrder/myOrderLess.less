@@ -1,0 +1,175 @@
+.myOrder{
+  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+  color: #CCCCCC; 
+  } 
+  input:-moz-placeholder, textarea:-moz-placeholder { 
+  color: #CCCCCC; 
+  } 
+  input::-moz-placeholder, textarea::-moz-placeholder { 
+  color: #CCCCCC; 
+  } 
+  input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+  color: #CCCCCC; 
+  } 
+  .flex-1{
+    flex: 1;
+  }
+  // 覆盖ant mobile样式
+  .am-tabs-content-wrap{
+    margin-top: 30px;
+  }
+  .am-tabs-default-bar-tab{
+    font-size: 28px;
+    color: #666666;
+  }
+  .am-tabs-tab-bar-wrap{
+    padding: 0 30px;
+    background-color: #fff;
+    .am-tabs-default-bar-tab-active{
+      color: #FD5C0E;
+      position: relative;
+
+    }
+    .am-tabs-default-bar-tab-active{
+      .changAnt_tabs{
+        border-bottom: 3px solid #FD5C0E;
+      }
+
+    }
+    .am-tabs-default-bar-underline{
+      display: none;
+    }
+  }
+  
+
+  .mo_searchBox{
+    background-color: #fff;
+    padding: 20px 30px 0;
+    .mo_searchBox{
+      padding: 0 30px;
+      border: 1px solid #E6E6E6;
+      border-radius: 10px;
+      display: flex;
+      height: 80px;
+      align-items: center;
+    }
+    .iconfont{
+      font-size: 40px;
+      color: #cccccc;
+    }
+    input{
+      width: 100%;
+      padding-right: 70px; 
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+
+    }
+  }
+  .mo_listBox{
+    font-size: 28px;
+    line-height: 36px;
+    .mo_listItem{
+      background-color: #fff;
+      margin-bottom: 30px;
+      padding: 0 30px;
+    }
+    .am-list-body{
+      background-color: transparent;
+    }
+  }
+  .mo_listTitle{
+    display: flex;
+    align-items: center;
+    height: 88px;
+    justify-content: space-between;
+    border-bottom: 1px solid #E6E6E6;
+    &>div:nth-of-type(2){
+      color: #0F68B0;
+    }
+  }
+  .mo_listInfo{
+    padding: 30px 0;
+    border-bottom: 1px solid #e6e6e6;
+    &>div{
+      display: flex;
+      margin-bottom: 20px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+      &>div:nth-of-type(1){
+        width: 5em;
+      }
+    }
+    .mo_carTags{
+      width: 78%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      span{
+        margin-right: 10px;
+      }
+    }
+  }
+  .mo_listInfo_tel{
+    color: #666666;
+    font-size: 24px;
+    width: 200px;
+    text-align: right;
+    .iconfont{
+      font-size: 24px;
+      margin-right: 4px;
+    }
+  }
+  .mo_listInfo_area{
+    color: #999999;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 24px;
+    flex: 1;
+    .iconfont{
+      font-size: 24px;
+      margin-right: 10px;
+    }
+  }
+  .mo_listInfo_map{
+    color: #FD5C0E;
+    font-size: 28px;
+    width: 200px;
+    text-align: right;
+    .iconfont{
+      font-size: 24px;
+      margin-right: 4px;
+    }
+  }
+  .mo_list_userInfo{
+    &>div:nth-of-type(2){
+      margin-right: 40px;
+    }
+  }
+  .mo_btnBox{
+    display: flex;
+    height: 88px;
+    align-items: center;
+    flex-direction: row-reverse;
+    color: #FD5C0E;
+    .mo_goPay{
+      width: 160px;
+      text-align: center;
+      color: #fff;
+      background-color: #FD5C0E;
+      border-radius: 10px;
+      margin-right: 40px;
+      line-height: 60px;
+    }
+  }
+  .mo_yysj{
+    color: #0F68B0;
+    margin-right: 20px;
+  }
+}
+// ant mobile
+html:not([data-scale]) .am-tabs-default-bar-top .am-tabs-default-bar-tab::after{
+  display: none;
+}

@@ -1,0 +1,29 @@
+{
+  "data": {
+    "total": 2,
+    "pages": 1,
+    "pageSize": 2,
+    "list": [
+      {
+        "id": 1,
+        "nickName":"john",
+        "headImgUrl":"assets/images/activity/header.png",
+        "itemSpecification":"福特福克斯 1.5T/峡谷棕",
+        "score":3.5,
+        "content": "动力强，操控感好，目前开了5000公里，很满意",
+        "date": "2018-03-10 17:46:00"
+      },
+      {
+        "id": 1,
+        "nickName":"john",
+        "headImgUrl":"assets/images/activity/header.png",
+        "itemSpecification":"福特福克斯 1.5T/峡谷棕",
+        "score":3.5,
+        "content": "动力强，操控感好，目前开了5000公里，很满意",
+        "date": "2018-03-10 17:46:00"
+      }
+    ]
+  },
+  "resultCode": 0,
+  "resultMsg": "success"
+}

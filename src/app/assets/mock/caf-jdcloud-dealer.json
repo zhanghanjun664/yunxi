@@ -1,0 +1,25 @@
+{
+  "data": {
+    "dealerId": "123456",
+    "dealerName": "重庆安福大石坝店",
+    "score": 3.5,
+    "salePhone": "021-12345678",
+    "imgUrl": "assets/images/cloubStore/jxs.png",
+    "shops": [
+      {
+        "name": "重庆市安捷明福一号店",
+        "address": "重庆市萝岗区科丰路31号",
+        "longitude": 116.67,
+        "latitude": 39.92
+      },
+      {
+        "name": "重庆市安捷明福一号店",
+        "address": "重庆市萝岗区科丰路31号",
+        "longitude": 116.67,
+        "latitude": 39.92
+      }
+    ]
+  },
+  "resultCode": 0,
+  "resultMsg": "success"
+}

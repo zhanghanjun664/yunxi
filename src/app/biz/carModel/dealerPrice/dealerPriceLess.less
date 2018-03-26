@@ -1,0 +1,90 @@
+.complate-info-page {
+  p{
+    font-family: PingFangSC-Regular;
+    font-size: 30px;
+    color: #333333;
+    letter-spacing: -0.38px;
+    line-height: 36px;
+  }
+  i{
+    display: inline-block;
+  }
+  background: white;
+  padding: 150px 60px 134px;
+  height: 100%;
+  .info-portrait{
+    width: 240px;
+    height:240px;
+    margin:0 195px 100px;
+    text-align: center;
+    img{
+      width: 240px;
+      height:240px;
+      border-radius: 50%;
+
+    }
+  }
+  .info-name-tel{
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 19px 0;
+    position: relative;
+    .title{
+      color: #0F68B0;
+      padding-left: 30px;
+      margin-bottom: 10px;
+      font-size:24px;
+    }
+    .am-list-item.am-input-item{
+      height:28px;
+      min-height: 28px;
+      border-left: 1px solid #E6E6E6;
+      border-right: 1px solid #E6E6E6;
+    }
+    &.info-code{
+      padding: 26px 0;
+      margin-bottom: 50px;
+      .get-code{
+        cursor: pointer;
+        font-size: 28px;
+        color: #FD5C0E;
+        position: absolute;
+        right: 20px;
+        z-index: 2;
+      }
+    }
+    &.selected{
+      border: 1px solid #0F68B0;
+      .am-list-item.am-input-item{
+        border-left: 1px solid #0F68B0;
+        border-right: 1px solid #0F68B0;
+      }
+    }
+
+  }
+
+  //绑定按钮
+  .submit-btn{
+    text-align: center;
+    padding-bottom: 40px;
+    a{
+      display: inline-block;
+      font-size: 36px;
+      color: #FFFFFF;
+      line-height: 36px;
+      padding: 26px 212px;
+      background: #FD5C0E;
+      border-radius: 10px;
+    }
+    p{
+      font-size: 24px;
+      color: #999999;
+      margin-top: 30px;
+      span{
+        color: #0F68B0;
+      }
+    }
+  }
+
+}

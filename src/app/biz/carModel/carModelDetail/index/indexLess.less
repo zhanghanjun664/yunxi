@@ -1,0 +1,220 @@
+.productDetail{
+  padding:0 0 90px;
+  &>div{
+    margin-bottom: 30px;
+  }
+  // 选择区
+  .pdSelectBox{
+    padding: 0 30px;
+    background-color: #fff;
+    .pdSelectBox_item{
+      display: flex;
+      align-items: center;
+      height: 80px;
+      &:nth-of-type(1){
+        border-bottom: 1px solid #e6e6e6;
+      }
+    }
+    .pdSelectBox_color{
+      padding-left: 14px;
+      display: flex;
+      align-items: center;
+      .pdSelectCircle{
+        width: 22px;
+        height: 22px;
+        background-color: #FD5C0E;
+        border-radius: 50%;
+        margin-right: 6px;
+      }
+    }
+    .pdSelectBox_item2{
+      flex: 1;
+      position: relative;
+    }
+    .iconfont{
+      font-size: 24px;
+      color: #b7b7b7;
+    }
+  }
+  // 附近商家
+  .nearbyInfo{
+    font-size: 28px;
+    line-height: 36px;
+    background-color: #fff;
+    padding: 20px 30px 26px;
+    .nearbyInfo1{
+      margin-bottom: 30px;
+    }
+    .nearbyInfo2{
+      display: flex;
+      justify-content: space-between;
+    }
+    .color_gray{
+      font-size: 24px;
+    }
+    .iconfont{
+      color: #b7b7b7;
+    }
+  }
+  // 评论
+  .component_pdc{
+    padding: 20px 30px 0;
+    background-color: #fff;
+    .component_pdc_title{
+      font-size: 30px;
+    }
+  }
+  // 图文介绍
+  .productDetailIntroduce{
+    padding: 50px 0 70px;
+    background-color: #fff;
+    .pdi_1{
+      line-height: 48px;
+      font-size: 36px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .pdi_2{
+      margin-bottom: 30px;
+      img{
+        width: 100%;
+      }
+    }
+    .pdi_3{
+      padding: 0 60px;
+      font-size: 28px;
+      line-height: 36px;
+      margin-bottom: 56px;
+    }
+    .pdi_4{
+      position: relative;
+      margin-bottom: 36px;
+      img{
+        width: 100%;
+      }
+      .pdi_4box{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-bottom: 16px;
+        display: flex;
+        color: #ffffff;
+        p{
+          font-size: 28px;
+          line-height: 40px;
+        }
+        .pdi_space{
+          flex: 1;
+        }
+        .pdi_space2{
+          flex: 2;
+          position: relative;
+          &:after{
+            display: block;
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 10px;
+            bottom: 10px;
+            width: 1px;
+            background-color: #fff;
+          }
+        }
+
+      }
+      
+    }
+    .pdi_5{
+      line-height: 36px;
+      font-size: 28px;
+      padding: 0 60px;
+    }
+
+  }
+
+  .component_pdConfig{
+    background-color: #fff;
+    padding: 0 30px;
+    .component_pdConfig_title{
+      font-size: 30px;
+      line-height: 78px;
+    }
+  }
+  .component_test{
+    background-color: #fff;
+    .component_test_title{
+      padding: 0 30px;
+      color: #fd5c0e;
+      font-size: 30px;
+      line-height: 80px;
+      .iconfont{
+        color: #FD5C0E;
+        width: 30px;
+        margin-right: 8px;
+        font-size: 30px;
+      }
+      
+    }
+  }
+  .pd_nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    background-color: #fff;
+    align-items: center;
+    line-height: 80px;
+    justify-content: space-around;
+    z-index: 9;
+    &>div{
+      // flex: 1;
+      // text-align: center;
+      color: #666666;
+      font-size: 28px;
+      // line-height: 80px;
+    }
+    &>.active{
+      color: #FD5C0E;
+      border-bottom: 3px solid #fd5c0e;
+    }
+    
+  }
+  .pd_footer{
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    z-index: 9;
+    background-color: #fff;
+    width: 100%;
+    margin-bottom: 0;
+    align-items: center;
+    height: 90px;
+    .pd_footerItem1{
+      flex: 1;
+      text-align: center;
+      color: #666666;
+      font-size: 20px;
+      display: flex;
+      line-height: 22px;
+      justify-content: center;
+      img{
+        margin-right: 4px;
+        width: 44px;
+      }
+    }
+    .pd_footerItem3,.pd_footerItem4{
+      width: 230px;
+      color: #fff;
+      text-align: center;
+      background-color: #F33037;
+      line-height: 90px;
+      font-size: 36px;
+    }
+    .pd_footerItem4{
+      background-color: #FB901D;
+    }
+  }
+
+}

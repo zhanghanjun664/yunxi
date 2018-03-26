@@ -1,0 +1,76 @@
+{
+	"data": {
+		"total": 3,
+		"pages": 1,
+		"pageSize": 5,
+		"list": [{
+				"dealerName": "重庆市安捷明福",
+				"shop": [{
+					"address": "重庆市萝岗区科丰路31号",
+				        "distance": "800"
+				}],
+				"score": "3.5分",
+				"price": 160000,
+				"stock": "有现货",
+				"activities": [{
+						"name": "到店享好礼，下订单抽大奖",
+						"url": "api / v1 / franchiser / manage / activitys / 123134152001"
+					},
+					{
+						"name": "购置税减免2000元",
+						"url": "api / v1 / franchiser / manage / activitys / 123134152"
+					}
+				],
+				"salePhone": "400-1234-5678"
+			},
+			{
+				"dealerName": "重庆花都福特",
+				"shop": [{
+					"address": "重庆市花都区建设北路",
+				        "distance": "1800"
+				}],
+				"score": "3.5分",
+				"price": 162000,
+				"stock": "有现货",
+				"activities": [{
+						"name": "到店享好礼，下订单抽大奖",
+						"url": "api / v1 / franchiser / manage / activitys / 123134152001"
+					},
+					{
+						"name": "购置税减免2000元",
+						"url": "api / v1 / franchiser / manage / activitys / 123134152"
+					}
+				],
+				"salePhone": "400-1234-5678"
+			},
+			{
+				"dealerName": "重庆庆福福特",
+				"shop": [{
+						"address": "重庆市花都区建设北路",
+				                "distance": "6800"
+					},
+					{
+						"address": "重庆市萝岗区建设南路",
+				                "distance": "2800"
+					}
+				],
+				"score": "3.5分",
+				"price": 160000,
+				"stock": "有现货",
+				"activities": [{
+						"name": "到店享好礼，下订单抽大奖",
+						"url": "api / v1 / franchiser / manage / activitys / 123134152001"
+					},
+					{
+						"name": "购置税减免2000元",
+						"url": "api / v1 / franchiser / manage / activitys / 123134152"
+					}
+				],
+				"salephone": "400-1234-5678"
+			}
+		],
+		"pageNum": 1
+	},
+	"resultCode": 0,
+	"resultMsg": "success"
+}

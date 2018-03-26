@@ -1,0 +1,359 @@
+.ask-price-page {
+  p{
+    font-family: PingFangSC-Regular;
+    font-size: 30px;
+    color: #333333;
+    letter-spacing: -0.38px;
+    line-height: 36px;
+  }
+  i{
+    display: inline-block;
+  }
+
+
+  //选择经销商
+  .select-dealer{
+    padding:20px 30px;
+    background: white;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+    margin: 30px 0;
+    //标题
+    .select-type{
+      overflow: hidden;
+      margin-bottom: 30px;
+      p{
+        float: left;
+        line-height: 60px;
+        span{
+          font-size: 28px;
+          color: #666666;
+          padding-left: 15px;
+          i{
+            color: #FD5C0E;
+            font-style: normal;
+          }
+        }
+      }
+      .address{
+        float: right;
+        font-size: 24px;
+        color: #FD5C0E;
+        line-height: 60px;
+        i{
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          margin-right: 10px;
+          vertical-align: text-bottom;
+          background: url("../../assets/images/askPrice/address_selected.png");
+          background-size: 100%;
+        }
+      }
+    }
+  }
+
+  //填写信息
+  .fill-info{
+    background: #FFFFFF;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+    .fill-form{
+      padding: 40px 30px 30px;
+      .am-list-item{
+        border: 1px solid #E6E6E6;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        &.selected{
+          border: 1px solid #0F68B0;
+        }
+        &.am-textarea-item{
+          //min-height: 160px;
+        }
+        &.am-input-item{
+          height: 80px;
+          padding-left: 20px;
+          .am-input-control input{
+            color: #666666;
+          }
+        }
+        .am-input-label,.am-textarea-label{
+          font-size: 24px;
+          color: #0F68B0;
+          margin-right: 15px;
+          &.am-input-label-5{
+            width: 107px;
+          }
+          &.am-textarea-label{
+            width: 107px;
+            margin-right: 0;
+          }
+        }
+        .required{
+          display: inline-block;
+          position: relative;
+          span {
+            color: #FD5C0E;
+            position: absolute;
+            right: -10px;
+          }
+        }
+        .code{
+          overflow: hidden;
+          color: #333;
+          .get-code{
+            cursor: pointer;
+            font-size: 28px;
+            color: #FD5C0E;
+            position: absolute;
+            right: 20px;
+          }
+        }
+      }
+      .fill-more{
+        font-size: 24px;
+        color: #999999;
+        padding: 20px 0;
+      }
+      .cost-time-range{
+        font-size: 24px;
+        color: #0F68B0;
+        padding: 22px 20px;
+        border: 1px solid #E6E6E6;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        position: relative;
+        display: flex;
+        .cost-selected{
+          border: 0;
+          font-size: 28px;
+          //width: 70%;
+          flex:1;
+        }
+        .arrow{
+          display: inline-block;
+          width: 22px;
+          height:20px;
+          background: url("../../assets/images/askPrice/down.png") no-repeat center;
+          position: absolute;
+          top:34px;
+          right:30px;
+          background-size: 100%;
+        }
+        .required{
+          display: inline-block;
+          position: relative;
+          span {
+            color: #FD5C0E;
+            position: absolute;
+            right: -10px;
+          }
+        }
+      }
+    }
+  }
+
+  //提交按钮
+  .submit-btn{
+    text-align: center;
+    padding: 0 60px 40px;
+    a{
+      display: inline-block;
+      font-size: 36px;
+      color: #FFFFFF;
+      line-height: 36px;
+      padding: 26px 0;
+      width: 100%;
+      background: #FD5C0E;
+      border-radius: 10px;
+      box-shadow: 0 5px 12px 0 rgba(253,92,14,0.50);
+    }
+    p{
+      font-size: 24px;
+      color: #666666;
+      margin-top: 30px;
+      line-height: 26px;
+      text-align: left;
+      i{
+        display: inline-block;
+        width: 26px;
+        height:26px;
+        background: url("../../assets/images/askPrice/checkbox_On.png");
+        background-size: 100%;
+        margin-right: 12px;
+        vertical-align: bottom;
+      }
+      span{
+        color: #0F68B0;
+      }
+    }
+    .have-tel{
+      color: #999999;
+      i{
+        width: 24px;
+        height: 24px;
+        background: url("../../assets/images/askPrice/tips.png") no-repeat;
+        background-size: 100%;
+      }
+    }
+  }
+}
+
+
+//经销商列表
+.ask-price-page-dealer-list{
+  ul{
+    li{
+      padding: 30px;
+      border: 1px solid #E6E6E6;
+      position: relative;
+      margin-bottom: 20px;
+      .dealer-name{
+        font-size: 30px;
+        color: #333333;
+        line-height: 36px;
+      }
+      .dealer-star{
+        float: right;
+        margin-right: -4px;
+        i{
+          width: 20px;
+          height: 20px;
+          margin-right: 4px;
+        }
+        .star{
+          background: url("../../assets/images/askPrice/star.png");
+          background-size: 100%;
+        }
+        .half-star{
+          background: url("../../assets/images/askPrice/half_star.png");
+          background-size: 100%;
+        }
+        .grey-star{
+          background: url("../../assets/images/askPrice/grey_star.png");
+          background-size: 100%;
+        }
+      }
+      .dealer-tel{
+        font-size: 24px;
+        line-height: 24px;
+        color: #666666;
+        margin: 20px 0 30px;
+        i{
+          width: 24px;
+          height:24px;
+          background: url("../../assets/images/askPrice/tel.png");
+          background-size: 100%;
+          margin-right: 10px;
+          vertical-align: bottom;
+        }
+      }
+      .dealer-address{
+        font-size: 24px;
+        color: #999999;
+        line-height: 24px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        i{
+          width: 24px;
+          height:24px;
+          background: url("../../assets/images/askPrice/address.png");
+          background-size: 100%;
+          margin-right: 10px;
+          vertical-align: bottom;
+        }
+        span{
+          float: right;
+        }
+      }
+      &.selected{
+        border: 1px solid #FD5C0E;
+        &:before{
+          background: url("../../assets/images/askPrice/cb_selected.png") no-repeat center center;
+          background-size: 100%;
+        }
+      }
+      &:before{
+        content: '';
+        position: absolute;
+        width: 64px;
+        height: 50px;
+        top: -2px;
+        right: -1px;
+        background: url("../../assets/images/askPrice/cb_select.png") no-repeat center center;
+        background-size: 100%;
+      }
+      .dealer-test{
+        font-size: 24px;
+        color: #666666;
+        line-height: 24px;
+        i{
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          background: url("../../assets/images/askPrice/cb_test.png");
+          background-size: 100%;
+          vertical-align: text-bottom;
+          margin-right: 10px;
+        }
+        &.selected{
+          i{
+            background: url("../../assets/images/askPrice/cb_on_test.png");
+            background-size: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+//modal层
+.ask-price-modal-page{
+  //modal层--预算区间、购车时间
+  &.am-modal-transparent {
+    width: 690px;
+    height: 552px;
+    text-align: left;
+  }
+  .am-modal-header {
+    padding-bottom: 10px;
+  }
+  .am-modal-title{
+    text-align: left;
+    font-size: 30px;
+    color: #333333;
+  }
+  .am-modal-content{
+    text-align: left;
+    .am-modal-body{
+      height:336px;
+      .am-picker{
+        height:336px;
+      }
+      .am-picker-col{
+        height:336px;
+      }
+      .am-picker-col-content{
+        padding: 20px 0!important;
+      }
+    }
+  }
+  .am-modal-footer{
+    padding: 0 34px;
+    .am-modal-button{
+      background: #FD5C0E;
+      color: white;
+      border-radius: 10px;
+      width: 296px;
+      height:80px;
+      line-height: 80px;
+    }
+    .am-modal-button:first-child{
+      background: white;
+      border: 1px solid #FD5C0E;
+      border-radius: 10px;
+      color: #FD5C0E;
+      margin-right: 30px;
+    }
+  }
+
+}
+
