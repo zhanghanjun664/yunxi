@@ -4,7 +4,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import { RefreshListView } from 'widget';
-
+import { Flex } from 'antd-mobile';
 
 class SubscribeList extends Component {
 
@@ -46,7 +46,6 @@ class SubscribeList extends Component {
                     <div><span className='mo_yysj'>预约试驾</span>预约号:01</div>
                     <div>状态：待支付</div>
                 </div>
-
                 <div className='mo_listInfo'>
                     <div>
                         <div>意向车型:</div>
@@ -55,29 +54,35 @@ class SubscribeList extends Component {
                             <span>三厢</span>
                             <span>EcoBoost</span>
                             <span>1.5T</span>
-                            <span>自动旗舰型</span>
+                            <span>自动旗舰型说法来是否是否</span>
                         </div>
                     </div>
 
                     <div>
                         <div>经销商:</div>
-                        <div className='flex-1'>广州恒福福特</div>
-                        <div className='mo_listInfo_tel'>
-                            <span className='iconfont icon-dianhua'></span>
-                            <span>021-12345612</span>
-                        </div>
+                        <Flex className='flex-1'>
+                            <div className='flex-1'>广州恒福福特</div>
+                            <div className='mo_listInfo_tel'>
+                                <span className='iconfont icon-dianhua'></span>
+                                <span>021-12345612</span>
+                            </div>
+                        </Flex>
+
                     </div>
 
                     <div>
                         <div></div>
-                        <div className='mo_listInfo_area'>
-                            <span className='iconfont icon-dingwei'></span>
-                            <span>重庆市萝岗区科丰路31号花卉阿萨德</span>
-                        </div>
-                        <div className='mo_listInfo_map'>
-                            <span className='iconfont icon-ditu'></span>
-                            <span>地图</span>
-                        </div>
+                        <Flex className='flex-1'>
+                            <div className='mo_listInfo_area'>
+                                <span className='iconfont icon-dingwei'></span>
+                                <span>重庆市萝岗区科丰路31号花卉阿萨德</span>
+                            </div>
+                            <div className='mo_listInfo_map'>
+                                <span className='iconfont icon-ditu'></span>
+                                <span>地图</span>
+                            </div>
+                        </Flex>
+
 
                     </div>
 
@@ -109,12 +114,15 @@ class SubscribeList extends Component {
     }
 
     render() {
+        let style = this.props.style || {};
         return (
             <RefreshListView
                 fetchData={this.fetchData}
                 renderRow={this.renderRow}
                 ref="list"
                 first={false}
+                useBodyScroll={false}
+                style={style}
             />
 
         )
@@ -122,3 +130,7 @@ class SubscribeList extends Component {
 }
 
 module.exports = SubscribeList;
+
+
+
+

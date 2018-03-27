@@ -10,6 +10,7 @@ class MySubsribe {
     @observable state = {
         tabIndex: 0,
         key: '',   //搜索内容
+        style: {},  //listview样式
     };
 
 
@@ -29,6 +30,11 @@ class MySubsribe {
     getAppointment = (params) => {
         params = Object.assign({}, params, {searchContent: this.state.key});
         return Serv.getAppointment(params);
+    }
+
+    @action
+    setStyle = (style) => {
+        this.state.style = style;
     }
 
 }

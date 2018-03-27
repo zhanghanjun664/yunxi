@@ -20,7 +20,7 @@ class PersonalCenterView extends Component {
                     <img className="header-img" src="assets/images/activity/header.png" />
                     <div className="account-info">
                         <div className="user-name">年轻活剥的大鱼</div>
-                        <div className="account">账号管理></div>
+                        <div className="account" onClick={()=>window.app.routerGoTo('/accountManage')}>账号管理></div>
                     </div>
                 </Flex>
                 <Flex className="message-wrap">

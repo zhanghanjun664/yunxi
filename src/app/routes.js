@@ -3,6 +3,8 @@ function rootOnEnter(nextState, replace) {
     var urlInfo = nextState.location.pathname;
     //修改标题
     let urlKey = urlInfo.split('/')[1];
+    // 回到顶部
+    window.scrollTo(0, 0);
 
     ////console.log("urlInfo====",urlInfo)
     //
@@ -288,6 +290,17 @@ export default [
                     require.ensure([], (require) => {
                         cb(null, require('./biz/my/personalCenter/PersonalCenterView'))
                         titleText("个人中心")
+                    })
+                },
+                onEnter: rootOnEnter,
+                onLeave: rootOnLeave
+            },
+            {
+                path: '/accountManage',
+                getComponent: (nextState, cb) => {
+                    require.ensure([], (require) => {
+                        cb(null, require('./biz/my/accountManage/accountManageView'))
+                        titleText("账号管理")
                     })
                 },
                 onEnter: rootOnEnter,

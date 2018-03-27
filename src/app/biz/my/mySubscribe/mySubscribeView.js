@@ -20,15 +20,21 @@ class MySubsribe extends Component {
 
 
 		this.tabs = [
-			{ title: '所有预约' },
-			{ title: '待到店' },
-			{ title: '已完成' },
-			{ title: '已取消' },
+			{title: <div className="my-tab-bar">所有预约</div>},
+			{title: <div className="my-tab-bar">待到店</div>},
+			{title: <div className="my-tab-bar">已完成</div>},
+			{title: <div className="my-tab-bar">已取消</div>},
 		];
 	}
 
 	componentDidMount() {
-
+		let height = document.body.clientHeight;
+		let height1 = document.getElementsByClassName('am-tabs-tab-bar-wrap')[0].clientHeight;
+		let height2 = document.getElementsByClassName('mo_searchWrap')[0].clientHeight;
+		this.stores.setStyle({
+			height: (height - height1 - height2) + 'px'
+		})
+		
 	}
 
 	//tab切换
@@ -61,29 +67,34 @@ class MySubsribe extends Component {
 							  onChange={this.onTabChange}
 							  onTabClick={(tab, index) => {}}
 							  swipeable={false}
+							  tabBarUnderlineStyle={{border: 'none',}}
 						>
 							<ul className='mo_listBox'>
 								<SubscribeList ref="list0"
 											   fetchData={this.stores.getAppointment}
 											   status={null}
+											   style={this.stores.state.style}
 								/>
 							</ul>
 							<ul className='mo_listBox'>
 								<SubscribeList ref="list1"
 											   fetchData={this.stores.getAppointment}
 											   status={0}
+											   style={this.stores.state.style}
 								/>
 							</ul>
 							<ul className='mo_listBox'>
 								<SubscribeList ref="list2"
 											   fetchData={this.stores.getAppointment}
 											   status={1}
+											   style={this.stores.state.style}
 								/>
 							</ul>
 							<ul className='mo_listBox'>
 								<SubscribeList ref="list3"
 											   fetchData={this.stores.getAppointment}
 											   status={2}
+											   style={this.stores.state.style}
 								/>
 							</ul>
 

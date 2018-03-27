@@ -64,25 +64,18 @@ class util {
     static formatDate(str) {
         return str.split(" ")[0].replace(/-/g, '.')
     }
-    // 评分转换星星
-    static changeStarArr(str) {
-        var str = String(str);
-        var full = Number(str.split(".")[0]),
-            mid = Number(str.split(".")[1]),
-            no = parseInt(Number(str)),
-            arr = [];
-        for (let i = 0; i < 5; i++) {
-            if (i < full) {
-                arr.push('assets/images/productDetail/icon_fullStar.png')
-            } else {
-                arr.push('assets/images/productDetail/icon_noStar.png')
-            }
-        }
-        if (mid == 5) {
-            arr.splice(full, 1, "assets/images/productDetail/icon_midStar.png")
-        }
-        return arr
-    }
+    // 获取滚动条高度
+    static getScrollTop() {
+        var scrollTop = 0;
+        // pc
+		if(document.documentElement && document.documentElement.scrollTop) {
+			scrollTop = document.documentElement.scrollTop;
+		} else if(document.body) {
+            // 移动
+			scrollTop = document.body.scrollTop;
+		}
+		return scrollTop;
+	}
 
 }
 

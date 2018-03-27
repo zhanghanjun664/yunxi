@@ -1,5 +1,5 @@
-import React, { PropTypes, Component } from 'react'
-import { Link, IndexLink } from 'react-router'
+import React, { PropTypes, Component } from 'react';
+import { Link, IndexLink } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import Config from 'config/Config';
 import Util from 'util';
@@ -142,7 +142,7 @@ class ProductDetailIndex extends Component {
 		this.stores = this.props.productDetailIndex;
 	}
 	handleScroll(e) {
-		let scrollTop = e.target.documentElement.scrollTop
+		let scrollTop = Util.getScrollTop()
 		let pdi_top = this.refs.productDetailIntroduce.refs.pdi_box.offsetTop
 		let pdConfig_top = this.refs.productConfig.offsetTop
 		let pdt_top = this.refs.test.offsetTop - 1000
@@ -161,6 +161,7 @@ class ProductDetailIndex extends Component {
 
 		// console.log(scrollTop, pdi_top, pdConfig_top, pdt_top)
 	}
+	
 	changeNavTab(type) {
 		let pdi_top = this.refs.productDetailIntroduce.refs.pdi_box.offsetTop - 83
 		let pdConfig_top = this.refs.productConfig.offsetTop - 83

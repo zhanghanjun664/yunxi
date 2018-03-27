@@ -127,9 +127,9 @@ class RefreshListView extends Component {
 
 
     render() {
-        let {useBodyScroll = true, renderSeparator = null, renderBodyComponent = null, } = this.props;
+        let {useBodyScroll = true, renderSeparator = null, renderBodyComponent = null, style = {} } = this.props;
         return (
-            <ListView ref="product-list"
+            <ListView ref="product-list" style={style}
                 dataSource={this.state.dataSource}
                 renderFooter={this._renderFooter}
                 renderRow={this.props.renderRow}

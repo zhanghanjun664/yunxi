@@ -25,6 +25,7 @@ let envConfig = {
   dev: {
     // api接口主机地址，演示阶段，先用本地，且开启mock
     host: 'https://wxdev.dtyunxi.cn/caf-b2c-web-h5',
+    // host: location.href.split('/dist')[0] + '/dist',
     // 只能在本地生效
     mock: true
   },

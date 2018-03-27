@@ -6,7 +6,6 @@ import React, { PropTypes, Component } from 'react';
 import { Flex, Button, Icon, Modal, TextareaItem, } from 'antd-mobile';
 import { inject, observer } from 'mobx-react';
 import './ActivityDetailsLess.less';
-import TabBar from 'pubBiz/tabBar/tabBarView';
 import { StarRange } from 'widget';
 
 
@@ -172,10 +171,8 @@ class ActivityDetailsView extends Component {
 
                     </Modal>
 
-                    <div style={{height: '1.2rem', width: '100%'}}></div>
-
                 </div>
-                <TabBar selectedTab = 'activityTab'/>
+
             </div>
         )
     }

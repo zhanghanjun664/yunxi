@@ -51,6 +51,11 @@ class HomeView extends Component {
   }
   componentWillMount() {
   }
+  renderTabs = tab => (
+    <div>
+      <div className='changAnt_tabs'>{tab.title}</div>
+    </div>
+  )
 
   render() {
     const { adList } = this.stores.state
@@ -83,7 +88,7 @@ class HomeView extends Component {
           <Tabs tabs={this.tabs}
             initialPage={0}
             onChange={(tab, index) => { console.log('onChange', index, tab); }}
-            onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
+            renderTab={this.renderTabs}
 
           >
               <ActivityList />
