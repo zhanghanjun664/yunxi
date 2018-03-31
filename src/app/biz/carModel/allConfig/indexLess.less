@@ -5,11 +5,22 @@
     background-color: #fff;
   }
   .ac_title{
-    border-left: 4px solid #FD5C0E;
+    // border-left: 4px solid #FD5C0E;
     line-height: 1;
     padding-left: 30px;
     margin-bottom: 20px;
     font-size: 30px;
+    position: relative;
+    &:after{
+      display: block;
+      position: absolute;
+      content: "";
+      left: 0;
+      height: 100%;
+      width: 4px;
+      background-color: #FD5C0E;
+      top: 0;
+    }
   }
   .pdConfig_item{
     padding: 0 30px;

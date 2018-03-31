@@ -31,7 +31,7 @@ class ProductDetailIndex extends Component {
 				<ul>
 					<li className='pdt_item'>
 						<div className='pdt_cover'>
-							<img src="assets/images/productDetail/baseInfo.png" />
+							<img src="assets/images/cloubStoreIndex/a1.png" />
 						</div>
 
 						<div className='pdt_infoBox'>
@@ -57,7 +57,7 @@ class ProductDetailIndex extends Component {
 					</li>
 					<li className='pdt_item'>
 						<div className='pdt_cover'>
-							<img src="assets/images/productDetail/baseInfo.png" />
+							<img src="assets/images/cloubStoreIndex/a2.png" />
 						</div>
 
 						<div className='pdt_infoBox'>

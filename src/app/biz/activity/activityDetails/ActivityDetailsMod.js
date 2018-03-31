@@ -11,7 +11,17 @@ class ActivityDetails {
     @observable state = {
         show: false,             //展示modal
         checked: true,           //勾选同意协议框
+        info: {},                //活动信息
     };
+
+    @action
+    async getActivityDetails(id) {
+        let { data, resultCode, resultMsg } = await Serv.getActivityDetails(id);
+        runInAction(() => {
+            this.state.info = data;
+        })
+
+    }
 
     @action
     openModal = () => {

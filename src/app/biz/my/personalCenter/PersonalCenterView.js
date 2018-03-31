@@ -7,19 +7,29 @@ import { Flex, Toast, Carousel, } from 'antd-mobile';
 import TabBar from 'pubBiz/tabBar/tabBarView';
 import './PersonalCenterLess.less';
 
+@inject('personalCenter')
+@observer
 class PersonalCenterView extends Component {
 
     constructor(props, context) {
         super(props, context);
+
+        this.stores = props.personalCenter;
+    }
+
+    componentDidMount() {
+        this.stores.getMemberInfo();
     }
 
     render() {
+        let { info } = this.stores.state;
+
         return (
             <div className="personal-center-page">
                 <Flex className="user-info-wrap">
-                    <img className="header-img" src="assets/images/activity/header.png" />
+                    <img className="header-img" src={info.imgUrl} />
                     <div className="account-info">
-                        <div className="user-name">年轻活剥的大鱼</div>
+                        <div className="user-name">{info.name}</div>
                         <div className="account" onClick={()=>window.app.routerGoTo('/accountManage')}>账号管理></div>
                     </div>
                 </Flex>
@@ -29,21 +39,25 @@ class PersonalCenterView extends Component {
                         <span className="text2">消息</span>
                     </div>
                     <Flex.Item>
-                        <Carousel
-                            vertical
-                            dots={false}
-                            dragging={false}
-                            swiping={false}
-                            autoplay
-                            infinite
-                        >
-                            <div className="news-item ellipsis">
-                                <span className="tag">围观</span>xxxxxxxxxxxxsfd
-                            </div>
-                            <div className="news-item ellipsis">
-                                <span className="tag">围观</span>xxxxxxxxxxxxsfd
-                            </div>
-                        </Carousel>
+                        { info.messages && (
+                            <Carousel
+                                vertical
+                                dots={false}
+                                dragging={false}
+                                swiping={false}
+                                autoplay
+                                infinite
+                            >
+                                { info.messages.map((item, index) => {
+                                    return (
+                                        <div className="news-item ellipsis">
+                                            <span className="tag">{item.sender}</span>{item.content}
+                                        </div>
+                                    )
+                                })}
+                            </Carousel>
+                        )}
+
                     </Flex.Item>
                     <div className="more-news">更多</div>
                 </Flex>

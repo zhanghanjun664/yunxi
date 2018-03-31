@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { Flex, Toast, Carousel, } from 'antd-mobile';
 import './accountManageLess.less';
 
-class PersonalCenterView extends Component {
+class AccountManage extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -47,4 +47,4 @@ class PersonalCenterView extends Component {
   }
 }
 
-module.exports = PersonalCenterView;
+module.exports = AccountManage;

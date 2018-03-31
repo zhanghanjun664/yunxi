@@ -1,0 +1,59 @@
+{
+  "data": {
+    "itemId": 13245,
+    "cmpMedias": [
+      {
+        "id": 1,
+        "fileType": 1,
+        "fileUrl": "assets/images/carModel/ci_detail.jpg"
+      }
+    ],
+    "introduces": [
+      "富文件1",
+      "富文件2"
+    ],
+    "props": [
+      {
+        "groupId": 1,
+        "groupName": "基本参数",
+        "nameId": 1,
+        "name": "排量",
+        "valueId": 1,
+        "value": "1.5L"
+      },
+      {
+        "groupId": 1,
+        "groupName": "基本参数",
+        "nameId": 2,
+        "name": "最大排量",
+        "valueId": 1,
+        "value": "4.5L"
+      },
+      {
+        "groupId": 2,
+        "groupName": "车身",
+        "nameId": 11,
+        "name": "长",
+        "valueId": 1,
+        "value": "1.2m"
+      },
+      {
+        "groupId": 2,
+        "groupName": "车身",
+        "nameId": 12,
+        "name": "宽",
+        "valueId": 11,
+        "value": "1.5m"
+      },{
+        "groupId": 2,
+        "groupName": "车身",
+        "nameId": 12,
+        "name": "高",
+        "valueId": 11,
+        "value": "2.5m"
+      }
+    ]
+  },
+  "resultCode": 0,
+  "resultMsg": "success"
+}

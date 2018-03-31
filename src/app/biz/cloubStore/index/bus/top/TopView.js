@@ -34,8 +34,10 @@ class Top extends Component{
                 <Flex className="home-header">
                     <div className="logo"></div>
                     <Flex.Item className="input-wrap">
-                        <input type="search" className="search-input" placeholder="搜索您想要的车型" />
-                        <i className="iconfont icon-sousuo"></i>
+                        <div className="input-box">
+                            <span>搜索您想要的车型</span>
+                            <i className="iconfont icon-sousuo"></i>
+                        </div>
                     </Flex.Item>
                     <Flex className="position" onClick={this.selectAddr}>
                         <i className="iconfont icon-dingwei"></i>

@@ -1,4 +1,6 @@
 
+@import "~assets/css/commonCss";
+
 @left-padding:30px;
 
 .activityInformation{
@@ -8,8 +10,10 @@
     box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
 
     .activityInformation-title{
-        color: chocolate;
+        color: #FD5C0E ;
         padding: 20px @left-padding ;
+        font-size: 30px;
+        line-height: 36px;
         >i{
             font-size: 30px;
             padding-right: 10px;
@@ -31,7 +35,7 @@
                 >img{
                     height: 100% ;
                     width: 100% ;
-                    border-radius: 20px;
+                    border-radius: 10px;
                 }
             }
 
@@ -52,10 +56,16 @@
                     //bottom: 0;
                     color: #999;
                     margin-bottom: 10px;
+                    display: flex ;
+                    align-items: center ;
+                    line-height: 36px;
 
                     .activityInformation-content-item-b-space{
                         display: inline-block;
                         margin: 0 20px;
+                        width: 1px;
+                        height: 24px;
+                        background: #E6E6E6 ;
                     }
                 }
             }

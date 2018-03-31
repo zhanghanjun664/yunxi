@@ -1,5 +1,10 @@
 @import "../../../assets/css/commonCss";
 
+.bg-img(@url) {
+  background-image: url(@url);
+  background-size: 100% 100%;
+}
+
 .home-page {
   font-size: 24px;
   color: #333;
@@ -9,8 +14,7 @@
     width: 100%;
     height: 108px;
     background: #FF843C;
-    background-image: url("@{images}/home/header_bg.png");
-    background-size: 100% 100%;
+    .bg-img("~assets/images/home/header_bg.png");
     padding: 0 30px;
     position: fixed;
     top: 0px;
@@ -26,9 +30,10 @@
 
     .position {
       color: #ffffff;
+      max-width: 140px;
       > i {
         font-size: 40px;
-        margin-right: 3px;
+        margin-right: 5px;
       }
     }
 
@@ -56,6 +61,9 @@
   }
   /** 轮播图 **/
   .banner {
+    width: 100%;
+    height: 0;
+    padding-bottom: 43.3333%;
     .banner-item-wrap {
       width: 100%;
       height: 0;
@@ -81,7 +89,7 @@
     box-shadow: 0 5px 12px 0 rgba(0,0,0,0.07);
     border-radius: 10px;
     .news-wrap {
-      padding: 20px 20.25px 0px;
+      padding: 20px 20.25px 0px;      
 
       .text1 {
         color: #0F68B0;
@@ -137,10 +145,7 @@
       border: 1px solid #dddddd;
       color: #FD5C0E;
       font-size: 30px;
-      background: url("@{images}/home/title_bg.png")
-                  no-repeat
-                  scroll
-                  center center / 100%;
+      .bg-img("~assets/images/home/title_bg.png");
     }
     .icon {
       display: inline-block;
@@ -153,10 +158,7 @@
   /**热门车型**/
   .hot-cars {
     .icon-hot {
-      background: url("@{images}/home/huoyan.png")
-                  no-repeat
-                  scroll
-                  center center / 100%;
+      .bg-img("~assets/images/home/huoyan.png");
     }
     .hot-cars-content {
       padding: 30px;
@@ -233,10 +235,7 @@
   /**特惠车专区**/
   .discount-cars {
     .icon-discount {
-      background: url("@{images}/home/tehuiche.png")
-                  no-repeat
-                  scroll
-                  center center / 100%;
+      .bg-img("~assets/images/home/tehuiche.png");
     }
     .product-list {
       .product-item {
@@ -270,6 +269,9 @@
           line-height: 36px;
           margin-top: 14px;
         }
+        .color-sky {
+          color:#0F68B0
+        }
 
         .product-price {
           margin-top: 10px;
@@ -286,10 +288,8 @@
   /**精选视频**/
   .choose-vedio {
     .icon-vedio {
-      background: url("@{images}/home/shipin.png")
-                  no-repeat
-                  scroll
-                  center center / 100%;
+      .bg-img("~assets/images/home/shipin.png");
+
     }
     .vedio-footer {
       color: #0F68B0;
@@ -300,10 +300,7 @@
   .last-activity {
     background: transparent;
     .icon-activity {
-      background: url("@{images}/home/youhuihuodong.png")
-                  no-repeat
-                  scroll
-                  center center / 100%;
+      .bg-img("~assets/images/home/youhuihuodong.png");
     }
     .mb-30 {
       margin-bottom: 30px;
@@ -324,6 +321,7 @@
 
   /**卡片式公用样式**/
   .card {
+    box-shadow: 0 5px 12px 0 rgba(0,0,0,0.07);
     .card-content {
       width: 100%;
       height: 0px;

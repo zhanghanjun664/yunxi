@@ -1,10 +1,16 @@
-﻿
+﻿import Util from 'util';
+
 function rootOnEnter(nextState, replace) {
     var urlInfo = nextState.location.pathname;
     //修改标题
     let urlKey = urlInfo.split('/')[1];
     // 回到顶部
     window.scrollTo(0, 0);
+
+    // var page = Util.getQueryString("page");
+    // if(page){
+    //     replace(page)
+    // }
 
     ////console.log("urlInfo====",urlInfo)
     //

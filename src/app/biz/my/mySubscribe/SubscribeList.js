@@ -74,12 +74,12 @@ class SubscribeList extends Component {
                         <div></div>
                         <Flex className='flex-1'>
                             <div className='mo_listInfo_area'>
-                                <span className='iconfont icon-dingwei'></span>
+                                <span className='iconfont icon-dizhi'></span>
                                 <span>重庆市萝岗区科丰路31号花卉阿萨德</span>
                             </div>
                             <div className='mo_listInfo_map'>
                                 <span className='iconfont icon-ditu'></span>
-                                <span>地图</span>
+                                <span>到这里</span>
                             </div>
                         </Flex>
 
@@ -123,6 +123,7 @@ class SubscribeList extends Component {
                 first={false}
                 useBodyScroll={false}
                 style={style}
+                pullToRefresh={true}
             />
 
         )

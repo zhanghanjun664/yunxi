@@ -1,38 +1,36 @@
 import React, { PropTypes, Component } from 'react';
 import Request from "util/Request";
 
-//export async function resourceTree(params) {
-//    return request({
-//        url: '/sys/resource/tree',
-//        method: 'GET',
-//        data: params
-//    });
-//};
-//async cc(){
-//    try{
-//        let data = await Request({
-//            url:"http://192.168.33.11:8004/mocking/nuskin/api/v1/yundt/mgmt/item/list-by-page",
-//            type:"POST",
-//            data:{xx:1,bb:2}
-//        })
-//    }catch (e){
-//        console.log(e)
-//    }
-//}
-
 export default class {
-    static MockServ() {
+    static mockServ(params) {
         return Request({
             url: "caf/jdcloud/dealer/offers",
             type: "GET",
             data:{
-                carName:'car',
-                longitude:'0001',
-                latitude:'001',
-                cityId:'0001',
-                pageNum:1,
-                pageSize:2,
-                type:0
+                carName:params.carName,
+                longitude:params.longitude,
+                latitude:params.latitude,
+                cityId:params.cityId,
+                pageNum:params.pageNum,
+                pageSize:params.pageSize,
+                type:params.type
+            }
+        })
+    }
+    static priceSubmit(params) {
+        return Request({
+            url: "caf/api/v1/appointment/drive",
+            type: "POST",
+            data:{
+                vehicleModel:params.vehicleModel,
+                dealer:params.dealer,
+                memberName:params.memberName,
+                memberMobile:params.memberMobile,
+                appointmentTime:params.appointmentTime,
+                purchaseTime:params.purchaseTime,
+                type:params.type,
+                verifyCode:params.verifyCode,
+                openid:params.openid
             }
         })
     }

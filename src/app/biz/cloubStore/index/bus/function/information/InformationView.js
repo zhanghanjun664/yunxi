@@ -25,28 +25,6 @@ class Information extends Component{
 
     componentDidMount(){
 
-        
-        /*
-        //let _news = await AppServ.getNews() ;
-        let _news = {
-            "data": [
-                {
-                    "id":1,
-                    "title":"长安福特冬季特惠，百城千店联合",
-                      "redirectUrl":"/advanced/advanced?action=table&token=1596945391&lang=zh_CN"
-                },
-                {
-                    "id":2,
-                    "title":"长安福特冬季特惠，百城千店联合",
-                      "redirectUrl":"/advanced/advanced?action=table&token=1596945391&lang=zh_CN"
-                }
-            ],
-            "resultCode": 0,
-            "resultMsg": "success"
-        } ;
-        
-        this.setState({news:_news.data}) ;*/
-
         this.stores.getInformationList(this.storeCode) ;
         
     }
@@ -99,6 +77,7 @@ class Information extends Component{
                         this.drawNews() 
                     }
                 </div>
+                <div className='Information-sep'></div>
                 <div className='Information-more'>
                     <span>更多</span>   
                 </div>

@@ -13,7 +13,6 @@
     .banner-item-wrap {
       width: 100%;
       height: 330px;
-      // padding-bottom: 43.3333%;
       position: relative;
       .banner-item {
         position: absolute;
@@ -52,25 +51,26 @@
     .am-tabs-default-bar-tab{
       font-size: 28px;
       color: #666666;
+      height: 80px;
+      line-height: 80px;
     }
     .am-tabs-tab-bar-wrap{
       padding: 0 30px;
       background-color: #fff;
-      .am-tabs-default-bar-tab-active{
+      box-shadow: 0 0 30px -2px rgba(0, 0, 0, 0.2);/*no*/
+      .am-tabs-default-bar-tab-active {
         color: #FD5C0E;
         position: relative;
-        // border-bottom: 3px solid #FD5C0E!important;
         .changAnt_tabs{
-          border-bottom: 3px solid #FD5C0E;
+          border-bottom: 3px solid #FD5C0E;/*no*/
+          height: 126%;
         }
-
       }
-      
-      .am-tabs-default-bar-tab{
-        padding: 0;
-        // height: inherit;
-        // padding: 20px 0;
+      .am-tabs-default-bar-tab {
+        height:80px;
+        line-height: 80px;
       }
+    
       .am-tabs-default-bar-content{
         // padding: 20px 0;
       }
@@ -80,4 +80,8 @@
     }
   }
 
+}
+// ant mobile
+html:not([data-scale]) .am-tabs-default-bar-top .am-tabs-default-bar-tab::after{
+  display: none;
 }

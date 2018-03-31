@@ -16,16 +16,28 @@ class ProductDetailBaseInfo extends Component {
 	constructor(props, context) {
 		super(props, context)
 		//this.stores = this.props.cloubStoreCarModelDetail;
-		
+		this.state = {
+			followFlag:'1' ,
+			sku:{
+				officialSellPrice:0,
+				sellerSellPrice:0
+			}
+		}
 	}
 
+	componentWillReceiveProps(newProps){
+		let carDetailBaseInfo  = newProps.carDetailBaseInfo ;
+		if (carDetailBaseInfo.skus!=null){
+			this.setState({sku:carDetailBaseInfo.skus[0]}) ;
+		}
+	}
 	drawCloubAct=()=>{
-		let carDetailBaseInfo  = this.props.carDetailBaseInfo
+		//let carDetailBaseInfo  = this.props.carDetailBaseInfo
 		//console.log(carDetailBaseInfo);
 		return(
 			<div className='pdbc'>
 				<span>
-					{carDetailBaseInfo.adWord}
+					{this.state.sku.adWord}
 				</span> 
 			</div>
 		) ;
@@ -35,8 +47,10 @@ class ProductDetailBaseInfo extends Component {
 	 * 绘制关注按钮
 	 */
 	drawFollowStatus = () =>{
-		let followFlag = this.props.followFlag ;
+		let followFlag = this.state.followFlag||this.props.followFlag ;
 		let iconName = "icon_follow" ; 
+		
+		//followFlag = parseInt(Math.random()*1.99)+"" ;
 		//等于1为已关注		
 		if(followFlag==="1"){
 			iconName = "icon_cancelFollow" ; 
@@ -58,21 +72,37 @@ class ProductDetailBaseInfo extends Component {
 	 * 点击关注按钮
 	 */
 	handleClickFollow = () =>{
-		let followFlag = this.props.followFlag ;
+		let followFlag = this.state.followFlag||this.props.followFlag ;
 
 		if(followFlag==="1"){
-			Toast.success('点击取消关注') ;
+			Toast.success('取消关注') ;
+			this.setState({followFlag:'0'}) ;
 		}else{
-			Toast.success('点击关注') ;
+			Toast.success('关注') ;
+			this.setState({followFlag:'1'}) ;
 		}
+	}
+	toUrl(url){
+		window.app.routerGoTo(url);
 	}
 
 //<div className='pdb2_1'>福特福克斯 1.5T <span className='pdb2_Type'>EcoBoost</span> 自动旗舰型</div>
 	render() {
-		let {carDetailBaseInfo,followFlag}  = this.props ;		
+		let {carDetailBaseInfo,followFlag}  = this.props ;	
+		
 		return (
 			<div className="productDetailBaseInfo">
-				<div className='pdb1'><img src="assets/images/productDetail/baseInfo.png" /></div>
+				<div className='pdb1'>
+					<img src={carDetailBaseInfo.skus ? carDetailBaseInfo.skus[0].cmpMedias[0].fileUrl : ""} />
+					{/* <img src="assets/images/productDetail/baseInfo.png" /> */}
+					<div className='pdb1_tags'>
+						<div onClick={()=>this.toUrl('/carImages?ci_type=video')}>
+							<span className='iconfont icon-Triangle'></span>
+							<span>视频</span>
+						</div>
+						<div onClick={()=>this.toUrl('/carImages')}>图片</div>
+					</div>
+				</div>
 				
 				<div className='pdb2'>
 					<div className='pdb2_1'>{carDetailBaseInfo.name}</div>
@@ -86,10 +116,10 @@ class ProductDetailBaseInfo extends Component {
 				<div className='pdb3'>
 					<div className='pdb3_1'>
 						<div className='pdb3_1_0'>
-							官方指导价：￥<span className='pdb3_price'>{carDetailBaseInfo.officialPrice}万</span> 							
+							官方指导价：￥<span className='pdb3_price'>{this.state.sku.officialSellPrice/10000}万</span> 							
 						</div>
 						<div className='pdb3_1_1'>
-							经销商报价：￥<span className='pdb3_price'>{carDetailBaseInfo.dealerPrice}万</span> 
+							经销商报价：￥<span className='pdb3_price'>{this.state.sku.sellerSellPrice/10000}万</span> 
 						</div>
 					</div>
 					{

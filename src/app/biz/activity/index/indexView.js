@@ -1,6 +1,3 @@
-/**
- * Created by zhang.weihua on 2018/3/19.
- */
 import React, { PropTypes, Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 import { inject, observer } from 'mobx-react';
@@ -20,16 +17,20 @@ class HomeView extends Component {
     super(props, context);
     this.stores = this.props.activity;
     this.tabs = [
-			{ title: '推荐' },
-			{ title: '行业' },
-			{ title: '评测' },
-			{ title: '活动' },
+			{ title: <div className='changAnt_tabs'>推荐</div> },
+			{ title: <div className='changAnt_tabs'>行业</div> },
+			{ title: <div className='changAnt_tabs'>评测</div> },
+			{ title: <div className='changAnt_tabs'>活动</div> },
 		];
   }
 
 
   componentDidMount() {
+    this.stores.setStyle({
+      height: Util.getScrollHeight(['banner', 'am-tabs-tab-bar-wrap', 'am-tab-bar-bar'])
+    })
     this.getData();
+    // window.app.routerRedirect('home')
   }
 
   //获取数据
@@ -52,13 +53,11 @@ class HomeView extends Component {
   componentWillMount() {
   }
   renderTabs = tab => (
-    <div>
       <div className='changAnt_tabs'>{tab.title}</div>
-    </div>
   )
 
   render() {
-    const { adList } = this.stores.state
+    const { adList, style } = this.stores.state
     return (
       <div className="activity-page">
         <div className="banner">
@@ -88,13 +87,32 @@ class HomeView extends Component {
           <Tabs tabs={this.tabs}
             initialPage={0}
             onChange={(tab, index) => { console.log('onChange', index, tab); }}
-            renderTab={this.renderTabs}
 
           >
-              <ActivityList />
-              <ActivityList />
-              <ActivityList />
-              <ActivityList />
+              {/* 推荐 */}
+              <ActivityList 
+                style={style}
+                activityLabel={1} 
+                fetchData={this.stores.getActivityList}
+              />
+              {/* 行业 */}
+              <ActivityList 
+                style={style}
+                activityLabel={2} 
+                fetchData={this.stores.getActivityList}
+              />
+              {/* 测评 */}
+              <ActivityList 
+                style={style}
+                activityLabel={3} 
+                fetchData={this.stores.getActivityList}
+              />
+              {/* 活动 */}
+              <ActivityList 
+                style={style}
+                activityLabel={4} 
+                fetchData={this.stores.getActivityList}
+              />
 
           </Tabs>
         </div>

@@ -1,23 +1,21 @@
+@import '../../../assets/css/commonCss.less';
 .myOrder{
   input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
-  color: #CCCCCC; 
+    color: #CCCCCC; 
   } 
   input:-moz-placeholder, textarea:-moz-placeholder { 
-  color: #CCCCCC; 
+    color: #CCCCCC; 
   } 
   input::-moz-placeholder, textarea::-moz-placeholder { 
-  color: #CCCCCC; 
+    color: #CCCCCC; 
   } 
   input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
-  color: #CCCCCC; 
+    color: #CCCCCC; 
   } 
   .flex-1{
     flex: 1;
   }
   // 覆盖ant mobile样式
-  .am-tabs-content-wrap{
-    margin-top: 30px;
-  }
   .am-tabs-default-bar-tab{
     font-size: 28px;
     color: #666666;
@@ -47,7 +45,7 @@
     padding: 20px 30px 0;
     .mo_searchBox{
       padding: 0 30px;
-      border: 1px solid #E6E6E6;
+      border: 1px solid @color_line;
       border-radius: 10px;
       display: flex;
       height: 80px;
@@ -66,12 +64,15 @@
 
     }
   }
+  .am-list-view-scrollview-content{
+    width: 100%;
+  }
   .mo_listBox{
     font-size: 28px;
     line-height: 36px;
     .mo_listItem{
       background-color: #fff;
-      margin-bottom: 30px;
+      margin-top: 30px;
       padding: 0 30px;
     }
     .am-list-body{
@@ -83,14 +84,14 @@
     align-items: center;
     height: 88px;
     justify-content: space-between;
-    border-bottom: 1px solid #E6E6E6;
+    border-bottom: 1px solid @color_line;
     &>div:nth-of-type(2){
       color: #0F68B0;
     }
   }
   .mo_listInfo{
     padding: 30px 0;
-    border-bottom: 1px solid #e6e6e6;
+    border-bottom: 1px solid @color_line;
     &>div{
       display: flex;
       margin-bottom: 20px;
@@ -118,7 +119,7 @@
     text-align: right;
     .iconfont{
       font-size: 24px;
-      margin-right: 4px;
+      margin-right: 10px;
     }
   }
   .mo_listInfo_area{
@@ -140,7 +141,7 @@
     text-align: right;
     .iconfont{
       font-size: 24px;
-      margin-right: 4px;
+      margin-right: 10px;
     }
   }
   .mo_list_userInfo{

@@ -6,21 +6,20 @@ class MyOrder {
   @observable state = {
     tabIndex: "",
     key: '',   //搜索内容
+    style: {}
   };
 
   @action
   changeTab(num){
     this.state.tabIndex = num
   }
+  @action
+  setStyle(style){
+    this.state.style = style
+  }
 
   @action
   getOrderList = (params) => {
-    // console.log('this.state.tabIndex:'+this.state.tabIndex+' params.appointmentStatus:'+params.appointmentStatus)
-    // if(this.state.tabIndex !== params.appointmentStatus){
-    //   console.log('不一样')
-    //   return
-    // }
-    // console.log('可以拉')
     params = Object.assign({}, params, { searchContent: this.state.key });
     return Serv.getOrderList(params);
   }

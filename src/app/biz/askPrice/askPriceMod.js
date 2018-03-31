@@ -12,37 +12,12 @@ class price {
     //将数据设为被观察者，这意味着数据将成为公共数据
     @observable state = {
         list: [],
+        dealerList:[],//经销商列表
         dealerDistance:[],  //经销商(距离)
         dealerScore:[],     //经销商(评分)
     };
     //如果设定了useStrict严格模式，那么所有observable的值的修改必须在action定义的方法内，否则可以直接修改
-    //用action定义事件
-    // @action
-    // async text() {
-    //     let {data} = await Serv.MockServ();
-    //     let {data2} = await Serv.testServ();
-    //     //如果是异步，必须在runInAction
-    //     runInAction(()=> {
-    //         this.state.list = data.list;
-    //     })
-    //     //监控数据变化的回调,读取什么参数，即代表将要监控什么数据
-    //     autorun(() => {
-    //         console.log("Tasks left: ", this.state.list)
-    //     })
-    // }
-    // @action
-    // async mockPriceText() {
-    //     let {data} = await Serv.MockServ();
-    //     //如果是异步，必须在runInAction
-    //     runInAction(()=> {
-    //         this.state.list = data.list;
-    //         console.log("data",data.list)
-    //     })
-    //     //监控数据变化的回调,读取什么参数，即代表将要监控什么数据
-    //     autorun(() => {
-    //         console.log("Tasks left: ", this.state.list)
-    //     })
-    // }
+
 
     /**
      * 查询经销商
@@ -57,11 +32,27 @@ class price {
      * }
      * http://192.168.33.11:8004/document/detailPage?id=2870
      */
+    @action
     async getDealer(params){
-        let {data, resultCode, resultMsg} = await Serv.MockServ(params) ;
+        let {data, resultCode, resultMsg} = await Serv.mockServ(params) ;
         runInAction(() => {
-            this.state.dealerDistance = data.list
+            console.log("&&&&&&",params)
+            if(params.type==0){
+                this.state.dealerDistance = data.list
+            }else if(params.type==1){
+                this.state.dealerScore = data.list
+            }
         })
+        console.log("222222222",this.state.dealerDistance)
+    }
+
+    @action
+    async askPriceSubmit(params){
+        let {data, resultCode, resultMsg} = await Serv.priceSubmit(params) ;
+        runInAction(() => {
+            this.state.priceSubmit = data.resultCode;
+        })
+        console.log("1111",this.state.priceSubmit)
     }
 }
 

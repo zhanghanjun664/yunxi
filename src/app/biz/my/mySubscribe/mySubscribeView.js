@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { Tabs, WhiteSpace, Badge } from 'antd-mobile';
 import './mySubscribeLess.less';
 import SubscribeList from './SubscribeList';
+import Util from 'util';
 
 
 /**
@@ -28,11 +29,11 @@ class MySubsribe extends Component {
 	}
 
 	componentDidMount() {
-		let height = document.body.clientHeight;
-		let height1 = document.getElementsByClassName('am-tabs-tab-bar-wrap')[0].clientHeight;
-		let height2 = document.getElementsByClassName('mo_searchWrap')[0].clientHeight;
+		// let height = document.body.clientHeight;
+		// let height1 = document.getElementsByClassName('am-tabs-tab-bar-wrap')[0].clientHeight;
+		// let height2 = document.getElementsByClassName('mo_searchWrap')[0].clientHeight;
 		this.stores.setStyle({
-			height: (height - height1 - height2) + 'px'
+			height: Util.getScrollHeight(['mo_searchWrap', 'am-tabs-tab-bar-wrap'])
 		})
 		
 	}

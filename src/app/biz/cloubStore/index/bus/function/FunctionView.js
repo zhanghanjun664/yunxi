@@ -49,19 +49,19 @@ class CFunction extends Component{
                         <Flex className="nav">
                             <div className="nav-item" onClick={this.handleClickTestDrivie}>
                                 <img src="assets/images/home/shichengshijia.png" />
-                                <span>试乘试驾</span>
+                                <span>预约试驾</span>
                             </div>
                             <div className="nav-item" onClick={this.handleClickAskprice}>
                                 <img src="assets/images/home/xundijia.png" />
-                                <span>询底价</span>
+                                <span>查询底价</span>
                             </div>
                             <div className="nav-item">
                                 <img src="assets/images/home/kefuzhongxin.png" />
-                                <span>客服中心</span>
+                                <span>在线客服</span>
                             </div>
                             <div className="nav-item">
                                 <img src="assets/images/home/gouchejisuanqi.png" />
-                                <span className="ellipsis">购车计算器</span>
+                                <span className="ellipsis">金融方案</span>
                             </div>
                             <div className="nav-item" onClick={this.handleClickMore}>
                                 <img src="assets/images/home/gengduo.png" />

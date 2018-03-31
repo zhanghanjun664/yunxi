@@ -1,3 +1,5 @@
+@import "../../../assets/css/commonCss";
+
 .complate-info-page {
   p{
     font-family: PingFangSC-Regular;
@@ -15,8 +17,7 @@
   .info-portrait{
     width: 240px;
     height:240px;
-    margin:0 195px 100px;
-    text-align: center;
+    margin: 0 auto 100px;
     img{
       width: 240px;
       height:240px;
@@ -28,7 +29,7 @@
     border: 1px solid #E6E6E6;
     border-radius: 10px;
     margin-bottom: 20px;
-    padding: 19px 0;
+    padding: 18px 0;
     position: relative;
     .title{
       color: #0F68B0;
@@ -40,10 +41,11 @@
       }
     }
     .am-list-item.am-input-item{
-      height:28px;
-      min-height: 28px;
-      border-left: 1px solid #E6E6E6;
-      border-right: 1px solid #E6E6E6;
+      height: 36px;
+      min-height: 36px;
+      .am-input-control input{
+        font-size: 28px!important;
+      }
     }
     &.info-code{
       padding: 26px 0;
@@ -69,19 +71,31 @@
 
   //绑定按钮
   .submit-btn{
-    text-align: center;
     padding-bottom: 40px;
     a{
       display: inline-block;
       font-size: 36px;
       color: #FFFFFF;
-      line-height: 36px;
-      padding: 26px 212px;
+      width: 100%;
+      height: 88px;
+      line-height: 88px;
       background: #FD5C0E;
       border-radius: 10px;
+      text-align: center;
     }
-    p{
+    div{
+      text-align: left;
+      i{
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        background-image: url('~assets/images/my/checkbox_on.png');
+        background-size: 100% 100%;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
       font-size: 24px;
+      line-height: 24px;
       color: #999999;
       margin-top: 30px;
       span{

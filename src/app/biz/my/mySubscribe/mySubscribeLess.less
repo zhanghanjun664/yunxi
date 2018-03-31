@@ -1,4 +1,4 @@
-
+@import '../../../assets/css/commonCss.less';
 .subscribe-list-page {
   input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     color: #CCCCCC;
@@ -16,14 +16,18 @@
     flex: 1;
   }
 
+
   .am-tabs-default-bar-tab{
     font-size: 28px;
     color: #666666;
+    height: 80px;
+    line-height: 80px;
   }
   .am-tabs-tab-bar-wrap{
     padding: 0 30px;
     background-color: #fff;
     width: 100%;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
     .am-tabs-default-bar-tab-active{
       color: #FD5C0E;
       position: relative;
@@ -41,9 +45,9 @@
 
   .my-tab-bar {
     border-bottom: 2px solid #fff;
-    margin-top: -2px;
-    height: 87px;
+    height: 80px;
     line-height: 80px;
+    box-sizing: border-box;
 
   }
   .am-tabs-default-bar-tab-active {
@@ -55,7 +59,7 @@
 
   .mo_searchWrap{
     background-color: #fff;
-    padding: 20px 30px 0;
+    padding: 20px 30px 7px;
     width: 100%;
     box-sizing: border-box;
     .mo_searchBox{
@@ -137,7 +141,7 @@
     text-align: right;
     .iconfont{
       font-size: 24px;
-      margin-right: 4px;
+      margin-right: 10px;
     }
   }
   .mo_listInfo_area{
@@ -159,7 +163,7 @@
     text-align: right;
     .iconfont{
       font-size: 24px;
-      margin-right: 4px;
+      margin-right: 10px;
     }
   }
   .mo_list_userInfo{
@@ -188,4 +192,7 @@
     margin-right: 20px;
   }
 }
-
+// ant mobile
+html:not([data-scale]) .am-tabs-default-bar-top .am-tabs-default-bar-tab::after{
+  display: none;
+}

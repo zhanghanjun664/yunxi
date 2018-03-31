@@ -47,8 +47,8 @@ class InfoView extends React.Component {
                     </div>
                     <div className='infoPage-content-info-m-r'>
                       <p className="p2">距您{`<`}10km</p>
+                      <span className='infoPage-content-info-m-r-sep'></span>
                       <a href={'tel:'+dealerInfo.salePhone}>
-                        <span className='r-j'></span>
                         <i className='iconfont icon-dianhua'></i>
                       </a>
                     </div>

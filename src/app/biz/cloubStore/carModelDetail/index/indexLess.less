@@ -1,5 +1,5 @@
 .productDetail{
-  padding-bottom: 50px;
+  padding-bottom: 90px;
   &>div{
     margin-bottom: 30px;
   }
@@ -59,11 +59,13 @@
   }
   // 评论
   .component_pdc{
-    padding: 10px 30px 0;
+    padding: 0px 30px 0;
     background-color: #fff;
     box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
     .component_pdc_title{
-      font-size: 30px;
+      font-size: 36px;
+      padding: 20px 0 24px;
+      line-height: 1;
     }
   }
   // 图文介绍
@@ -162,7 +164,7 @@
       
     }
   }
-  .pd_nav{
+  .pd_top{
     position: fixed;
     top: 0;
     left: 0;
@@ -173,6 +175,8 @@
     line-height: 80px;
     justify-content: space-around;
     z-index: 9;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+
     &>div{
       // flex: 1;
       // text-align: center;
@@ -184,32 +188,49 @@
       color: #FD5C0E;
       border-bottom: 3px solid #fd5c0e;
     }
+  }
+  .pd_hide{
+    top:-100px;
+  }
+  .pd_nav{
+    top:0 ;
     
   }
   .pd_footer{
     position: fixed;
     bottom: 0;
-    display: flex;
     z-index: 9;
     background-color: #fff;
     width: 100%;
     margin-bottom: 0;
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
     height: 90px;
-    .pd_footerItem1{
-      flex: 1;
-      text-align: center;
+    .pd_footerItem1 {
+      //margin-right: 4%;
+      width: 20%;
       color: #666666;
       font-size: 20px;
-      display: flex;
       line-height: 22px;
+      display: flex;
       justify-content: center;
       img{
-        margin-right: 4px;
+        margin-right: 10px;
+        height: 44px;
+        width: 44px;
       }
+
+      &:first-child{
+        padding-left: 4%;
+      }
+      
+    }
+    .last-item{
+      padding-right: 4%;
     }
     .pd_footerItem3,.pd_footerItem4{
-      width: 230px;
+      width:30%;
       color: #fff;
       text-align: center;
       background-color: #F33037;
@@ -250,7 +271,7 @@
     margin: 10px 0;
     >i{
       font-size: 24px;
-      margin-right: 5px;
+      margin-right: 10px;
     }
   }
 
@@ -260,15 +281,16 @@
     align-items: center ;
     margin-top: 20px;
     margin-bottom: 10px;
-    
+    color: #999;
     .disInfo3-1{
-      color: #999;
+      
       >i{
         font-size: 24px;
+        margin-right: 10px;
       }
     }
     .disInfo3-2{
-      color: #3f3f3f;
+      //color: #999;
     }
   }
 

@@ -26,7 +26,7 @@ class ProductDetailIndex extends Component {
 	render() {
 
 		let carDetailInfo = this.props.carDetailInfo ; 
-		let propGroups = carDetailInfo.propGroups ; 
+		let props = carDetailInfo.props ; 
 		
 
 		return (
@@ -34,8 +34,11 @@ class ProductDetailIndex extends Component {
 				<ul>
 					
 					{
-						propGroups==null?'':propGroups[0].props.map((val,i) => {
-							
+						props==null?'':props.map((val,i) => {
+							//暂时一次性显示8个参数
+							if(i>7){
+								return '';
+							}
 							return(
 								<li className='pdConfig_item' key={`itemkey${i}`} >
 									<div>{val.name}</div>

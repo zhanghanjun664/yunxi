@@ -3,18 +3,28 @@
  */
 import React, { PropTypes, Component } from 'react';
 import { Flex, Button, } from 'antd-mobile';
-
+import {inject,observer} from 'mobx-react';
 import './QuickLinkLess.less';
 
+@inject('quickLink')
+@observer
 class QuickLinkView extends Component {
 
     constructor(props, context) {
         super(props, context);
 
+        this.stores = this.props.quickLink;
+    }
+
+    componentDidMount() {
+        this.stores.getQuickLinkList();
     }
 
 
     render() {
+
+        let { quickLinkList } = this.stores.state;
+        console.log(this.stores.data);
         return (
 
             <div className="quick-link-page">
@@ -24,26 +34,16 @@ class QuickLinkView extends Component {
                         <span>客户服务</span>
                     </Flex>
                     <Flex className="link-list" wrap="wrap">
-                        <div className="link-item">
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <div className="link-text ellipsis">客户服务</div>
-                        </div>
-                        <div className="link-item">
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <div className="link-text ellipsis">客户服务</div>
-                        </div>
-                        <div className="link-item">
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <div className="link-text ellipsis">客户服务</div>
-                        </div>
-                        <div className="link-item">
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <div className="link-text ellipsis">客户服务</div>
-                        </div>
-                        <div className="link-item">
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <div className="link-text ellipsis">客户服务</div>
-                        </div>
+                        { this.stores.data.service.map((item, index) => {
+                            return (
+                                <div className="link-item" key={'service'+index}>
+                                    <img src={item.imgUrl} />
+                                    <div className="link-text ellipsis">{item.name}</div>
+                                </div>
+                            )
+                        })}
+
+
                     </Flex>
                 </div>
 
@@ -53,26 +53,14 @@ class QuickLinkView extends Component {
                         <span>我的福特</span>
                     </Flex>
                     <Flex className="link-list" wrap="wrap">
-                        <div className="link-item">
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <div className="link-text ellipsis">客户服务</div>
-                        </div>
-                        <div className="link-item">
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <div className="link-text ellipsis">客户服务</div>
-                        </div>
-                        <div className="link-item">
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <div className="link-text ellipsis">客户服务</div>
-                        </div>
-                        <div className="link-item">
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <div className="link-text ellipsis">客户服务</div>
-                        </div>
-                        <div className="link-item">
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <div className="link-text ellipsis">客户服务</div>
-                        </div>
+                        { this.stores.data.my.map((item, index) => {
+                            return (
+                                <div className="link-item" key={'my'+index}>
+                                    <img src={item.imgUrl} />
+                                    <div className="link-text ellipsis">{item.name}</div>
+                                </div>
+                            )
+                        })}
                     </Flex>
                 </div>
             </div>

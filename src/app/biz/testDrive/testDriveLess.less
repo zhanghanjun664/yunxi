@@ -1,3 +1,4 @@
+@import "../../assets/css/commonCss";
 .ask-price-page {
   p{
     font-family: PingFangSC-Regular;
@@ -72,7 +73,7 @@
           height: 80px;
           padding-left: 20px;
           .am-input-control input{
-            color: #666666;
+            color: #333333;
           }
         }
         .am-input-label,.am-textarea-label{
@@ -176,7 +177,7 @@
         display: inline-block;
         width: 26px;
         height:26px;
-        background: url("../../assets/images/askPrice/checkbox_On.png");
+        background: url("~assets/images/askPrice/checkbox_on.png");
         background-size: 100%;
         margin-right: 12px;
         vertical-align: bottom;
@@ -190,7 +191,7 @@
       i{
         width: 24px;
         height: 24px;
-        background: url("../../assets/images/askPrice/tips.png") no-repeat;
+        background: url("~assets/images/askPrice/tips.png") no-repeat;
         background-size: 100%;
       }
     }
@@ -305,6 +306,40 @@
   }
 }
 
+//  预算区间pickView
+.am-picker{
+  width: 120px;
+  position: absolute;
+  top:-135px;
+  left:130px;
+  .am-picker-col-item-selected{
+    font-size:36px;
+  }
+}
+.picker-right {
+  left:350px;
+}
+.picker-part-left{
+  position: absolute;
+  top: 80px;
+  left: 290px;
+  color: #373737;
+}
+.picker-part-right{
+  position: absolute;
+  top: 80px;
+  right: 140px;
+  color: #373737;
+}
+.show-picker-selected{
+  width: 100%;
+  height: 68px;
+  border-top: 1px solid @color_line;
+  border-bottom: 1px solid @color_line;
+  position: absolute;
+  top: 68px;
+}
+
 //modal层
 .ask-price-modal-page{
   //modal层--预算区间、购车时间
@@ -324,20 +359,17 @@
   .am-modal-content{
     text-align: left;
     .am-modal-body{
-      height:336px;
-      .am-picker{
-        height:336px;
-      }
-      .am-picker-col{
-        height:336px;
-      }
-      .am-picker-col-content{
-        padding: 20px 0!important;
-      }
+      height:280px;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
     }
   }
   .am-modal-footer{
     padding: 0 34px;
+    .am-modal-button-group-h::before {
+      background:none;
+    }
     .am-modal-button{
       background: #FD5C0E;
       color: white;

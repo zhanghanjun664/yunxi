@@ -18,16 +18,16 @@ let baseConfig = {
 let envConfig = {
   loc: {
     // api接口主机地址
-    host: 'http://localhost:9095',
+    // host: document.location.origin,
+    host: 'https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application',
     // 只能在本地生效
-    mock: true
+    mock: false
   },
   dev: {
     // api接口主机地址，演示阶段，先用本地，且开启mock
-    host: 'https://wxdev.dtyunxi.cn/caf-b2c-web-h5',
-    // host: location.href.split('/dist')[0] + '/dist',
+    host: 'https://wxdev.dtyunxi.cn/ford/dev/caf-b2c-web-h5',
     // 只能在本地生效
-    mock: true
+    mock: true,
   },
   test: {
 
@@ -71,7 +71,8 @@ const getApiAppName = function(url){
         str = apiAppName[key]
       }
     }
-    return config.host + "/" + str + '/'
+    let version = 'api/v1'
+    return `${config.host}/${version}/${url}`
   }
 }
 

@@ -14,7 +14,7 @@ html{font-family: sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:
 address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal}
 input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit}
 input,button{overflow: visible;vertical-align:middle;outline:none}
-body,th,td,button,input,select,textarea{font-family:"Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",tahoma,arial,Verdana,sans-serif,"WenQuanYi Micro Hei","\5B8B\4F53";font-size:0.24rem !important;color: #333;-webkit-font-smoothing:antialiased;-moz-font-smoothing:antialiased}
+body,th,td,button,input,select,textarea{font-family:"Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",tahoma,arial,Verdana,sans-serif,"WenQuanYi Micro Hei","\5B8B\4F53";font-size:0.24rem;color: #333;-webkit-font-smoothing:antialiased;-moz-font-smoothing:antialiased}
 body{line-height:1.6; background: #f4f5f7!important;}
 body:before {
     position: fixed;
@@ -52,6 +52,10 @@ li{
     border-bottom:1px solid #fff !important;
 }
 
+/* #app{
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+} */
 /* .iconfont{
     font-size: 32px;
 } */
@@ -69,4 +73,8 @@ li{
 }
 .box_shadow{
     box-shadow: 0 5px 12px 0 rgba(224, 224, 224, 0.5);
+}
+
+#app .am-pull-to-refresh-content-wrapper{
+    overflow: initial;
 }

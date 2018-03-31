@@ -25,13 +25,13 @@ class Home {
     getIndexData = () => {
         this.getBannerList();
         this.getNewsList()
-        this.getHotCarList()
-        this.getDiscountCarList();
-        this.getHotActivityList()
+        // this.getHotCarList()
+        // this.getDiscountCarList();
+        // this.getHotActivityList()
     }
 
     @action
-    getBannerList = async () => {
+    async getBannerList() {
         let params = {
             type: '1',
             areaCode: this.state.position.value
@@ -39,13 +39,14 @@ class Home {
         let {data, resultCode, resultMsg} = await Serv.getBannerList(params);
         //如果是异步，必须在runInAction
         runInAction(()=> {
-            this.state.bannerList = data.list;
+            this.state.bannerList = data;
+            console.log(data)
         })
 
     }
 
     @action
-    getNewsList = async () => {
+    async getNewsList() {
         let params = {
             type: '1',
             areaCode: this.state.position.value
@@ -57,7 +58,7 @@ class Home {
     }
 
     @action
-    getQuickLinkList = async () => {
+    async getQuickLinkList() {
 
         let {data, resultCode, resultMsg} = await Serv.getQuickLinkList();
         runInAction(()=> {
@@ -67,7 +68,7 @@ class Home {
     }
 
     @action
-    getHotCarList = async () => {
+    async getHotCarList() {
         let params = {
             type: '1',
             areaCode: this.state.position.value,
@@ -81,7 +82,7 @@ class Home {
     }
 
     @action
-    getDiscountCarList = async () => {
+    async getDiscountCarList() {
         let params = {
             type: '1',
             areaCode: this.state.position.value
@@ -93,7 +94,7 @@ class Home {
     }
 
     @action
-    getHotActivityList = async () => {
+    async getHotActivityList() {
         let params = {
             type: '1',
             areaCode: this.state.position.value

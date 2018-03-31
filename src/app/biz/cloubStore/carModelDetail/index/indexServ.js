@@ -18,7 +18,7 @@ export default class{
 
         try {
             let data = Request({
-                url: "caf/jdcloud/store/item/info/base",
+                url: "caf/jdcloud/item/car/base-info",
                 type: "GET",
                 data: params
             })
@@ -88,7 +88,7 @@ export default class{
     static getCloubActivity(params){
         try {
             let data = Request({
-                url: "shop/activity/list-by-page",
+                url: "mall/activity/list-by-page",
                 type: "GET",
                 data: params
             })
@@ -109,7 +109,7 @@ export default class{
     static getCarDetailInfo(params){
         try {
             let data = Request({
-                url: "caf/jdcloud/store/item/detail-info",
+                url: "caf/jdcloud/item/car/detail-info",
                 type: "GET",
                 data: params
             })

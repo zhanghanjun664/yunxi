@@ -1,7 +1,7 @@
 /**
  * 常用工具类
  */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class util {
     //判断是安卓还是ios
@@ -61,21 +61,44 @@ class util {
         }
     }
     //时间转换
-    static formatDate(str) {
-        return str.split(" ")[0].replace(/-/g, '.')
+    static formatDate(str, type = 1) {
+        let [y, m, d, h, min, s] = str.replace(/[-|:]/g, " ").split(" ");
+        let ns = "";
+        switch (type) {
+            case 1:
+                ns = y + "." + m + "." + d
+                break
+            case 2:
+                ns = y + "." + m + "." + d + " " + h + ":" + min + ":" + s
+                break
+        }
+
+        return ns
     }
     // 获取滚动条高度
     static getScrollTop() {
         var scrollTop = 0;
         // pc
-		if(document.documentElement && document.documentElement.scrollTop) {
-			scrollTop = document.documentElement.scrollTop;
-		} else if(document.body) {
+        if (document.documentElement && document.documentElement.scrollTop) {
+            scrollTop = document.documentElement.scrollTop;
+        } else if (document.body) {
             // 移动
-			scrollTop = document.body.scrollTop;
-		}
-		return scrollTop;
-	}
+            scrollTop = document.body.scrollTop;
+        }
+        return scrollTop;
+    }
+    // 获取滚动容器高度
+    static getScrollHeight(arr) {
+        var scrollHeight = document.body.clientHeight;
+        for (let i = 0; i < arr.length; i++) {
+            scrollHeight -= document.getElementsByClassName(arr[i])[0].clientHeight
+        }
+        return scrollHeight;
+    }
+    // 元->万
+    static changeMoney(str) {
+        return (Number(str)/10000).toFixed(2);
+    }
 
 }
 

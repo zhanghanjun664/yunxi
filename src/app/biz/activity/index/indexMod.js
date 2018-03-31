@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import {observable,action,runInAction,useStrict,autorun} from 'mobx';
+import { observable, action, runInAction, useStrict, autorun } from 'mobx';
 import Serv from './indexServ';
 import Config from 'config/Config';
 /**
@@ -13,27 +13,39 @@ class Activity {
     @observable state = {
         navTab: 0,
         adList: [],
+        style: {},
+        activityList: []
     };
-    //如果设定了useStrict严格模式，那么所有observable的值的修改必须在action定义的方法内，否则可以直接修改
+    // 活动列表
     @action
-    async getBaseData(params){
-      let data = await Serv.getBaseInfo(params)
-      this.state.baseInfo = data.data
-      console.log(data)
+    async getActivityList(params) {
+        return Serv.getActivityList(params)
     }
+    @action
+    setStyle(style){
+        this.state.style = style
+    }
+
+    @action
+    async getBaseData(params) {
+        let data = await Serv.getBaseInfo(params)
+        this.state.baseInfo = data.data
+        console.log(data)
+    }
+
     @action
     getAdList = async (params) => {
 
         let { data } = await Serv.getAdList(params);
         //如果是异步，必须在runInAction
-        runInAction(()=> {
+        runInAction(() => {
             this.state.adList = data.list;
             console.log(data)
         })
 
     }
 
-    
+
 }
 
 //将组件实例化，这意味着组件将不能从别处实例化

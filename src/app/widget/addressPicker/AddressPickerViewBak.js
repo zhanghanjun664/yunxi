@@ -2,7 +2,6 @@
  * Created by zhang.weihua on 2018/3/20.
  */
 /**
- * 别删！！！
  * props参数
  * cascade 默认是1  //2级就传1，3级就传2
  * ok  //func(item)  选择之后的回调函数, item是选中的市
@@ -13,7 +12,7 @@ import Request from "util/Request";
 import './AddressPickerLess.less';
 
 
-const defaultItem = {label: '请选择'};
+const defaultItem = {name: '请选择'};
 
 class AddressPickerView extends Component {
 
@@ -23,7 +22,6 @@ class AddressPickerView extends Component {
         this.state = {
             show: false,
             loading: false,
-            areaData: null,
             areaList: [],
             selectedArea: [defaultItem],
             index: 0,    //表示进行到那个tab
@@ -61,14 +59,13 @@ class AddressPickerView extends Component {
     _getAreaData = (params) => {
         this._toggleLoading();
         Request({
-            url: 'caf/jdcloud/index/areas',
+            url: 'http://192.168.33.11:8004/mocking/caf/api/v1/caf/jdcloud/index/area',
             type: "GET",
             data: params
         }).then((result) => {
             this._toggleLoading();
             this.setState({
-                areaData: result.data.list,
-                areaList: result.data.list,
+                areaList: result.data
             })
         }, (err) => {
             this._toggleLoading();
@@ -77,7 +74,7 @@ class AddressPickerView extends Component {
 
 
     //区域选择
-    _areaClick = (item, idx) => {
+    _areaClick = (item) => {
 
         let {selectedArea, index} = this.state;
         selectedArea[index] = item;
@@ -89,11 +86,14 @@ class AddressPickerView extends Component {
             this.props.ok && this.props.ok(item);
         }else {
             index++;
-            selectedArea[index] = defaultItem;
+            selectedArea[index] = defaultItem
             this.setState({
                 selectedArea: selectedArea,
-                index: index,
-                areaList: item.children
+                index: index
+            })
+            this._getAreaData({
+                level: 2,
+                areaCode: item.code
             })
         }
 
@@ -103,17 +103,16 @@ class AddressPickerView extends Component {
     _tabClick = (index) => {
         if (this.state.index != index) {
             if (index === 0) {   //获取省份
-                this.setState({
-                    index: index,
-                    areaList: this.state.areaData
-                })
+                this._getAreaData({level: 1});   //拿省份
             }else {
-                this.setState({
-                    index: index,
-                    areaList: this.state.selectedArea[index-1].children
+                this._getAreaData({
+                    level: 2,
+                    areaCode: this.state.selectedArea[index-1].code
                 })
             }
-
+            this.setState({
+                index: index
+            })
         }
 
     }
@@ -135,7 +134,7 @@ class AddressPickerView extends Component {
                     <Flex className="area-tabs">
                         { this.state.selectedArea.map((item, index) => (
                             <div className="tab" key={'tab'+index} onClick={this._tabClick.bind(this, index)}>
-                                <div className={index === this.state.index ? 'tab-text active' : 'tab-text'}>{item.label}</div>
+                                <div className={index === this.state.index ? 'tab-text active' : 'tab-text'}>{item.name}</div>
                             </div>
                         ))}
 
@@ -143,10 +142,10 @@ class AddressPickerView extends Component {
                     <div className="area-content">
 
                         { this.state.areaList.map((item, index) => {
-                            let selected = this.state.selectedArea[this.state.index].value == item.value;
+                            let selected = this.state.selectedArea[this.state.index].code == item.code;
                             return (
-                                <div className={`area-item ${selected ? 'active' : ''}`} key={'area'+index} onClick={this._areaClick.bind(this, item, index)}>
-                                    {item.label}
+                                <div className={`area-item ${selected ? 'active' : ''}`} key={'area'+index} onClick={this._areaClick.bind(this, item)}>
+                                    {item.name}
                                 </div>
                             )
                         })}
@@ -154,7 +153,7 @@ class AddressPickerView extends Component {
                     {
                         this.state.loading ? (
                             <Flex className="loading" justify="center">
-                                <Icon type="loading" />
+                                <Icon type="loading" size="lg" />
                             </Flex>
                         ) : null
                     }

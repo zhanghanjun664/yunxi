@@ -34,7 +34,11 @@ class ProductDetailIndex extends Component {
 								{
 									this.drawCommenStars(val.score)
 								}
-								<div className='pdc_iB_3'>{val.date}</div>
+								<div className='pdc_iB_3'>
+									{
+										Util.formatDate(val.date,1) 
+									}
+								</div>
 							</div>
 
 							<div className='pdc_type'>{val.itemSpecification}</div>

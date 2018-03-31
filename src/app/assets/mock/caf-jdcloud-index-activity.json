@@ -6,19 +6,19 @@
     "list": [
       {
         "id":22,
-        "imgUrl":"assets/images/home/car02.png",
-        "name":"长安福特冬季特惠，百城千店联合",
+        "imgUrl":"assets/images/cloubStoreIndex/a1.png",
+        "name":"所至之处 皆我角度2018款福特 F-150猛禽 重装升级",
         "pv":999,
         "commentNum":888,
-        "beginDate":"2018-03-07 15:28"
+        "beginDate":"2018-03-10 17:46:00"
       },
       {
         "id":22,
-        "imgUrl":"assets/images/home/car02.png",
-        "name":"长安福特冬季特惠，百城千店联合",
+        "imgUrl":"assets/images/cloubStoreIndex/a2.png",
+        "name":"矩阵优化 品质升级2018款福特 金牛座尊崇上市",
         "pv":999,
         "commentNum":888,
-        "beginDate":"2018-03-07 15:28"
+        "beginDate":"2018-03-10 17:46:00"
       }
     ],
     "pageNum": 1

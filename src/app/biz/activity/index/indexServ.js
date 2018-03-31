@@ -5,7 +5,7 @@ export default class {
   static getAdList(params) {
     try {
       let data = Request({
-        url: "caf/jdcloud/index/carouselFigure",
+        url: "api/v1/caf/jdcloud/index/carousel-figures",
         type: "GET",
         data: params
       })
@@ -27,4 +27,17 @@ export default class {
       console.log(e)
     }
   }
+  //  活动 
+  static getActivityList(params) {
+    try {
+        let data = Request({
+            url: "mall/activity/list-by-page",
+            type: "GET",
+            data: params
+        })
+        return data;
+    } catch (e) {
+        console.log(e)
+    }
+}
 }

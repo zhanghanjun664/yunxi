@@ -1,8 +1,37 @@
 .productDetailBaseInfo{
   box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
   .pdb1{
+    position: relative;
+    height: 380px;
     img{
       width: 100%;
+      height: 100%;
+    }
+    .pdb1_tags{
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+      display: flex;
+      font-size: 20px;
+      &>div:nth-of-type(1){
+        width: 90px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        height: 34px;
+        justify-content: center;
+        background-color: #FD5C0E;
+        border-radius: 100px;
+        margin-right: 20px;
+      }
+      &>div:nth-of-type(2){
+        color: #666666;
+        line-height: 34px;
+        width: 72px;
+        text-align: center;
+        border-radius: 100px;
+        background-color: #fff;
+      }
     }
   }
   .pdbc{
@@ -66,6 +95,7 @@
     }
     .pdb3_2{
       margin-right: 40px;
+      width: 60px;
     }
   }
 

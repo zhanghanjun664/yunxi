@@ -6,28 +6,33 @@
   #tab-bar .demoName {
     height: 40px;
   }
-  #tab-bar .demo-preview-item .am-tab-bar {
+ .am-tab-bar {
     background-color: white;
     font-size:20px;
+    .am-tabs-tab-bar-wrap{
+      position: absolute;
+      width: 100%;
+      top:0;
+    }
   }
+  
   .am-tab-bar-bar{
     height: 98px;
-  }
-  .am-tab-bar-bar{
+    .am-tab-bar-tab:first-child {
+      .tab_page_icon {
+        width:80px;
+        height:50px;
+      }
+    }
     .am-tab-bar-tab-title{
       font-size:20px;
     }
   }
-  .tab_page_icon{
+  .tab_page_icon {
     width: 50px;
     height:50px;
     background-size: 100%;
-  }
-  .tab_selected_icon{
-    width: 72px;
-    height: 72px;
-    background-size: 100%;
-    margin-top: 25px;
+    background-repeat: no-repeat;
   }
   .am-tab-bar-bar-hidden{
     //bottom:-98px;

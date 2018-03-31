@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { RefreshListView } from 'widget';
+import { PullToRefreshListView } from 'widget';
 
 
 class OrderList extends Component {
@@ -25,7 +25,7 @@ class OrderList extends Component {
     let params = {
       pageNum: pageNum,
       pageSize: 10,
-      appointmentStatus: this.props.status
+      status: this.props.status
     };
 
     let { data } = await this.props.fetchData(params);
@@ -67,7 +67,7 @@ class OrderList extends Component {
           <div>
             <div></div>
             <div className='mo_listInfo_area'>
-              <span className='iconfont icon-dingwei'></span>
+              <span className='iconfont icon-dizhi'></span>
               <span>重庆市萝岗区科丰路31号花卉阿萨德</span>
             </div>
             <div className='mo_listInfo_map'>
@@ -105,12 +105,15 @@ class OrderList extends Component {
   }
 
   render() {
+    let style = this.props.style || {};
     return (
-      <RefreshListView
+      <PullToRefreshListView
         fetchData={this.fetchData}
         renderRow={this.renderRow}
         ref="list"
         first={false}
+        useBodyScroll={false}
+        style={style}
       />
 
     )

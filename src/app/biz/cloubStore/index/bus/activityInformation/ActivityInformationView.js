@@ -3,6 +3,8 @@ import { Flex, WhiteSpace } from 'antd-mobile';
 
 import { inject, observer } from 'mobx-react';
 
+import Util from 'util';
+
 import './ActivityInformationLess.less' ;
 /**
  * yie.lvlin
@@ -34,7 +36,7 @@ class ActivityInformation extends Component{
         
         return(
             <div className='activityInformation'>
-                <div className='activityInformation-title fz_28'>
+                <div className='activityInformation-title'>
                     <i className='iconfont icon-huodongzixun'/>
                     <span>活动资讯</span>
                 </div>
@@ -56,8 +58,12 @@ class ActivityInformation extends Component{
                                         </div>
                                         <div className='activityInformation-content-item-b'>
                                             <span>汽车资讯</span>
-                                            <span className='activityInformation-content-item-b-space'>|</span>
-                                            <span>{val.beginDate}</span>
+                                            <span className='activityInformation-content-item-b-space'></span>
+                                            <span>
+                                            {
+                                                Util.formatDate(val.beginDate,1) 
+                                            }
+                                            </span>
                                         </div>
                                     </Flex.Item>
                                 </Flex>

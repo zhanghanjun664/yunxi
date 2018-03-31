@@ -1,33 +1,27 @@
 import React, { PropTypes, Component } from 'react'
-import { Link, IndexLink } from 'react-router'
 import { inject, observer } from 'mobx-react';
-import Config from 'config/Config';
 import Util from 'util';
 import './myOrderLess.less';
-// import OrderList from 'pubBiz/orderList/orderListView';
 import { Tabs } from 'antd-mobile';
 import OrderList from './orderList';
-/**
- * 视图层，功能逻辑，html代码将存放于此
- */
-//inject从props中获取相应的数据
 @inject("myOrder")
-//将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
 @observer
 class MyOrder extends Component {
 	constructor(props, context) {
 		super(props, context)
 		this.stores = this.props.myOrder;
 		this.tabs = [
-			{ title: '所有订单', statusCode: "" },
-			{ title: '待支付', statusCode: 0 },
-			{ title: '待到店', statusCode: 1 },
-			{ title: '已完成', statusCode: 2 },
-			{ title: '已取消', statusCode: 3 },
+			{ title: <div className='changAnt_tabs'>所有订单</div>, statusCode: "" },
+			{ title: <div className='changAnt_tabs'>待支付</div>, statusCode: 0 },
+			{ title: <div className='changAnt_tabs'>待到店</div>, statusCode: 1 },
+			{ title: <div className='changAnt_tabs'>已完成</div>, statusCode: 2 },
+			{ title: <div className='changAnt_tabs'>已取消</div>, statusCode: 3 },
 		];
 	}
 	componentDidMount() {
-
+		this.stores.setStyle({
+			height: Util.getScrollHeight(['mo_searchBox', 'am-tabs-tab-bar-wrap'])
+		})
 	}
 
 	//tab切换
@@ -42,11 +36,6 @@ class MyOrder extends Component {
 		event.preventDefault();
 		this.refs['list' + this.stores.state.tabIndex].refreshList();
 	}
-	renderTabs = tab => (
-		<div>
-			<div className='changAnt_tabs'>{tab.title}</div>
-		</div>
-	)
 	handleFetchData(type, fn){
 		console.log(type, fn)
 		
@@ -54,6 +43,7 @@ class MyOrder extends Component {
 	}
 
 	render() {
+		
 		return (
 			<div className="myOrder">
 				<div className='mo_searchBox'>
@@ -66,11 +56,12 @@ class MyOrder extends Component {
 					<div>
 						<Tabs tabs={this.tabs}
 							initialPage={0}
-							renderTab={this.renderTabs}
 							onChange={this.onTabChange}
+							animated={false}
 						>
 							<ul className='mo_listBox'>
 								<OrderList fetchData={this.stores.getOrderList}
+									style={this.stores.state.style}
 									status={""} />
 
 							</ul>
@@ -78,6 +69,7 @@ class MyOrder extends Component {
 							<div>
 								<ul className='mo_listBox'>
 								<OrderList fetchData={this.stores.getOrderList}
+									style={this.stores.state.style}
 									status={0} />
 
 								</ul>
@@ -85,6 +77,7 @@ class MyOrder extends Component {
 							<div>
 								<ul className='mo_listBox'>
 								<OrderList fetchData={this.stores.getOrderList}
+									style={this.stores.state.style}
 									status={1} />
 
 								</ul>
@@ -92,6 +85,7 @@ class MyOrder extends Component {
 							<div>
 								<ul className='mo_listBox'>
 								<OrderList fetchData={this.stores.getOrderList}
+									style={this.stores.state.style}
 									status={2} />
 
 								</ul>
@@ -99,6 +93,7 @@ class MyOrder extends Component {
 							<div>
 								<ul className='mo_listBox'>
 								<OrderList fetchData={this.stores.getOrderList}
+									style={this.stores.state.style}
 									status={3} />
 
 								</ul>

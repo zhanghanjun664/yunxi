@@ -6,13 +6,11 @@ useStrict(true)
 class MySubsribe {
 
 
-
     @observable state = {
         tabIndex: 0,
         key: '',   //搜索内容
         style: {},  //listview样式
     };
-
 
 
     @action

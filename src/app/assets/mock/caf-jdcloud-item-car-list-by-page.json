@@ -11,13 +11,13 @@
           {
             "id": 1,
             "name": "福睿斯",
-            "imgUrl": "https://zn-image.oss-cn-shenzhen.aliyuncs.com/supplychain-dev/test/floor/PmQyytGY5R.jpg",
+            "imgUrl": "https://www.ford.com.cn/content/dam/Ford/website-assets/ap/ch/nameplate/Escort/thumbnails/escort-170908.jpg",
             "remark": "厂家建议零售价：9.68万起"
           },
           {
             "id": 2,
             "name": "福克斯",
-            "imgUrl": "https://zn-image.oss-cn-shenzhen.aliyuncs.com/supplychain-dev/test/floor/PmQyytGY5R.jpg",
+            "imgUrl": "https://www.ford.com.cn/content/dam/Ford/website-assets/ap/ch/nameplate/new-focus/thumbnails/all-new-focus.jpg",
             "remark": "厂家建议零售价：19.68万起"
           }
         ]
@@ -29,13 +29,13 @@
           {
             "id": 3,
             "name": "翼博",
-            "imgUrl": "https://zn-image.oss-cn-shenzhen.aliyuncs.com/supplychain-dev/test/floor/PmQyytGY5R.jpg",
+            "imgUrl": "https://www.ford.com.cn/content/dam/Ford/website-assets/ap/ch/nameplate/new-ecosport/thumbnails/new-ecosport-navigation.jpg",
             "remark": "厂家建议零售价：68.68万起"
           },
           {
             "id": 4,
             "name": "翼虎",
-            "imgUrl": "https://zn-image.oss-cn-shenzhen.aliyuncs.com/supplychain-dev/test/floor/PmQyytGY5R.jpg",
+            "imgUrl": "https://www.ford.com.cn/content/dam/Ford/website-assets/ap/ch/nameplate/kuga/thumbnails/new-kuga.jpg",
             "remark": "厂家建议零售价：16.98万起"
           }
         ]

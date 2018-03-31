@@ -10,6 +10,8 @@
       border-bottom: 1px solid #e6e6e6;
       border-right: 1px solid #e6e6e6;
       vertical-align: middle;
+      position: relative;
+
       &:nth-child(2n) {
         border-right: none;
       }
@@ -33,6 +35,11 @@
         color: #333333;
         line-height: 36px;
         margin-top: 14px;
+
+        .product-name-bule{
+          color: #0F68B0 ;
+
+        }
       }
 
       .product-price {
@@ -42,6 +49,29 @@
           color: #999;
           margin-left: 20px;
         }
+      }
+
+      //热门好车标签
+      .product-item-label{
+
+        position: absolute ;
+        top: 30px ;
+        left: 30px ;
+        background-image: url('~assets/images/cloubStore/fill02.png') ;
+        width: 158px;
+        height: 43px;
+        background-size: 100% 100%;
+
+        font-size: 24px;
+        color: #fff;
+        >i{
+          
+          font-size: 28px;
+          margin-left: 10px;
+          margin-right: 5px;
+        }
+
+
       }
     }
   }

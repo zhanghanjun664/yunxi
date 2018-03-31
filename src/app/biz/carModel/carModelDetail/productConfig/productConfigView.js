@@ -16,38 +16,48 @@ class ProductDetailIndex extends Component {
 		super(props, context)
 		this.stores = this.props.productDetailIndex;
 	}
-	componentDidMount(){
+	componentDidMount() {
 		this.stores.getCarConfig({
 			itemCode: "车型编码"
 		})
 	}
-	goAllconfig(){
+	goAllconfig() {
 		window.app.routerGoTo('/allConfig');
 	}
 	render() {
 		const data = this.stores.state.carConfig
-		console.log(data.propGroups)
+		console.log(data.props)
 		return (
-			<div className="pdConfig box_shadow">
+			<div className="pdConfig">
 				<ul>
 					{
-						data.propGroups ? 
-						data.propGroups.map((item, index)=>{
-							return (
-								item.props.map((item2, index2)=>{
-									return (
-										<li className='pdConfig_item' key={index+index2}>
-											<div>{item2.name}</div>
-											<div>{item2.value}</div>
-										</li>
-									)
-	
-								})
-							)
-						})
-						:""
+						data.props ?
+							data.props.filter((item) => {
+								return item.groupName == '基本参数'
+							}).map((item, index) => {
+								return (
+									<li className='pdConfig_item' key={index}>
+										<div>{item.name}</div>
+										<div>{item.value}</div>
+									</li>
+								)
+							})
+							// data.props.map((item, index)=>{
+							// 	return (
+							// 		item.props.map((item2, index2)=>{
+							// 			return (
+							// 				<li className='pdConfig_item' key={index+index2}>
+							// 					<div>{item2.name}</div>
+							// 					<div>{item2.value}</div>
+							// 				</li>
+							// 			)
+
+							// 		})
+							// 	)
+							// })
+							: ""
 					}
-					
+
 
 				</ul>
 				<div className='pdConfig_footer'>

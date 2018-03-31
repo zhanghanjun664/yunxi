@@ -119,27 +119,32 @@ class DistributorInfo extends Component{
 class CarIntroduce extends Component{
 	render(){
 
-		let introduce = this.props.carDetailInfo.introduce ; 
+		let introduces = this.props.carDetailInfo.introduces ; 
 		
 		return (
 			<div className='productDetailIntroduce' ref='pdi_box'>
-				{
+				{/* {
 					//此处是车型的详情介绍
-					introduce!=null?<div dangerouslySetInnerHTML={{__html:introduce}}></div>:''
-				}
+					introduces!=null?introduces.map((val,i)=>{
+
+						return(
+							<div key={`introduce${i}`} dangerouslySetInnerHTML={{__html:val}}></div>
+						)
+					}):''
+				} */}
 				<div className='pdi_1'>
 					<p>狂野的心</p>
 					<p>动不动就大发雷霆</p>
 				</div>
 				<div className='pdi_2'>
-					<img src="assets/images/productDetail/baseInfo.png"/>
+					<img src="assets/images/carModel/pd_detail1.png"/>
 				</div>
 				
 				<div className='pdi_3'>整个车内律动着立体创造性的动感线条，运动感十足的三幅方向盘与个性四射的操控台相呼应，明快的银色装饰条增添了强烈的摇滚金属感。</div>
 
 				<div className='pdi_4'>
-					<img src="assets/images/productDetail/baseInfo.png"/>
-					<div className='pdi_4box'>
+					<img src="assets/images/carModel/pd_detail2.png"/>
+					{/* <div className='pdi_4box'>
 						<div className='pdi_space'></div>
 						<div className='pdi_4item1'>
 							<p className='pdi_4item_top'>200mm</p>
@@ -157,7 +162,7 @@ class CarIntroduce extends Component{
 						</div>
 						<div className='pdi_space'></div>
 
-					</div>
+					</div> */}
 					
 				</div>
 				
@@ -167,6 +172,7 @@ class CarIntroduce extends Component{
 		)
 	}
 }
+
 
 /**
  * 促销活动
@@ -212,7 +218,7 @@ class ShopActivity extends Component{
 											</div>
 											<div>
 												<span className='iconfont icon-shijian'></span>
-												<span className='ellipsis'>{val.publishTime}</span>
+												<span className='ellipsis'>{Util.formatDate(val.publishTime,1)}</span>
 											</div>
 										</div>
 
@@ -241,7 +247,7 @@ class ProductDetailIndex extends Component {
 
 		//需要获取云店编码
 		this.storesCloubIndex = this.props.cloubStoreIndex ; 
-
+		
 		//console.log(this.props.location);
 		
 	}
@@ -252,28 +258,31 @@ class ProductDetailIndex extends Component {
 	}
 
 	getData = () =>{
-		let [_itemCode,_account] = ['00001','11111'] ; 
+		let [_itemCode,_account,_itemId] = ['00001','11111','3'] ; 
 		let params = {
 			itemCode:_itemCode,
-			storeCode:this.storesCloubIndex.state.storeCode 
+			storeCode:this.storesCloubIndex.state.storeCode ,
+			itemId:_itemId 
 		}
 		
 		this.getCarDetailBaseInfo(params) ;
 
 		this.getFollowFlag({
 			itemCode:_itemCode,
-			account:_account
+			account:_account,
+			itemId:_itemId 
 		}) ;
 
 		this.getCommentList({
 			itemCode:_itemCode,
-			pageSize:3
+			pageSize:3 ,
+			itemId:_itemId 
 		}) ;
 
 		this.getDistributorInfo();
 
 		this.getActivityList({
-			storeId:this.storesCloubIndex.state.storeCode,
+			storeId:this.storesCloubIndex.state.storeId,
 			pageNum:1,
 			pageSize:3,
 			type:'',
@@ -281,7 +290,8 @@ class ProductDetailIndex extends Component {
 		})
 
 		this.getCarDetailInfo({
-			itemCode:_itemCode
+			itemCode:_itemCode,
+			itemId:_itemId 
 		})
 	}
 
@@ -333,12 +343,15 @@ class ProductDetailIndex extends Component {
 	 * @param {*} e 
 	 */
 	handleScroll(e){
-		let scrollTop = e.target.documentElement.scrollTop
+
+		let scrollTop = Util.getScrollTop() ;
 		let pdi_top = this.refs.productDetailIntroduce.refs.pdi_box.offsetTop
 		let pdConfig_top = this.refs.productConfig.offsetTop
 		let pdt_top = this.refs.test.offsetTop - 1000
+
+		
 		if (scrollTop < pdi_top) {
-			if (scrollTop > window.outerHeight) {
+			if (scrollTop > window.innerHeight) {
 				this.stores.handleScroll(1)
 			} else {
 				this.stores.handleScroll(0)
@@ -354,7 +367,30 @@ class ProductDetailIndex extends Component {
 		let pdConfig_top = this.refs.productConfig.offsetTop - 83
 		let pdt_top = this.refs.test.offsetTop
 		let arr = [pdi_top, pdConfig_top, pdt_top]
-		window.scrollTo(0, arr[type - 1]);
+
+		let y = arr[type - 1] ; 
+
+		let lastY = 0 ,count=0;
+		let arg = (y-Util.getScrollTop())/10 ;
+		console.log(arg);
+		
+		let timer = setInterval(()=>{
+			let thisy = Util.getScrollTop() ;
+			count++;
+			//最终距离小于平均值 或者已经到底部则清掉定时器
+			if(Math.abs(thisy-y)<Math.abs(arg) || thisy===lastY){				
+				window.scrollTo(0,y) ;
+				clearInterval(timer) ;
+
+				//alert(`总共${count}次，arg${arg}`) 
+			}else{
+				
+				window.scrollTo(0,thisy+arg) ;
+				lastY = thisy ; 
+			}
+			
+		},30)
+		//window.scrollTo(0, arr[type - 1]);
 	}
 	/**
 	 * 点击跳转到询底价页面
@@ -365,6 +401,7 @@ class ProductDetailIndex extends Component {
 	}
 
 	componentWillMount(){
+		
 		this.regScroll(this.handleScroll.bind(this));
 	}
 	componentWillUnmount(){
@@ -389,7 +426,7 @@ class ProductDetailIndex extends Component {
 		
 		return (
 			<div className="productDetail">
-				<div className={navTab===0?'hide':'pd_nav'}>
+				<div className={'pd_top '+(navTab===0?'pd_hide':'pd_nav')}>
 					<div className={navTab===1?'active':''} onClick={() => this.changeNavTab(1)}>商品介绍</div>
 					<div className={navTab===2?'active':''} onClick={() => this.changeNavTab(2)}>详细配置</div>
 					<div className={navTab===3?'active':''} onClick={() => this.changeNavTab(3)}>活动信息</div>
@@ -424,11 +461,11 @@ class ProductDetailIndex extends Component {
 				</div>
 
 				<div className='pd_footer'>
-					<div className='pd_footerItem1'>
+					<div className='pd_footerItem1' >
 						<img src="assets/images/productDetail/icon_jisuanqi.png" />
 						<p>立即<br/>下单</p>
 					</div>
-					<div className='pd_footerItem1'>
+					<div className='pd_footerItem1 last-item'>
 						<img src="assets/images/productDetail/icon_kefu.png" />
 						<p>在线<br/>咨询</p>
 					</div>

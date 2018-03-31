@@ -11,18 +11,19 @@
 }
 #tp{
   width: 100%;
-  max-width:1200px;
-  height: auto;
+  //max-width:1200px;
+  //height: auto;
 }
 #tp_a{
-  height: auto;
+  //height: auto;
   display: block;
   position: relative;
   box-shadow: 2px 1px 1px rgba(0, 0, 0, 0);
+  
 }
-#jiage{
-  position: relative;
-  margin-top: -40%;
+.popCar-jiage{
+  //position: relative;
+  //margin-top: -40%;
   color: white;
   font-size: 100%;
   text-align: center;
@@ -31,22 +32,47 @@
   background: white;
 }
 #an{
-  width: 30%;
-  height: 50px;
-  border: 1px solid #eaa525;
-  color: #eaa525;
-  border-radius: 15px;
+  width: 180px;
+  height: 60px;
+  border: 1px solid #FD5C0E;
+  color: #FD5C0E;
+  border-radius: 10px;
   text-align: center;
-  line-height: 50px;
+  line-height: 60px;
   position: relative;
   left: 35%;
-  margin-top: 3%;
+  margin-top: 30px ;
 }
 #wk{
-  width: 100%;
-  height: 100%;
-  padding: 30px;
+  //width: 100%;
+  //height: 100%;
+  padding: 30px 22.5px 20px;
   position: relative;
+
+  .carItem{
+    //position: relative;
+    margin: 0 7.5px;
+    position: relative;
+  }
+
+  .popCar-price{
+    position: absolute ;
+    bottom: 10px;
+    left: 0 ;
+    right: 0 ;
+
+    .popCar-next{
+      display: flex ;
+      justify-content: center;
+      
+      .icon-next{
+        font-size: 30px;
+        color: white;
+        //margin-left: 45%;
+        line-height: 1;
+      }
+    }
+  }
 }
 // #yuan{
 //   width: 30px;
@@ -60,12 +86,47 @@
 //   left: 45%;
 //   z-index: 10px;
 // }
-.icon-next{
-  font-size: 30px;
-  color: white;
-  margin-left: 45%;
-  line-height: 0;
-}
+
 // .slider-frame{
 //   height: 307px;
 // }
+
+.popCar-fil{
+  background-image: url('~assets/images/cloubStore/fill01.png') ;
+  background-size: 100% 100% ;
+  position: absolute ;
+  top: 0 ;
+  right: 9px; 
+  width: 115px;
+  height: 65px;
+
+  //font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  //justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+  //line-height: 22PX;
+  line-height: 1.2;
+  color: #fff;
+
+  span{
+    font-size: 18px;
+  }
+}
+
+.popCar-allCar{
+
+  display: flex ;
+  justify-content: center;
+  margin-top: 30px;
+  .popCar-allCar-btn{
+    height: 60px;
+    width: 24% ;
+    font-size: 24px;
+    line-height: 60px ;
+    border: 1px solid #FD5C0E;
+    border-radius: 10px;
+    color: #FD5C0E ;
+  }
+}

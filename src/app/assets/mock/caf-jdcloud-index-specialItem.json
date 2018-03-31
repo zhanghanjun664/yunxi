@@ -8,32 +8,32 @@
       {
         "id": 1,
         "code":"123454545",
-        "imgUrl": "assets/images/home/car02.png",
-        "name": "福特福克斯 1.5T 三厢 EcoBoost 自动旗舰型",
+        "imgUrl": "assets/images/cloubStoreIndex/car01.png",
+        "name": "福克斯 2015款 1.5T自动精英型",
         "originalPrice": 16.58,
         "discountPrice": 5.88
       },
       {
         "id": 2,
         "code":"123454545",
-        "imgUrl": "assets/images/home/car02.png",
-        "name": "福特福克斯 1.5T 三厢 EcoBoost 自动旗舰型",
+        "imgUrl": "assets/images/cloubStoreIndex/car02.png",
+        "name": "福克斯 2015款 1.5T自动精英型",
         "originalPrice": 16.58,
         "discountPrice": 5.88
       },
       {
         "id": 3,
         "code":"123454545",
-        "imgUrl": "assets/images/home/car02.png",
-        "name": "福特福克斯 1.5T 三厢 EcoBoost 自动旗舰型",
+        "imgUrl": "assets/images/cloubStoreIndex/car03.png",
+        "name": "福克斯 2015款 1.5T自动精英型",
         "originalPrice": 16.58,
         "discountPrice": 5.88
       },
       {
         "id": 4,
         "code":"123454545",
-        "imgUrl": "assets/images/home/car02.png",
-        "name": "福特福克斯 1.5T 三厢 EcoBoost 自动旗舰型",
+        "imgUrl": "assets/images/cloubStoreIndex/car04.png",
+        "name": "福克斯 2015款 1.5T自动精英型",
         "originalPrice": 16.58,
         "discountPrice": 5.88
       }

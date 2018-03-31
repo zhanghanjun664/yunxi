@@ -33,7 +33,7 @@ class ProductDetailIndex extends Component {
 		const data = this.stores.state.commentParams.showList
 		console.log(data)
 		return (
-			<div className="productDetailComment box_shadow">
+			<div className="productDetailComment">
 				<ul>
 					{
 						

@@ -3,6 +3,7 @@ import {Link, IndexLink} from 'react-router';
 import { inject ,observer} from 'mobx-react';
 import Style from './askPriceLess.less';
 import { InputItem ,TextareaItem ,ActionSheet ,Modal ,List ,Button ,PickerView  } from 'antd-mobile';
+import { StarRange } from 'widget';
 
 function closest(el, selector) {
     const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
@@ -33,13 +34,10 @@ const seasons = [
             label: '20',
             value: '20',
         },
-    ],
-    [
-        {
-            label: '—',
-            value: '—',
-        },
-    ],
+    ]
+];
+
+const rightCost = [
     [
         {
             label: '10',
@@ -57,15 +55,8 @@ const seasons = [
             label: '40',
             value: '40',
         },
-    ],
-    [
-        {
-            label: '万',
-            value: '万',
-        },
-
-    ],
-];
+    ]
+]
 
 @inject("askPrice")
 //将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
@@ -74,27 +65,42 @@ class askPrice extends Component {
     constructor(props, context) {
         super(props, context)
         this.stores = this.props.askPrice;
-        console.log("this.stores",this.stores)
     }
 
     state = {
         modal: false,
-        costmodal: false,
-        timemodal:false,
+        costmodal: false,//预算区间弹窗
+        timemodal:false,//g
         tabindex: 0,
         inputIndex:0,
         value: null,
-        cost:null,
+        costone:null,
+        costtwo:null,
         time:null,
-        dealindex:0
+        dealindex:0,//经销商num
+        dealData:null, //经销商列表
+        name: '',
+        tel: '',
+        code: '',
+        cost: '',
+        time: '',
+        note: ''
     };
 
     componentDidMount(){
         this.getData();
-        console.log("0000",this.stores.state.list)
     }
 
     getData = () =>{
+        this.getDealerList({
+            carName:'car',
+            longitude:'0001',
+            latitude:'001',
+            cityId:'0001',
+            pageNum:1,
+            pageSize:2,
+            type:1
+        })
         this.getDealerList({
             carName:'car',
             longitude:'0001',
@@ -115,9 +121,17 @@ class askPrice extends Component {
     }
 
     handleClickTab(key) {
+        let data;
+        if(key==0){
+            data=this.stores.state.dealerDistance;
+        }else{
+            data=this.stores.state.dealerScore;
+        }
         this.setState({
-            tabindex:key
+            tabindex:key,
+            dealData:data
         });
+
     }
 
 
@@ -151,7 +165,13 @@ class askPrice extends Component {
 
     onChange = (value) => {
         this.setState({
-            value,
+            costone: value,
+        });
+    }
+
+    onChangetwo = (value) => {
+        this.setState({
+            costtwo: value,
         });
     }
 
@@ -163,11 +183,62 @@ class askPrice extends Component {
         this.setState({dealindex:key});
     }
 
+    //表单提交
+    submitAskPrice = () => {
+        this.stores.askPriceSubmit({
+            vehicleModel:'car',
+            dealer:'0001',
+            memberName:'001',
+            memberMobile:'0001',
+            appointmentTime:1,
+            appointmentTime:2,
+            purchaseTime:0,
+            type:2,
+            verifyCode:'',
+            openid:''
+        })
+    }
+
+    //经销商列表 more==1查看更多，==0展示3条,type==0表示距离,type==1表示评分
+    renderDealer = (dealerList,more=0,type=0) => {
+        let arr = [];
+        let num = 0;
+        if(!dealerList){
+            let list=<div>
+                本地暂无经销商，请切换城市后选择</div>
+            arr.push(list)
+        }else{
+            let length = dealerList.length
+            for(let i = 0; i < length; i++) {
+                let dealer = dealerList[i];
+                for(let j = 0; j < dealer.shop.length;j++){
+                    if(num > 2 && more == 0) break;
+                    let shop = dealer.shop[j];
+                    let html=<li key={num} onClick={this.dealerSelect.bind(this, num)}
+                                 className={this.state.dealindex == num ? 'selected' : ''}>
+                        <span className="dealer-name">{shop.name}</span>
+                        <span className="dealer-star"><StarRange number={dealer.score} /></span>
+                        <p className="dealer-tel fz_24"><i></i>{dealer.salePhone}</p>
+                        <p className="dealer-address"><i></i>{shop.address}<span>距您&lt;{shop.distance}km</span>
+                        </p>
+                    </li>;
+                    num++;
+                    arr.push(html)
+                }
+
+
+            }
+        }
+
+        return arr;
+    }
+
     render() {
         let tabindex = this.state.tabindex;
         let dealindex = this.state.dealindex;
         let inputIndex = this.state.inputIndex;
         let activityList = this.props.activityList ;
+        this.state.dealData = this.stores.state.dealerDistance;
         return (
             <div>
                 <Modal
@@ -180,16 +251,24 @@ class askPrice extends Component {
                     footer={[{ text: '取消', onPress: () => { this.onClose('costmodal')(); } },{ text: '确定', onPress: () => { this.onClose('costmodal')(); } }]}
                     wrapProps={{ onTouchStart: this.onWrapTouchStart }}
                 >
-                    <div>
                         <PickerView
                             onChange={this.onChange}
                             onScrollChange={this.onScrollChange}
-                            value={this.state.cost}
+                            value={this.state.costone}
                             data={seasons}
                             cascade={false}
                         />
-
-                    </div>
+                         <span className="picker-part-left">—</span>
+                         <span className="picker-part-right">万</span>
+                        <PickerView
+                            onChange={this.onChangetwo}
+                            prefixCls  ={'am-picker picker-right'}
+                            onScrollChange={this.onScrollChange}
+                            value={this.state.costtwo}
+                            data={rightCost}
+                            cascade={false}
+                        />
+                        <div className="show-picker-selected"></div>
                 </Modal>
 
                 <Modal
@@ -202,16 +281,24 @@ class askPrice extends Component {
                     footer={[{ text: '取消', onPress: () => { this.onClose('timemodal')(); } },{ text: '确定', onPress: () => { this.onClose('timemodal')(); } }]}
                     wrapProps={{ onTouchStart: this.onWrapTouchStart }}
                 >
-                    <div>
                         <PickerView
                             onChange={this.onChange}
                             onScrollChange={this.onScrollChange}
-                            value={this.state.time}
+                            value={this.state.costone}
                             data={seasons}
                             cascade={false}
                         />
-
-                    </div>
+                        <span className="picker-part-left">—</span>
+                        <PickerView
+                            prefixCls  ={'am-picker picker-right'}
+                            onChange={this.onChangetwo}
+                            onScrollChange={this.onScrollChange}
+                            value={this.state.costtwo}
+                            data={rightCost}
+                            cascade={false}
+                        />
+                        <span className="picker-part-right">年</span>
+                        <div className="show-picker-selected"></div>
                 </Modal>
 
                 <Modal
@@ -224,59 +311,14 @@ class askPrice extends Component {
                         <div className="ask-price-page-title">选择经销商</div>
                         <div className="ask-price-page-dealer-list">
                             <ul>
-                                <li className="selected">
-                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                    <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
-                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span></p>
-                                </li>
-                                <li>
-                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                    <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
-                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span></p>
-                                </li>
-                                <li className="selected">
-                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                    <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
-                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span></p>
-                                </li>
-                                <li>
-                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                    <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
-                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span></p>
-                                </li>
-                                <li className="selected">
-                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                    <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
-                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span></p>
-                                </li>
-                                <li>
-                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                    <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
-                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span></p>
-                                </li>
-                                <li className="selected">
-                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                    <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
-                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span></p>
-                                </li>
-                                <li>
-                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                    <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
-                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span></p>
-                                </li>
+                                {
+                                    this.renderDealer(this.state.dealData,1,tabindex)
+                                }
                             </ul>
                         </div>
                         <div className="ask-price-page-grey"></div>
                         <div className="ask-price-page-cancel-btn">
-                            <p>取消</p>
+                            <p onClick={ this.onClose('modal') }>取消</p>
                         </div>
                     </div>
                 </Modal>
@@ -300,35 +342,11 @@ class askPrice extends Component {
                         <div className="ask-price-page-dealer-list">
                             <ul>
                                 {
-                                    this.stores.state.list.map((list) => {
-                                        return <li key={list.index} onClick={() => this.dealerSelect(0)}
-                                                   className={dealindex == 0 ? 'selected' : ''}>
-                                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                                    <span className="dealer-star"><i className="star"></i><i
-                                                        className="star"></i><i className="star"></i><i className="star"></i><i
-                                                        className="star"></i></span>
-                                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span>
-                                                    </p>
-                                                </li>
-                                    })
+                                    this.renderDealer(this.state.dealData,0,tabindex)
                                 }
-                                <li key="0" onClick={ () => this.dealerSelect(0) } className={dealindex == 0 ? 'selected' : ''}>
-                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                    <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
-                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span></p>
-                                </li>
-                                <li key="1" onClick={ () => this.dealerSelect(1) } className={dealindex == 1 ? 'selected' : ''}>
-                                    <span className="dealer-name">万江汽车投资有限公司两江分公司</span>
-                                    <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
-                                    <p className="dealer-tel"><i></i>021-12345678</p>
-                                    <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>距您&lt;100km</span></p>
-                                </li>
                             </ul>
                             <div className="dealer-more">
-                                <span className="more-btn" onClick={this.showModal('modal')}>查看更多</span>
-
+                                <span className={!this.state.dealData ? 'hide' : 'more-btn'} onClick={this.showModal('modal')}>查看更多</span>
                             </div>
                         </div>
                     </div>
@@ -336,26 +354,32 @@ class askPrice extends Component {
                         <p className="fill-title">填写信息</p>
                         <div className="fill-form">
                             <InputItem
-                                placeholder="click label to focus input"
+                                placeholder="请输入姓名"
                                 ref={el => this.labelFocusInst = el}
                                 onClick={()=>this.onFocus(0)}
                                 className={inputIndex == 0 ? 'selected' : ''}
                                 data-index="0"
+                                value={this.state.name}
+                                onChange={(value) => {this.setState({name: value})}}
                             ><div className="required" onClick={() => this.labelFocusInst.focus()}><span>*</span>姓名</div></InputItem>
                             <InputItem
-                                placeholder="click label to focus input"
+                                placeholder="请输入手机号码"
                                 ref={el => this.labelFocusInst = el}
                                 data-index="1"
                                 onClick={()=>this.onFocus(1)}
                                 className={inputIndex == 1 ? 'selected' : ''}
+                                value={this.state.tel}
+                                onChange={(value) => {this.setState({tel: value})}}
                             ><div className="required" onClick={(e) => { this.labelFocusInst.focus(); this.onFocus()} }><span>*</span>手机号码</div></InputItem>
                             <InputItem
-                                placeholder="click label to focus input"
+                                placeholder="请输入验证码"
                                 ref={el => this.labelFocusInst = el}
                                 onClick={()=>this.onFocus(2)}
                                 data-index="2"
                                 className={inputIndex == 2 ? 'selected' : ''}
-                            ><div className="code" onClick={() => this.labelFocusInst.focus()}>APPL <span className="get-code">获取验证码</span></div></InputItem>
+                                value={this.state.code}
+                                onChange={(value) => {this.setState({code: value})}}
+                            ><div className="code" onClick={() => this.labelFocusInst.focus()}>APPL <span className="get-code">发送验证码</span></div></InputItem>
                             <div className={inputIndex == 3 ? 'selected cost-time-range' : 'cost-time-range'} data-index="3" onClick={this.showModal('costmodal')}>
                                 <span className="title">预算区间</span>
                                 <span className="cost-selected"></span>
@@ -368,18 +392,19 @@ class askPrice extends Component {
                             </div>
                             <TextareaItem
                                 title="留言"
-                                placeholder="click the button below to focus"
-                                rows={5}
+                                rows={2}
                                 data-index="6"
                                 onClick={()=>this.onFocus(6)}
                                 className={inputIndex == 6 ? 'selected' : ''}
+                                value={this.state.note}
+                                onChange={(value) => {this.setState({note: value})}}
                             />
-                            <p className="fill-tips">*位置不能为空</p>
+                            <p className="fill-tips fz_24">*位置不能为空</p>
                         </div>
                     </div>
                     <div className="submit-btn">
-                        <a href="">提 交</a>
-                        <p><i></i>点击提交则视为同意<span>《福特购个人信息保护声明》</span></p>
+                        <span className="sub-span" onClick={this.submitAskPrice() }>提 交</span>
+                        <p className="fz_24"><i></i>点击提交则视为同意<span>《福特购个人信息保护声明》</span></p>
                     </div>
                 </div>
             </div>

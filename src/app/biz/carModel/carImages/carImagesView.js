@@ -33,7 +33,7 @@ class DetailImages extends Component {
     console.log(this.stores.imgDetail)
     return (
       <div className='detaildImg'>
-        <div className='di_title'><img src="assets/images/cloubStore/banner01.png" /></div>
+        <div className='di_title'><img src="assets/images/carModel/ci_detail.jpg" /></div>
         <div className='di_box'>
           <div>2/56</div>
           <div>
@@ -45,7 +45,7 @@ class DetailImages extends Component {
                       index,
                       urls: 11
                     })}>
-                      <img src="assets/images/cloubStore/banner01.png" />
+                      <img src="assets/images/carModel/ci_detail.jpg" />
                     </li>
 
                   )
@@ -73,17 +73,21 @@ class VideoTemp extends Component {
         <ul>
           <li className='vt_item box_shadow'>
             <div className='vt_videoBox'>
-              <img src="assets/images/cloubStore/banner01.png" />
-              <div className='vt_mask'>
-                <div className='iconfont icon-play'></div>
-                <div className='vt_time'>03:54</div>
-              </div>
+              <img src="assets/images/carModel/ci_video1.jpg" />
             </div>
             <div className='vt_title'>
               长安福特官方品牌视频
             </div>
           </li>
           <li className='vt_item box_shadow'>
+            <div className='vt_videoBox'>
+              <img src="assets/images/carModel/ci_video1.jpg" />
+            </div>
+            <div className='vt_title'>
+              长安福特官方品牌视频
+            </div>
+          </li>
+          {/* <li className='vt_item box_shadow'>
             <div className='vt_videoBox'>
               <img src="assets/images/cloubStore/banner01.png" />
               <div className='vt_mask'>
@@ -94,7 +98,7 @@ class VideoTemp extends Component {
             <div className='vt_title'>
               长安福特官方品牌视频
             </div>
-          </li>
+          </li> */}
 
 
         </ul>
@@ -123,14 +127,12 @@ class ModelList extends Component {
     { title: "视频" },
   ]
   renderTabs = tab => (
-    <div>
-      <div className='changAnt_tabs'>{tab.title}</div>
-    </div>
+    <div className='changAnt_tabs'>{tab.title}</div>
   )
   changeTab(tab, index) {
     console.log(tab, index)
   }
-  toUrl(url){
+  toUrl(url) {
     window.app.routerGoTo(url)
   }
 
@@ -141,49 +143,65 @@ class ModelList extends Component {
       <div className='carImages'>
         <Tabs tabs={this.tabsBox}
           renderTab={this.renderTabs}
-          initialPage={this.type == 'video' ? 5:0}
+          initialPage={this.type == 'video' ? 5 : 0}
           pageSize={4}
-          onTabClick={(tab  , index) => this.changeTab(tab, index)}
+          onTabClick={(tab, index) => this.changeTab(tab, index)}
         >
           <div>
             <ul>
               <li className='ci_imgItem'>
-                <img src="https://gw.alicdn.com/tps/TB1W_X6OXXXXXcZXVXXXXXXXXXX-400-400.png" />
+                <img src="assets/images/carModel/ci_all1.jpg" />
               </li>
+              <li className='ci_imgItem'>
+                <img src="assets/images/carModel/ci_all2.jpg" />
+              </li>
+
             </ul>
           </div>
 
           <div>
             <ul>
               <li className='ci_imgItem'>
-                <img src="https://gw.alicdn.com/tps/TB1W_X6OXXXXXcZXVXXXXXXXXXX-400-400.png" />
+                <img src="assets/images/carModel/ci_all1.jpg" />
               </li>
               <li className='ci_imgItem'>
-                <img src="https://gw.alicdn.com/tps/TB1W_X6OXXXXXcZXVXXXXXXXXXX-400-400.png" />
+                <img src="assets/images/carModel/ci_all2.jpg" />
               </li>
+
             </ul>
           </div>
           <div>
             <ul>
               <li className='ci_imgItem'>
-                <img src="https://gw.alicdn.com/tps/TB1W_X6OXXXXXcZXVXXXXXXXXXX-400-400.png" />
+                <img src="assets/images/carModel/ci_all1.jpg" />
               </li>
+              <li className='ci_imgItem'>
+                <img src="assets/images/carModel/ci_all2.jpg" />
+              </li>
+
             </ul>
           </div>
           <div>
             <ul>
               <li className='ci_imgItem'>
-                <img src="https://gw.alicdn.com/tps/TB1W_X6OXXXXXcZXVXXXXXXXXXX-400-400.png" />
+                <img src="assets/images/carModel/ci_all1.jpg" />
               </li>
               <li className='ci_imgItem'>
-                <img src="https://gw.alicdn.com/tps/TB1W_X6OXXXXXcZXVXXXXXXXXXX-400-400.png" />
+                <img src="assets/images/carModel/ci_all2.jpg" />
               </li>
               <li className='ci_imgItem'>
-                <img src="https://gw.alicdn.com/tps/TB1W_X6OXXXXXcZXVXXXXXXXXXX-400-400.png" />
+                <img src="assets/images/carModel/ci_all1.jpg" />
               </li>
               <li className='ci_imgItem'>
-                <img src="https://gw.alicdn.com/tps/TB1W_X6OXXXXXcZXVXXXXXXXXXX-400-400.png" />
+                <img src="assets/images/carModel/ci_all2.jpg" />
               </li>
+              <li className='ci_imgItem'>
+                <img src="assets/images/carModel/ci_all1.jpg" />
+              </li>
+              <li className='ci_imgItem'>
+                <img src="assets/images/carModel/ci_all2.jpg" />
+              </li>
+
             </ul>
           </div>
           <div>

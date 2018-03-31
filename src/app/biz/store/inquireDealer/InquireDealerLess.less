@@ -3,44 +3,22 @@
 .inquire-dealer-page {
   padding-top: 80px;
 
-  .my-tab-bar {
-    border-bottom: 2px solid #fff;
-    margin-top: -2px;
-    height: 80px;
-    line-height: 80px;
-
-  }
-  .am-tabs-default-bar-tab-active {
-    .my-tab-bar {
-      border-bottom-color: #FD5C0E;
-    }
-  }
-
-  .am-tabs-tab-bar-wrap {
+  .dealer-tabs {
     position: fixed;
-    width: 78%;
-    top: 0px;
-    left: 0px;
     z-index: 2;
     background: #FFFFFF;
     padding: 0 24px;
-    border-bottom: 1px solid #E6E6E6;
-    .am-tabs-default-bar-top .am-tabs-default-bar-tab:after {
-      display: none;
-    }
+    top: 0;
+    left: 0;
   }
 
+
   .position-wrap {
-    position: fixed;
     width: 22%;
     height: 81px;
-    top: 0px;
-    right: 0px;
-    z-index: 2;
-    background: #FFFFFF;
-    border-bottom: 1px solid #E6E6E6;
     color: @color_orange;
     font-size: 24px;
+    position: relative;
     .line {
       height: 50px;
       width: 1px;
@@ -51,20 +29,25 @@
     }
     .iconfont {
       font-size: 30px;
-      margin-right: 5px;
+      margin-right: 10px;
     }
 
   }
 
   .inquiry-list {
+    margin-top: 20px;
+    .am-list-body {
+      background: transparent;
+    }
     .inquiry-item {
-      margin-top: 30px;
+      margin-bottom: 30px;
       background: #FFFFFF;
       padding: 30px;
       box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
       .inquiry-header {
         .company-name {
           font-size: 30px;
+          padding-right: 10px;
         }
       }
       .address {
@@ -73,6 +56,13 @@
         .iconfont {
           font-size: 24px;
           margin-right: 10px;
+        }
+        .to-here {
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        .text {
+          padding-right: 25px;
         }
       }
       .ml-34 {
@@ -90,10 +80,10 @@
           width: 38px;
           height: 28px;
           display: inline-block;
-          background: url("@{images}/carModel/yundian.png");
+          background: url("~assets/images/carModel/yundian.png");
           background-size: 100% 100%;
           vertical-align: middle;
-          margin-right: 9px;
+          margin-right: 10px;
           margin-bottom: 4px;
         }
       }
@@ -112,7 +102,7 @@
       }
 
       .inquiry-btn {
-        width: 210px;
+        width: 30.4%;
         height: 60px;
         line-height: 60px;
         font-size: 28px;
@@ -126,14 +116,15 @@
         color: #FFFFFF;
       }
     }
+  }
 
-    .price-tips {
-      color: #999;
-      padding: 38px 30px;
-      .iconfont {
-        font-size: 24px;
-        margin-right: 8px;
-      }
+  .price-tips {
+    color: #999;
+    padding: 8px 30px 38px;
+    .iconfont {
+      font-size: 24px;
+      margin-right: 8px;
     }
   }
+
 }

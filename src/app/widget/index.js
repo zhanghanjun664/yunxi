@@ -3,7 +3,9 @@
  */
 module.exports ={
     UploadImage:require('./uploadImage'),
-    AddressPicker: require('./addressPicker/AddressPickerViewBak'),
+    AddressPicker: require('./addressPicker/AddressPickerView'),
     RefreshListView: require('./refreshListView'),
     StarRange: require('./starRange'),
+    PullToRefreshListView: require('./pullToRefreshListView'),
+    Tabs: require('./tabs'),
 }

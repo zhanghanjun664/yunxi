@@ -26,12 +26,12 @@ class ProductDetailBaseInfo extends Component {
 	}
 
 	render() {
-		const data = this.stores.state.baseInfo
-		console.log(data)
+		const { baseInfo, carConfig  } = this.stores.state
+		console.log(carConfig)
 		return (
 			<div className="productDetailBaseInfo box_shadow">
 				<div className='pdb1'>
-					<img src={data.panoramaImgUrls ? data.panoramaImgUrls[0] : ""} />
+					<img src={carConfig.cmpMedias?carConfig.cmpMedias[0].fileUrl:""} />
 					<div className='pdb1_tags'>
 						<div onClick={()=>this.toUrl('/carImages?ci_type=video')}>
 							<span className='iconfont icon-Triangle'></span>
@@ -41,15 +41,15 @@ class ProductDetailBaseInfo extends Component {
 					</div>
 				</div>
 				<div className='pdb2'>
-					<div className='pdb2_1'>{data.name}</div>
+					<div className='pdb2_1'>{baseInfo.name}</div>
 
-					<div className='pdb2_2'>{data.labels}</div>
+					<div className='pdb2_2'>{baseInfo.labels}</div>
 
 				</div>
 				<div className='pdb3'>
-					<div className='pdb3_1'>官方指导价：￥<span className='pdb3_price'>{data.officialPrice}万</span> </div>
+					<div className='pdb3_1'>官方指导价：￥<span className='pdb3_price'>{baseInfo.skus?Util.changeMoney(baseInfo.skus[0].officialSellPrice):""}万</span> </div>
 					<div className='pdb3_2'>
-						<img src="assets/images/productDetail/icon_cancelFollow.png" />
+						<img src="assets/images/productDetail/icon_follow.png" />
 						<div>关注</div>
 					</div>
 					<div className='pdb3_3'>

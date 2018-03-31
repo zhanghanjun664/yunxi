@@ -60,10 +60,15 @@ class SpecialCar extends Component{
                                 </div>
                                 <div className="product-name ellipsis-two">
                                     {val.name}
+                                    <span className='product-name-bule'>(库存车型，数量有限)</span>
                                 </div>
                                 <div className="product-price">
                                     <span>￥{val.discountPrice}</span>
                                     <del>￥{val.originalPrice}</del>
+                                </div>
+                                <div className='product-item-label'>
+                                    <i className='iconfont icon-remenhaoche' />
+                                    <span>热门好车</span>
                                 </div>
                             </div>
                         ) 

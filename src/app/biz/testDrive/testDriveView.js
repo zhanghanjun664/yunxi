@@ -33,13 +33,9 @@ const seasons = [
             label: '20',
             value: '20',
         },
-    ],
-    [
-        {
-            label: '—',
-            value: '—',
-        },
-    ],
+    ]
+];
+const rightCost = [
     [
         {
             label: '10',
@@ -57,15 +53,8 @@ const seasons = [
             label: '40',
             value: '40',
         },
-    ],
-    [
-        {
-            label: '万',
-            value: '万',
-        },
-
-    ],
-];
+    ]
+]
 
 @inject("askPrice")
 //将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
@@ -171,16 +160,24 @@ class askPrice extends Component {
                     footer={[{ text: '取消', onPress: () => { this.onClose('costmodal')(); } },{ text: '确定', onPress: () => { this.onClose('costmodal')(); } }]}
                     wrapProps={{ onTouchStart: this.onWrapTouchStart }}
                 >
-                    <div>
                         <PickerView
                             onChange={this.onChange}
                             onScrollChange={this.onScrollChange}
-                            value={this.state.cost}
+                            value={this.state.costone}
                             data={seasons}
                             cascade={false}
                         />
-
-                    </div>
+                         <span className="picker-part-left">—</span>
+                         <span className="picker-part-right">万</span>
+                        <PickerView
+                            onChange={this.onChangetwo}
+                            prefixCls  ={'am-picker picker-right'}
+                            onScrollChange={this.onScrollChange}
+                            value={this.state.costtwo}
+                            data={rightCost}
+                            cascade={false}
+                        />
+                        <div className="show-picker-selected"></div>
                 </Modal>
 
                 <Modal
@@ -193,16 +190,24 @@ class askPrice extends Component {
                     footer={[{ text: '取消', onPress: () => { this.onClose('timemodal')(); } },{ text: '确定', onPress: () => { this.onClose('timemodal')(); } }]}
                     wrapProps={{ onTouchStart: this.onWrapTouchStart }}
                 >
-                    <div>
                         <PickerView
                             onChange={this.onChange}
                             onScrollChange={this.onScrollChange}
-                            value={this.state.time}
+                            value={this.state.costone}
                             data={seasons}
                             cascade={false}
                         />
-
-                    </div>
+                        <span className="picker-part-left">—</span>
+                        <PickerView
+                            prefixCls  ={'am-picker picker-right'}
+                            onChange={this.onChangetwo}
+                            onScrollChange={this.onScrollChange}
+                            value={this.state.costtwo}
+                            data={rightCost}
+                            cascade={false}
+                        />
+                        <span className="picker-part-right">年</span>
+                        <div className="show-picker-selected"></div>
                 </Modal>
 
                 <div className="ask-price-page">
@@ -214,21 +219,21 @@ class askPrice extends Component {
                                 <i className="arrow"></i>
                             </div>
                             <InputItem
-                                placeholder="click label to focus input"
+                                placeholder="请输入姓名"
                                 ref={el => this.labelFocusInst = el}
                                 onClick={()=>this.onFocus(0)}
                                 className={inputIndex == 0 ? 'selected' : ''}
                                 data-index="0"
                             ><div className="required" onClick={() => this.labelFocusInst.focus()}><span>*</span>姓名</div></InputItem>
                             <InputItem
-                                placeholder="click label to focus input"
+                                placeholder="请输入手机号码"
                                 ref={el => this.labelFocusInst = el}
                                 data-index="1"
                                 onClick={()=>this.onFocus(1)}
                                 className={inputIndex == 1 ? 'selected' : ''}
                             ><div className="required" onClick={(e) => { this.labelFocusInst.focus(); this.onFocus()} }><span>*</span>手机号码</div></InputItem>
                             <InputItem
-                                placeholder="click label to focus input"
+                                placeholder="请输入验证码"
                                 ref={el => this.labelFocusInst = el}
                                 onClick={()=>this.onFocus(2)}
                                 data-index="2"
@@ -251,8 +256,7 @@ class askPrice extends Component {
                                 <i className="arrow"></i>
                             </div>
                             <TextareaItem
-                                title="留言"
-                                placeholder="click the button below to focus"
+                                title="备注"
                                 rows={2}
                                 data-index="6"
                                 onClick={()=>this.onFocus(6)}
@@ -297,7 +301,7 @@ class askPrice extends Component {
                                     <span className="dealer-star"><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i><i className="star"></i></span>
                                     <p className="dealer-tel"><i></i>021-12345678</p>
                                     <p className="dealer-address"><i></i>重庆市萝岗区科丰路31号华慧…<span>&lt;100km</span></p>
-                                    <p className="dealer-test"><i></i>体验上门试驾</p>
+                                    <p className="dealer-test selected"><i></i>体验上门试驾</p>
                                 </li>
                             </ul>
                         </div>

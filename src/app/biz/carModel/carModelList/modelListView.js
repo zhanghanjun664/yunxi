@@ -4,6 +4,7 @@ import { inject ,observer} from 'mobx-react';
 import Style from './modelListLess.less';
 import { SearchBar,Drawer, List } from 'antd-mobile';
 import TabBar from 'pubBiz/tabBar/tabBarView'
+import cx from 'classnames'
 
 @inject("modelList")
 //将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
@@ -20,14 +21,13 @@ class ModelList extends Component {
         sortname:'',
     };
 
-    componentDidMount(){
+    componentDidMount() {
         this.stores.mockModelText();
     }
 
     onOpenChange = (...args) => {
         console.log(args);
         this.setState({ open: !this.state.open });
-        this.props.hideTabBar()
     }
 
     onChange= (value) => {
@@ -81,7 +81,7 @@ class ModelList extends Component {
                                 this.stores.state.list.map((list)=>{
                                     return  <li key={list.id} className="type-option">
                                                 <div className="type-title">
-                                                    <img src="assets/images/modelList/car.png" alt=""/>
+                                                    <i className="iconfont icon-jiaoche"></i>
                                                     {list.name}
                                                 </div>
                                                 <ul>

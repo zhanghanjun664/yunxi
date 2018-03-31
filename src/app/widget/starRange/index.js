@@ -1,5 +1,12 @@
 /**
- * Created by zhang.weihua on 2018/3/23.
+ * Created by zhang.weihua on 2018/3/29.
+ * 用法
+ * <StarRange
+ *     number={3.5}      表示选中的星星数，4.5-四颗半  4-四颗
+ *     max={5}           表示最大星星数，默认是5
+ *     className="xxx"   样式
+ * />
+ *
  */
 
 import React, { PropTypes, Component } from 'react';
