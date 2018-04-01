@@ -8,4 +8,5 @@ module.exports ={
     StarRange: require('./starRange'),
     PullToRefreshListView: require('./pullToRefreshListView'),
     Tabs: require('./tabs'),
+    CustomInputItem: require('./customInputItem'),
 }

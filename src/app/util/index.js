@@ -72,7 +72,6 @@ class util {
                 ns = y + "." + m + "." + d + " " + h + ":" + min + ":" + s
                 break
         }
-
         return ns
     }
     // 获取滚动条高度

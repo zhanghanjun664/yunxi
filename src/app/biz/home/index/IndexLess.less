@@ -89,15 +89,17 @@
     box-shadow: 0 5px 12px 0 rgba(0,0,0,0.07);
     border-radius: 10px;
     .news-wrap {
-      padding: 20px 20.25px 0px;      
 
-      .text1 {
-        color: #0F68B0;
-        font-weight: bold;
-      }
-      .text2 {
-        color: #151515;
-        font-weight: bold;
+      padding: 20px 20.25px 0px;
+      .news-title {
+        > span:first-child {
+          color: #0F68B0;
+          font-weight: bold;
+        }
+        > span:nth-child(2) {
+          color: #151515;
+          font-weight: bold;
+        }
       }
       .more-news:before {
         content: '';

@@ -32,6 +32,7 @@ class MySubsribe extends Component {
 		// let height = document.body.clientHeight;
 		// let height1 = document.getElementsByClassName('am-tabs-tab-bar-wrap')[0].clientHeight;
 		// let height2 = document.getElementsByClassName('mo_searchWrap')[0].clientHeight;
+		console.log(Util.getScrollHeight(['mo_searchWrap', 'am-tabs-tab-bar-wrap']))
 		this.stores.setStyle({
 			height: Util.getScrollHeight(['mo_searchWrap', 'am-tabs-tab-bar-wrap'])
 		})
@@ -80,21 +81,21 @@ class MySubsribe extends Component {
 							<ul className='mo_listBox'>
 								<SubscribeList ref="list1"
 											   fetchData={this.stores.getAppointment}
-											   status={0}
+											   status={1}
 											   style={this.stores.state.style}
 								/>
 							</ul>
 							<ul className='mo_listBox'>
 								<SubscribeList ref="list2"
 											   fetchData={this.stores.getAppointment}
-											   status={1}
+											   status={2}
 											   style={this.stores.state.style}
 								/>
 							</ul>
 							<ul className='mo_listBox'>
 								<SubscribeList ref="list3"
 											   fetchData={this.stores.getAppointment}
-											   status={2}
+											   status={3}
 											   style={this.stores.state.style}
 								/>
 							</ul>

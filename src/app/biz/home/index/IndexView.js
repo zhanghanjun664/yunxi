@@ -94,9 +94,9 @@ class HomeView extends Component {
 
                 <div className="nav-wrap">
                     <Flex className="news-wrap">
-                        <div>
-                            <span className="text1">福特</span>
-                            <span className="text2">头条</span>
+                        <div className="news-title">
+                            <span>福特</span>
+                            <span>头条</span>
                         </div>
                         <Flex.Item>
                             {

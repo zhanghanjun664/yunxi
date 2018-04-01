@@ -26,15 +26,14 @@ class ActivityList extends Component {
 
 	}
 	renderRow = (rowData, sectionID, rowID) => {
-		console.log(rowData)
 		return (
-					<li className='pdt_item' onClick={this.toUrl.bind(this, '/activityDetails?id=111')}>
+					<li className='pdt_item' onClick={this.toUrl.bind(this, '/activityDetails?id='+rowData.id)}>
 						<div className='pdt_cover'>
 							<img src="assets/images/productDetail/baseInfo.png" />
 						</div>
 
 						<div className='pdt_infoBox'>
-							<div className='pdt_info1 ellipsis-two'>{rowData.title}</div>
+							<div className='pdt_info1 ellipsis-two'>{rowData.name}</div>
 
 							<div className='pdt_info2'>
 								<div className='pdt_info_see'>
@@ -47,7 +46,7 @@ class ActivityList extends Component {
 								</div>
 								<div>
 									<span className='iconfont icon-shijian'></span>
-									<span>{Util.formatDate(rowData.publishTime)}</span>
+									<span>{rowData.publishTime?Util.formatDate(rowData.publishTime):'-'}</span>
 								</div>
 							</div>
 

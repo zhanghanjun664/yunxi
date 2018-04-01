@@ -3,41 +3,29 @@ import Request from 'util/Request';
 export default class {
   //获取首页轮播图
   static getAdList(params) {
-    try {
-      let data = Request({
-        url: "api/v1/caf/jdcloud/index/carousel-figures",
-        type: "GET",
-        data: params
-      })
-      return data;
-    } catch (e) {
-      console.log(e)
-    }
+    let data = Request({
+      url: "caf/jdcloud/index/carousel-figures",
+      type: "GET",
+      data: params
+    })
+    return data;
   }
   //获取首页轮播图
   static getActivityList(params) {
-    try {
-      let data = Request({
-        url: "mall/activity/list-by-page",
-        type: "GET",
-        data: params
-      })
-      return data;
-    } catch (e) {
-      console.log(e)
-    }
+    let data = Request({
+      url: "mall/activity/list-by-page",
+      type: "GET",
+      data: params
+    })
+    return data;
   }
   //  活动 
   static getActivityList(params) {
-    try {
-        let data = Request({
-            url: "mall/activity/list-by-page",
-            type: "GET",
-            data: params
-        })
-        return data;
-    } catch (e) {
-        console.log(e)
-    }
-}
+    let data = Request({
+      url: "mall/activity/list-by-page",
+      type: "GET",
+      data: params
+    })
+    return data;
+  }
 }

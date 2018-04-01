@@ -26,21 +26,20 @@ class Activity {
         this.state.style = style
     }
 
-    @action
-    async getBaseData(params) {
-        let data = await Serv.getBaseInfo(params)
-        this.state.baseInfo = data.data
-        console.log(data)
-    }
+    // @action
+    // async getBaseData(params) {
+    //     let data = await Serv.getBaseInfo(params)
+    //     this.state.baseInfo = data.data
+    //     console.log(data)
+    // }
 
+    // 广告列表
     @action
     getAdList = async (params) => {
 
         let { data } = await Serv.getAdList(params);
-        //如果是异步，必须在runInAction
         runInAction(() => {
-            this.state.adList = data.list;
-            console.log(data)
+            this.state.adList = data;
         })
 
     }
@@ -48,7 +47,6 @@ class Activity {
 
 }
 
-//将组件实例化，这意味着组件将不能从别处实例化
 const activity = new Activity();
 
 

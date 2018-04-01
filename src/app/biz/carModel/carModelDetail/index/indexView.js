@@ -8,22 +8,19 @@ import Baseinfo from 'biz/carModel/carModelDetail/baseInfo/baseInfoView';
 import Comment from 'biz/carModel/carModelDetail/comment/commentView';
 import ProductConfig from 'biz/carModel/carModelDetail/productConfig/productConfigView';
 import Test from 'biz/carModel/carModelDetail/test/testView';
+import cx from 'classnames';
 
 import { List } from 'antd-mobile';
 
 import Serv from './indexServ';
 
 @inject("productDetailIndex")
+//将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
 @observer
 class ProductDetailIndex extends Component {
 	constructor(props, context) {
 		super(props, context)
 		this.stores = this.props.productDetailIndex;
-		this.navTab = [
-			{title: "商品介绍", tabIndex: 1},
-			{title: "详细配置", tabIndex: 2},
-			{title: "活动信息", tabIndex: 3}
-		]
 	}
 	handleScroll(e) {
 		let scrollTop = Util.getScrollTop()
@@ -139,17 +136,13 @@ class ProductDetailIndex extends Component {
 	}
 
 	render() {
-		const { activityList, nearbyInfo, navTab } = this.stores.state
+		const { activityList, nearbyInfo } = this.stores.state
 		return (
 			<div className="productDetail">
-				<div className={navTab == 0 ? 'hidden' : 'pd_nav'}>
-					{
-						this.navTab.map((item, index)=>{
-							return (
-								<div className={navTab == item.tabIndex ? 'active' : ''} onClick={this.changeNavTab.bind(this, item.tabIndex)} key={index}>{item.title}</div>
-							)
-						})
-					}
+				<div className={this.stores.state.navTab == 0 ? 'hidden' : 'pd_nav'}>
+					<div className={this.stores.state.navTab == 1 ? 'active' : ''} onClick={this.changeNavTab.bind(this, 1)}>商品介绍</div>
+					<div className={this.stores.state.navTab == 2 ? 'active' : ''} onClick={this.changeNavTab.bind(this, 2)}>详细配置</div>
+					<div className={this.stores.state.navTab == 3 ? 'active' : ''} onClick={this.changeNavTab.bind(this, 3)}>活动信息</div>
 				</div>
 				<Baseinfo />
 				{this.renderSelectBox()}

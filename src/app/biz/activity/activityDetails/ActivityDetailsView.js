@@ -6,64 +6,9 @@ import React, { PropTypes, Component } from 'react';
 import { Flex, Button, Icon, Modal, TextareaItem, InputItem, } from 'antd-mobile';
 import { inject, observer } from 'mobx-react';
 import './ActivityDetailsLess.less';
-import { StarRange } from 'widget';
+import { StarRange, CustomInputItem } from 'widget';
+import Util from 'util';
 
-
-
-function CheckBox({checked = true, onClick = () => {}}) {
-
-    let activeClass = checked ? 'active' : '';
-
-    return (
-        <div className={`checkbox ${activeClass}`} onClick={onClick}>
-            <Icon type="check"></Icon>
-        </div>
-    )
-}
-
-class InputC extends Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            active: false,
-        }
-    }
-
-    onFocus = () => {
-        this.setState({
-            active: true
-        })
-    }
-
-    onBlur = () => {
-        this.setState({
-            active: false
-        })
-    }
-
-    render() {
-        let {name = '', necessary = true, value, onChange, inputType = 'input', type} = this.props;
-        let content = null;
-        if(inputType == 'input') {
-            content = (
-                <InputItem className={`form-input ${this.state.active ? 'active' : ''}`} onFocus={this.onFocus} onBlur={this.onBlur}
-                    value={value} onChange={onChange} type={type}
-                >
-                    <span className={necessary ? 'necessary' : ''}>{name}</span>
-                </InputItem>
-            );
-        }else {
-            content = (
-                <InputItem className={`form-code ${this.state.active ? 'active' : ''}`} onFocus={this.onFocus} onBlur={this.onBlur}
-                           value={value} onChange={onChange} type={type} >
-                    发送验证码
-                </InputItem>
-            );
-        }
-        return content;
-
-    }
-}
 
 
 @inject("activityDetails")
@@ -74,11 +19,27 @@ class ActivityDetailsView extends Component {
         super(props, context);
 
         this.stores = props.activityDetails;
+
+        this.state = {
+            mobile: '',
+            name: ''
+        }
     }
 
 
     componentDidMount() {
         this.stores.getActivityDetails(this.props.location.query.id);
+    }
+
+    checkBox(checked = true, onClick = () => {}) {
+
+        let activeClass = checked ? 'active' : '';
+
+        return (
+            <div className={`checkbox ${activeClass}`} onClick={onClick}>
+                <Icon type="check"></Icon>
+            </div>
+        )
     }
 
 
@@ -122,24 +83,29 @@ class ActivityDetailsView extends Component {
         switch (type) {
             case 1:
                 content = (
-                    <InputC
+                    <CustomInputItem
                         key={'input'+index}
-                        name="姓名"
+                        label="姓名"
                         type="text"
+                        value={this.state.name}
+                        onChange={e => this.setState({name: e})}
                     />
                 )
                 break;
             case 2:
                 content = [
-                    <InputC
+                    <CustomInputItem
                         key={'input'+index}
-                        name="手机号码"
+                        label="手机号码"
                         type="phone"
+                        value={this.state.mobile}
+                        onChange={e => this.setState({mobile: e})}
                     />,
-                    <InputC
+                    <CustomInputItem
                         key={'code'+index}
                         inputType="code"
                         type="digit"
+                        label={<div onClick={() => console.log('发送验证码')}>发送验证码</div>}
                     />
 
                 ]
@@ -171,7 +137,7 @@ class ActivityDetailsView extends Component {
                                 </div>
                                 <div>
                                     <span className="iconfont icon-shijian"></span>
-                                    <span>{info.publishTime}</span>
+                                    <span>{info.publishTime?Util.formatDate(info.publishTime):'-'}</span>
                                 </div>
                             </Flex>
                             { info.type == 1 && (
@@ -196,7 +162,7 @@ class ActivityDetailsView extends Component {
 
 
                                     <div className="statement">
-                                        <CheckBox checked={this.stores.state.checked} onClick={this.stores.checkboxChange} />
+                                        {this.checkBox(this.stores.state.checked, this.stores.checkboxChange)}
                                         <span>点击提交则视为同意</span>
                                         <span>《福特购个人信息保护声明》</span>
                                     </div>
@@ -213,9 +179,9 @@ class ActivityDetailsView extends Component {
                             <div onClick={this.stores.openModal}><span className="iconfont icon-xiepinglun icon-comment"></span><span>写评论</span></div>
                         </Flex>
 
-                        <div className="comment-list">
+                        {/* <div className="comment-list">
                             { this.renderCommentItems(info.commentList) }
-                        </div>
+                        </div> */}
 
                     </div>
 

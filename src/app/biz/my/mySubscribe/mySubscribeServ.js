@@ -16,9 +16,9 @@ export default class {
         }
 
         return Request({
-            url: "caf/api/v1/appointment/list",
+            url: "appointment/list",
             type: "GET",
-            data: JSON.stringify(params),
+            data: params,
             headers: headers
         });
     }

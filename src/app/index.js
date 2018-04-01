@@ -6,7 +6,6 @@ window.app = {
         window.app.router.push(path);
     },
     routerRedirect: function(path){
-        console.log("path:"+path)
         window.app.router.replace(path);
     },
     currentRouterPath: '/',//保存当前进入的页面。作用主要是为了。进入某一个页面。如果没有登录，会进入注册页面，注册成功后，返回。注：/Register 不会被设置

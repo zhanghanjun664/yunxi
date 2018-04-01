@@ -25,7 +25,7 @@ class OrderList extends Component {
     let params = {
       pageNum: pageNum,
       pageSize: 10,
-      status: this.props.status
+      appointmentStatus: this.props.status
     };
 
     let { data } = await this.props.fetchData(params);

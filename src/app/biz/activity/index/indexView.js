@@ -27,10 +27,9 @@ class HomeView extends Component {
 
   componentDidMount() {
     this.stores.setStyle({
-      height: Util.getScrollHeight(['banner', 'am-tabs-tab-bar-wrap', 'am-tab-bar-bar'])
+      height: Util.getScrollHeight(['banner', 'am-tabs-default-bar-content', 'am-tabs-tab-bar-wrap'])-60
     })
     this.getData();
-    // window.app.routerRedirect('home')
   }
 
   //获取数据
@@ -43,7 +42,8 @@ class HomeView extends Component {
   }
 
   toUrl(url) {
-    window.app.routerGoTo(url);
+    // window.app.routerGoTo(url);
+    location.href = url;
   }
 
   // 跳转到详情
@@ -58,6 +58,7 @@ class HomeView extends Component {
 
   render() {
     const { adList, style } = this.stores.state
+    console.log(adList)
     return (
       <div className="activity-page">
         <div className="banner">
@@ -86,6 +87,7 @@ class HomeView extends Component {
         <div className='tabsBox'>
           <Tabs tabs={this.tabs}
             initialPage={0}
+            animated={false}
             onChange={(tab, index) => { console.log('onChange', index, tab); }}
 
           >
