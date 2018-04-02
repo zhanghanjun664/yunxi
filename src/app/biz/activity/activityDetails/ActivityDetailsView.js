@@ -8,6 +8,7 @@ import { inject, observer } from 'mobx-react';
 import './ActivityDetailsLess.less';
 import { StarRange, CustomInputItem } from 'widget';
 import Util from 'util';
+import Verify from 'util/Verify.js';
 
 
 
@@ -22,7 +23,8 @@ class ActivityDetailsView extends Component {
 
         this.state = {
             mobile: '',
-            name: ''
+            name: '',
+            checkCode: ''
         }
     }
 
@@ -89,6 +91,8 @@ class ActivityDetailsView extends Component {
                         type="text"
                         value={this.state.name}
                         onChange={e => this.setState({name: e})}
+                        className="input"
+                        maxLength={50}
                     />
                 )
                 break;
@@ -97,15 +101,20 @@ class ActivityDetailsView extends Component {
                     <CustomInputItem
                         key={'input'+index}
                         label="手机号码"
-                        type="phone"
+                        type="number"
                         value={this.state.mobile}
                         onChange={e => this.setState({mobile: e})}
+                        className="input"
+                        maxLength={11}
                     />,
                     <CustomInputItem
                         key={'code'+index}
                         inputType="code"
-                        type="digit"
-                        label={<div onClick={() => console.log('发送验证码')}>发送验证码</div>}
+                        type="number"
+                        value={this.state.checkCode}
+                        onChange={e => this.setState({checkCode: e})}
+                        label={<div onClick={this.getCode.bind(this, this.state.mobile)}>发送验证码</div>}
+                        className="input"
                     />
 
                 ]
@@ -113,6 +122,34 @@ class ActivityDetailsView extends Component {
         }
 
         return content;
+    }
+
+    signUp(){
+        if(this.state.checkCode != this.stores.state.checkCode){
+            console.log('请输入正确的验证码')
+            return
+        }
+        let params = {
+            memberName: this.state.name.trim(),
+            memberMobile: this.state.mobile,
+            activityId: this.props.location.query.id
+        }
+        console.log(params)
+        if(!params.memberName){
+            console.log('请输入姓名')
+            return
+        }
+        this.stores.postActivityInfo(params)
+
+    }
+    getCode(mobile){
+        console.log(mobile)
+        if(!Verify.isPhoneNum(mobile)){
+            console.log('号码不对')
+            return
+        }
+        this.stores.getCode(mobile)
+
     }
 
     render() {
@@ -158,7 +195,7 @@ class ActivityDetailsView extends Component {
                                         return this._renderFormItem(item, index);
                                     })}
 
-                                    <Button className="submit-btn">报名</Button>
+                                    <Button className="submit-btn" onClick={this.signUp.bind(this)}>报名</Button>
 
 
                                     <div className="statement">
@@ -179,9 +216,9 @@ class ActivityDetailsView extends Component {
                             <div onClick={this.stores.openModal}><span className="iconfont icon-xiepinglun icon-comment"></span><span>写评论</span></div>
                         </Flex>
 
-                        {/* <div className="comment-list">
-                            { this.renderCommentItems(info.commentList) }
-                        </div> */}
+                        <div className="comment-list">
+                            {/* { this.renderCommentItems(info.commentList) } */}
+                        </div>
 
                     </div>
 

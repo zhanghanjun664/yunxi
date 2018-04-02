@@ -20,12 +20,11 @@ class Information extends Component{
         this.state = {news:[]}
 
         this.stores = this.props.cloubStoreIndex ; 
-        this.storeCode = 'C001' ;
     }
 
     componentDidMount(){
 
-        this.stores.getInformationList(this.storeCode) ;
+        this.stores.getInformationList() ;
         
     }
 
@@ -55,7 +54,7 @@ class Information extends Component{
                                     className="v-item ellipsis"
                                     onClick={window.app.routerGoTo.bind(this,val.redirectUrl)}
                                 >
-                                    <span className='tag'>围观</span>
+                                    {/* <span className='tag'>围观</span> */}
                                     <span>{val.title}</span>
                                 </div>
                                ) ;

@@ -50,6 +50,7 @@ class StarsList extends Component{
     render(){
         let score = this.props.score ; 
         
+
         if(score==null)return(<div></div>) ;
 		let [n,f] = (score+'').split('.') ; 
 		//绘制各种星的数量
@@ -64,9 +65,9 @@ class StarsList extends Component{
 			fnum = n ;
 			fnum = parseInt(fnum) ;
 			arr.fill(1,0,fnum) ;
-			
+            
 			//半星
-			if(f!=0){
+			if(fnum!=0&&f!=0){
 				mnum = 1;
 				arr.fill(2,fnum,fnum+1) ;
 			}

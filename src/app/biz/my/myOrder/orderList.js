@@ -29,6 +29,7 @@ class OrderList extends Component {
     };
 
     let { data } = await this.props.fetchData(params);
+    console.log(data)
     success(data.list, data.pageNum, data.total);
 
   }

@@ -22,18 +22,26 @@ class ActivityInformation extends Component{
     }
 
     componentDidMount(){
-        this.stores.getActivityInformation() ;
+        let params = {
+            pageNum:1,
+            pageSize:3,
+            storeId:this.stores.state.dealerId
+        }
+        this.stores.getActivityInformation(params) ;
     }
 
     /**
      * 打开活动详情
      */
-    handleClickActivity = (e) => {
+    handleClickActivity = (e,code) => {
+        
         window.app.routerGoTo('/activityDetails') ;
     }
     render(){
         let {activityInformationList} = this.stores.state ; 
         
+        let type = ['推荐','行业','测评','特惠'] ;
+
         return(
             <div className='activityInformation'>
                 <div className='activityInformation-title'>
@@ -44,24 +52,26 @@ class ActivityInformation extends Component{
 
                     {
                         activityInformationList.map((val,i) => {
-                                                        
+                            
                             return(
-                                <Flex className='activityInformation-content-item' key={'activityInformation'+i} onClick={this.handleClickActivity}>
+                                <Flex className='activityInformation-content-item' 
+                                      key={'activityInformation'+i} 
+                                      onClick={(e) => {this.handleClickActivity(e,val.id)}}>
                                     <div className='activityInformation-content-item-img'>
-                                        <img src={val.imgUrl}/>
+                                        <img src={val.image}/>
                                     </div>
                                     <Flex.Item className='activityInformation-content-item-c'>
                                         <div className='activityInformation-content-item-title'>
-                                            <span>
+                                            <span className='ellipsis-two'>
                                                 {val.name}
                                             </span>
                                         </div>
                                         <div className='activityInformation-content-item-b'>
-                                            <span>汽车资讯</span>
+                                            <span>{type[val.type-1]}资讯</span>
                                             <span className='activityInformation-content-item-b-space'></span>
                                             <span>
                                             {
-                                                Util.formatDate(val.beginDate,1) 
+                                                Util.formatDate(val.publishTime||'2018-04-02',1) 
                                             }
                                             </span>
                                         </div>

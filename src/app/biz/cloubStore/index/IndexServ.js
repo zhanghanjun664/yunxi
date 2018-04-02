@@ -6,22 +6,23 @@
  */
 import Request from "util/Request";
 
+let locaPath = document.location.origin+document.location.pathname ;
 export default class{
-
     /**
      * 获取活动轮播图列表
-     * storeCode  云店编码
+     * dealerId  经销商ID
      */
-    static getActivityBannerList(_storeCode){
+    static getActivityBannerList(_dealerId){
 
         let params = {
             type:2,
-            storeCode:_storeCode
+            dealerId:_dealerId
         }
         
         try {
             let data = Request({
-                url: "caf/jdcloud/index/carouselFigure",
+                //url: "caf/jdcloud/index/carouselFigure",
+                url: "caf/jdcloud/index/carousel-figures",
                 type: "GET",
                 data: params
             })
@@ -34,12 +35,12 @@ export default class{
 
     /**
      * 获取最新资讯
-     * @param {*} _storeCode 云店编码
+     * @param {*} _dealerId  经销商ID
      */
-    static getInformationList(_storeCode){
+    static getInformationList(_dealerId){
         let params = {
             type:2,
-            storeCode:_storeCode
+            dealerId:_dealerId
         }
 
         try {
@@ -57,13 +58,15 @@ export default class{
 
     /**
      * 经销商查询 
-     * @param {*} _storeCode 云店编码
+     * @param {*} params {
+     *  dealerId:云店id
+     *  longtitude:经度
+     *  latitude:纬度
+     *  areaCode:城市编码
+     * }
      */
-    static getdealerInfo(_storeCode){
-        let params = {
-            storeCode:_storeCode
-        }
-
+    static getdealerInfo(params){
+        
         try {
             let data = Request({
                 url: "caf/jdcloud/dealer",
@@ -81,14 +84,13 @@ export default class{
      * 活动资讯
      * @param {*} _storeCode 云店编码
      */
-    static getActivityInformation(_storeCode){
-        let params = {
-            type:2,
-            storeCode:_storeCode
-        }
+    static getActivityInformation(params){
+       
         try {
             let data = Request({
-                url: "caf/jdcloud/index/activity",
+                //url: "caf/jdcloud/index/activity",
+                //url: "caf/jdcloud/index/activities",
+                url:"mall/activity/list-by-page",
                 type: "GET",
                 data: params
             })
@@ -113,7 +115,8 @@ export default class{
 
         try {
             let data = Request({
-                url: "caf/jdcloud/index/specialItem",
+                //url: "caf/jdcloud/index/specialItem",
+                url: locaPath+"assets/mock/caf-jdcloud-index-special-items.json", 
                 type: "GET",
                 data: params
             })
@@ -126,18 +129,17 @@ export default class{
 
     /**
      * 热门车型
-     * @param {*} _storeCode 云店编码
+     * @param {*} _dealerId 云店编码
      */
-    static getHotItemList(_storeCode){
-
+    static getHotItemList(_dealerId){
         let params = {
             type:2,
-            storeCode:_storeCode
+            dealerId:_dealerId
         }
 
         try {
             let data = Request({
-                url: "caf/jdcloud/index/hotItem",
+                url: "caf/jdcloud/index/hot-items",
                 type: "GET",
                 data: params
             })
@@ -146,6 +148,15 @@ export default class{
             Toast.fail(e) ;
             console.log(e)
         }
+    }
+
+    //获取导航栏
+    static getQuickLinkList() {
+        return Request({
+            url: "caf/jdcloud/index/quick-links",
+            type: "GET",
+            data: {type: 1}
+        })
     }
 
 

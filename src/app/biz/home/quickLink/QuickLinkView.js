@@ -20,11 +20,20 @@ class QuickLinkView extends Component {
         this.stores.getQuickLinkList();
     }
 
+    renderNavItem = (item, index, key) => {
+        return (
+            <div className="link-item" key={key + index} onClick={window.app.routerGoTo.bind(this, item.redirectUrl)}>
+                <img src={item.imgUrl} />
+                <div className="link-text ellipsis">{item.name}</div>
+            </div>
+        )
+    }
+
 
     render() {
 
         let { quickLinkList } = this.stores.state;
-        console.log(this.stores.data);
+
         return (
 
             <div className="quick-link-page">
@@ -34,14 +43,7 @@ class QuickLinkView extends Component {
                         <span>客户服务</span>
                     </Flex>
                     <Flex className="link-list" wrap="wrap">
-                        { this.stores.data.service.map((item, index) => {
-                            return (
-                                <div className="link-item" key={'service'+index}>
-                                    <img src={item.imgUrl} />
-                                    <div className="link-text ellipsis">{item.name}</div>
-                                </div>
-                            )
-                        })}
+                        { this.stores.data.service.map((item, index) => this.renderNavItem(item, index, 'service'))}
 
 
                     </Flex>
@@ -53,14 +55,7 @@ class QuickLinkView extends Component {
                         <span>我的福特</span>
                     </Flex>
                     <Flex className="link-list" wrap="wrap">
-                        { this.stores.data.my.map((item, index) => {
-                            return (
-                                <div className="link-item" key={'my'+index}>
-                                    <img src={item.imgUrl} />
-                                    <div className="link-text ellipsis">{item.name}</div>
-                                </div>
-                            )
-                        })}
+                        { this.stores.data.my.map((item, index) => this.renderNavItem(item, index, 'my'))}
                     </Flex>
                 </div>
             </div>

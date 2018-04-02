@@ -11,7 +11,7 @@ import React, {PropTypes, Component} from 'react';
 import { Flex, Toast, Modal, Icon, } from 'antd-mobile';
 import Request from "util/Request";
 import './AddressPickerLess.less';
-
+import district from './district';
 
 const defaultItem = {label: '请选择'};
 
@@ -23,8 +23,8 @@ class AddressPickerView extends Component {
         this.state = {
             show: false,
             loading: false,
-            areaData: null,
-            areaList: [],
+            areaData: district,    //总数据
+            areaList: district,    //显示数据
             selectedArea: [defaultItem],
             index: 0,    //表示进行到那个tab
         }
@@ -33,7 +33,7 @@ class AddressPickerView extends Component {
     }
 
     componentDidMount() {
-        this._getAreaData({level: 1});   //拿省份
+
     }
 
 
@@ -53,26 +53,6 @@ class AddressPickerView extends Component {
     _toggleLoading = () => {
         this.setState({
             loading: !this.state.loading
-        })
-    }
-
-
-    //数据   {level: 1, areaCode: 12332}
-    _getAreaData = (params) => {
-        this._toggleLoading();
-        Request({
-            url: 'caf/jdcloud/index/areas',
-            type: "GET",
-            data: params
-        }).then((result) => {
-            console.log(result)
-            this._toggleLoading();
-            this.setState({
-                areaData: result.data.list,
-                areaList: result.data.list,
-            })
-        }, (err) => {
-            this._toggleLoading();
         })
     }
 

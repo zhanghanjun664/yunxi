@@ -84,7 +84,7 @@ class DistributorInfo extends Component{
 			<div className='disInfo'>
 				<div className='disInfo1'>
 					<div className='disInfo1-name'>
-						<span>{dealerInfo.dealerName}</span>
+						<span className='ellipsis-two'>{dealerInfo.dealerName}</span>
 					</div>
 					<StarsList score={dealerInfo.score} className='disInfo1-stars' />
 				</div>
@@ -218,7 +218,7 @@ class ShopActivity extends Component{
 											</div>
 											<div>
 												<span className='iconfont icon-shijian'></span>
-												<span className='ellipsis'>{Util.formatDate(val.publishTime,1)}</span>
+												<span className='ellipsis'>{Util.formatDate(val.publishTime||'2018-4-2',1)}</span>
 											</div>
 										</div>
 
@@ -248,7 +248,7 @@ class ProductDetailIndex extends Component {
 		//需要获取云店编码
 		this.storesCloubIndex = this.props.cloubStoreIndex ; 
 		
-		//console.log(this.props.location);
+		this.stores.itemId = this.props.location.state.itemId ; 
 		
 	}
 	componentDidMount(){
@@ -258,11 +258,15 @@ class ProductDetailIndex extends Component {
 	}
 
 	getData = () =>{
-		let [_itemCode,_account,_itemId] = ['00001','11111','3'] ; 
+				
+
+		let [_itemCode,_account,_itemId] = ['00001','11111',this.stores.state.itemId] ; 
+		let {dealerId} = this.storesCloubIndex.state ;
 		let params = {
-			itemCode:_itemCode,
-			storeCode:this.storesCloubIndex.state.storeCode ,
-			itemId:_itemId 
+			//itemCode:_itemCode,
+			//storeCode:this.storesCloubIndex.state.storeCode ,
+			itemId:_itemId ,
+			"dealerId":dealerId ,
 		}
 		
 		this.getCarDetailBaseInfo(params) ;
@@ -279,7 +283,12 @@ class ProductDetailIndex extends Component {
 			itemId:_itemId 
 		}) ;
 
-		this.getDistributorInfo();
+		// TODO 经纬度获取还未完成
+		this.getDistributorInfo({
+			itemId:_itemId ,
+			longtitude:0 ,
+			latitude:0 ,
+		});
 
 		this.getActivityList({
 			storeId:this.storesCloubIndex.state.storeId,
@@ -320,8 +329,8 @@ class ProductDetailIndex extends Component {
 	/**
 	 * 获取经销商信息
 	 */
-	getDistributorInfo = (storeCode) =>{
-		this.storesCloubIndex.getdealerInfo(storeCode) ; 
+	getDistributorInfo = (params) =>{
+		this.storesCloubIndex.getdealerInfo(params) ; 
 	}
 
 	/**

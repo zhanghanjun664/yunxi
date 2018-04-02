@@ -4,7 +4,8 @@
   height: auto;
   border: 1px solid @color_line;
   border-radius: 10px;
-  margin: 0 30px 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   &.active {
     border-color: @color_orange;
   }
@@ -14,7 +15,7 @@
       .am-input-label {
         font-size: 24px;
         color: #0F68B0;
-        line-height: 35px;
+        line-height: 34px;
       }
       .necessary:after {
         content: '*';
@@ -46,6 +47,7 @@
     .am-input-label {
       width: auto;
       margin-right: 20px;
+      line-height: 28px;
     }
   }
 
@@ -62,10 +64,16 @@
     .am-input-control {
       font-size: 25px;
       width: 100%;
+      margin-bottom: 3px;
       input {
         font-size: 28px;
       }
     }
+  }
+
+  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #999;
+    font-size: 24px;
   }
 
 

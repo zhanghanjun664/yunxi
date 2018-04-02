@@ -45,7 +45,6 @@ class AppView extends Component{
     }
 
     render(){
-
         return(
 
             <div className='indexPage'>

@@ -14,7 +14,20 @@ class InfoView extends React.Component {
     }
 
     componentDidMount() {
-      this.stores.getdealerInfo();
+      let params = {
+        longtitude:113.436542,
+        latitude:23.103679,
+        areaCode:'cq'
+      }
+      this.stores.getdealerInfo(params);
+    }
+    converKm(val){
+      val = Number(val) ; 
+      if(val<1000){
+        return val.toFixed(2)+'m' ;
+      }else{
+        return (val/1000).toFixed(2)+'km' ;
+      }
     }
 
     render() {
@@ -46,7 +59,11 @@ class InfoView extends React.Component {
                       <p className="p1">到这里</p>
                     </div>
                     <div className='infoPage-content-info-m-r'>
-                      <p className="p2">距您{`<`}10km</p>
+                      <p className="p2">距您{`<`}{
+                        dealerInfo.shops==null?'':
+                        this.converKm(dealerInfo.shops[0].distance)
+                      }
+                      </p>
                       <span className='infoPage-content-info-m-r-sep'></span>
                       <a href={'tel:'+dealerInfo.salePhone}>
                         <i className='iconfont icon-dianhua'></i>

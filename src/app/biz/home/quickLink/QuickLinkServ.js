@@ -8,8 +8,9 @@ export default class {
 
     static getQuickLinkList() {
         return Request({
-            url: "caf/jdcloud/index/quickLink",
+            url: "caf/jdcloud/index/quick-links",
             type: "GET",
+            data: {type: 0}
         })
     }
 }

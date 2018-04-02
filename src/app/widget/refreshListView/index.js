@@ -80,6 +80,7 @@ class RefreshListView extends Component {
     _fetchData = (pageNum = 1) => {
 
         this.props.fetchData && this.props.fetchData(pageNum, (list, pageNum, pages) => {
+            console.log("pages:"+pages+" pageNum:"+ pageNum)
             //请求成功
             this.first = false;
             this.setState({
@@ -88,7 +89,8 @@ class RefreshListView extends Component {
                 isLoading: false,
                 refreshing: false,
             });
-            this._addRows(list);
+            console.log(list)
+            list && list.length && this._addRows(list);
         }, (err) => {
             console.log(err);
         });

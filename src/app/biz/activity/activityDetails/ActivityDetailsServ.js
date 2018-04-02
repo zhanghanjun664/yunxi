@@ -14,4 +14,22 @@ export default class {
             data: {id: id}
         })
     }
+    //发送验证码 postActivityInfo
+    static getCode(mobile) {
+        console.log(mobile)
+        return Request({
+            url: "verify/code/get",
+            type: "GET",
+            data: {mobile: mobile}
+        })
+    }
+    //活动报名 postActivityInfo
+    static postActivityInfo(params) {
+        console.log(params)
+        return Request({
+            url: "mall/activity/attend",
+            type: "POST",
+            data: params
+        })
+    }
 }

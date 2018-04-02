@@ -4,15 +4,23 @@ import Information from './information/InformationView'
 import { Flex} from 'antd-mobile';
 
 import './FunctionLess.less' ;
+import { inject, observer } from 'mobx-react';
 
 /**
  * yie.lvlin
  * 精彩资讯+功能选项
  */
+@inject("cloubStoreIndex") 
+@observer
 class CFunction extends Component{
 
-    constructor(){
-        super() ;
+    constructor(props){
+        super(props) ;
+        this.stores = this.props.cloubStoreIndex ; 
+    }
+
+    componentDidMount(){
+        this.stores.getQuickLink() ;
     }
 
     /**
@@ -37,7 +45,7 @@ class CFunction extends Component{
     }
     render(){
 
-        
+        let {quickLinkList} = this.stores.state ;
 
         return(
             <div className="cfunction-div">
@@ -47,7 +55,7 @@ class CFunction extends Component{
                     </div>
                     <div className='cfunction-nav'>
                         <Flex className="nav">
-                            <div className="nav-item" onClick={this.handleClickTestDrivie}>
+                            {/* <div className="nav-item" onClick={this.handleClickTestDrivie}>
                                 <img src="assets/images/home/shichengshijia.png" />
                                 <span>预约试驾</span>
                             </div>
@@ -62,7 +70,17 @@ class CFunction extends Component{
                             <div className="nav-item">
                                 <img src="assets/images/home/gouchejisuanqi.png" />
                                 <span className="ellipsis">金融方案</span>
-                            </div>
+                            </div> */}
+                            { quickLinkList.map((item, index) => {
+                                //固定只取前4个
+                                if(index>=4) return '';
+                                return (
+                                    <div className="nav-item" onClick={() => { window.app.routerGoTo(item.redirectUrl) }} key={'nav'+index}>
+                                        <img src={item.imgUrl} />
+                                        <span>{item.name}</span>
+                                    </div>
+                                )
+                            })}
                             <div className="nav-item" onClick={this.handleClickMore}>
                                 <img src="assets/images/home/gengduo.png" />
                                 <span>更多</span>

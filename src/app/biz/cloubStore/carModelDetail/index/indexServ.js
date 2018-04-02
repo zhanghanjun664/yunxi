@@ -40,7 +40,8 @@ export default class{
     static getFollowFlag(params){
         try {
             let data = Request({
-                url: "caf/jdcloud/store/item/follow",
+                //url: "caf/jdcloud/store/item/follow",
+                url:'caf/jdcloud/item/car/follow' ,
                 type: "GET",
                 data: params
             })
@@ -63,7 +64,8 @@ export default class{
     static getCommentList(params){
         try {
             let data = Request({
-                url: "caf/jdcloud/store/item/comment",
+                //url: "caf/jdcloud/store/item/comment",
+                url:"caf/jdcloud/item/car/comments" ,
                 type: "GET",
                 data: params
             })

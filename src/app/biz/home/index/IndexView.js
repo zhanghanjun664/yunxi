@@ -43,13 +43,13 @@ class HomeView extends Component {
     }
 
     // 跳转到详情
-    goToDetail(e) {
-        window.app.routerGoTo('/carModelDetail')
+    goToDetail(itemId) {
+        window.app.routerGoTo('/carModelDetail?itemId='+itemId)
     }
 
     render() {
 
-        let { bannerList, newsList, hotCarList, discountCarList, hotActivityList, position } = this.stores.state;
+        let { bannerList, newsList, hotCarList, discountCarList, hotActivityList, position, quickLinkList, } = this.stores.state;
 
         return (
             <div className="home-page">
@@ -86,7 +86,6 @@ class HomeView extends Component {
                                     )
                                 })
                             }
-
                         </Carousel>
                     )
                 }
@@ -124,23 +123,17 @@ class HomeView extends Component {
 
                         <div className="more-news">更多</div>
                     </Flex>
-                    <Flex className="nav">
-                        <div className="nav-item" onClick={() => { window.app.routerGoTo('testdrive') }}>
-                            <img src="assets/images/home/shichengshijia.png" />
-                            <span>预约试驾</span>
-                        </div>
-                        <div className="nav-item" onClick={() => { window.app.routerGoTo('askprice') }}>
-                            <img src="assets/images/home/xundijia.png" />
-                            <span>查询底价</span>
-                        </div>
-                        <div className="nav-item">
-                            <img src="assets/images/home/kefuzhongxin.png" />
-                            <span>在线客服</span>
-                        </div>
-                        <div className="nav-item">
-                            <img src="assets/images/home/gouchejisuanqi.png" />
-                            <span className="ellipsis">金融方案</span>
-                        </div>
+
+                    <Flex className="nav" wrap="wrap">
+                        { quickLinkList.map((item, index) => {
+                            return (
+                                <div className="nav-item" onClick={() => { window.app.routerGoTo(item.redirectUrl) }} key={'nav'+index}>
+                                    <img src={item.imgUrl} />
+                                    <span>{item.name}</span>
+                                </div>
+                            )
+                        })}
+
                         <div className="nav-item" onClick={() => { window.app.routerGoTo('quickLink') }}>
                             <img src="assets/images/home/gengduo.png" />
                             <span>更多</span>
@@ -157,7 +150,7 @@ class HomeView extends Component {
                                 {hotCarList.map((item, index) => {
                                     return (
                                         <Flex.Item className="car-item" key={'hotcar' + index}>
-                                            <img src={`assets/images/home/chexing_bg0${index + 1}.png`} onClick={e => { this.goToDetail(e) }} />
+                                            <img src={item.imgUrl} onClick={ this.goToDetail.bind(this,item.itemId) } />
                                         </Flex.Item>
                                     )
                                 })}

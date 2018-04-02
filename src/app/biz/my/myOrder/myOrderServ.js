@@ -13,7 +13,7 @@ export default class {
         }
 
         return Request({
-            url: "caf/api/v1/appointment/list",
+            url: "caf/jdcloud/trade/order/list-by-page",
             type: "GET",
             data: params,
             headers: headers

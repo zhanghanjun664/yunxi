@@ -15,6 +15,15 @@ export default class {
         })
     }
 
+    //获取导航栏
+    static getQuickLinkList() {
+        return Request({
+            url: "caf/jdcloud/index/quick-links",
+            type: "GET",
+            data: {type: 1}
+        })
+    }
+
     //获取最新资讯列表
     static getNewsList(params) {
         return Request({
@@ -28,7 +37,7 @@ export default class {
     //热门车型
     static getHotCarList(params) {
         return Request({
-            url: "caf/jdcloud/index/hotItem",
+            url: "caf/jdcloud/index/hot-items",
             type: "GET",
             data: params
         })

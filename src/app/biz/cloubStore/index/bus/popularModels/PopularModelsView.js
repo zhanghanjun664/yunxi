@@ -22,8 +22,14 @@ class PopularModelsView extends React.Component {
     this.stores.getHotItemList();
   }
 
-  handleClick = (e) => {
-    window.app.routerGoTo('/cloubStore/carModelDetail')
+  handleClick = (itemId) => {
+    let path = {
+      "pathname":'cloubStore/carModelDetail' ,
+       "state":{
+         "itemId":itemId
+       }
+    }
+    window.app.routerGoTo(path) ;
   }
 
   /**
@@ -36,6 +42,8 @@ class PopularModelsView extends React.Component {
 
   render() {
     let {hotItemList} = this.stores.state ;
+    
+    
     return (
       <div id="wk">
         <Carousel className="space-carousel"
@@ -52,7 +60,8 @@ class PopularModelsView extends React.Component {
           
           <div key={i} className='carItem'>
             <div 
-              onClick={this.handleClick}
+              itemID={val.id}
+              onClick={this.handleClick.bind(this,val.id)}
             >
               <img
                 id="tp"
@@ -65,30 +74,29 @@ class PopularModelsView extends React.Component {
               />
               
             </div>
-            <div className='popCar-price'>
+            {/* <div className='popCar-price'>
               <p className="popCar-jiage">￥{val.officialPrice}万</p>
               <div className='popCar-next'>
                 <i className="iconfont icon-next"></i>
               </div>
-            </div>
+            </div> */}
             {
-              i%3===0?
-              <div className='popCar-fil'>
-                <span>热门好车</span>
-                <span>精 · 选</span>
-              </div>:''
+              //i%3===0?
+              // <div className='popCar-fil'>
+              //   <span>热门好车</span>
+              //   <span>精 · 选</span>
+              // </div>:''
             }
           </div>
         ))}
       </Carousel>
       <div className="popCar-allCar" >
-        <Button 
+        <div 
           onClick={this.handleClickAllCars}
           className='popCar-allCar-btn'
-          style={{border:"1px solid #FD5C0E"}}
           >
-          全部车型 >
-          </Button>
+          全部车型
+        </div>
       </div>
     </div>
     );

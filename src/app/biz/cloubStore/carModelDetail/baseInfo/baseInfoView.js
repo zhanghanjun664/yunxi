@@ -17,7 +17,7 @@ class ProductDetailBaseInfo extends Component {
 		super(props, context)
 		//this.stores = this.props.cloubStoreCarModelDetail;
 		this.state = {
-			followFlag:'1' ,
+			followFlag:'0' ,
 			sku:{
 				officialSellPrice:0,
 				sellerSellPrice:0
@@ -109,7 +109,9 @@ class ProductDetailBaseInfo extends Component {
 					{
 						this.drawCloubAct() 
 					}
+					<div className='pdb2_3'>1.5T涡轮增压/紧凑型轿车/自动变速箱/无钥匙启动/全景天窗/17寸轮毂</div>
 					<div className='pdb2_2'>{carDetailBaseInfo.labels}</div>
+					
 
 				</div>
 				

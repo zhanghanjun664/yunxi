@@ -24,8 +24,9 @@ class Home {
     @action
     getIndexData = () => {
         this.getBannerList();
-        this.getNewsList()
-        // this.getHotCarList()
+        this.getNewsList();
+        this.getQuickLink();
+        this.getHotCarList()
         // this.getDiscountCarList();
         // this.getHotActivityList()
     }
@@ -43,6 +44,16 @@ class Home {
             console.log(data)
         })
 
+    }
+
+    @action
+    async getQuickLink() {
+        let {data, resultCode, resultMsg} = await Serv.getQuickLinkList();
+        //如果是异步，必须在runInAction
+        runInAction(()=> {
+            this.state.quickLinkList = data;
+            console.log(data)
+        })
     }
 
     @action
@@ -70,14 +81,14 @@ class Home {
     @action
     async getHotCarList() {
         let params = {
-            type: '1',
-            areaCode: this.state.position.value,
-            pageSize: 3,
         };
         let {data, resultCode, resultMsg} = await Serv.getHotCarList(params);
         runInAction(()=> {
-
-            this.state.hotCarList = data.list;
+            let arr = data;
+            if (data.length > 3) {
+                arr = data.slice(0, 3);
+            }
+            this.state.hotCarList = arr;
         })
     }
 

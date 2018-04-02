@@ -9,6 +9,7 @@ import { observable, action, runInAction } from 'mobx';
  */
 class CloubStoreCarModelDetail {
     @observable state = {
+        itemId:'1171328588805309440', //车型id
         carDetailBaseInfo:{} ,  //车型基础信息
         followFlag:"0",  //是否已关注
         commentList:[], //评论列表
@@ -20,6 +21,10 @@ class CloubStoreCarModelDetail {
     @action
     handleScroll(type){
       this.state.navTab = type
+    }
+
+    set itemId(_itemId){
+        this.state.itemId = _itemId ; 
     }
 
     /**
@@ -44,6 +49,8 @@ class CloubStoreCarModelDetail {
      * @param {*} params {
      *   itemCode  --车型编码
      *   account  --微信unionId
+     *   itemId  --车型ID
+     * 
      * }
      * http://192.168.33.11:8004/document/detailPage?id=2764
      */
@@ -52,7 +59,9 @@ class CloubStoreCarModelDetail {
 
         let {data, resultCode, resultMsg} = await Serv.getFollowFlag(params) ;
         runInAction(() => {
-            this.state.followFlag = data.followFlag
+            if(data!=null){
+                this.state.followFlag = data.followFlag
+            }
         })
     }
 

@@ -2,8 +2,9 @@
  * @author 蓝胖
  * @time 2018-3-31
  * inputType   vertical-两行  horizontal-一行   code-发送验证码
- * necessary
- * label
+ * necessary   是否必填
+ * label       说明文字
+ * activeClassName  高亮样式
  * 其他同antd-mobile inputItem组件
  */
 
@@ -34,16 +35,17 @@ class CustomInputItem extends Component {
     }
 
     render() {
-        let {label = '', value, onChange, inputType = 'vertical', type='text', necessary = true,} = this.props;
-
-        let classname = 'form-input-widget';
-        classname += ` ${this.inputTypeStyle[inputType]}`;
+        let {label = '', inputType = 'vertical', necessary = true, activeClassName='active', className='', ...props} = this.props;
+        let inputClass = 'form-input-widget';
+        inputClass += ` ${this.inputTypeStyle[inputType]}`;
         if (this.state.active)
-            classname += ' active';
+            inputClass += ` ${activeClassName}`;
+
+        inputClass += ' ' + className;
 
         return (
-            <InputItem className={classname} onFocus={this.toggle} onBlur={this.toggle}
-                       value={value} onChange={e => onChange(e)} type={type} >
+            <InputItem className={inputClass} onFocus={this.toggle} onBlur={this.toggle}
+                       {...props} >
                 <span className={necessary ? 'necessary' : ''}>{label}</span>
             </InputItem>
         );
