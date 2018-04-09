@@ -19,17 +19,18 @@ class PopularModelsView extends React.Component {
   }
   componentDidMount() {
     
+    //TODO 待修改为默认
     this.stores.getHotItemList();
   }
 
   handleClick = (itemId) => {
-    let path = {
-      "pathname":'cloubStore/carModelDetail' ,
-       "state":{
-         "itemId":itemId
-       }
-    }
-    window.app.routerGoTo(path) ;
+    // let path = {
+    //   "pathname":'cloubStore/carModelDetail' ,
+    //    "state":{
+    //      "itemId":itemId
+    //    }
+    // }
+    window.app.routerGoTo(`cloubStore/carModelDetail?itemId=${itemId}`) ;
   }
 
   /**

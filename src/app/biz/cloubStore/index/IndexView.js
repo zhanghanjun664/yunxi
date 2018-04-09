@@ -27,7 +27,7 @@ import Info from './bus/info/InfoView' ;
 
 import './IndexLess.less' ; 
 import { inject,observer } from 'mobx-react';
-import TabBar from 'pubBiz/tabBar/tabBarView'
+import TabBar from 'pubBiz/tabBar/TabBarView'
 
 /**
  * yie.lvlin
@@ -37,11 +37,15 @@ import TabBar from 'pubBiz/tabBar/tabBarView'
 //@inject("")
 //设为观察者模式
 //@observer
+@inject("cloubStoreIndex")
+@observer
 class AppView extends Component{
     
-    constructor(){
+    constructor(props){
 
-        super() ;
+        super(props) ;
+        this.stores = this.props.cloubStoreIndex ;
+        this.stores.state.dealerId = this.props.location.query.dealerId ;
     }
 
     render(){

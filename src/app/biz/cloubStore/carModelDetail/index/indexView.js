@@ -21,7 +21,52 @@ import { List , Toast } from 'antd-mobile';
 /**@inject("cloubStoreCarModelDetail")
 @observer */
 class SelectBox extends Component{
+
+	drawLine(carDetailBaseInfo){
+
+		let skus = carDetailBaseInfo.skus||[] ; 
+
+		
+		if(skus.length>0){
+			let props = skus[0].props ; 
+			if(props.length===0)return "";
+			//如果有多种标签则显示已选规格，如果只有一个标签则显示标签名称
+			let labelName = (props.length>1) ? '已选规格':`已选${props[0].name}`  ;
+			
+			return(
+				<li className='pdSelectBox_item'>
+						<div>{labelName}：</div>
+						<div className='pdSelectBox_item2'>
+							<span className='hidden'>未选择</span>
+							<div className='pdSelectBox_color'>
+								<span className='pdSelectCircle'></span>
+								{
+									(carDetailBaseInfo.skus!=null)?
+									carDetailBaseInfo.skus[0].props.map((val,i)=>{
+										return <span key={`sexboxlable${i}`}>
+											{val.value}
+											{
+												(i+1)===carDetailBaseInfo.skus[0].props.length?
+												'':'+'
+											}
+											</span>
+									})
+									:''
+								}
+							</div>
+							
+						</div>
+						<div className='iconfont icon-right'></div>
+					</li>
+			) ;
+		}
+
+		return '' ;
+	}
+
 	render(){
+		let {carDetailBaseInfo} = this.props ; 
+		
 		return (
 			<div>
 				<ul className='pdSelectBox'>
@@ -29,22 +74,39 @@ class SelectBox extends Component{
 						<div>已选车型：</div>
 						<div className='pdSelectBox_item2'>
 							<span className='hidden'>未选择</span>
-							<span>1.8T/紧凑型/自动变速箱</span>
+							{/* <span>1.8T/紧凑型/自动变速箱</span> */}
+							<span>{carDetailBaseInfo.name}</span>
 						</div>
 						<div className='iconfont icon-right'></div>
 					</li>
-					<li className='pdSelectBox_item'>
+					{
+						this.drawLine(carDetailBaseInfo)
+					}
+					{/* <li className='pdSelectBox_item'>
 						<div>已选颜色：</div>
 						<div className='pdSelectBox_item2'>
 							<span className='hidden'>未选择</span>
 							<div className='pdSelectBox_color'>
 								<span className='pdSelectCircle'></span>
-								<span>峡谷棕</span>
+								{/* <span>峡谷棕</span> }
+								{
+									(carDetailBaseInfo.skus!=null)?
+									carDetailBaseInfo.skus[0].props.map((val,i)=>{
+										return <span key={`sexboxlable${i}`}>
+											{val.value}
+											{
+												(i+1)===carDetailBaseInfo.skus[0].props.length?
+												'':'+'
+											}
+											</span>
+									})
+									:''
+								}
 							</div>
 							
 						</div>
 						<div className='iconfont icon-right'></div>
-					</li>
+					</li> */}
 
 				</ul>
 			</div>
@@ -76,6 +138,14 @@ class DistributorInfo extends Component{
 
 	}
 
+	converKm(val){
+		val = Number(val) ; 
+		if(val<1000){
+		  return val.toFixed(2)+'m' ;
+		}else{
+		  return (val/1000).toFixed(2)+'km' ;
+		}
+	  }
 	render(){
 		let {dealerInfo} = this.props ; 
 		if(dealerInfo==null||dealerInfo.dealerName==null) return <div></div> ;
@@ -102,7 +172,7 @@ class DistributorInfo extends Component{
 									<span>{val.address}</span>
 								</div>
 								<div className='disInfo3-2'>
-									<span>{'距您<100KM'}</span>
+									<span>{'距您<'+this.converKm(val.distance)}</span>
 								</div>
 							</div>
 						)
@@ -205,7 +275,7 @@ class ShopActivity extends Component{
 									</div>
 
 									<div className='pdt_infoBox'>
-										<div className='pdt_info1'>{val.title}</div>
+										<div className='pdt_info1'>{val.name}</div>
 
 										<div className='pdt_info2'>
 											<div className='pdt_info_see'>
@@ -248,7 +318,10 @@ class ProductDetailIndex extends Component {
 		//需要获取云店编码
 		this.storesCloubIndex = this.props.cloubStoreIndex ; 
 		
-		this.stores.itemId = this.props.location.state.itemId ; 
+		//this.stores.itemId = this.props.location.state.itemId ; 
+		//TODO 后期修改成从URL获取
+		this.stores.itemId = this.props.location.query.itemId ; 
+		//this.stores.itemId = '1171675815723683840'//this.props.location.query.itemId ; 
 		
 	}
 	componentDidMount(){
@@ -272,34 +345,45 @@ class ProductDetailIndex extends Component {
 		this.getCarDetailBaseInfo(params) ;
 
 		this.getFollowFlag({
-			itemCode:_itemCode,
+			//itemCode:_itemCode,
 			account:_account,
 			itemId:_itemId 
 		}) ;
 
 		this.getCommentList({
-			itemCode:_itemCode,
+			//itemCode:_itemCode,
 			pageSize:3 ,
 			itemId:_itemId 
 		}) ;
 
+		let res = localStorage.getItem('myPosition') ;
+		if(res == null){
+			//29.6213983210,106.4917498827
+			//res = {latitude:23.103679,longitude:113.436542}
+			//重庆互联网产业园
+			res = {latitude:29.6213983210,longitude:106.4917498827}
+		}else{
+			res = JSON.parse(res) ; 
+		}
+		let {latitude,longitude} = res ; 
+
 		// TODO 经纬度获取还未完成
 		this.getDistributorInfo({
 			itemId:_itemId ,
-			longtitude:0 ,
-			latitude:0 ,
+			'longtitude':longitude ,
+			'latitude':latitude ,
 		});
 
 		this.getActivityList({
-			storeId:this.storesCloubIndex.state.storeId,
+			storeId:dealerId,
 			pageNum:1,
 			pageSize:3,
-			type:'',
-			areaCode:''
+			//type:'',
+			//areaCode:''
 		})
 
 		this.getCarDetailInfo({
-			itemCode:_itemCode,
+			//itemCode:_itemCode,
 			itemId:_itemId 
 		})
 	}
@@ -440,8 +524,8 @@ class ProductDetailIndex extends Component {
 					<div className={navTab===2?'active':''} onClick={() => this.changeNavTab(2)}>详细配置</div>
 					<div className={navTab===3?'active':''} onClick={() => this.changeNavTab(3)}>活动信息</div>
 				</div>
-				<Baseinfo carDetailBaseInfo={carDetailBaseInfo} followFlag={followFlag} />
-				<SelectBox />
+				<Baseinfo carDetailBaseInfo={carDetailBaseInfo} followFlag={followFlag} carDetailInfo={carDetailInfo} />
+				<SelectBox carDetailBaseInfo={carDetailBaseInfo} />
 				<DistributorInfo dealerInfo={dealerInfo} />
 				<div className='component_pdc'>
 					<div className='component_pdc_title'>评论</div>

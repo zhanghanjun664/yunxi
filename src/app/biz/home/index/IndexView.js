@@ -9,7 +9,7 @@ import Config from 'config/Config';
 import Util from 'util';
 import './IndexLess.less';
 import { AddressPicker } from 'widget';
-import TabBar from 'pubBiz/tabBar/tabBarView'
+import TabBar from 'pubBiz/tabBar/TabBarView'
 
 @inject("home")
 @observer
@@ -23,8 +23,31 @@ class HomeView extends Component {
 
     componentDidMount() {
         this.getData();
+    }
 
+    componentWillMount(){
+    }
 
+    getCurrCity(){
+        var callbacks = {
+            complete:function(results){
+                console.log('results:', results)
+                Toast.info(JSON.stringify(results.detail.name), 1000)
+            }
+        }
+
+        wx.getLocation({
+        type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+        success: function (res) {
+            var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+            var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+            var speed = res.speed; // 速度，以米/每秒计
+            var accuracy = res.accuracy; // 位置精度
+            var cs=new qq.maps.CityService(callbacks);
+            cs.searchCityByLatLng(new qq.maps.LatLng(latitude, longitude));
+            console.log('latitude:', latitude, 'longitude:', longitude, 'speed:', speed, 'accuracy:', accuracy)
+        }
+        });        
     }
 
     //获取数据
@@ -33,29 +56,56 @@ class HomeView extends Component {
 
     }
 
+    // 轮播图跳转
     toUrl(url) {
-        window.app.routerGoTo(url);
-        // location.href = url
+        // window.app.routerGoTo(url);
+        if(url){
+            let urls = Util.getUrl(url)
+            location.href = urls
+        }
     }
 
     selectAddr = () => {
-        this.refs.addrModal.openModal();
+
+        // this.refs.addrModal.openModal();
+
+        wx.getLocation({
+            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function (res) {
+                let {latitude, longitude, accuracy} = res; // 纬度, 经度, 速度
+
+                alert('Latitude:' + latitude + 'Long:' + longitude)
+
+            }
+        });
     }
 
     // 跳转到详情
     goToDetail(itemId) {
-        window.app.routerGoTo('/carModelDetail?itemId='+itemId)
+        window.app.routerGoTo('/carModelDetail?itemId=' + itemId)
+    }
+    
+    handleClickLogo(data){
+        if(data.redirectType == 2){
+            let urls = Util.getUrl(data.redirectUrl)
+            location.href = urls
+        }
+    }
+    noOpen(){
+        Toast.info('此功能暂未开放')
     }
 
     render() {
 
-        let { bannerList, newsList, hotCarList, discountCarList, hotActivityList, position, quickLinkList, } = this.stores.state;
+        let { bannerList, newsList, hotCarList, discountCarList, hotActivityList, position, quickLinkList, logoData } = this.stores.state;
 
         return (
             <div className="home-page">
                 <Flex className="home-header">
-                    <div className="logo"></div>
-                    <Flex.Item className="input-wrap">
+                    <div className="logo" onClick={this.handleClickLogo.bind(this, logoData)}>
+                        <img src={logoData.imgUrl} />
+                    </div>
+                    <Flex.Item className="input-wrap" onClick={this.noOpen.bind(this)}>
                         <div className="input-box">
                             <span>搜索您想要的车型</span>
                             <i className="iconfont icon-sousuo"></i>
@@ -63,32 +113,32 @@ class HomeView extends Component {
 
                     </Flex.Item>
                     <Flex className="position" onClick={this.selectAddr}>
-                        <i className="iconfont icon-dingwei"></i>
+                        <i className="iconfont icon-dingwei" onClick={ e => this.getCurrCity()}></i>
                         <span className="ellipsis">{position && position.label}</span>
                     </Flex>
                 </Flex>
                 <div className="banner">
-                {
-                    bannerList && bannerList.length > 0 && (
-                        <Carousel
-                            className="banner-slide"
-                            autoplay={true}
-                            infinite
-                            selectedIndex={0}
-                            dots={false}
-                            swipeSpeed={35}>
-                            {
-                                bannerList.map((item, index) => {
-                                    return (
-                                        <div className="banner-item-wrap" key={'banner' + index} onClick={this.toUrl.bind(this, item.redirectUrl)}>
-                                            <img className="banner-item" src={item.imgUrl} />
-                                        </div>
-                                    )
-                                })
-                            }
-                        </Carousel>
-                    )
-                }
+                    {
+                        bannerList && bannerList.length > 0 && (
+                            <Carousel
+                                className="banner-slide"
+                                autoplay={true}
+                                infinite
+                                selectedIndex={0}
+                                dots={false}
+                                swipeSpeed={35}>
+                                {
+                                    bannerList.map((item, index) => {
+                                        return (
+                                            <div className="banner-item-wrap" key={'banner' + index} onClick={this.toUrl.bind(this, item.redirectUrl)}>
+                                                <img className="banner-item" src={item.imgUrl} />
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </Carousel>
+                        )
+                    }
                 </div>
 
                 <div className="nav-wrap">
@@ -116,7 +166,7 @@ class HomeView extends Component {
                                             )
                                         })}
                                     </Carousel>
-                                ) : null
+                                ) : <div>暂无资讯</div>
                             }
 
                         </Flex.Item>
@@ -125,9 +175,9 @@ class HomeView extends Component {
                     </Flex>
 
                     <Flex className="nav" wrap="wrap">
-                        { quickLinkList.map((item, index) => {
+                        {quickLinkList && quickLinkList.length > 0 && quickLinkList.slice(0, 4).map((item, index) => {
                             return (
-                                <div className="nav-item" onClick={() => { window.app.routerGoTo(item.redirectUrl) }} key={'nav'+index}>
+                                <div className="nav-item" onClick={() => { window.app.routerGoTo(item.redirectUrl) }} key={'nav' + index}>
                                     <img src={item.imgUrl} />
                                     <span>{item.name}</span>
                                 </div>
@@ -150,7 +200,7 @@ class HomeView extends Component {
                                 {hotCarList.map((item, index) => {
                                     return (
                                         <Flex.Item className="car-item" key={'hotcar' + index}>
-                                            <img src={item.imgUrl} onClick={ this.goToDetail.bind(this,item.itemId) } />
+                                            <img src={item.imgUrl} onClick={this.goToDetail.bind(this, item.itemId)} />
                                         </Flex.Item>
                                     )
                                 })}
@@ -160,26 +210,31 @@ class HomeView extends Component {
                     )
                 }
 
-                <Flex className="home-module recomment-cars" align="start">
-                    <div className="img-wrap">
-                        <img src="assets/images/home/jxs_bg.png" />
-                    </div>
-                    <Flex.Item className="jxs-info">
-                        <div className="jxs-name ellipsis-two">重庆安福大石坝分公司(重庆安福
+                {
+                    // 2期
+                    false && (
+                        <Flex className="home-module recomment-cars" align="start">
+                            <div className="img-wrap">
+                                <img src="assets/images/home/jxs_bg.png" />
+                            </div>
+                            <Flex.Item className="jxs-info">
+                                <div className="jxs-name ellipsis-two">重庆安福大石坝分公司(重庆安福
                             百俊）</div>
-                        <div className="jxs-position ellipsis">距您19.5km  |  江北区/大石坝大庆村</div>
-                        <Flex justify="between">
-                            <div className="to-here">
-                                <span className="iconfont icon-ditu"></span>
-                                <span>到这里</span>
-                            </div>
-                            <div className="to-phone">
-                                <span></span>
-                                <span className="iconfont icon-dianhua"></span>
-                            </div>
+                                <div className="jxs-position ellipsis">距您19.5km  |  江北区/大石坝大庆村</div>
+                                <Flex justify="between">
+                                    <div className="to-here">
+                                        <span className="iconfont icon-ditu"></span>
+                                        <span>到这里</span>
+                                    </div>
+                                    <div className="to-phone">
+                                        <span></span>
+                                        <span className="iconfont icon-dianhua"></span>
+                                    </div>
+                                </Flex>
+                            </Flex.Item>
                         </Flex>
-                    </Flex.Item>
-                </Flex>
+                    )
+                }
 
                 {discountCarList && discountCarList.length > 0 && (
                     <div className="home-module discount-cars">
@@ -209,20 +264,25 @@ class HomeView extends Component {
                 )}
 
 
-                <div className="home-module choose-vedio">
-                    <Flex className="home-module-head" justify="center">
-                        <span className="icon icon-vedio"></span><span>视频鉴赏</span>
-                    </Flex>
-                    <div className="card">
-                        <div className="card-content">
-                            <img src="assets/images/home/test_shipin.png" />
+                {
+                    // 2期
+                    false && (
+                        <div className="home-module choose-vedio">
+                            <Flex className="home-module-head" justify="center">
+                                <span className="icon icon-vedio"></span><span>视频鉴赏</span>
+                            </Flex>
+                            <div className="card">
+                                <div className="card-content">
+                                    <img src="assets/images/home/test_shipin.png" />
+                                </div>
+                                <div className="card-footer vedio-footer">
+                                    长安福特官方品牌视频
                         </div>
-                        <div className="card-footer vedio-footer">
-                            长安福特官方品牌视频
-                        </div>
-                    </div>
+                            </div>
 
-                </div>
+                        </div>
+                    )
+                }
 
                 {hotActivityList && hotActivityList.length > 0 && (
                     <div className="home-module last-activity">
@@ -232,12 +292,12 @@ class HomeView extends Component {
                         <div>
                             {hotActivityList.map((item, index) => {
                                 return (
-                                    <div className="card mb-30" key={'activity' + index}>
+                                    <div className="card mb-30" key={'activity' + index} onClick={this.toUrl.bind(this, `/activityDetails?id=${item.id}`)}>
                                         <div className="card-content">
                                             <img src="assets/images/home/banner02.png" />
                                         </div>
                                         <div className="card-footer activity-footer">
-                                            <span>最高15000元置换补贴</span><span>24期贷款0利率</span>
+                                            <span></span><span>{item.name}</span>
                                         </div>
                                     </div>
                                 )

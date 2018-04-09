@@ -1,76 +1,105 @@
 import React, { PropTypes, Component } from 'react';
 import { observable, action, runInAction, useStrict, autorun } from 'mobx';
-import Serv from './indexServ';
+import Serv from './IndexServ';
 import Config from 'config/Config';
-/**
- * mod层
- * 业务逻辑，数据逻辑应该存储于此
- */
-//定义为严格模式
+
 useStrict(true)
 class ProductDetailIndex {
-  //将数据设为被观察者，这意味着数据将成为公共数据
   @observable state = {
     navTab: 0,
+    itemId: '',
+    skusId: '',
     baseInfo: {},
     commentData: {},
     nearbyInfo: {},
-    commentParams: {
-      showNum: 5,
-      showList: [],
-      loading: false,
-      sum: 99
-    },
     carConfig: {},
     activityList: [],
     imgDetail: {
-      activeIndex: 0
+      activeIndex: 0,
+      data: {},
+      tabsBox: [
+        { title: "全景", isShow: false },
+        { title: "外观", isShow: false },
+        { title: "中控", isShow: false },
+        { title: "座椅", isShow: false },
+        { title: "细节", isShow: false },
+        { title: "视频", isShow: false },
+      ],
+      qjList: [],
+      wgList: [],
+      zkList: [],
+      zyList: [],
+      xjList: [],
+      spList: []
+    },
+    switchSpec:{
+
     }
   };
-  //如果设定了useStrict严格模式，那么所有observable的值的修改必须在action定义的方法内，否则可以直接修改
-  //用action定义事件
   @action
   handleScroll(type) {
     this.state.navTab = type
+  }
+  @action
+  setItemId(id){
+    this.state.itemId = id
   }
   @action
   changeImg(obj) {
     this.state.imgDetail.activeIndex = obj.index
     console.log(obj)
   }
+  @action
+  setItem(type) {
+    this.state.navTab = type
+  }
   // 基本信息
   @action
   async getBaseInfo(params) {
     let data = await Serv.getBaseInfo(params)
     runInAction(() => {
+      console.log(data)
       this.state.baseInfo = data.data
+      !this.state.skusId&&this.setSkusId(data.data.skus[0].id)
+      this.changeImgData(this.state.skusId)
+      
     })
   }
+
+  // 选择skus
+  @action
+  changeImgData(id) {
+    for (let item of this.state.baseInfo.skus) {
+      if (item.id == id) {
+        this.state.imgDetail.data = item
+        this.handleTabsBox()
+        return
+      }
+    }
+  }
+
+  // 设置skusId
+  @action
+  setSkusId(id) {
+    this.state.skusId = id
+  }
+
   // 经销商信息
   @action
   async getNearbyInfo(params) {
     let data = await Serv.getNearbyInfo(params)
+    console.log(this)
     runInAction(() => {
       this.state.nearbyInfo = data.data
     })
-    console.log("经销商")
-    console.log(data)
   }
-  // 评论caf/jdcloud/store/item/info/detail
+  // 评论
   @action
   async getCommentData(params) {
-    var params = this.state.commentParams;
-    if (params.loading || params.sum <= 3) {
-      return
-    }
     let data = await Serv.getCommentData(params)
     runInAction(() => {
       this.state.commentData = data.data
-      params.showList = data.data.list
-      // params.showList.push(...data.data.list)
-      // console.log(params.showList)
     })
-    // console.log(this.state.commentData)
   }
   // 车型详情（参数）
   @action
@@ -79,7 +108,20 @@ class ProductDetailIndex {
     runInAction(() => {
       this.state.carConfig = data.data
     })
-    console.log(this.state.carConfig)
+  }
+  @action
+  handleTabsBox() {
+    let { qjList, wgList, zkList, zyList, xjList, spList, data, tabsBox } = this.state.imgDetail
+    data.cmpMedias.map((item, index) => {
+      item.fileType == 1 && qjList.push(item)
+      item.fileType == 2 && wgList.push(item)
+      item.fileType == 3 && zkList.push(item)
+      item.fileType == 4 && zyList.push(item)
+      item.fileType == 5 && xjList.push(item)
+      item.fileType == 6 && spList.push(item)
+      tabsBox[item.fileType - 1].isShow = true
+    })
+    this.state.imgDetail.tabsBox = tabsBox.filter(item => item.isShow)
   }
   // 活动
   @action
@@ -88,13 +130,12 @@ class ProductDetailIndex {
     runInAction(() => {
       this.state.activityList = data.data.list
     })
-    console.log(this.state.carConfig)
+    console.log(this)
   }
 
 
 }
 
-//将组件实例化，这意味着组件将不能从别处实例化
 const productDetailIndex = new ProductDetailIndex();
 
 

@@ -26,15 +26,15 @@ class SpecialCar extends Component{
     goToDetail = (e) => {
         
         let itemCode = e.currentTarget.getAttribute('carid') ;
+        let itemId = '1171328588805309440' ;
         
         //使用此方法可以传递任意数据到下一个页面
         //通过this.prop.location.state 获取
         let path = {
             pathname:`/cloubStore/carModelDetail`,
-            state:{
-                specialCarList:this.stores.state,
-                test1:'test12133',
-                "itemCode":itemCode
+            query:{
+                "itemCode":itemCode,
+                itemId
             }
         }
 

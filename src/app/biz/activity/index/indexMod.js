@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { observable, action, runInAction, useStrict, autorun } from 'mobx';
-import Serv from './indexServ';
+import Serv from './IndexServ';
 import Config from 'config/Config';
 /**
  * mod层
@@ -26,17 +26,10 @@ class Activity {
         this.state.style = style
     }
 
-    // @action
-    // async getBaseData(params) {
-    //     let data = await Serv.getBaseInfo(params)
-    //     this.state.baseInfo = data.data
-    //     console.log(data)
-    // }
-
     // 广告列表
     @action
     getAdList = async (params) => {
-
+        
         let { data } = await Serv.getAdList(params);
         runInAction(() => {
             this.state.adList = data;

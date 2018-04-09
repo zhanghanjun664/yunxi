@@ -60,3 +60,56 @@ IndexView.js是云店首页的路口
       -iconUrl  //icon图片地址
       -iconClass  //icon字体图标样式
   ==注== iconUrl和iconClass二选一即可
+
+## 1.云店首页接口联调情况
+### 1.1. 活动轮播图
+```
+    接口地址：caf/jdcloud/index/carousel-figures
+    测试地址&参数：https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application/api/v1/caf/jdcloud/index/carousel-figures?type=2&dealerId=1171252663755543500
+    完成情况：已完成
+```
+### 1.2. 精彩资讯
+```
+    接口地址：caf/jdcloud/index/news
+    测试地址&参数：https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application/api/v1/caf/jdcloud/index/news?type=2&dealerId=1171252663755543500
+    完成情况：已完成
+```
+### 1.3. 快速导航
+```
+    接口地址：caf/jdcloud/index/quick-links
+    测试地址&参数：https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application/api/v1/caf/jdcloud/index/quick-links?type=1
+    完成情况：
+        已完成
+        注：首页快速导航应当只有4个，后端接口目前返回超过4；
+            目前界面处理方法是固定只取了前4个
+```
+### 1.4. 经销商云店信息
+```
+    接口地址：caf/jdcloud/dealer
+    测试地址&参数：https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application/api/v1/caf/jdcloud/dealer?longtitude=113.436542&latitude=23.103679&areaCode=cq&dealerId=1171252663755543500
+    完成情况：已完成
+```
+### 1.5. 热门车型
+```
+    接口地址：caf/jdcloud/index/hot-items
+    测试地址&参数：https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application/api/v1/caf/jdcloud/index/hot-items?type=2&dealerId=1171252663755543500
+    完成情况：已完成
+```
+### 1.6. 活动资讯
+```
+    接口地址：mall/activity/list-by-page
+    测试地址&参数：https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application/api/v1/mall/activity/list-by-page?pageNum=1&pageSize=3&storeId=1171252663755543500
+    完成情况：已完成
+```
+### 1.7. 特惠车专区
+```
+    接口地址：
+    测试地址&参数：
+    完成情况：绅士回复一阶段不做
+```
+### 1.8. 精选视频
+```
+    接口地址：
+    测试地址&参数：
+    完成情况：绅士回复一阶段不做
+```

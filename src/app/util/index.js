@@ -4,6 +4,14 @@
 import React, { Component } from 'react';
 
 class util {
+    // 判断是否iphoneX
+    static isIphoneX() {
+        if(/iphone/ig.test(navigator.userAgent)) {
+            // (window.innerWidth == 375*3) && (window.innerHeight == 724*3)
+           return window.devicePixelRatio === 3 && (screen.height == 812 && screen.width == 375)
+        }
+        return false;
+    }
     //判断是安卓还是ios
     static androidOrios() {
         var u = navigator.userAgent;
@@ -26,14 +34,15 @@ class util {
         return tem;
     }
     //设置cookie
-    static getLocalCache(c_name, value, expiredays = 3600000) {
+    /*
+    static getLocalCache2(c_name, value, expiredays = 3600000) {
         var exdate = new Date()
         exdate.setTime(exdate.getTime() + expiredays)
         document.cookie = c_name + "=" + escape(value) +
             ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
     }
     //取回cookie
-    static getLocalCache(c_name) {
+    static getLocalCache3 (c_name) {
         if (document.cookie.length > 0) {
             var c_start = document.cookie.indexOf(c_name + "=")
             if (c_start != -1) {
@@ -45,6 +54,7 @@ class util {
         }
         return "";
     }
+    */
 
     //从url取值
     static getQueryString(name = '') {
@@ -97,6 +107,17 @@ class util {
     // 元->万
     static changeMoney(str) {
         return (Number(str)/10000).toFixed(2);
+    }
+    // 处理url
+    static getUrl(url) {
+        console.log(url)
+        let urls = ""
+        if(url.indexOf('http') == -1){
+            urls = 'http://' + url
+        }else{
+            urls = url
+        }
+        return urls
     }
 
 }

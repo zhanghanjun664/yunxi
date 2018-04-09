@@ -1,0 +1,111 @@
+@import '../../../assets/css/commonCss.less';
+.myCoupon_page{
+  // 覆盖ant mobile样式
+  .am-list-body{
+    background-color: transparent
+  }
+  .am-tabs-default-bar-tab{
+    font-size: 28px;
+    color: #666666;
+    height: 80px;
+    line-height: 77px;
+  }
+  .am-tabs-tab-bar-wrap{
+    background-color: #fff;
+    box-shadow: 0 5px 12px 0 rgba(224, 224, 224, 0.5);
+    .am-tabs-default-bar-tab-active{
+      color: #FD5C0E;
+      position: relative;
+
+    }
+    .am-tabs-default-bar-tab-active{
+      .changAnt_tabs{
+        border-bottom: 3px solid #FD5C0E;
+      }
+
+    }
+    .am-tabs-default-bar-underline{
+      display: none;
+    }
+  }
+      
+
+  .itemBox{
+    padding-bottom: 20px;
+  }
+  .couponType_1{
+    .itemBox{
+      background-image: url('~assets/images/my/myCoupon_bg.png');  
+    }
+  }
+  .couponType_2{
+    .itemBox{
+      background-image: url('~assets/images/my/myCoupon_bg2.png');  
+    }
+  }
+  .item{
+    padding: 30px 30px 0 30px;
+    .itemBox{
+      padding: 10px;
+      height: 208px;
+      display: flex;
+      align-items: center;
+      background-size: 100% 100%;
+      .item_money{
+        color: #fff;
+        flex: 1;
+        padding-left: 64px;
+        line-height: 1;
+        &>p:nth-of-type(1){
+          font-size: 80px;
+          margin-bottom: 20px;
+          position: relative;
+          &:after{
+            display: block;
+            position: absolute;
+            left: -44px;
+            content:  "￥";
+            font-size: 44px;
+            top: 6px;
+          }
+        }
+        &>p:nth-of-type(2){
+          font-size: 30px;
+        }
+      }
+      .item_info{
+        width: 29.8%;
+        padding: 14px;
+        div{
+          width: 80px;
+          height: 80px;
+          background-image: url('~assets/images/my/myCoupon_logo.png');
+          background-size: 100% 100%;
+          margin: 18px auto 15px;
+        }
+        p{
+          font-size: 18px;
+          line-height: 36px;
+        }
+      }
+    }
+  }
+
+
+  .mc_footer{
+    font-size: 28px;
+    color: #FD5C0E;
+    text-align: center;
+    padding: 10px 0 50px;
+    line-height: 36px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: rgb(244, 245, 247);
+  }
+
+}
+// ant mobile
+html:not([data-scale]) .am-tabs-default-bar-top .am-tabs-default-bar-tab::after{
+  display: none;
+}

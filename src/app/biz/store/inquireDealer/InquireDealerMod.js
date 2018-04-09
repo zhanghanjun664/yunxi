@@ -8,10 +8,10 @@ useStrict(true)
 class InquireDealerMod {
 
     @observable state = {
-
+        distanceList: [],
+        priceList: []
     };
 
-    @action
     getDealerList(params) {
         return Serv.getDealerList(params);
     }

@@ -1,9 +1,9 @@
 import React, {PropTypes, Component} from 'react'
 import {Link, IndexLink} from 'react-router';
 import { inject ,observer} from 'mobx-react';
-import Style from './myComplateLess.less';
+import Style from './MyComplateLess.less';
 import { InputItem ,TextareaItem ,ActionSheet ,Modal ,List ,Button, Flex  } from 'antd-mobile';
-import TabBar from 'pubBiz/tabBar/tabBarView'
+import TabBar from 'pubBiz/tabBar/TabBarView'
 
 @inject("complateInfo")
 //将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化

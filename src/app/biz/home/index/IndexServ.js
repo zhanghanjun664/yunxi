@@ -56,8 +56,16 @@ export default class {
     static getHotActivityList(params) {
 
         return Request({
-            url: "caf/jdcloud/index/activity",
+            url: "mall/activity/list-by-page",
             type: "GET",
+            data: params
+        })
+    }
+
+    // logo信息
+    static getLogoData(params){
+        return Request({
+            url: 'caf/jdcloud/index/logo',
             data: params
         })
     }

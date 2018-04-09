@@ -1,9 +1,13 @@
+/**
+ * Created by zhang.hanjun 
+ */
 import React, { PropTypes, Component } from 'react'
 import { Link, IndexLink } from 'react-router'
 import { inject, observer } from 'mobx-react';
+import {groupBy,get, extend, each} from 'lodash'
 import Config from 'config/Config';
 import Util from 'util';
-import './indexLess.less';
+import './IndexLess.less';
 
 
 @inject("productDetailIndex")
@@ -15,35 +19,45 @@ class AllConfig extends Component {
     this.data = []
   }
   componentDidMount() {
-    let data = this.stores.state.carConfig
-    if (!('itemCode' in data)) {
+    let { carConfig, itemId } = this.stores.state
+    console.log(carConfig)
+    if (!('itemCode' in carConfig)) {
+      // 参数
       this.stores.getCarConfig({
-        itemCode: "车型编码"
+        itemId: itemId
       })
     }
   }
   handleData(arr) {
-    let newArr = [], num = 0;
-    for (let i = 0; i < arr.length; i++) {
-      if (i == 0) {
-        newArr[num] = {
-          name: arr[i].groupName,
-          props: [arr[i]]
-        }
-      } else {
-        if (arr[i].groupId == arr[i - 1].groupId) {
-          newArr[num].props.push(arr[i])
-        } else {
-          num++
-          newArr[num] = {
-            name: arr[i].groupName,
-            props: [arr[i]]
-          }
-        }
+    let newArr = [];
+    let tmp = groupBy(arr,  item => item.groupId)
+    each(tmp, (item,key) => {
+      newArr.push({
+        name: key,
+        props: item
+      })
+    })
 
-      }
+    // for (let i = 0; i < arr.length; i++) {
+    //   if (i == 0) {
+    //     newArr[num] = {
+    //       name: arr[i].groupName,
+    //       props: [arr[i]]
+    //     }
+    //   } else {
+    //     if (arr[i].groupId == arr[i - 1].groupId) {
+    //       newArr[num].props.push(arr[i])
+    //     } else {
+    //       num++
+    //       newArr[num] = {
+    //         name: arr[i].groupName,
+    //         props: [arr[i]]
+    //       }
+    //     }
 
-    }
+    //   }
+
+    // }
     return newArr
 
   }

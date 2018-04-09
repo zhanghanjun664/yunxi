@@ -1,9 +1,7 @@
-import Util from 'util'
-
 // 基础共同的配置
 let baseConfig = {
   // auth名，登陆后得到的令牌缓存的名字
-  authName: "TestAuthName",
+  authName: "auth",
   // 登录后存放的用户信息的名字
   userName: "userName",
   // 环境变量，loc, dev，test，stage
@@ -18,10 +16,11 @@ let baseConfig = {
 let envConfig = {
   loc: {
     // api接口主机地址
-    // host: document.location.origin,
-    host: 'https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application',
+    host: document.location.origin,
+    // host: 'https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application',
+    // host: 'https://wxdev.dtyunxi.cn/ford/test/caf-trade-application',
     // 只能在本地生效
-    mock: false
+    mock: true
   },
   dev: {
     // api接口主机地址，演示阶段，先用本地，且开启mock
@@ -30,7 +29,10 @@ let envConfig = {
     mock: false
   },
   test: {
-
+    // api接口主机地址
+    host: 'https://wxdev.dtyunxi.cn/ford/test/caf-trade-application',
+    // 只能在本地生效
+    mock: false
   },
   stage: {
 

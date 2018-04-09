@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { inject, observer } from 'mobx-react';
-import { Tabs, WhiteSpace, Badge } from 'antd-mobile';
-import './mySubscribeLess.less';
+import { Tabs, WhiteSpace, Badge, Toast } from 'antd-mobile';
+import './MySubscribeLess.less';
 import SubscribeList from './SubscribeList';
 import Util from 'util';
 
@@ -32,7 +32,6 @@ class MySubsribe extends Component {
 		// let height = document.body.clientHeight;
 		// let height1 = document.getElementsByClassName('am-tabs-tab-bar-wrap')[0].clientHeight;
 		// let height2 = document.getElementsByClassName('mo_searchWrap')[0].clientHeight;
-		console.log(Util.getScrollHeight(['mo_searchWrap', 'am-tabs-tab-bar-wrap']))
 		this.stores.setStyle({
 			height: Util.getScrollHeight(['mo_searchWrap', 'am-tabs-tab-bar-wrap'])
 		})
@@ -50,13 +49,16 @@ class MySubsribe extends Component {
 		event.preventDefault();
 		this.refs['list'+ this.stores.state.tabIndex].refreshList();
 	}
+	noOpen(){
+		Toast.info('此功能暂未开放')
+	}
 
 	render() {
 
 
 		return (
 			<div className="subscribe-list-page">
-				<div className='mo_searchWrap'>
+				<div className='mo_searchWrap' onClick={this.noOpen.bind(this)}>
 					<form className='mo_searchBox' action="#" onSubmit={this._onSubmit}>
 						<input placeholder='商品名称/预约号' type="search" value={this.stores.state.key} onChange={this.stores.changeKey}  />
 						<span className='iconfont icon-sousuo'></span>

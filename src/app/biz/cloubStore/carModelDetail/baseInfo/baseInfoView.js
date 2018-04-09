@@ -88,12 +88,14 @@ class ProductDetailBaseInfo extends Component {
 
 //<div className='pdb2_1'>福特福克斯 1.5T <span className='pdb2_Type'>EcoBoost</span> 自动旗舰型</div>
 	render() {
-		let {carDetailBaseInfo,followFlag}  = this.props ;	
-		
+		let {carDetailBaseInfo,followFlag,carDetailInfo}  = this.props ;	
+			
+
 		return (
 			<div className="productDetailBaseInfo">
 				<div className='pdb1'>
-					<img src={carDetailBaseInfo.skus ? carDetailBaseInfo.skus[0].cmpMedias[0].fileUrl : ""} />
+					{/* <img src={carDetailBaseInfo.skus ? carDetailBaseInfo.skus[0].cmpMedias[0].fileUrl : ""} /> */}
+					<img src={(carDetailInfo.cmpMedias!=null&&carDetailInfo.cmpMedias.length>0) ? carDetailInfo.cmpMedias[0].fileUrl:''} />
 					{/* <img src="assets/images/productDetail/baseInfo.png" /> */}
 					<div className='pdb1_tags'>
 						<div onClick={()=>this.toUrl('/carImages?ci_type=video')}>
@@ -109,7 +111,7 @@ class ProductDetailBaseInfo extends Component {
 					{
 						this.drawCloubAct() 
 					}
-					<div className='pdb2_3'>1.5T涡轮增压/紧凑型轿车/自动变速箱/无钥匙启动/全景天窗/17寸轮毂</div>
+					<div className='pdb2_3'>{carDetailBaseInfo.tags}</div>
 					<div className='pdb2_2'>{carDetailBaseInfo.labels}</div>
 					
 

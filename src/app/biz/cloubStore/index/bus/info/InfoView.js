@@ -60,8 +60,8 @@ class InfoView extends React.Component {
                     </div>
                     <div className='infoPage-content-info-m-r'>
                       <p className="p2">距您{`<`}{
-                        dealerInfo.shops==null?'':
-                        this.converKm(dealerInfo.shops[0].distance)
+                        (dealerInfo.shops!=null&&dealerInfo.shops.length!=0)?
+                        this.converKm(dealerInfo.shops[0].distance):''
                       }
                       </p>
                       <span className='infoPage-content-info-m-r-sep'></span>

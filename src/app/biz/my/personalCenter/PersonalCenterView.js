@@ -4,7 +4,7 @@
 import React, {PropTypes, Component} from 'react';
 import {inject,observer} from 'mobx-react';
 import { Flex, Toast, Carousel, } from 'antd-mobile';
-import TabBar from 'pubBiz/tabBar/tabBarView';
+import TabBar from 'pubBiz/tabBar/TabBarView';
 import './PersonalCenterLess.less';
 
 @inject('personalCenter')
@@ -19,6 +19,9 @@ class PersonalCenterView extends Component {
 
     componentDidMount() {
         this.stores.getMemberInfo();
+    }
+    noOpen(){
+        Toast.info('此功能暂未开放')
     }
 
     render() {
@@ -71,19 +74,19 @@ class PersonalCenterView extends Component {
                         <img src="assets/images/my/wodedingdan.png" />
                         <div className="nav-text ellipsis">我的订单</div>
                     </div>
-                    <div className="nav-item">
+                    <div className="nav-item" onClick={this.noOpen.bind(this)}>
                         <img src="assets/images/my/wodeguanzhu.png" />
                         <div className="nav-text ellipsis">我的关注</div>
                     </div>
-                    <div className="nav-item">
+                    <div className="nav-item" onClick={() => window.app.routerGoTo('myCoupon')}>
                         <img src="assets/images/my/wodeyouhuiquan.png" />
                         <div className="nav-text ellipsis">我的优惠券</div>
                     </div>
-                    <div className="nav-item">
+                    <div className="nav-item" onClick={this.noOpen.bind(this)}>
                         <img src="assets/images/my/xiaoshouguwen.png" />
                         <div className="nav-text ellipsis">销售顾问</div>
                     </div>
-                    <div className="nav-item">
+                    <div className="nav-item" onClick={this.noOpen.bind(this)}>
                         <img src="assets/images/my/wodexiaoxi.png" />
                         <div className="nav-text ellipsis">我的消息</div>
                     </div>

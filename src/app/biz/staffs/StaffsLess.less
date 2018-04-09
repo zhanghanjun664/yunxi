@@ -1,0 +1,184 @@
+ @import "~assets/css/commonCss";
+
+ .titleFont {
+   font-family: PingFangSC-Regular;
+   font-size: 24px;
+   letter-spacing: -0.3px;
+   line-height: 36px;
+ }
+
+ .msgCont {
+   border-radius: 10px;
+   padding: 20px 18px 20px 20px;
+ }
+
+ .readTxt{
+    font-size: 24px;
+    letter-spacing: -0.3px;
+    text-align: right;
+    line-height: 36px;
+    padding: 10px 0 14px 0;
+ }
+
+ .staffs-wrap {
+   /*标题栏*/
+   .title-bar {
+     background: #FFF;
+     box-shadow: 0 5px 12px 0 rgba(224, 224, 224, 0.50);
+     height: 80px;
+     padding: 20px 0 30px 20px;
+     margin-bottom: 30px;
+     .staffs-head, .staffs-head img{
+       width: 40px;
+       height: 40px;
+     }
+     .title-label,
+     .title-name {
+       .titleFont;
+     }
+     .title-label {
+       color: #333;
+       margin-left: 7px;
+     }
+     .title-name {
+       color: #FD5C0E;
+     }
+   } 
+   /*时间显示*/
+   .chat-time-item {
+     text-align: center;
+     .chat-time-wrap {
+       background: #CCC;
+       border-radius: 4px;
+       padding: 0 10px;
+       .chat-time {
+         color: #FFFFFF;
+         text-align: center;
+         .titleFont;
+       }
+     }
+   }
+
+   .mgt60 {
+     margin-top: 60px;
+   }
+   .mgb60 {
+     margin-bottom: 60px;
+   }
+   .mgl0 {
+     margin-left: 0px;
+   }
+   .wid510 {
+     width: 510px;
+   }
+   .avatar {
+     width: 100px;
+     height: 100px;
+     margin: 0 30px;
+     img {
+       width: 100px;
+       height: 100px;
+     }
+   } 
+   .readed{
+      color: #CCC;
+      .readTxt;
+   }
+   .reading{
+      color:  #0F68B0;
+      .readTxt;
+   }
+   .txt-left{
+      text-align: left;
+      margin-left: 80px;
+   }
+   .txt-right{
+      text-align: right;
+      margin-right: 80px;
+   }
+   /*消息框*/
+   .msg-box {
+     background: #FFFFFF;
+     border: 1px solid #E6E6E6;
+     .msgCont;
+   }
+
+   .msg-cont {
+     font-family: PingFangSC-Light;
+     font-size: 30px;
+     color: #333333;
+     letter-spacing: -0.38px;
+     line-height: 36px;
+   }
+
+   .msg-link {
+     font-family: PingFangSC-Light;
+     font-size: 30px;
+     letter-spacing: -0.38px;
+     line-height: 48px;
+     margin-top: 20px;
+   }
+   .msg-link a {
+     color: #0F68B0;
+   }
+
+   .blue-bg {
+     background: #CCDFFF;
+     border: 1px solid #CCDFFF;
+     border-radius: 10px;
+     .msgCont;
+   }
+
+   .mgl80 {
+     margin-left: 80px;
+   }
+
+   .mgr80 {
+     margin-right: 80px;
+   }
+
+   .mgl20 {
+     margin-left: 20px;
+   }
+
+   .send-bar {
+     padding-left: 30px;
+     background: #FFFFFF;
+     box-shadow: 0 5px 12px 0 rgba(224, 224, 224, 0.50);
+     padding: 20px 30px;
+     position: fixed;
+     bottom: 0;
+     width: 100%;
+   }
+
+   .send-input-wid {
+     width: 540px;
+   }
+
+   .send-input {
+     background: #FFFFFF;
+     border: 1px solid #E6E6E6;
+     border-radius: 10px;
+   }
+
+   .send-btn-wrap {
+     background: #FD5C0E;
+     border-radius: 10px;
+     width: 130px;
+     height: 80px;
+     display: flex;
+     align-items: center;
+     /*垂直居中*/
+     justify-content: center;
+     /*水平居中*/
+   }
+
+   .send-btn {
+     font-family: PingFangSC-Regular;
+     font-size: 28px;
+     color: #FFFFFF;
+     letter-spacing: -0.35px;
+     text-align: center;
+     line-height: 36px;
+   }
+ }

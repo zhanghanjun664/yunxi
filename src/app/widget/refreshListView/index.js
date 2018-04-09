@@ -92,7 +92,11 @@ class RefreshListView extends Component {
             console.log(list)
             list && list.length && this._addRows(list);
         }, (err) => {
-            console.log(err);
+            // reject也要取消loading状态
+            this.setState({
+                isLoading: false,
+                refreshing: false,
+            });
         });
     }
 

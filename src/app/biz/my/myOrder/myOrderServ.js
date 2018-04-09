@@ -6,17 +6,10 @@ import Config from 'config/Config';
 export default class {
     //获取订单列表
     static getOrderList(params) {
-
-        let headers = {
-            "Content-type": "application/json",
-            "auth": Util.getLocalCache(Config.authName)
-        }
-
         return Request({
-            url: "caf/jdcloud/trade/order/list-by-page",
+            url: "caf/api/v1/appointment/list",
             type: "GET",
             data: params,
-            headers: headers
         });
     }
 };

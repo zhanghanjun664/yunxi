@@ -4,7 +4,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import { RefreshListView } from 'widget';
-import { Flex } from 'antd-mobile';
+import { Flex, Toast } from 'antd-mobile';
 import Util from 'util';
 
 class SubscribeList extends Component {
@@ -34,6 +34,9 @@ class SubscribeList extends Component {
         let { data, resultCode, resultMsg } = await this.props.fetchData(params);
         success(data.list, data.pageNum, data.pages);
 
+    }
+    noOpen(){
+        Toast.info('此功能暂未开放')
     }
 
 
@@ -93,7 +96,7 @@ class SubscribeList extends Component {
                             </div>
                             <div className='mo_listInfo_map'>
                                 <span className='iconfont icon-ditu'></span>
-                                <span>到这里</span>
+                                <span onClick={this.noOpen.bind(this)}>到这里</span>
                             </div>
                         </Flex>
 
@@ -118,7 +121,7 @@ class SubscribeList extends Component {
 
                 </div>
 
-                <div className='mo_btnBox'>
+                <div className='mo_btnBox' onClick={this.noOpen.bind(this)}>
                     <div>查看详情</div>
                     {/* <div className='mo_goPay'>去支付</div> */}
                     {btnText}

@@ -10,17 +10,12 @@ export default class {
 
     static getDealerList(params) {
 
-        let headers = {
-            "Content-type": "application/json",
-            "auth":Util.getLocalCache(Config.authName)
-        }
-
         return Request({
             url: "caf/jdcloud/dealer/offers",
             type: "GET",
-            data: params,
-            headers: headers
+            data: params
         })
     }
+
 
 }

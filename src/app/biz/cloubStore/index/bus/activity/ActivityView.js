@@ -31,7 +31,7 @@ class ActivityView extends React.Component {
         <Carousel
           autoplay={true}
           infinite={true}
-          selectedIndex={1}
+          selectedIndex={0}
           dots={false}
           //beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
           //afterChange={index => console.log('slide to', index)}

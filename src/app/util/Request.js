@@ -10,13 +10,17 @@ export default function(obj) {
     type: "GET",
     //接口返回数据类型
     dataType: "json",
+
+    processData: true,
+
+    contentType:'application/x-www-form-urlencoded;charset=UTF-8',
     //接口头部
     headers: {
-      "Content-type": "application/x-www-form-urlencoded", //'application/json'
       "auth": Util.getLocalCache(Config.authName)
     },
     data: {}
   }
+
 
   parameter = Object.assign(parameter, obj);
 
@@ -30,6 +34,8 @@ export default function(obj) {
       type: parameter.type,
       url: Config.apiAppName(parameter.url),
       dataType: parameter.dataType,
+      contentType: parameter.contentType,
+      processData:parameter.processData,
       data: parameter.data,
       statusCode: {
         401: function(r) {
@@ -50,6 +56,8 @@ export default function(obj) {
           } else if (data.resultCode == 0) {
             resolve(data);
           } else {
+            // Toast.info(data.resultMsg)
+            Toast.fail(data.resultMsg)
             reject("失败了");
           }
         } else {

@@ -12,18 +12,16 @@ export default class {
     }
     //   经销商信息
     static getNearbyInfo(params) {
-        //  必填	STRING	areaCode	城市编码
-        //      必填	STRING	itemCode	车型编码
         return Request({
             url: "caf/jdcloud/dealer/nearby/stastics",
             type: "GET",
             data: params
         })
     }
-    //   评论carConfig
+    //   评论
     static getCommentData(params) {
         return Request({
-            url: "caf/jdcloud/store/item/comment",
+            url: "caf/jdcloud/item/car/comments",
             type: "GET",
             data: params
         })
@@ -40,6 +38,14 @@ export default class {
     static getActivityList(params) {
         return Request({
             url: "mall/activity/list-by-page",
+            type: "GET",
+            data: params
+        })
+    }
+    //  关注 
+    static getFollowFlag(params) {
+        return Request({
+            url: "caf/jdcloud/item/car/follow",
             type: "GET",
             data: params
         })

@@ -1,7 +1,10 @@
+/**
+ * Created by zhang.hanjun 
+ */
 import React, { PropTypes, Component } from 'react';
 import { Tabs, WhiteSpace, Badge } from 'antd-mobile';
-import { PullToRefreshListView } from 'widget';
-import './activityListLess.less';
+import { RefreshListView } from 'widget';
+import './ActivityListLess.less';
 import Util from 'util';
 
 class ActivityList extends Component {
@@ -17,12 +20,12 @@ class ActivityList extends Component {
 	fetchData = async (pageNum, success, error) => {
 		let params = {
 			pageNum: pageNum,
-			pageSize: 10,
+			pageSize: 5,
 			activityLabel: this.props.activityLabel
 		};
 
 		let { data } = await this.props.fetchData(params);
-		success(data.list, data.pageNum, data.total);
+		success(data.list, data.pageNum, data.pages);
 
 	}
 	renderRow = (rowData, sectionID, rowID) => {
@@ -63,13 +66,14 @@ class ActivityList extends Component {
 		return (
 			<div className="productDetailTest">
 				<ul>
-					<PullToRefreshListView
+					<RefreshListView
 						fetchData={this.fetchData}
 						renderRow={this.renderRow}
 						ref="list"
 						first={false}
 						useBodyScroll={false}
 						style={style}
+						pullToRefresh={true}
 					/>
 
 

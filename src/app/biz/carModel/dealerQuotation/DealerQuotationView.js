@@ -18,15 +18,25 @@ class DealerQuotationView extends Component {
         this.tabs = ['离我最近', '价格最低'];
         this.type = 1;   //1-距离最近， 2-评分最高
         this.stores = this.props.dealerQuotation;
+        this.itemId = this.props.location.query.itemId
     }
 
     componentDidMount() {
         this.refs.list.start();
     }
 
+    callMe(rowData) {
+        location.href = 'tel:' + rowData.salePhone;
+    }
+
 
     fetchData = (pageNum, success, error) => {
         let params = {   //在这里添加剩余的参数就好了
+            pageSize:20,
+            pageNum:1,
+            cityId:'440000000000',
+            longitude:40,
+            latitude:30,
             type: this.type
         }
         this.stores.getDealerList(params).then((result) => {
@@ -47,6 +57,13 @@ class DealerQuotationView extends Component {
         this.refs.list.onRefresh();
     }
 
+    toUrl(url){
+        window.app.routerGoTo(url)
+    }
+    noOpen(){
+        Toast.info('此功能暂未开放')
+    }
+
 
     renderRow = (rowData, sectionID, rowID) => {
         let shop = rowData.shops && rowData.shops.length > 0 ? rowData.shops[0] : null;
@@ -64,10 +81,10 @@ class DealerQuotationView extends Component {
                     <Flex className="address" justify="between">
                         <div className="ellipsis">
                             <span className="iconfont icon-dizhi"></span>
-                            <span className="text">{shop.address}</span>
+                            <span className="text">{rowData.shops[0].address}</span>
                         </div>
 
-                        <span className="distance">&lt;{shop.distance}km</span>
+                        <span className="distance">&lt;{(rowData.shops[0].distance/1000).toFixed(2)}km</span>
                     </Flex>
                 )}
                 { activity && (
@@ -82,9 +99,9 @@ class DealerQuotationView extends Component {
                     <span className="iconfont icon-xianche"></span>
                 </Flex>
                 <Flex justify="between">
-                    <Button className="inquiry-btn">致电</Button>
-                    <Button className="inquiry-btn">在线客服</Button>
-                    <Button className="inquiry-btn btn-orange">查询底价</Button>
+                    <Button className="inquiry-btn" onClick={e=>this.callMe(rowData)}>致电</Button>
+                    <Button className="inquiry-btn" onClick={this.noOpen.bind(this)}>在线客服</Button>
+                    <Button className="inquiry-btn btn-orange" onClick={this.toUrl.bind(this, '/askprice?itemId='+this.itemId)}>查询底价</Button>
                 </Flex>
             </div>
         )

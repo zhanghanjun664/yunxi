@@ -22,7 +22,7 @@ $(function() {
                 timestamp: data.timestamp,
                 nonceStr: data.nonceStr,
                 signature: data.signature,
-                jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'getLocation', 'openLocation','getNetworkType']
+                jsApiList: ['onMenuShareTimeline', 'chooseImage','uploadImage','previewImage','onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'getLocation', 'openLocation','getNetworkType']
             })
         }).fail(function(err) {
             console.error('Request Fail->', err)
@@ -32,7 +32,16 @@ $(function() {
     }
 
     initConfig(function() {
-        console.log('WXSDK is Ready!');
-    }, true);
+        wx.getLocation({
+            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: (res) => {
+                let {latitude, longitude, accuracy} = res;
+                // 纬度，浮点数，范围为90 ~ -90
+                // 经度，浮点数，范围为180 ~ -180。
+                alert('Latitude, Longit ->' + latitude + '--' + longitude)
+                localStorage.setItem('myPosition', JSON.stringify(res));
+            }
+        });
+    }, false);
 
 })

@@ -1,16 +1,23 @@
 @import "../../assets/css/commonCss";
 .ask-price-page {
-  p{
+  p {
     //font-family: PingFangSC-Regular;
     //font-size: 30px;
     //color: #333333;
     //letter-spacing: -0.38px;
     //line-height: 36px;
   }
-  i{
+  i {
     display: inline-block;
   }
 
+  .cost-selected{
+    border: 0;
+    font-size: 28px;
+    //width: 70%;
+    margin-left:20px;
+    flex:1;
+  }
   //意向车型
   .aim-model {
     box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
@@ -189,12 +196,7 @@
     text-align: center;
     padding: 30px 60px 40px;
     .sub-span{
-      display: inline-block;
-      font-size: 36px;
       color: #FFFFFF;
-      line-height: 36px;
-      padding: 26px 0;
-      width: 100%;
       background: @color_orange;
       border-radius: 10px;
     }
@@ -336,6 +338,12 @@
   }
 }
 
+.am-picker{
+  position: absolute;
+  width:100%;
+  top:-135px;
+}
+
 //modal层
 .ask-price-modal-page{
   //modal层--预算区间、购车时间
@@ -382,40 +390,6 @@
       color: @color_orange;
       margin-right: 30px;
     }
-  }
-
-//  预算区间pickView
-  .am-picker{
-    width: 120px;
-    position: absolute;
-    top:-135px;
-    left:130px;
-    .am-picker-col-item-selected{
-      font-size:36px;
-    }
-  }
-  .picker-right {
-    left:350px;
-  }
-  .picker-part-left{
-    position: absolute;
-    top: 80px;
-    left: 290px;
-    color: #373737;
-  }
-  .picker-part-right{
-    position: absolute;
-    top: 80px;
-    right: 140px;
-    color: #373737;
-  }
-  .show-picker-selected{
-    width: 100%;
-    height: 68px;
-    border-top: 1px solid @color_line;
-    border-bottom: 1px solid @color_line;
-    position: absolute;
-    top: 68px;
   }
 
 }

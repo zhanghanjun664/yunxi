@@ -2,43 +2,35 @@ import React, { PropTypes, Component } from 'react';
 import Request from "util/Request";
 
 export default class {
-    static mockServ(params) {
+    static listDealers(params) {
         return Request({
             url: "caf/jdcloud/dealer/offers",
             type: "GET",
-            data:{
-                carName:params.carName,
-                longitude:params.longitude,
-                latitude:params.latitude,
-                cityId:params.cityId,
-                pageNum:params.pageNum,
-                pageSize:params.pageSize,
-                type:params.type
-            }
+            data:params
         })
     }
+
+    static getVerifyCode(params) {
+        return Request({
+            url : 'verify/code/get',
+            data:params,
+            type:'GET'
+        })
+    }
+
+    static getDetail(params) {
+        return Request({
+            url : 'caf/jdcloud/item/car/base-info',
+            data:params,
+            type:'GET'
+        })
+    }
+
     static priceSubmit(params) {
         return Request({
-            url: "caf/api/v1/appointment/drive",
+            url: "appointment/drive",
             type: "POST",
-            data:{
-                vehicleModel:params.vehicleModel,
-                dealer:params.dealer,
-                memberName:params.memberName,
-                memberMobile:params.memberMobile,
-                appointmentTime:params.appointmentTime,
-                purchaseTime:params.purchaseTime,
-                type:params.type,
-                verifyCode:params.verifyCode,
-                openid:params.openid
-            }
-        })
-    }
-    static testServ2() {
-        return Request({
-            url: "yundt/mgmt/item/list-by-page",
-            type: "GET",
-            data: {xx: 1, bb: 2}
+            data:params
         })
     }
 };

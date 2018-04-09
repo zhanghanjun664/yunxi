@@ -1,4 +1,8 @@
 import { Toast} from 'antd-mobile';
+import { initConfig } from 'util/WxUtils'
+
+// 初始化微信配置
+initConfig(true)
 
 window.app = {
     router: null,//路由跳转用到
@@ -32,4 +36,3 @@ try {
 } catch (e) {
     console.error(e);
 }
-

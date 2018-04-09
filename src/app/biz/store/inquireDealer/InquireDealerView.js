@@ -6,6 +6,7 @@ import { Flex, Button, Icon, } from 'antd-mobile';
 import { StarRange, AddressPicker, Tabs, RefreshListView, } from 'widget';
 import './InquireDealerLess.less';
 import { inject, observer } from 'mobx-react';
+import TabBar from 'pubBiz/tabBar/TabBarView'
 
 @inject('inquireDealer')
 @observer
@@ -23,14 +24,27 @@ class InquireDealerView extends Component {
         this.refs.list.start();
     }
 
+    callMe(item) {
+        location.href = 'tel:' + item.salePhone;
+    }
 
+    gotoShop(item) {
+        window.app.routerGoTo('/cloubStore/index?tabBarType=1&dealerId=' + item.id)
+    }
+    
     selectAddr = () => {
         this.refs.addrModal.openModal();
     }
 
     fetchData = (pageNum, success, error) => {
         let params = {   //在这里添加剩余的参数就好了
-            type: this.type
+            pageSize:20,
+            pageNum:1,
+            cityId:'440000000000',
+            longitude:40,
+            latitude:120,
+            type:this.type
+
         }
         this.stores.getDealerList(params).then((result) => {
             let { data, resultCode, resultMsg } = result;
@@ -39,8 +53,9 @@ class InquireDealerView extends Component {
                 return;
             }
             success(data.list, data.pageNum, data.pages);
-        }, (error) => {
-
+        }, (e) => {
+            console.log(e)
+            error(e)
         })
 
     }
@@ -54,16 +69,13 @@ class InquireDealerView extends Component {
         return (
             <div className="inquiry-item">
                 <Flex className="inquiry-header" justify="between">
-                    <div className="company-name ellipsis">
-                        万江汽车投资有限公司两江分公司数据分类是否是
-                    </div>
-
-                    <StarRange number={2.3} />
+                    <div className="company-name ellipsis" onClick={e => this.gotoShop(rowData)}>{rowData.dealerName}</div>
+                    <StarRange number={rowData.score} />
                 </Flex>
                 <Flex className="address" justify="between">
                     <div className="ellipsis">
                         <span className="iconfont icon-dizhi"></span>
-                        <span className="text">重庆市萝岗区科丰路31号华慧士大夫是否书法家是否</span>
+                        <span className="text">{rowData.shops[0].address}</span>
                     </div>
                     <div className="to-here color_orange">
                         <span className="iconfont icon-ditu"></span>
@@ -75,10 +87,8 @@ class InquireDealerView extends Component {
                     <div className="icon-yundian"></div>
                     到店享好礼，下订单抽大奖
                 </div>
-
-
                 <Flex justify="between" className="btn-list">
-                    <Button className="inquiry-btn">致电</Button>
+                    <Button className="inquiry-btn" onClick={e=> this.callMe(rowData)}>致电</Button>
                     <Button className="inquiry-btn">在线客服</Button>
                     <Button className="inquiry-btn btn-orange">查询底价</Button>
                 </Flex>
@@ -89,9 +99,7 @@ class InquireDealerView extends Component {
 
     render() {
         return (
-
             <div className="inquire-dealer-page">
-
                 <Tabs
                     className="dealer-tabs"
                     tabs={this.tabs}
@@ -121,36 +129,10 @@ class InquireDealerView extends Component {
                 <AddressPicker ref="addrModal" ok={(item) => {
 
                 }} />
-
+                <TabBar selectedTab='searchTab' />                
             </div>
-
-
         )
     }
 }
 
 module.exports = InquireDealerView;
-
-// <Tabs tabs={this.tabs} initialPage={0} tabBarTextStyle={{fontSize: '0.28rem', height: '0.8rem'}}
-//       tabBarActiveTextColor="#FD5C0E"
-//       tabBarInactiveTextColor="#666"
-//       swipeable={false}
-//       tabBarUnderlineStyle={{border: 'none',}}
-//       onTabClick={(item, index) => {
-//           console.log(index);
-//       }}
-// >
-//     <div className="inquiry-list">
-//         { this.renderDealerItem() }
-//         { this.renderDealerItem() }
-//         { this.renderDealerItem() }
-//         { this.renderPriceTips() }
-//
-//     </div>
-//     <div className="inquiry-list">
-//         { this.renderDealerItem() }
-//         { this.renderDealerItem() }
-//         { this.renderDealerItem() }
-//         { this.renderPriceTips() }
-//     </div>
-// </Tabs>

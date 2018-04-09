@@ -1,9 +1,12 @@
+/**
+ * Created by zhang.hanjun 
+ */
 import React, { PropTypes, Component } from 'react'
 import { inject, observer } from 'mobx-react';
 import Util from 'util';
-import './myOrderLess.less';
-import { Tabs } from 'antd-mobile';
-import OrderList from './orderList';
+import './MyOrderLess.less';
+import { Tabs, Toast } from 'antd-mobile';
+import OrderList from './OrderList';
 @inject("myOrder")
 @observer
 class MyOrder extends Component {
@@ -41,13 +44,16 @@ class MyOrder extends Component {
 		
 		return this.stores.getOrderList
 	}
+	noOpen(){
+		Toast.info('此功能暂未开放')
+	}
 
 	render() {
 		
 		return (
 			<div className="myOrder">
 				<div className='mo_searchBox'>
-					<div className='mo_searchBox'>
+					<div className='mo_searchBox' onClick={this.noOpen.bind(this)}>
 						<input placeholder='商品名称/预约号' />
 						<span className='iconfont icon-sousuo'></span>
 					</div>

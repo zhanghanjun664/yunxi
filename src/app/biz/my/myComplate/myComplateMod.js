@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import {observable,action,runInAction,useStrict,autorun} from 'mobx';
-import Serv from './myComplateServ';
+import Serv from './MyComplateServ'; 
 import Config from 'config/Config';
 /**
  * mod层

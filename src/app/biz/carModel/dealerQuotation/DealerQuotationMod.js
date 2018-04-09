@@ -10,7 +10,7 @@ class DealerQuotationMod {
 
     @observable state = {
 
-    };
+    }
 
     @action
     getDealerList(params) {

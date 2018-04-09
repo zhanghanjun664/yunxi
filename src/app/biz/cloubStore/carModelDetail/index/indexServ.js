@@ -4,8 +4,10 @@ import Request from "util/Request";
 /**
  * 云店车型详情请求服务
  */
+let locaPath = document.location.origin+document.location.pathname ;
 export default class{
 
+    
     /**
      * 
      * @param {*} params {
@@ -65,7 +67,8 @@ export default class{
         try {
             let data = Request({
                 //url: "caf/jdcloud/store/item/comment",
-                url:"caf/jdcloud/item/car/comments" ,
+                //url:"caf/jdcloud/item/car/comments" ,
+                url:locaPath+"assets/mock/caf-jdcloud-item-car-comments.json" ,
                 type: "GET",
                 data: params
             })

@@ -3,7 +3,7 @@
  */
 
 import React, { PropTypes, Component } from 'react';
-import { Flex, Button, Icon, Modal, TextareaItem, InputItem, } from 'antd-mobile';
+import { Flex, Button, Icon, Modal, TextareaItem, InputItem, Toast } from 'antd-mobile';
 import { inject, observer } from 'mobx-react';
 import './ActivityDetailsLess.less';
 import { StarRange, CustomInputItem } from 'widget';
@@ -111,7 +111,7 @@ class ActivityDetailsView extends Component {
                         key={'code'+index}
                         inputType="code"
                         type="number"
-                        value={this.state.checkCode}
+                        value={this.stores.state.checkCode}
                         onChange={e => this.setState({checkCode: e})}
                         label={<div onClick={this.getCode.bind(this, this.state.mobile)}>发送验证码</div>}
                         className="input"
@@ -125,27 +125,26 @@ class ActivityDetailsView extends Component {
     }
 
     signUp(){
-        if(this.state.checkCode != this.stores.state.checkCode){
-            console.log('请输入正确的验证码')
-            return
-        }
         let params = {
             memberName: this.state.name.trim(),
             memberMobile: this.state.mobile,
             activityId: this.props.location.query.id
         }
-        console.log(params)
+        
+        // if(this.state.checkCode != this.stores.state.checkCode){
+        //     Toast.info("请输入正确的验证码")
+        //     return
+        // }
         if(!params.memberName){
-            console.log('请输入姓名')
+            Toast.info('请输入姓名')
             return
         }
         this.stores.postActivityInfo(params)
 
     }
     getCode(mobile){
-        console.log(mobile)
         if(!Verify.isPhoneNum(mobile)){
-            console.log('号码不对')
+            Toast.info('请输入正确的手机号')
             return
         }
         this.stores.getCode(mobile)
@@ -180,9 +179,8 @@ class ActivityDetailsView extends Component {
                             { info.type == 1 && (
                                 <div className="color_orange">此处应该有优惠券，但ui还没给</div>
                             )}
-                            <div className="activity-text" dangerouslySetInnerHTML={{__html: info.content}}>
-
-                            </div>
+                            {/* <div className="activity-text" dangerouslySetInnerHTML={{__html: info.content}}></div> */}
+                            <div className="activity-text" >{info.content}</div>
                         </div>
                         {
                             info.type == 2 && (
@@ -210,24 +208,25 @@ class ActivityDetailsView extends Component {
                     </div>
 
 
-                    <div className="hot-comment">
+                        {/* 2期 */}
+                    {/* <div className="hot-comment">
                         <Flex className="comment-header" justify="between">
                             <div>热门评价</div>
                             <div onClick={this.stores.openModal}><span className="iconfont icon-xiepinglun icon-comment"></span><span>写评论</span></div>
                         </Flex>
 
                         <div className="comment-list">
-                            {/* { this.renderCommentItems(info.commentList) } */}
+                            { this.renderCommentItems(info.commentList) }
                         </div>
 
                     </div>
 
                     <div className="look-more-wrap">
                         <Button className="more-btn">查看全部评价</Button>
-                    </div>
+                    </div> */}
 
                     <div className="qrcode-wrap">
-                        <img src={info.qrCode} />
+                        <img src='assets/images/activity/dev_qrcode.png' />
                         <span className="fz_24 color_gray">长按或扫描二维码，关注公众号</span>
                     </div>
 

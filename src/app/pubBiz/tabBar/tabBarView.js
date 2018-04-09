@@ -1,44 +1,13 @@
 import React, {PropTypes, Component} from 'react'
 import {Link, IndexLink} from 'react-router'
-import tabStyle from './tabBarLess.less';
+import tabStyle from './TabBarLess.less';
 import { TabBar } from 'antd-mobile';
+import Util from 'util';
 
 //将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
 
 
 // 菜单数据 
-const tabBardata = [
-    {
-        name:'首页',
-        icon: ['tabbar_index.png', 'tabbar_index.png'],
-        target:'/home',
-        activityTab:'indexTab'
-    },
-    {
-        name:'商品',
-        icon: ['tabbar_car.png', 'selected_car.png'],
-        target:'/carModelList',
-        activityTab:'carTab'
-    },
-    {
-        name:'活动',
-        icon: ['tabbar_activity.png', 'selected_activity.png'],
-        target:'/activity',
-        activityTab:'activityTab'
-    },
-    {
-        name:'查找门店',
-        icon: ['tabbar_search.png', 'selected_search.png'],
-        target:'/cloubStore/index',
-        activityTab:'searchTab'
-    },
-    {
-        name:'我的',
-        icon: ['tabbar_mine.png', 'selected_mine.png'],
-        target:'/personalCenter',
-        activityTab:'mineTab'
-    },
-]
 
 class tabBar extends Component {
     constructor(props) {
@@ -47,6 +16,83 @@ class tabBar extends Component {
             selectedTab: 'indexTab',
             hidden: false,
             fullScreen: true,
+            type: Util.getQueryString('tabBarType')||0,
+            style: [
+                {
+                    normalColor: '#FD5C0E',
+                    activeColor: '#FD5C0E'
+                },
+                {
+                    normalColor: '#4689bf',
+                    activeColor: '#4689bf'
+                }
+            ],
+            tabBardata: [
+                [
+                    {
+                        name:'首页',
+                        icon: ['tabbar_index.png', 'tabbar_index.png'],
+                        target:'/home',
+                        activityTab:'indexTab'
+                    },
+                    {
+                        name:'商品',
+                        icon: ['tabbar_car.png', 'selected_car.png'],
+                        target:'/carModelList',
+                        activityTab:'carTab'
+                    },
+                    {
+                        name:'活动',
+                        icon: ['tabbar_activity.png', 'selected_activity.png'],
+                        target:'/activity',
+                        activityTab:'activityTab'
+                    },
+                    {
+                        name:'查找门店',
+                        icon: ['tabbar_search.png', 'selected_search.png'],
+                        target:'/inquireDealer',
+                        activityTab:'searchTab'
+                    },
+                    {
+                        name:'我的',
+                        icon: ['tabbar_mine.png', 'selected_mine.png'],
+                        target:'/personalCenter',
+                        activityTab:'mineTab'
+                    },
+                ],
+                [
+                    {
+                        name:'总店',
+                        icon: ['clound_index.png', 'clound_index.png'],
+                        target:'/home',
+                        activityTab:'indexTab'
+                    },
+                    {
+                        name:'车型',
+                        icon: ['clound_car.png', 'cSelected_car.png'],
+                        target:'/carModelList',
+                        activityTab:'carTab'
+                    },
+                    {
+                        name:'活动',
+                        icon: ['clound_activity.png', 'cSelected_activity.png'],
+                        target:'/activity',
+                        activityTab:'activityTab'
+                    },
+                    {
+                        name:'客服',
+                        icon: ['clound_customer.png', 'cSelected_customer.png'],
+                        target:'/kefu',
+                        activityTab:'searchTab'
+                    },
+                    {
+                        name:'我的',
+                        icon: ['clound_mine.png', 'cSelected_mine.png'],
+                        target:'/personalCenter',
+                        activityTab:'mineTab'
+                    },
+                ]
+            ]
         };
     }
 
@@ -58,6 +104,7 @@ class tabBar extends Component {
     }
 
     componentDidMount(){
+        console.log('tabbar')
         // 当前选中的选项卡
         if(!!this.props.selectedTab){
           this.setState({
@@ -68,13 +115,22 @@ class tabBar extends Component {
 
     // 选项卡点击
     onTabBarClick(currKey, gotoUrl) {
+        console.log(this.state.type, currKey, gotoUrl)
+        let urls = gotoUrl
+        if('indexTab' != currKey&&'mineTab' != currKey ){
+            
+            let tabBarType = Util.getQueryString('tabBarType')
+            if(tabBarType){
+                urls = gotoUrl+'?tabBarType='+tabBarType
+            }
+        }
         this.setState({
             selectedTab: currKey,
         });
         if('indexTab' === '' + currKey){
             this.title='';
         }
-        window.app.routerGoTo(gotoUrl)
+        window.app.routerGoTo(urls)
         
     }
 
@@ -103,16 +159,16 @@ class tabBar extends Component {
     
 
     render() {
-      let selectedTab = this.state.selectedTab;
+      let { selectedTab, type, tabBardata, style } = this.state;
         return (
             <div className="tab-bar-page"  style={this.state.fullScreen ? this.getTabBarStyle() : { height: '100%' }}>
                 <TabBar
-                    unselectedTintColor="#FD5C0E"
-                    tintColor="#FD5C0E"
+                    unselectedTintColor={style[type].normalColor}
+                    tintColor={style[type].activeColor}
                     barTintColor="white"
                     hidden={this.state.hidden}
                 >
-                {tabBardata.map(item=> <TabBar.Item
+                {tabBardata[type].map(item=> <TabBar.Item
                     title={item.name}
                     key={item.activityTab}
                     icon={<div className="tab_page_icon" style={this.getIconStyle(item,0)} ></div>}

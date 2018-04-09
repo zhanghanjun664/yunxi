@@ -1,12 +1,16 @@
+/**
+ * Created by zhang.hanjun 
+ */
 import React, { PropTypes, Component } from 'react';
-import { PullToRefreshListView } from 'widget';
+import { RefreshListView } from 'widget';
 
-
+@inject('myOrder')
+@observer
 class OrderList extends Component {
 
   constructor(props, context) {
     super(props, context);
-
+    this.stores = this.props.myOrder
     // console.log(props.mySubsribe.state);
   }
 
@@ -31,8 +35,21 @@ class OrderList extends Component {
     let { data } = await this.props.fetchData(params);
     console.log(data)
     success(data.list, data.pageNum, data.total);
+    error(e)
 
   }
+  // fetchData = (pageNum, success, error) => {
+  //   let params = {
+  //     pageNum: pageNum,
+  //     pageSize: 10,
+  //     appointmentStatus: this.props.status
+  //   };
+  //   this.stores.getOrderList(params).then((result)=>{
+  //     let { data, resultCode, resultMsg } = result;
+  //     success(data.list, data.pageNum, data.total)
+  //   })
+
+  // }
 
 
   renderRow = (rowData, sectionID, rowID) => {
@@ -108,13 +125,15 @@ class OrderList extends Component {
   render() {
     let style = this.props.style || {};
     return (
-      <PullToRefreshListView
+      <RefreshListView
         fetchData={this.fetchData}
         renderRow={this.renderRow}
         ref="list"
         first={false}
         useBodyScroll={false}
         style={style}
+        pullToRefresh={true}
+        
       />
 
     )

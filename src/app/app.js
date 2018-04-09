@@ -8,10 +8,17 @@ class App extends Component {
 
     componentWillMount() {//完成：插入真实 DOM前
         window.app.router = this.props.router;
-        if('/' === '' + this.props.location.pathname){
+        if('/' === '' + this.props.location.pathname) {
             window.app.routerRedirect('/home');
+
         }
-        //console.log('App>>componentWillMount')
+        let search = location.search;
+        if(search.indexOf('auth=') > -1 ) {
+            let auth = search.match(/\d+/);
+            if(auth.length>0) {
+                localStorage.setItem('auth', auth[0])
+            }
+        }
     }
 
     componentDidMount() {//插入完成真实 DOM
@@ -23,7 +30,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (this.props.children);
     }
 }

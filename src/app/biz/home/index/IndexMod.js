@@ -16,8 +16,8 @@ class Home {
         hotCarList: [],
         discountCarList: [],
         hotActivityList: [],
-        position: { label: '广州市', value: '123' },
-
+        position: { label: '广州市', postCode: '510001' },
+        logoData: {}
     };
 
     //获取首页数据
@@ -28,17 +28,17 @@ class Home {
         this.getQuickLink();
         this.getHotCarList()
         // this.getDiscountCarList();
-        // this.getHotActivityList()
+        this.getHotActivityList()
+        this.getLogoData()
     }
 
     @action
     async getBannerList() {
         let params = {
             type: '1',
-            areaCode: this.state.position.value
+            areaCode: this.state.position.postCode
         };
         let {data, resultCode, resultMsg} = await Serv.getBannerList(params);
-        //如果是异步，必须在runInAction
         runInAction(()=> {
             this.state.bannerList = data;
             console.log(data)
@@ -49,7 +49,6 @@ class Home {
     @action
     async getQuickLink() {
         let {data, resultCode, resultMsg} = await Serv.getQuickLinkList();
-        //如果是异步，必须在runInAction
         runInAction(()=> {
             this.state.quickLinkList = data;
             console.log(data)
@@ -60,7 +59,7 @@ class Home {
     async getNewsList() {
         let params = {
             type: '1',
-            areaCode: this.state.position.value
+            areaCode: this.state.position.postCode
         };
         let {data, resultCode, resultMsg} = await Serv.getNewsList(params);
         runInAction(()=> {
@@ -96,7 +95,7 @@ class Home {
     async getDiscountCarList() {
         let params = {
             type: '1',
-            areaCode: this.state.position.value
+            areaCode: this.state.position.postCode
         };
         let {data, resultCode, resultMsg} = await Serv.getDiscountCarList(params);
         runInAction(()=> {
@@ -108,11 +107,21 @@ class Home {
     async getHotActivityList() {
         let params = {
             type: '1',
-            areaCode: this.state.position.value
+            pageNum: 1,
+            pageSize: 3
         };
         let {data, resultCode, resultMsg} = await Serv.getHotActivityList(params);
         runInAction(()=> {
             this.state.hotActivityList = data.list;
+        })
+    }
+
+    @action
+    async getLogoData(){
+        let { data } = await Serv.getLogoData();
+        runInAction(()=>{
+            this.state.logoData = data
+            console.log(data)
         })
     }
 

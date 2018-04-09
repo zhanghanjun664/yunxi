@@ -10,16 +10,9 @@ export default class {
 
 
     static getMemberInfo() {
-
-        let headers = {
-            "Content-type": "application/json",
-            "auth":Util.getLocalCache(Config.authName)
-        }
-
         return Request({
             url: "members/info",
-            type: "GET",
-            headers: headers
+            type: "GET"
         })
     }
 }
