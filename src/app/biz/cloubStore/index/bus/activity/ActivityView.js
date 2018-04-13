@@ -3,7 +3,14 @@ import React from 'react';
 import './ActivityLess.less';
 import PopularModelsView from './../popularModels/PopularModelsView' ;
 
+import IndexUtil from './../../global/IndexUtil' ;
 import { inject,observer } from 'mobx-react';
+
+/*
+ * 云店首页banner
+ * @author lvlin
+ * @time 2017-3
+ * */
 
 @inject("cloubStoreIndex")
 @observer
@@ -26,6 +33,7 @@ class ActivityView extends React.Component {
     this.stores.getActivityBannerList();
   }
   render() {
+    
     return (
       <div id="bnk">
         <Carousel
@@ -39,7 +47,7 @@ class ActivityView extends React.Component {
           {this.stores.state.activityBannerList.map(val => (
             <a
               key={val}
-              href={val.redirectUrl}
+              onClick={e=>{IndexUtil.toUrl(val.redirectUrl)}}
               style={{ display: 'inline-block'}}
             >
               <img

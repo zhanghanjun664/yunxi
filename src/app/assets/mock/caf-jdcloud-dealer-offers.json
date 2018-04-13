@@ -9,7 +9,7 @@
     "list": [{
       "dealerId": "1234",
       "dealerName": "重庆市安捷明福",
-      "shop": [{
+      "shops": [{
         "name": "重庆市安捷明福一号店",
         "address": "重庆市萝岗区科丰路31号",
         "longitude": 12.01,
@@ -34,7 +34,7 @@
       {
         "dealerId": "2234",
         "dealerName": "重庆花都福特",
-        "shop": [{
+        "shops": [{
           "name": "重庆花都福特一号店",
           "address": "重庆市萝岗区科丰路31号",
           "longitude": 12.02,
@@ -59,7 +59,7 @@
       {
         "dealerId": "3234",
         "dealerName": "重庆庆福福特",
-        "shop": [{
+        "shops": [{
           "name": "重庆庆福福特一号店",
           "address": "重庆市萝岗区科丰路31号",
           "longitude": 12.02,
@@ -92,7 +92,7 @@
       {
         "dealerId": "3234",
         "dealerName": "重庆庆福福特",
-        "shop": [{
+        "shops": [{
           "name": "重庆庆福福特一号店",
           "address": "重庆市萝岗区科丰路31号",
           "longitude": 12.02,

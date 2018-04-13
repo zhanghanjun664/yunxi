@@ -18,7 +18,8 @@ class ProductDetailIndex extends Component {
 	componentDidMount() {
 	}
 	goAllconfig() {
-		window.app.routerGoTo('/allConfig');
+		let { itemId } = this.stores.state
+		window.app.routerGoTo('/allConfig?itemId='+itemId);
 	}
 	render() {
 		const data = this.stores.state.carConfig
@@ -42,7 +43,7 @@ class ProductDetailIndex extends Component {
 
 				</ul>
 				<div className='pdConfig_footer'>
-					<div className='btn_moreConfig' onClick={this.goAllconfig}>全部参数</div>
+					<div className='btn_moreConfig' onClick={this.goAllconfig.bind(this)}>全部参数</div>
 				</div>
 
 			</div>

@@ -17,14 +17,14 @@ class AllConfig extends Component {
     super(props, context)
     this.stores = this.props.productDetailIndex;
     this.data = []
+    this.itemId = this.props.location.query.itemId
   }
   componentDidMount() {
     let { carConfig, itemId } = this.stores.state
-    console.log(carConfig)
     if (!('itemCode' in carConfig)) {
       // 参数
       this.stores.getCarConfig({
-        itemId: itemId
+        itemId: this.itemId
       })
     }
   }
@@ -37,27 +37,7 @@ class AllConfig extends Component {
         props: item
       })
     })
-
-    // for (let i = 0; i < arr.length; i++) {
-    //   if (i == 0) {
-    //     newArr[num] = {
-    //       name: arr[i].groupName,
-    //       props: [arr[i]]
-    //     }
-    //   } else {
-    //     if (arr[i].groupId == arr[i - 1].groupId) {
-    //       newArr[num].props.push(arr[i])
-    //     } else {
-    //       num++
-    //       newArr[num] = {
-    //         name: arr[i].groupName,
-    //         props: [arr[i]]
-    //       }
-    //     }
-
-    //   }
-
-    // }
+    console.log(newArr)
     return newArr
 
   }
@@ -73,7 +53,7 @@ class AllConfig extends Component {
             this.handleData(data.props).map((item, index) => {
               return (
                 <div className='ac_item box_shadow' key={index}>
-                  <div className='ac_title'>{item.name}</div>
+                  <div className='ac_title'>{item.props[0].groupName}</div>
                   <ul>
                     {
                       item.props.map((item2, index2) => {

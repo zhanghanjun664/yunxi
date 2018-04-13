@@ -62,10 +62,9 @@
           line-height: 30px;
           padding:14px 34px;
           i{
-            width: 30px;
-            height: 30px;
+            font-size: 24px;
             margin-right: 10px;
-            vertical-align: bottom;
+            color: #333;
           }
           &.selected{
             border: 1px solid @color_orange;
@@ -75,30 +74,20 @@
         .distance{
           border: 1px solid @color_line;
           border-radius: 10px 0 0 10px;
-          i{
-            background: url("../../assets/images/askPrice/distance_select.png");
-            background-size: 100%;
-          }
           &.selected{
             border-radius: 10px 0 0 10px;
             i{
-              background: url("../../assets/images/askPrice/distance_selected.png") 100%;
-              background-size: 100%;
+              color: @color_orange;
             }
           }
         }
         .score{
           border: 1px solid @color_line;
           border-radius: 0 10px 10px 0;
-          i{
-            background: url("../../assets/images/askPrice/score_select.png");
-            background-size: 100%;
-          }
           &.selected{
             border-radius: 0 10px 10px 0;
             i{
-              background: url("../../assets/images/askPrice/score_selected.png");
-              background-size: 100%;
+              color: @color_orange;
             }
           }
         }
@@ -130,8 +119,12 @@
         &.am-input-item{
           height: 80px;
           padding-left: 20px;
-          .am-input-control input{
-            color: @color_dark_grey;
+          .am-input-control{
+            line-height: 0.36rem;
+            input{
+              color: @color_dark_grey;
+              font-size: 0.28rem;
+            }
           }
         }
         .am-input-label,.am-textarea-label{
@@ -199,6 +192,7 @@
       color: #FFFFFF;
       background: @color_orange;
       border-radius: 10px;
+      box-shadow: 0 18px 18px 0 rgba(253, 92, 14, 0.3);
     }
     p{
       text-align: left;
@@ -276,12 +270,8 @@
         color: #666666;
         margin: 20px 0 30px;
         i{
-          width: 24px;
-          height:24px;
-          background: url("../../assets/images/askPrice/tel.png");
-          background-size: 100%;
+          font-size: 24px;
           margin-right: 10px;
-          vertical-align: bottom;
         }
       }
       .dealer-address{
@@ -290,12 +280,8 @@
         line-height: 24px;
         overflow: hidden;
         i{
-          width: 24px;
-          height:24px;
-          background: url("../../assets/images/askPrice/address.png");
-          background-size: 100%;
+          font-size: 24px;
           margin-right: 10px;
-          vertical-align: bottom;
         }
         span{
           float: right;
@@ -336,61 +322,5 @@
       height:900px;
     }
   }
-}
-
-.am-picker{
-  position: absolute;
-  width:100%;
-  top:-135px;
-}
-
-//modal层
-.ask-price-modal-page{
-  //modal层--预算区间、购车时间
-  &.am-modal-transparent {
-    width: 690px;
-    height: 552px;
-    text-align: left;
-  }
-  .am-modal-header {
-    padding-bottom: 10px;
-  }
-  .am-modal-title{
-    text-align: left;
-    font-size: 30px;
-    color: @color_dark_grey;
-  }
-  .am-modal-content{
-    text-align: left;
-    .am-modal-body{
-      height:280px;
-      position: relative;
-      overflow: hidden;
-      padding: 0;
-    }
-  }
-  .am-modal-footer{
-    padding: 0 34px;
-    margin-top: 30px;
-    .am-modal-button-group-h::before {
-      background:none;
-    }
-    .am-modal-button{
-      background: @color_orange;
-      color: white;
-      border-radius: 10px;
-      width: 296px;
-      height:80px;
-      line-height: 80px;
-    }
-    .am-modal-button:first-child{
-      background: white;
-      border: 1px solid @color_orange;
-      border-radius: 10px;
-      color: @color_orange;
-      margin-right: 30px;
-    }
-  }
-
 }
 

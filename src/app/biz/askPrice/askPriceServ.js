@@ -20,7 +20,7 @@ export default class {
 
     static getDetail(params) {
         return Request({
-            url : 'caf/jdcloud/item/car/base-info',
+            url : 'caf/jdcloud/item/car/info',
             data:params,
             type:'GET'
         })
@@ -33,4 +33,12 @@ export default class {
             data:params
         })
     }
+
+    static getUserInfo(params) {
+        return Request({
+            url : 'members/info',
+            data: params,
+            type: 'GET'
+        })
+    } 
 };

@@ -47,7 +47,7 @@
     font-size: 28px;
     line-height: 36px;
     background-color: #fff;
-    padding: 20px 30px 26px;
+    padding: 23px 30px 23px;
     .nearbyInfo1{
       margin-bottom: 30px;
     }
@@ -60,6 +60,7 @@
     }
     .iconfont{
       color: #b7b7b7;
+      font-size: 24px;
     }
   }
   // 评论
@@ -175,6 +176,7 @@
     height: 80px;
     justify-content: space-around;
     z-index: 9;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
     &>div{
       // flex: 1;
       // text-align: center;
@@ -201,7 +203,8 @@
     align-items: center;
     height: 90px;
     .pd_footerItem1 {
-      margin-right: 4%;
+      //margin-right: 4%;
+      width: 20%;
       color: #666666;
       font-size: 20px;
       line-height: 22px;
@@ -209,7 +212,15 @@
       justify-content: center;
       img{
         margin-right: 10px;
+        height: 44px;
+        width: 44px;
       }
+      &:first-child{
+        padding-left: 4%;
+      }
+    }
+    .last-item{
+      padding-right: 4%;
     }
     .pd_footerItem3,.pd_footerItem4{
       width:30%;

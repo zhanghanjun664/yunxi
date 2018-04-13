@@ -15,38 +15,81 @@ useStrict(true)
 class StaffsMod {
   // 将数据设为被观察者，这意味着数据将成为公共数据
   @observable state = {
-    list: []
+    list: [],
+    staffsType: '平台客服',
+    staffsNickName: '小福',
+    // 消息输入框的值
+    msgContent: '',
+    // 消息列表
+    msgList: [
+      {
+        type: 'receive',
+        createAt: '3月29日 20:00',
+        avatar: 'assets/images/staffs/girl.png',
+        readStatus: 'readed',
+        content: '我是客服【小福】，请问有什么可以帮到您？'
+      },
+      {
+        type: 'receive',
+        createAt: '昨天',
+        avatar: 'assets/images/staffs/girl.png',
+        readStatus: 'readed',
+        content: `
+          <div>常见问题：</div>
+          <div class='msg-link'>
+            <ul>
+              <li><a href='about:blank;'>如何支付定金？</a></li>
+              <li><a href='about:blank;'>如何完成尾款支付？</a></li>
+              <li><a href='about:blank;'>预约试驾需要</a></li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        type: 'send',
+        createAt: '18:30',
+        avatar: 'assets/images/staffs/boy.png',
+        readStatus: 'reading',
+        content: '请问经销商报价真实吗？到店是否有现车？'
+      }
+    ],
   }
 
-  // 如果设定了useStrict严格模式，那么所有observable的值的修改必须在action定义的方法内，否则可以直接修改
-  // 用action定义事件
+  // 发送消息到后台
   @action
-  async text() {
-    let { data } = await Serv.testServ()
-    let { data2 } = await Serv.testServ()
+  send2Server(cbf){
+    let self = this
+    // 发送的消息
+    let sendMsg = this.state.msgContent
+    // 空值判断
+    if(!sendMsg){
+      return false
+    }
 
-    // 设置数据到状态机，如果是异步，必须在runInAction
+    // 设置到状态机
     runInAction(() => {
-      this.state.list = data.list
-    })
-    //监控数据变化的回调,读取什么参数，即代表将要监控什么数据
-    autorun(() => {
-      console.log("Tasks left: ", this.state.list)
+      // 添加到已发送消息列表
+      self.state.msgList.push({
+        type: 'send',
+        createAt: '18:30',
+        avatar: 'assets/images/staffs/boy.png',
+        readStatus: 'reading',
+        content: sendMsg
+      })
+      // 情况输入框的值
+      self.state.msgContent = ''
+      cbf()
     })
   }
 
-  @action
-  async mockText() {
-    let { data } = await Serv.testServ2()
-    //如果是异步，必须在runInAction
+  // 改变输入框的值
+  setInputValue(val){
+    // 设置到状态机
     runInAction(() => {
-      this.state.list = data.list
-    })
-    //监控数据变化的回调,读取什么参数，即代表将要监控什么数据
-    autorun(() => {
-      console.log("Tasks left: ", this.state.list)
+      this.state.msgContent = val
     })
   }
+
 }
 
 // 将组件实例化，这意味着组件将不能从别处实例化

@@ -19,7 +19,7 @@ export default class {
 
     static getDetail(params) {
         return Request({
-            url : 'caf/jdcloud/item/car/base-info',
+            url : 'caf/jdcloud/item/car/info',
             data:params,
             type:'GET'
         })
@@ -30,6 +30,14 @@ export default class {
             url : 'verify/code/get',
             data:params,
             type:'GET'
+        })
+    } 
+
+    static getUserInfo(params) {
+        return Request({
+            url : 'members/info',
+            data: params,
+            type: 'GET'
         })
     } 
 };

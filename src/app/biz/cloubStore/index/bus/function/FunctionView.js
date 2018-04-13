@@ -6,6 +6,8 @@ import { Flex} from 'antd-mobile';
 import './FunctionLess.less' ;
 import { inject, observer } from 'mobx-react';
 
+import IndexUtil from './../../global/IndexUtil' ; 
+
 /**
  * yie.lvlin
  * 精彩资讯+功能选项
@@ -46,7 +48,7 @@ class CFunction extends Component{
     render(){
 
         let {quickLinkList} = this.stores.state ;
-
+        
         return(
             <div className="cfunction-div">
                 <div className='cfunction-box'>
@@ -75,7 +77,7 @@ class CFunction extends Component{
                                 //固定只取前4个
                                 if(index>=4) return '';
                                 return (
-                                    <div className="nav-item" onClick={() => { window.app.routerGoTo(item.redirectUrl) }} key={'nav'+index}>
+                                    <div className="nav-item" onClick={() => { IndexUtil.toUrl(item.redirectUrl) }} key={'nav'+index}>
                                         <img src={item.imgUrl} />
                                         <span>{item.name}</span>
                                     </div>

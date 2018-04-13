@@ -14,8 +14,18 @@ class Activity {
         navTab: 0,
         adList: [],
         style: {},
+        activityLabel:[],
         activityList: []
     };
+    // 活动标签
+    @action
+    async getActivityLabel(cbf) {
+        let {data} = await Serv.getActivityLabel({type:2});
+        runInAction( () => {
+            this.state.activityList = data;
+            cbf(data);
+        })
+    }
     // 活动列表
     @action
     async getActivityList(params) {
@@ -29,7 +39,6 @@ class Activity {
     // 广告列表
     @action
     getAdList = async (params) => {
-        
         let { data } = await Serv.getAdList(params);
         runInAction(() => {
             this.state.adList = data;

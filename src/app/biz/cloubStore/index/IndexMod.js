@@ -1,5 +1,5 @@
 import {observable,action,runInAction,useStrict,autorun} from 'mobx';
-
+import Util from 'util';
 import Serv from './IndexServ' ;
 
 //严格模式
@@ -12,7 +12,7 @@ class IndexMod {
 
     @observable state = {
         storeCode:'C0001',
-        dealerId:'1171252663755543500',
+        dealerId: Util.getQueryString('dealerId'),
         activityBannerList:[] , //首页活动轮播图列表
         informationList:[],  //最新资讯
         dealerInfo:{},  //经销商查询
@@ -77,7 +77,9 @@ class IndexMod {
      */
     @action
     async getdealerInfo(params) {
-        !params.dealerId?params.dealerId=this.getDealerId():'' ;
+        // !params.dealerId?params.dealerId=this.getDealerId():'' ;
+        // params
+        params.dealerId = this.state.dealerId
         let {data, resultCode, resultMsg} = await Serv.getdealerInfo(params);
         runInAction(() => {
             this.state.dealerInfo = data ;

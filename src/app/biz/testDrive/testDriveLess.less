@@ -41,13 +41,9 @@
         color: #FD5C0E;
         line-height: 60px;
         i{
-          display: inline-block;
-          width: 30px;
-          height: 30px;
+          color: #FD5C0E;
+          font-size: 24px;
           margin-right: 10px;
-          vertical-align: text-bottom;
-          background: url("../../assets/images/askPrice/address_selected.png");
-          background-size: 100%;
         }
       }
     }
@@ -72,8 +68,12 @@
         &.am-input-item{
           height: 80px;
           padding-left: 20px;
-          .am-input-control input{
-            color: #333333;
+          .am-input-control{
+            line-height: 0.36rem;
+            input{
+              color: #333333;
+              font-size: 0.28rem;
+            }
           }
         }
         .am-input-label,.am-textarea-label{
@@ -157,16 +157,10 @@
   .submit-btn{
     text-align: center;
     padding: 0 60px 40px;
-    a{
-      display: inline-block;
-      font-size: 36px;
-      color: #FFFFFF;
-      line-height: 36px;
-      padding: 26px 0;
-      width: 100%;
+    a {
+      color:#fff;
       background: #FD5C0E;
-      border-radius: 10px;
-      box-shadow: 0 5px 12px 0 rgba(253,92,14,0.50);
+      box-shadow: 0 18px 18px 0 rgba(253, 92, 14, 0.3);
     }
     p{
       font-size: 24px;
@@ -240,12 +234,8 @@
         color: #666666;
         margin: 20px 0 30px;
         i{
-          width: 24px;
-          height:24px;
-          background: url("../../assets/images/askPrice/tel.png");
-          background-size: 100%;
+          font-size: 24px;
           margin-right: 10px;
-          vertical-align: bottom;
         }
       }
       .dealer-address{
@@ -255,12 +245,8 @@
         overflow: hidden;
         margin-bottom: 20px;
         i{
-          width: 24px;
-          height:24px;
-          background: url("../../assets/images/askPrice/address.png");
-          background-size: 100%;
+          font-size: 24px;
           margin-right: 10px;
-          vertical-align: bottom;
         }
         span{
           float: right;
@@ -288,77 +274,10 @@
         color: #666666;
         line-height: 24px;
         i{
-          display: inline-block;
-          width: 30px;
-          height: 30px;
-          background: url("../../assets/images/askPrice/cb_test.png");
-          background-size: 100%;
-          vertical-align: text-bottom;
+          font-size: 24px;
           margin-right: 10px;
-        }
-        &.selected{
-          i{
-            background: url("../../assets/images/askPrice/cb_on_test.png");
-            background-size: 100%;
-          }
         }
       }
     }
   }
 }
-
-.am-picker{
-  position: absolute;
-  width:100%;
-  top:-135px;
-}
-
-//modal层
-.ask-price-modal-page{
-  //modal层--预算区间、购车时间
-  &.am-modal-transparent {
-    width: 690px;
-    height: 552px;
-    text-align: left;
-  }
-  .am-modal-header {
-    padding-bottom: 10px;
-  }
-  .am-modal-title{
-    text-align: left;
-    font-size: 30px;
-    color: #333333;
-  }
-  .am-modal-content{
-    text-align: left;
-    .am-modal-body{
-      height:280px;
-      position: relative;
-      overflow: hidden;
-      padding: 0;
-    }
-  }
-  .am-modal-footer{
-    padding: 0 34px;
-    .am-modal-button-group-h::before {
-      background:none;
-    }
-    .am-modal-button{
-      background: #FD5C0E;
-      color: white;
-      border-radius: 10px;
-      width: 296px;
-      height:80px;
-      line-height: 80px;
-    }
-    .am-modal-button:first-child{
-      background: white;
-      border: 1px solid #FD5C0E;
-      border-radius: 10px;
-      color: #FD5C0E;
-      margin-right: 30px;
-    }
-  }
-
-}
-

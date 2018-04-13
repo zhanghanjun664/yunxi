@@ -28,7 +28,8 @@ class ProductDetailIndex extends Component {
 				{title: '活动信息', tabIndex: 3},
 			]
 		}
-		// this.stores.itemId = this.props.location.query.itemId ; 
+		this.itemId = this.props.location.query.itemId ; 
+		this.skusId = this.props.location.query.skusId ; 
 	}
 	handleScroll(e) {
 		let scrollTop = Util.getScrollTop()
@@ -71,8 +72,15 @@ class ProductDetailIndex extends Component {
 	}
 	getDate = ()=>{
 		let { itemId } = this.stores.state
-		// 基本信息
-		this.stores.getBaseInfo({
+		let { cityId } = Util.getCityID()
+
+		// this.stores.getBaseInfo({
+		// 	itemId: 1172434417033946112,
+		// 	dealerId: 1171252663755543500
+		// })
+
+		// 参数(详细信息)
+		this.stores.getCarConfig({
 			itemId: itemId
 		})
 
@@ -82,9 +90,10 @@ class ProductDetailIndex extends Component {
 			pageSize: 3
 		})
 
+		console.log(cityId)
 		// 附近经销商
 		this.stores.getNearbyInfo({
-			areaCode: "1",
+			areaCode: cityId,
 			itemId: itemId,
 			areaType: 2
 		})
@@ -96,14 +105,10 @@ class ProductDetailIndex extends Component {
 			pageSize: 3
 		})
 
-		// 参数(详细信息)
-		this.stores.getCarConfig({
-			itemId: itemId
-		})
-
 	}
 	componentWillUnmount() {
 		window.onscroll = '';
+		this.stores.clearStaticData()
 	}
 	regScroll(myHandler) {
 		if (window.onscroll === null) {
@@ -131,7 +136,7 @@ class ProductDetailIndex extends Component {
 						</div>
 						<div className='iconfont icon-right'></div>
 					</li>
-					<li className='pdSelectBox_item' onClick={this.toUrl.bind(this, '/switchSpec?skusId='+skusId+'&itemId='+itemId)}>
+					<li className='pdSelectBox_item' onClick={this.toUrl.bind(this, '/switchSpec?skusId='+this.skusId+'&itemId='+itemId)}>
 						<div>已选颜色：</div>
 						<div className='pdSelectBox_item2'>
 							<div className='pdSelectBox_color'>
@@ -242,11 +247,11 @@ class ProductDetailIndex extends Component {
 				<div className='pd_footer'>
 					<div className='pd_footerItem1' onClick={this.noOpen.bind(this)}>
 						<img src="assets/images/productDetail/icon_jisuanqi.png" />
-						<p>立即<br />下单</p>
+						<p>立即<br/>下单</p>
 					</div>
-					<div className='pd_footerItem1' onClick={this.noOpen.bind(this)}>
+					<div className='pd_footerItem1 last-item' onClick={this.noOpen.bind(this)}>
 						<img src="assets/images/productDetail/icon_kefu.png" />
-						<p>在线<br />咨询</p>
+						<p>在线<br/>咨询</p>
 					</div>
 					<div className='pd_footerItem3' onClick={this.toUrl.bind(this, '/askprice?itemId='+itemId)}>询底价</div>
 					<div className='pd_footerItem4' onClick={this.toUrl.bind(this, '/testdrive?itemId='+itemId)}>预约试驾</div>

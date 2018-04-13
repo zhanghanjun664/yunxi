@@ -23,8 +23,6 @@ import SelectedVideo from './bus/selectedVideo/SelectedVideoView' ;
 //经销商信息 
 import Info from './bus/info/InfoView' ; 
 
-
-
 import './IndexLess.less' ; 
 import { inject,observer } from 'mobx-react';
 import TabBar from 'pubBiz/tabBar/TabBarView'
@@ -41,27 +39,25 @@ import TabBar from 'pubBiz/tabBar/TabBarView'
 @observer
 class AppView extends Component{
     
-    constructor(props){
+    constructor(props) {
 
         super(props) ;
         this.stores = this.props.cloubStoreIndex ;
+        
         this.stores.state.dealerId = this.props.location.query.dealerId ;
     }
 
     render(){
         return(
-
             <div className='indexPage'>
                 <IndexTop />
                 <Carousels />
                 <CFunction />
                 <Info />
-                <MaskTitle   iconClass='icon icon-hot'  titleName='热门车型'>
-                    <Horizontal/>
+                <MaskTitle  iconClass='icon icon-hot'  titleName='热门车型'>
+                <Horizontal/>
                 </MaskTitle>
-
                 <ActivityInformation />
-
                 <SpecialCar />
 
                 <SelectedVideo />

@@ -36,7 +36,7 @@ class PersonalCenterView extends Component {
                         <div className="account" onClick={()=>window.app.routerGoTo('/accountManage')}>账号管理></div>
                     </div>
                 </Flex>
-                <Flex className="message-wrap">
+                <Flex className="message-wrap hide">
                     <div>
                         <span className="text1">福特</span>
                         <span className="text2">消息</span>
@@ -53,7 +53,7 @@ class PersonalCenterView extends Component {
                             >
                                 { info.messages.map((item, index) => {
                                     return (
-                                        <div className="news-item ellipsis">
+                                        <div className="news-item ellipsis" key={index}>
                                             <span className="tag">{item.sender}</span>{item.content}
                                         </div>
                                     )

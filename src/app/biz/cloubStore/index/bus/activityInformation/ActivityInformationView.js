@@ -6,10 +6,12 @@ import { inject, observer } from 'mobx-react';
 import Util from 'util';
 
 import './ActivityInformationLess.less' ;
-/**
- * yie.lvlin
+
+/*
  * 活动资讯
- */
+ * @author yie.lvlin
+ * @time 2017-3
+ * */
 @inject("cloubStoreIndex")
 @observer
 class ActivityInformation extends Component{
@@ -33,9 +35,9 @@ class ActivityInformation extends Component{
     /**
      * 打开活动详情
      */
-    handleClickActivity = (e,code) => {
+    handleClickActivity = (e,id) => {
         
-        window.app.routerGoTo('/activityDetails') ;
+        window.app.routerGoTo('/activityDetails?id='+id) ;
     }
     render(){
         let {activityInformationList} = this.stores.state ; 
@@ -66,7 +68,7 @@ class ActivityInformation extends Component{
                                                 {val.name}
                                             </span>
                                         </div>
-                                        <div className='activityInformation-content-item-b'>
+                                        {/* <div className='activityInformation-content-item-b'>
                                             <span>{type[val.type-1]}资讯</span>
                                             <span className='activityInformation-content-item-b-space'></span>
                                             <span>
@@ -74,6 +76,24 @@ class ActivityInformation extends Component{
                                                 Util.formatDate(val.publishTime||'2018-04-02',1) 
                                             }
                                             </span>
+                                        </div> */}
+                                        <div className='activityInformation-content-item-b'>
+                                            <div className='item-tab-1'>
+                                                <span class="iconfont icon-yuedu"></span>
+                                                <span>{val.commentTotal}</span>
+                                            </div>
+                                            <div className='item-tab-2'>
+                                                <span class="iconfont icon-pinglun"></span>
+                                                <span>{val.readTotal}</span>
+                                            </div>
+                                            <div className='item-tab-3'>
+                                                <span class="iconfont icon-shijian"></span>
+                                                <span class="ellipsis">
+                                                {
+                                                    Util.formatDate(val.publishTime||'2018-04-02',1) 
+                                                }
+                                                </span>
+                                            </div>
                                         </div>
                                     </Flex.Item>
                                 </Flex>

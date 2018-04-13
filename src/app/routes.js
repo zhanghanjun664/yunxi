@@ -121,6 +121,17 @@ export default [
         onEnter: rootOnEnter,
         onLeave: rootOnLeave
       }, {
+        //特惠车首页
+        path: '/specialcar',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                cb(null, require('./biz/specialCar/specialCarList/SpecialListView'))
+                titleText("超值好车")
+            })
+        },
+        onEnter: rootOnEnter,
+        onLeave: rootOnLeave
+      }, {
         path: '/search',
         getComponent: (nextState, cb) => {
           require.ensure([], (require) => {

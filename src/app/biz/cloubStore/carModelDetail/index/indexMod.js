@@ -9,7 +9,7 @@ import { observable, action, runInAction } from 'mobx';
  */
 class CloubStoreCarModelDetail {
     @observable state = {
-        itemId:'1171328588805309440', //车型id
+        itemId:'', //车型id
         carDetailBaseInfo:{} ,  //车型基础信息
         followFlag:"0",  //是否已关注
         commentList:[], //评论列表

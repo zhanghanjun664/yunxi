@@ -9,6 +9,7 @@ import './ActivityDetailsLess.less';
 import { StarRange, CustomInputItem } from 'widget';
 import Util from 'util';
 import Verify from 'util/Verify.js';
+import PickerOption from 'pubBiz/pickerOption/PickerOption'
 
 
 
@@ -24,13 +25,29 @@ class ActivityDetailsView extends Component {
         this.state = {
             mobile: '',
             name: '',
-            checkCode: ''
+            checkCode: '',
+            dealer: '',
+            carItem: '',
+            costmodal: false, //   预算金额弹出层
+            buytimemodal:false, // 预计购车时间
+            formData:{
+                budgetRange:'',
+                purchaseTime:'',
+            }
         }
+        this.activityId = this.props.location.query.activityId
     }
 
 
     componentDidMount() {
-        this.stores.getActivityDetails(this.props.location.query.id);
+        let query = this.props.location.query
+        this.stores.getActivityDetails(this.props.location.query.activityId);
+        this.stores.getUserInfo()
+        if('itemId' in query){
+            this.stores.getDetail({
+                itemId: query.itemId
+            })
+        }
     }
 
     checkBox(checked = true, onClick = () => {}) {
@@ -82,6 +99,15 @@ class ActivityDetailsView extends Component {
     //渲染留资活动表单组件
     _renderFormItem = (type, index) => {
         let content = null;
+        let { userInfo, modelDetail } = this.stores.state
+        if(userInfo.mobile !== null){
+            this.state.name = userInfo.name
+            this.state.mobile = userInfo.mobile
+            // this.setState({
+            //     name: userInfo.name,
+            //     mobile: userInfo.mobile
+            // })
+        }
         switch (type) {
             case 1:
                 content = (
@@ -106,8 +132,10 @@ class ActivityDetailsView extends Component {
                         onChange={e => this.setState({mobile: e})}
                         className="input"
                         maxLength={11}
-                    />,
-                    <CustomInputItem
+                    />
+                ]
+                if(userInfo.mobile === null){
+                    content.push(<CustomInputItem
                         key={'code'+index}
                         inputType="code"
                         type="number"
@@ -115,28 +143,135 @@ class ActivityDetailsView extends Component {
                         onChange={e => this.setState({checkCode: e})}
                         label={<div onClick={this.getCode.bind(this, this.state.mobile)}>发送验证码</div>}
                         className="input"
+                    />)
+                }
+                break;
+            // case 3:
+            //     content = (
+            //         <CustomInputItem
+            //             key={'input'+index}
+            //             label="意向经销商"
+            //             type="text"
+            //             value={this.state.dealer}
+            //             onChange={e => this.setState({name: e})}
+            //             className="input"
+            //         />
+            //     )
+            //     break;
+            case 4:
+                content = (
+                    <CustomInputItem
+                        key={'input'+index}
+                        label="意向车型"
+                        type="text"
+                        value={modelDetail.name}
+                        onClick={e => this.gotoSelect()}
+                        className="input"
                     />
-
-                ]
+                )
+                break;
+            case 5:
+                content = (
+                    <CustomInputItem
+                        key={'input'+index}
+                        label="预算区间"
+                        type="text"
+                        value={this.state.formData.budgetRange[1]}
+                        onClick={e => this.showModal('costmodal')}
+                        className="input"
+                    />
+                )
+                break;
+            case 6:
+                content = (
+                    <CustomInputItem
+                        key={'input'+index}
+                        label="购买时间"
+                        type="text"
+                        value={this.state.formData.purchaseTime[1]}
+                        onClick={e => this.showModal('buytimemodal')}
+                        className="input"
+                    />
+                )
                 break;
         }
 
         return content;
     }
 
-    signUp(){
-        let params = {
-            memberName: this.state.name.trim(),
-            memberMobile: this.state.mobile,
-            activityId: this.props.location.query.id
-        }
+    gotoSelect() {
+        window.app.routerGoTo('/carModelList?goback=activityDetails&activityId='+this.activityId)
+    }
+    showModal(key){
+        console.log(12121212)
+        this.setState({
+            [key]: true,
+        });
+    }
+    onClose = key => (flag) => {
+        this.setState({
+            [key]: false,
+        });
+
+        // if(flag) {
+
+        //     let {formData} = this.state;
+        //     this.onChange(formData.appointmentTime, 'appointmentTime')
+        // }
+
+    }
+    onChange (value, key) {
+        let { formData } = this.state;
         
+        formData[key] = value;
+        console.log(value, key)
+
+        if(key === 'memberMobile') {
+            formData[key] = value.replace(/\s/g, '');
+        }
+
+        if(key === 'budgetRange') {
+            this.setState({
+                selBuget : value[1]
+            })
+        }
+
+        if(key === 'purchaseTime') {
+            this.setState({
+                selBuyTime : value[1]
+            })
+        }
+
+        this.setState({
+            formData
+        })
+    }
+    signUp(){
+        let { activityId, itemId } = this.props.location.query
+        let { budgetRange, purchaseTime } = this.state.formData
+        let params = {
+            memberName: this.state.name.trim(),//姓名
+            memberMobile: this.state.mobile,//手机号
+            activityId: activityId,//活动id
+            itemId: itemId,//车型id
+            budgetRange: budgetRange[0],//预算区间
+            purchaseTime: purchaseTime[0],//购买时间
+            dealer: ''//意向经销商
+        }
         // if(this.state.checkCode != this.stores.state.checkCode){
         //     Toast.info("请输入正确的验证码")
         //     return
         // }
         if(!params.memberName){
             Toast.info('请输入姓名')
+            return
+        }
+        if(!params.budgetRange){
+            Toast.info('请选择预算区间')
+            return
+        }
+        if(!params.purchaseTime){
+            Toast.info('请选择购买时间')
             return
         }
         this.stores.postActivityInfo(params)
@@ -152,10 +287,14 @@ class ActivityDetailsView extends Component {
     }
 
     render() {
-        let { info } = this.stores.state;
+        let { info, sending } = this.stores.state;
 
         return (
             <div>
+                <PickerOption name="budgetRange" type="budget" visible={this.state.costmodal} onPickClose={this.onClose('costmodal')} onChange={(a, b) => this.onChange(a, b)}/>
+
+                <PickerOption name="purchaseTime" type="buytime" visible={this.state.buytimemodal} onPickClose={this.onClose('buytimemodal')} onChange={(a, b) => this.onChange(a, b)}/>
+
                 <div className="activity-details-page">
                     <div className="details-module">
                         <div className="activity-info">
@@ -193,7 +332,7 @@ class ActivityDetailsView extends Component {
                                         return this._renderFormItem(item, index);
                                     })}
 
-                                    <Button className="submit-btn" onClick={this.signUp.bind(this)}>报名</Button>
+                                    <Button disabled={sending.signUp} className="submit-btn" onClick={this.signUp.bind(this)}>报名</Button>
 
 
                                     <div className="statement">

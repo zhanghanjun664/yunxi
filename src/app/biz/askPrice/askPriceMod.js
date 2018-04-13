@@ -30,13 +30,23 @@ class price {
      * }
      */
     @action
-    async getDealers(params) {
+    async getDealers(params, cbf) {
         let {data, resultCode, resultMsg} = await Serv.listDealers(params) ;
 
         runInAction(() => {
             this.state.dealerList = data.list
+            cbf&&cbf(data.list)
         })
     }
+
+    @action
+     async getUserInfo(params, cbf) {
+         let {data } = await Serv.getUserInfo(params);
+         //如果是异步，必须在runInAction
+         runInAction(()=> {
+            cbf(data);
+         })
+     }
 
     @action
     async getVerCode(params) {
@@ -48,11 +58,12 @@ class price {
     }
 
     @action
-    async getDetail(params) {
+    async getDetail(params, cbf) {
         let {data} = await Serv.getDetail(params);
 
         runInAction(() => {
             this.state.modelDetail = data;
+            cbf&&cbf(data)
         })
     }
 

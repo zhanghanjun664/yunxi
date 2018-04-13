@@ -20,7 +20,7 @@ class Top extends Component{
 
         this.storesHome = this.props.home ; 
 
-        this.getPostion();
+        //this.getPostion();
     }
 
     getPostion =() => {
@@ -62,10 +62,13 @@ class Top extends Component{
     
         }).done(json=>{
             console.log(json);
-            this.storesHome.setPosition({label:json.result.address_component.city,postCode:'00001'})
+            //this.storesHome.setPosition({label:json.result.address_component.city,postCode:'00001'})
         })
     }
 
+    componentDidMount(){
+        this.storesHome.getLogoData() ;
+    }
     selectAddr = () => {
         this.refs.addrModal.openModal();
     }
@@ -73,14 +76,20 @@ class Top extends Component{
     handleSearch = () => {
         window.app.router.push('/search') ;
     }
+    handleClickLogo =() =>{
+        location.href = 'https://www.ford.com.cn/' ;
+    }
 
 //<SearchBar placeholder='搜索您想要的车型' cancelText=''  />
     render(){
-        let {position} = this.storesHome.state ; 
+        let {position,logoData} = this.storesHome.state ; 
+        
         return(
             <div>
                 <Flex className="home-header">
-                    <div className="logo"></div>
+                    <div className="logo" onClick={this.handleClickLogo}>
+                        <img src={logoData.imgUrl} />
+                    </div>
                     <Flex.Item className="input-wrap">
                         <div className="input-box" onClick={this.handleSearch}>
                             <span>搜索您想要的车型</span>

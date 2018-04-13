@@ -17,7 +17,9 @@ class ActivityDetails {
         sending:{
             code: false,
             signUp: false
-        }
+        },
+        userInfo: {},
+        modelDetail: {}
     };
     // 活动详情
     @action
@@ -53,9 +55,31 @@ class ActivityDetails {
         }
         this.state.sending.signUp = true;
         let { data, resultCode, resultMsg } = await Serv.postActivityInfo(params);
-        this.state.sending.signUp = false;
         Toast.info('报名成功')
         console.log('报名成功')
+        runInAction(()=>{
+            this.state.sending.signUp = false;
+        })
+    }
+
+    // 获取用户信息
+    @action
+    async getUserInfo() {
+        let { data, resultCode, resultMsg } = await Serv.getUserInfo();
+        runInAction(() => {
+            this.state.userInfo = data;
+        })
+
+    }
+
+    // 取车型的名字
+    @action
+    async getDetail(params) {
+        let {data} = await Serv.getDetail(params);
+
+        runInAction(() => {
+            this.state.modelDetail = data;
+        })
     }
 
     @action

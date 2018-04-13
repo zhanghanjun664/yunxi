@@ -5,6 +5,7 @@ import React, { PropTypes, Component } from 'react';
 import { Flex, Button, } from 'antd-mobile';
 import {inject,observer} from 'mobx-react';
 import './QuickLinkLess.less';
+import Util from 'util';
 
 @inject('quickLink')
 @observer
@@ -19,10 +20,16 @@ class QuickLinkView extends Component {
     componentDidMount() {
         this.stores.getQuickLinkList();
     }
+    toUrl(url){
+        if(url){
+            let urls = Util.getUrl(url)
+            location.href = urls
+        }
+    }
 
     renderNavItem = (item, index, key) => {
         return (
-            <div className="link-item" key={key + index} onClick={window.app.routerGoTo.bind(this, item.redirectUrl)}>
+            <div className="link-item" key={key + index} onClick={this.toUrl.bind(this, item.redirectUrl)}>
                 <img src={item.imgUrl} />
                 <div className="link-text ellipsis">{item.name}</div>
             </div>

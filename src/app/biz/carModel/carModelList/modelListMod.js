@@ -43,8 +43,8 @@ class model {
     }
 
     @action
-    async listItems(params) {
-        let {resultCode,data} = await Serv.getItemByprops(params);
+    async listItems(params, dealerId) {
+        let {resultCode,data} = await Serv.getItemByprops(params, dealerId);
         //如果是异步，必须在runInAction
         runInAction(()=> {
             this.state.carItemList = data;

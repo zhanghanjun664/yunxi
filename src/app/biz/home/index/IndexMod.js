@@ -16,8 +16,9 @@ class Home {
         hotCarList: [],
         discountCarList: [],
         hotActivityList: [],
-        position: { label: '广州市', postCode: '510001' },
-        logoData: {}
+        position: { label: '广州', postCode: '440100000000' },
+        logoData: {},
+        hideHotCar: false
     };
 
     //获取首页数据
@@ -41,7 +42,7 @@ class Home {
         let {data, resultCode, resultMsg} = await Serv.getBannerList(params);
         runInAction(()=> {
             this.state.bannerList = data;
-            console.log(data)
+            // console.log(data)
         })
 
     }
@@ -51,7 +52,7 @@ class Home {
         let {data, resultCode, resultMsg} = await Serv.getQuickLinkList();
         runInAction(()=> {
             this.state.quickLinkList = data;
-            console.log(data)
+            // console.log(data)
         })
     }
 
@@ -83,11 +84,19 @@ class Home {
         };
         let {data, resultCode, resultMsg} = await Serv.getHotCarList(params);
         runInAction(()=> {
-            let arr = data;
+            let arr = data, hideCount=0;
             if (data.length > 3) {
                 arr = data.slice(0, 3);
             }
             this.state.hotCarList = arr;
+            arr.map(item=>{
+                if(!item.imgUrl){
+                    hideCount++
+                }
+            })
+            if(hideCount == 3){
+                this.state.hideHotCar = true
+            }
         })
     }
 
@@ -108,7 +117,7 @@ class Home {
         let params = {
             type: '1',
             pageNum: 1,
-            pageSize: 3
+            pageSize: 5
         };
         let {data, resultCode, resultMsg} = await Serv.getHotActivityList(params);
         runInAction(()=> {
@@ -121,7 +130,6 @@ class Home {
         let { data } = await Serv.getLogoData();
         runInAction(()=>{
             this.state.logoData = data
-            console.log(data)
         })
     }
 
@@ -129,8 +137,10 @@ class Home {
     @action
     setPosition = (item) => {
         this.state.position = item;
+        localStorage.setItem('myCity', JSON.stringify({cityName: item.label, postCode: item.value}))
         this.getIndexData();  //刷新数据
     }
+
 
 
 }

@@ -32,4 +32,19 @@ export default class {
             data: params
         })
     }
+    // 获取用户信息
+    static getUserInfo() {
+        return Request({
+            url: "members/info",
+            type: "GET"
+        })
+    }
+    // 获取车型名称
+    static getDetail(params) {
+        return Request({
+            url : 'caf/jdcloud/item/car/info',
+            data:params,
+            type:'GET'
+        })
+    }
 }

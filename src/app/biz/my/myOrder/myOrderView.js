@@ -105,12 +105,8 @@ class MyOrder extends Component {
 								</ul>
 							</div>
 						</Tabs>
-
 					</div>
 				</div>
-
-
-
 			</div>
 		);
 	}

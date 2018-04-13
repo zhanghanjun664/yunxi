@@ -27,8 +27,9 @@ class AccountManage extends Component {
   }
   hidetelNum(num){
     if(num){
-      let num = String(num)
-      return num.slice(0,3) + "****" + num.slice(-4,0)
+      let nums = String(num)
+      return nums.replace(/(\d{3})\d+(\d{4})/, '$1****$2')
+      
     }
     
   }
@@ -69,10 +70,10 @@ class AccountManage extends Component {
             <li className='am_item'>
               <div className='am_item_key'>账号密码</div>
               {
-                info.password?
-                <div className='am_item_value'>已设置</div>
-                :
+                info.mobile === null?
                 <div className='am_item_value' onClick={this.toUrl.bind(this, '/myComplate')}>未设置</div>
+                :
+                <div className='am_item_value'>已设置</div>
               }
               <div className='iconfont icon-right'></div>
             </li>

@@ -10,6 +10,7 @@ import Util from 'util';
 import './IndexLess.less';
 import { AddressPicker } from 'widget';
 import TabBar from 'pubBiz/tabBar/TabBarView'
+import district from 'widget/addressPicker/district';
 
 @inject("home")
 @observer
@@ -23,31 +24,59 @@ class HomeView extends Component {
 
     componentDidMount() {
         this.getData();
+        this.getCurrCity();
     }
 
     componentWillMount(){
     }
 
     getCurrCity(){
-        var callbacks = {
+        let self = this;
+        let callbacks = {
             complete:function(results){
-                console.log('results:', results)
-                Toast.info(JSON.stringify(results.detail.name), 1000)
+                // 地址名数组
+                let nameArr = results.detail.detail.split(',');
+                // 省份名
+                let provinceName = nameArr[nameArr.length -2];
+                // 城市名
+                let cityName = nameArr[nameArr.length -3];
+                // 区域码
+                let postCode = '';
+                // 查询城市区域码
+                if(0 !== district.length){
+                    district.map((province, i) => {
+                        if(0 !== province.children.length && (-1 !== provinceName.indexOf(province.label))){
+                            province.children.map((city, j) => {
+                                if(-1 !== cityName.indexOf(city.label) ){
+                                    // Toast.info(JSON.stringify(city));
+                                    postCode = city.value;
+                                    return;
+                                }
+                            })
+                        }
+                    })
+                }
+                localStorage.setItem('myCity', JSON.stringify({provinceName, cityName, postCode}));
+                self.stores.setPosition({label: cityName, value: postCode})
+                // Toast.info(JSON.stringify({cityName, postCode, provinceName}), 10)
             }
         }
 
-        wx.getLocation({
-        type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-        success: function (res) {
-            var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-            var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-            var speed = res.speed; // 速度，以米/每秒计
-            var accuracy = res.accuracy; // 位置精度
-            var cs=new qq.maps.CityService(callbacks);
-            cs.searchCityByLatLng(new qq.maps.LatLng(latitude, longitude));
-            console.log('latitude:', latitude, 'longitude:', longitude, 'speed:', speed, 'accuracy:', accuracy)
-        }
-        });        
+        wx.ready(function(){
+            wx.getLocation({
+                type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                success: function (res) {
+                    let latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                    let longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                    let speed = res.speed; // 速度，以米/每秒计
+                    let accuracy = res.accuracy; // 位置精度
+                    localStorage.setItem('myPosition', JSON.stringify(res));
+                    let cs = new qq.maps.CityService(callbacks);
+                    cs.searchCityByLatLng(new qq.maps.LatLng(latitude, longitude));
+                }
+            });  
+        })
+      
     }
 
     //获取数据
@@ -66,18 +95,7 @@ class HomeView extends Component {
     }
 
     selectAddr = () => {
-
-        // this.refs.addrModal.openModal();
-
-        wx.getLocation({
-            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-            success: function (res) {
-                let {latitude, longitude, accuracy} = res; // 纬度, 经度, 速度
-
-                alert('Latitude:' + latitude + 'Long:' + longitude)
-
-            }
-        });
+        this.refs.addrModal.openModal();
     }
 
     // 跳转到详情
@@ -90,6 +108,11 @@ class HomeView extends Component {
             let urls = Util.getUrl(data.redirectUrl)
             location.href = urls
         }
+        if(data.redirectType == 3){
+            console.log(data)
+            let urls = '/carModelDetail?itemId='+data.itemId
+            window.app.routerGoTo(urls)
+        }
     }
     noOpen(){
         Toast.info('此功能暂未开放')
@@ -97,8 +120,8 @@ class HomeView extends Component {
 
     render() {
 
-        let { bannerList, newsList, hotCarList, discountCarList, hotActivityList, position, quickLinkList, logoData } = this.stores.state;
-
+        let { bannerList, newsList, hotCarList, discountCarList, hotActivityList, position, quickLinkList, logoData, hideHotCar } = this.stores.state;
+        
         return (
             <div className="home-page">
                 <Flex className="home-header">
@@ -113,7 +136,7 @@ class HomeView extends Component {
 
                     </Flex.Item>
                     <Flex className="position" onClick={this.selectAddr}>
-                        <i className="iconfont icon-dingwei" onClick={ e => this.getCurrCity()}></i>
+                        <i className="iconfont icon-dingwei"></i>
                         <span className="ellipsis">{position && position.label}</span>
                     </Flex>
                 </Flex>
@@ -130,7 +153,7 @@ class HomeView extends Component {
                                 {
                                     bannerList.map((item, index) => {
                                         return (
-                                            <div className="banner-item-wrap" key={'banner' + index} onClick={this.toUrl.bind(this, item.redirectUrl)}>
+                                            <div className="banner-item-wrap" key={'banner' + index} onClick={this.handleClickLogo.bind(this, item)}>
                                                 <img className="banner-item" src={item.imgUrl} />
                                             </div>
                                         )
@@ -143,10 +166,7 @@ class HomeView extends Component {
 
                 <div className="nav-wrap">
                     <Flex className="news-wrap">
-                        <div className="news-title">
-                            <span>福特</span>
-                            <span>头条</span>
-                        </div>
+                        <div className="news-title"><span>福特</span> <span>头条</span></div>
                         <Flex.Item>
                             {
                                 newsList.length > 0 ? (
@@ -177,7 +197,7 @@ class HomeView extends Component {
                     <Flex className="nav" wrap="wrap">
                         {quickLinkList && quickLinkList.length > 0 && quickLinkList.slice(0, 4).map((item, index) => {
                             return (
-                                <div className="nav-item" onClick={() => { window.app.routerGoTo(item.redirectUrl) }} key={'nav' + index}>
+                                <div className="nav-item" onClick={() => { this.toUrl(item.redirectUrl) }} key={'nav' + index}>
                                     <img src={item.imgUrl} />
                                     <span>{item.name}</span>
                                 </div>
@@ -192,7 +212,7 @@ class HomeView extends Component {
                 </div>
                 {
                     hotCarList && hotCarList.length > 0 && (
-                        <div className="home-module hot-cars">
+                        <div className={hideHotCar?'hidden':'home-module hot-cars'}>
                             <Flex className="home-module-head" justify="center">
                                 <span className="icon icon-hot"></span><span>热门车型</span>
                             </Flex>
@@ -292,9 +312,9 @@ class HomeView extends Component {
                         <div>
                             {hotActivityList.map((item, index) => {
                                 return (
-                                    <div className="card mb-30" key={'activity' + index} onClick={this.toUrl.bind(this, `/activityDetails?id=${item.id}`)}>
+                                    <div className="card mb-30" key={'activity' + index} onClick={(e)=> window.app.routerGoTo('/activityDetails?id=' + item.id)}>
                                         <div className="card-content">
-                                            <img src="assets/images/home/banner02.png" />
+                                            <img src={item.image}/>
                                         </div>
                                         <div className="card-footer activity-footer">
                                             <span></span><span>{item.name}</span>

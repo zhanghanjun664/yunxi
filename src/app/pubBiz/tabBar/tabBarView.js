@@ -3,11 +3,7 @@ import {Link, IndexLink} from 'react-router'
 import tabStyle from './TabBarLess.less';
 import { TabBar } from 'antd-mobile';
 import Util from 'util';
-
-//将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
-
-
-// 菜单数据 
+// import { url } from 'inspector';
 
 class tabBar extends Component {
     constructor(props) {
@@ -103,8 +99,7 @@ class tabBar extends Component {
         });
     }
 
-    componentDidMount(){
-        console.log('tabbar')
+    componentDidMount() {
         // 当前选中的选项卡
         if(!!this.props.selectedTab){
           this.setState({
@@ -115,13 +110,16 @@ class tabBar extends Component {
 
     // 选项卡点击
     onTabBarClick(currKey, gotoUrl) {
-        console.log(this.state.type, currKey, gotoUrl)
         let urls = gotoUrl
-        if('indexTab' != currKey&&'mineTab' != currKey ){
+        if('mineTab' != currKey && 'indexTab' != currKey ) {
             
-            let tabBarType = Util.getQueryString('tabBarType')
-            if(tabBarType){
+            let tabBarType = Util.getQueryString('tabBarType');
+            let dealerId = Util.getQueryString('dealerId');
+            if(tabBarType) {
                 urls = gotoUrl+'?tabBarType='+tabBarType
+                if(dealerId) {
+                    urls += '&dealerId=' +  dealerId;
+                }
             }
         }
         this.setState({

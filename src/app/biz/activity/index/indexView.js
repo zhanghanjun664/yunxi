@@ -14,17 +14,12 @@ import ActivityList from 'biz/activity/activityList/ActivityList';
 
 @inject("activity")
 @observer
-class HomeView extends Component {
+class IndexView extends Component {
 
   constructor(props, context) {
     super(props, context);
     this.stores = this.props.activity;
-    this.tabs = [
-      { title: <div className='changAnt_tabs'>推荐</div> },
-      { title: <div className='changAnt_tabs'>行业</div> },
-      { title: <div className='changAnt_tabs'>评测</div> },
-      { title: <div className='changAnt_tabs'>活动</div> },
-    ];
+    this.tabs = [ ];
   }
 
 
@@ -32,39 +27,54 @@ class HomeView extends Component {
     this.stores.setStyle({
       height: Util.getScrollHeight(['banner', 'am-tabs-default-bar-content', 'am-tabs-tab-bar-wrap']) - 60
     })
+
+    this.stores.getActivityLabel(resp => {
+      this.tabs = resp.map(ok => {
+        return {title: <div className='changAnt_tabs' >{ok.name}</div>};
+      })
+    })
     this.getData();
   }
 
   //获取数据
   getData = () => {
     let { getAdList } = this.stores
+    console.log(localStorage.getItem('myCity'))
+    let cityId = Util.getCityID()
+    console.log(cityId)
     getAdList({
-      type: '1',
-      areaCode: '123'
+      type: '3',
+      areaCode: cityId.cityId
     })
   }
 
   toUrl(url) {
-    // window.app.routerGoTo(url);
-    console.log(url)
+
     if(url){
       let urls = Util.getUrl(url)
       location.href = url;
     }
   }
+  handleClickLogo(data){
+    console.log(data)
+    if(data.redirectType == 2){
+        let urls = Util.getUrl(data.redirectUrl)
+        location.href = urls
+    }
+    if(data.redirectType == 3){
+        console.log(data)
+        let urls = '/carModelDetail?itemId='+data.itemId
+        window.app.routerGoTo(urls)
+    }
+}
 
   // 跳转到详情
   goToDetail(e) {
     window.app.routerGoTo('/carModelDetail')
   }
-  componentWillMount() {
-  }
-  renderTabs = tab => (
-    <div className='changAnt_tabs'>{tab.title}</div>
-  )
 
   render() {
-    const { adList, style } = this.stores.state
+    const { adList, style,activityList } = this.stores.state
     return (
       <div className="activity-page">
         <div className="banner">
@@ -77,11 +87,10 @@ class HomeView extends Component {
                 selectedIndex={0}
                 dots={true}
                 swipeSpeed={35} >
-
                 {
                   adList.map((item, index) => {
                     return (
-                      <div className="banner-item-wrap" key={index} onClick={this.toUrl.bind(this, item.redirectUrl)}>
+                      <div className="banner-item-wrap" key={index} onClick={this.handleClickLogo.bind(this, item)}>
                         <img className="banner-item" src={item.imgUrl} />
                       </div>
                     )
@@ -98,42 +107,20 @@ class HomeView extends Component {
           <Tabs tabs={this.tabs}
             initialPage={0}
             animated={false}
-            onChange={(tab, index) => { console.log('onChange', index, tab); }}
-
-          >
-            {/* 推荐 */}
-            <ActivityList
-              style={style}
-              activityLabel={1}
-              fetchData={this.stores.getActivityList}
-            />
-            {/* 行业 */}
-            <ActivityList
-              style={style}
-              activityLabel={2}
-              fetchData={this.stores.getActivityList}
-            />
-            {/* 测评 */}
-            <ActivityList
-              style={style}
-              activityLabel={3}
-              fetchData={this.stores.getActivityList}
-            />
-            {/* 活动 */}
-            <ActivityList
-              style={style}
-              activityLabel={4}
-              fetchData={this.stores.getActivityList}
-            />
-
+            onChange={(tab, index) => { console.log('onChange', index, tab); }}>
+            {activityList.map(x=>
+                <ActivityList
+                key={x.id}
+                style={style}
+                activityLabel={x.id}
+                fetchData={this.stores.getActivityList}
+            />)}
           </Tabs>
         </div>
-
-
         <TabBar selectedTab='activityTab' />
       </div>
     )
   }
 }
 
-module.exports = HomeView;
+module.exports = IndexView;

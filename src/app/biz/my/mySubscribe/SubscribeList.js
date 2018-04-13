@@ -38,6 +38,12 @@ class SubscribeList extends Component {
     noOpen(){
         Toast.info('此功能暂未开放')
     }
+    go2Map(address){
+        Util.go2Map(address)
+    }
+    goTell(num){
+        location.href = 'tel:'+num
+    }
 
 
     renderRow = (rowData, sectionID, rowID) => {
@@ -56,6 +62,7 @@ class SubscribeList extends Component {
                 btnText = <div className='mo_goPay'>再次预约</div>
                 break
         }
+        console.log(rowData)
         return (
             <div className='mo_listItem'>
                 <div className='mo_listTitle'>
@@ -79,7 +86,7 @@ class SubscribeList extends Component {
                         <div>经销商:</div>
                         <Flex className='flex-1'>
                             <div className='flex-1'>{rowData.dealer&&rowData.dealer.name}</div>
-                            <div className='mo_listInfo_tel'>
+                            <div className='mo_listInfo_tel' onClick={()=>this.goTell(rowData.dealer.phone)}>
                                 <span className='iconfont icon-dianhua'></span>
                                 <span>{rowData.dealer&&rowData.dealer.phone}</span>
                             </div>
@@ -94,9 +101,9 @@ class SubscribeList extends Component {
                                 <span className='iconfont icon-dizhi'></span>
                                 <span>{rowData.dealer&&rowData.dealer.address}</span>
                             </div>
-                            <div className='mo_listInfo_map'>
+                            <div className='mo_listInfo_map' onClick={()=>this.go2Map(rowData.dealer.address)}>
                                 <span className='iconfont icon-ditu'></span>
-                                <span onClick={this.noOpen.bind(this)}>到这里</span>
+                                <span>到这里</span>
                             </div>
                         </Flex>
 
@@ -122,7 +129,7 @@ class SubscribeList extends Component {
                 </div>
 
                 <div className='mo_btnBox' onClick={this.noOpen.bind(this)}>
-                    <div>查看详情</div>
+                    <div >查看详情</div>
                     {/* <div className='mo_goPay'>去支付</div> */}
                     {btnText}
                 </div>

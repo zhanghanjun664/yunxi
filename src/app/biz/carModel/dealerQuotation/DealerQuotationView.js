@@ -5,6 +5,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Flex, Button, Icon, Toast, } from 'antd-mobile';
 import { StarRange, Tabs, RefreshListView, } from 'widget';
+import {extend, get, cloneDeep} from 'lodash'; 
 import './DealerQuotationLess.less';
 import { inject, observer } from 'mobx-react';
 
@@ -29,19 +30,47 @@ class DealerQuotationView extends Component {
         location.href = 'tel:' + rowData.salePhone;
     }
 
+    getCityID() {
+        let tmp = localStorage.getItem('myCity');
+        if(tmp !==  null) {
+            let {postCode} = JSON.parse(tmp);
+            return {
+                cityId:postCode
+            };
+        } else {
+            return {}
+        }
+    }
+
+    getCoordinate() {
+        let tmp = localStorage.getItem('myPosition');
+        if(tmp !==  null) {
+            let {longitude, latitude} = JSON.parse(tmp);
+            return {
+                longitude,
+                latitude
+            };
+        } else {
+            // 默认坐标
+            return {
+                longitude:23.10674,
+                latitude:113.440332,
+            }
+        }
+    }
+
 
     fetchData = (pageNum, success, error) => {
         let params = {   //在这里添加剩余的参数就好了
             pageSize:20,
             pageNum:1,
-            cityId:'440000000000',
-            longitude:40,
-            latitude:30,
             type: this.type
         }
+
+        extend(params, this.getCityID(), this.getCoordinate());
+        
         this.stores.getDealerList(params).then((result) => {
             let { data, resultCode, resultMsg } = result;
-
             if(resultCode !== 0) {
                 return;
             }

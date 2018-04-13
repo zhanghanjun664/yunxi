@@ -11,25 +11,13 @@ export default class {
             data: params
         })
     }
-
-    static listProps(params) {
+    static getBannerList(params) {
         return Request({
-            url: "caf/jdcloud/item/car/filter-props",
+            url: "caf/jdcloud/index/carousel-figures",
             type: "GET",
             data: params
         })
     }
 
-    static getItemByprops(params, d) {
-        return Request({
-            url: "caf/jdcloud/item/car?dealerId=" + d,
-            type: "POST",
-            data: JSON.stringify(params),
-            contentType:'application/json', 
-            processData:false,
-        })
-    }
-
-    
 
 };

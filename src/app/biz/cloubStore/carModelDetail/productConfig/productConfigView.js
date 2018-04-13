@@ -20,7 +20,7 @@ class ProductDetailIndex extends Component {
 
 	//点击查看全部参数按钮，跳转详情参数页面
 	handleClick = (e) => {
-		window.app.routerGoTo('/allConfig') ; 
+		window.app.routerGoTo(`/allConfig?itemId=${this.props.itemId}`) ; 
 	}
 
 	render() {

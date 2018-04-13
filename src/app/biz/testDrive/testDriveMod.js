@@ -15,7 +15,10 @@ class TestDrive {
     @observable state = {
         verCode:'',
         dealerList:[],
-        modelDetail:{},
+        modelDetail:{
+            name:''
+        },
+        isLoading: false,
         appointmnetId:'' // 预约后得到的预约号
     };
     // 获取验证码
@@ -28,24 +31,38 @@ class TestDrive {
         })
     }
 
+     // 取用户基本信息
+     @action
+     async getUserInfo(params, cbf) {
+         let {data } = await Serv.getUserInfo(params);
+         //如果是异步，必须在runInAction
+         runInAction(()=> {
+            cbf(data);
+         })
+     }
+
     // 取车型的名字
     @action
-    async getDetail(params) {
+    async getDetail(params, cbf) {
         let {data} = await Serv.getDetail(params);
-
 
         runInAction(() => {
             this.state.modelDetail = data;
+            cbf(data)
         })
     }
 
     // 提交预约试驾
     @action
-    async submitAppointMent(params) {
+    async submitAppointMent(params, cbf) {
+        this.state.isLoading = true;
+
         let {data} = await Serv.submitAppointment(params);
         //如果是异步，必须在runInAction
         runInAction(()=> {
             this.state.appointmnetId = data;
+            this.state.isLoading = false;
+            cbf(data);
         })
         //监控数据变化的回调,读取什么参数，即代表将要监控什么数据
         autorun(() => {
@@ -65,10 +82,11 @@ class TestDrive {
      *   type      --0：距离最近，1：评分最高
      * }
      */
-    async getDealer(params){
+    async getDealer(params, cbf) {
         let {data, resultCode, resultMsg} = await Serv.dealerList(params) ;
         runInAction(() => {
             this.state.dealerList = data.list
+            cbf&&cbf(data.list);
         })
     }
 }

@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Request from "util/Request";
 
 export default class {
-    // 车型基本信息
+    // 车型基本信息, 暂不调用，已经合并到 detail-info
     static getBaseInfo(params) {
         return Request({
             url: "caf/jdcloud/item/car/base-info",

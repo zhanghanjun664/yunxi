@@ -37,6 +37,7 @@ export default function(obj) {
       contentType: parameter.contentType,
       processData:parameter.processData,
       data: parameter.data,
+      timeout:25000,
       statusCode: {
         401: function(r) {
           //跳注册页面

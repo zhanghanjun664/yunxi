@@ -10,6 +10,7 @@ import Util from 'util';
 class ActivityList extends Component {
 	constructor(props, context) {
 		super(props, context)
+		this.dealerId = Util.getQueryString('dealerId')
 	}
 	componentDidMount() {
 		this.refs.list.start();
@@ -17,12 +18,23 @@ class ActivityList extends Component {
 	toUrl(url) {
 		window.app.routerGoTo(url)
 	}
+
 	fetchData = async (pageNum, success, error) => {
+		const location = window.app.router.location;
+		let { cityId } = Util.getCityID()
+
 		let params = {
 			pageNum: pageNum,
 			pageSize: 5,
-			activityLabel: this.props.activityLabel
+			activityLabel: this.props.activityLabel,
 		};
+		// 云店进入的查经销商id
+		if(this.dealerId){
+			params.storeId = this.dealerId
+		}else{
+			// 首页进入的查城市
+			params.areaCode = cityId
+		}
 
 		let { data } = await this.props.fetchData(params);
 		success(data.list, data.pageNum, data.pages);
@@ -30,9 +42,9 @@ class ActivityList extends Component {
 	}
 	renderRow = (rowData, sectionID, rowID) => {
 		return (
-					<li className='pdt_item' onClick={this.toUrl.bind(this, '/activityDetails?id='+rowData.id)}>
+					<li className='pdt_item' onClick={this.toUrl.bind(this, '/activityDetails?activityId='+rowData.id)}>
 						<div className='pdt_cover'>
-							<img src="assets/images/productDetail/baseInfo.png" />
+							<img src={rowData.image} />
 						</div>
 
 						<div className='pdt_infoBox'>

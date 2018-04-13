@@ -16,6 +16,7 @@ import dealerQuotation from 'biz/carModel/dealerQuotation/DealerQuotationMod';
 import inquireDealer from 'biz/store/inquireDealer/InquireDealerMod';
 import staffs from 'biz/staffs/StaffsMod';
 import myCoupon from 'biz/my/myCoupon/MyCouponMod';
+import specialList from 'biz/specialCar/specialCarList/SpecialListMod';
 
 // 在这里为所有的组件进行导出，将其注册到根组件
 export default{
@@ -36,5 +37,6 @@ export default{
     inquireDealer,
     testDrive,
     staffs,
-    myCoupon
+    myCoupon,
+    specialList,
 }

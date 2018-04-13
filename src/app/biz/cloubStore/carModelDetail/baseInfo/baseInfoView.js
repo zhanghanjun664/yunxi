@@ -23,11 +23,13 @@ class ProductDetailBaseInfo extends Component {
 				sellerSellPrice:0
 			}
 		}
+		this.itemId = Util.getQueryString('itemId')
 	}
 
 	componentWillReceiveProps(newProps){
 		let carDetailBaseInfo  = newProps.carDetailBaseInfo ;
-		if (carDetailBaseInfo.skus!=null){
+		
+		if (carDetailBaseInfo.skus!=null&&carDetailBaseInfo.skus.length>0){
 			this.setState({sku:carDetailBaseInfo.skus[0]}) ;
 		}
 	}
@@ -102,7 +104,7 @@ class ProductDetailBaseInfo extends Component {
 							<span className='iconfont icon-Triangle'></span>
 							<span>视频</span>
 						</div>
-						<div onClick={()=>this.toUrl('/carImages')}>图片</div>
+						<div onClick={()=>this.toUrl('/carImages?itemId='+this.itemId)}>图片</div>
 					</div>
 				</div>
 				

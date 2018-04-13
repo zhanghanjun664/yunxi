@@ -40,7 +40,7 @@ class ModelList extends Component {
     // this.handleTabsBox()
     let { baseInfo, itemId } = this.stores.state
     if (!('itemId' in baseInfo)) {
-      this.stores.getBaseInfo({
+      this.stores.getCarConfig({
         itemId: this.itemId
       })
     }
@@ -100,7 +100,7 @@ class ModelList extends Component {
 
   render() {
     const { data, tabsBox, qjList, wgList, zkList, zyList, xjList, spList } = this.stores.state.imgDetail
-    console.log(qjList.length)
+    console.log(data)
     return (
       <div className='carImages'>
 

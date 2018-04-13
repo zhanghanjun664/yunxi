@@ -321,12 +321,15 @@ class ProductDetailIndex extends Component {
 		//this.stores.itemId = this.props.location.state.itemId ; 
 		//TODO 后期修改成从URL获取
 		this.stores.itemId = this.props.location.query.itemId ; 
+		this.stores.state.dealerId = this.props.location.query.dealerId ; 
 		//this.stores.itemId = '1171675815723683840'//this.props.location.query.itemId ; 
+		this.itemId = this.props.location.query.itemId
 		
 	}
 	componentDidMount(){
 		//获取车型基础信息
 		this.getData() ;
+		
 		
 	}
 
@@ -334,7 +337,9 @@ class ProductDetailIndex extends Component {
 				
 
 		let [_itemCode,_account,_itemId] = ['00001','11111',this.stores.state.itemId] ; 
-		let {dealerId} = this.storesCloubIndex.state ;
+		let {dealerId} = this.stores.state ;
+		console.log(dealerId);
+		
 		let params = {
 			//itemCode:_itemCode,
 			//storeCode:this.storesCloubIndex.state.storeCode ,
@@ -372,12 +377,14 @@ class ProductDetailIndex extends Component {
 			itemId:_itemId ,
 			'longtitude':longitude ,
 			'latitude':latitude ,
+			dealerId
 		});
 
 		this.getActivityList({
 			storeId:dealerId,
 			pageNum:1,
 			pageSize:3,
+			dealerId
 			//type:'',
 			//areaCode:''
 		})
@@ -400,7 +407,8 @@ class ProductDetailIndex extends Component {
 	 * 查询用户是否已经关注该车型
 	 */
 	getFollowFlag = (params) => {
-		this.stores.getFollowFlag(params) ;
+		//TODO 迭代一不做
+		//this.stores.getFollowFlag(params) ;
 	}
 
 	/**
@@ -513,6 +521,10 @@ class ProductDetailIndex extends Component {
 		}
 	}
 
+	toUrl(url){
+		window.app.routerGoTo(url)
+	}
+
 	render() {
 		let {navTab,carDetailBaseInfo,followFlag,commentList,activityList,carDetailInfo} = this.stores.state ; 
 		let {dealerInfo} = this.storesCloubIndex.state ;
@@ -534,7 +546,7 @@ class ProductDetailIndex extends Component {
 				<CarIntroduce ref='productDetailIntroduce' carDetailInfo={carDetailInfo}  />
 				<div className='component_pdConfig' ref='productConfig'>
 					<div className='component_pdConfig_title'>参数配置</div>
-					<ProductConfig carDetailInfo={carDetailInfo} />
+					<ProductConfig carDetailInfo={carDetailInfo} itemId={this.stores.state.itemId} />
 				</div>
 
 				<div className='component_test'>
@@ -563,7 +575,7 @@ class ProductDetailIndex extends Component {
 						<p>在线<br/>咨询</p>
 					</div>
 					<div className='pd_footerItem3' onClick={this.hadnleClickAsk}>询底价</div>
-					<div className='pd_footerItem4'>预约试驾</div>
+					<div className='pd_footerItem4' onClick={this.toUrl.bind(this, '/testdrive?itemId='+this.itemId)}>预约试驾</div>
 				</div>
 				
 

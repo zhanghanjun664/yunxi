@@ -24,6 +24,7 @@ class ModelList extends Component {
     */
     state = {
         catalogId:0,
+        dealerId : '', // 指定经销商ID
         queryParam: {
             pageSize:20,
             pageNum:1
@@ -39,6 +40,12 @@ class ModelList extends Component {
 
     componentDidMount() {
         this.stores.getList(this.state.queryParam);
+
+        let location = window.app.router.location;
+
+        if('dealerId' in location.query) {
+            this.setState({'dealerId': location.query.dealerId})
+        }
     }
 
     onOpenChange (e, item) {
@@ -47,12 +54,12 @@ class ModelList extends Component {
 
         if(item) {
             hasSelect.text = item.name
-            this.setState(hasSelect);
+            this.setState({hasSelect});
             const params = {
-                catalogId: '1171675665593815040' // item.id
+                catalogId: item.id // item.id
             };
 
-            this.setState({catalogId: '1171675665593815040'})
+            this.setState({catalogId: item.id})
 
             this.stores.listProps(params)
 
@@ -60,7 +67,7 @@ class ModelList extends Component {
             // 收起左侧面板
             hasSelect.currIndex = 0;
             hasSelect.text = '';
-            this.setState({hasSelect, SelectArr:[],isSelectEnd:false})
+            this.setState({hasSelect, SelectArr:[], isSelectEnd:false})
         }
 
         this.setState({ open: !this.state.open });
@@ -75,7 +82,9 @@ class ModelList extends Component {
     }
 
     setSelectProps(item) {
+        
         const {hasSelect, SelectArr, catalogId} = this.state;
+
         let propsList = this.stores.state.propsList
 
         SelectArr[hasSelect.currIndex].propValueId = item.propValueId
@@ -87,9 +96,10 @@ class ModelList extends Component {
         if(propsList.length == hasSelect.currIndex+1) {
             this.setState({isSelectEnd: true})
             // 查具体的车型
-            this.stores.listItems(SelectArr)
+            this.stores.listItems(SelectArr, this.state.dealerId)
 
         } else {
+
             hasSelect.currIndex++;
             
             this.setState({hasSelect})
@@ -97,17 +107,23 @@ class ModelList extends Component {
 
     }
 
+    // 跳转到车型详情页
     gotoDetail(item) {
 
         let target = '/carModelDetail';
         let location = window.app.router.location;
+        let queryParams =  '?itemId=' + item.itemId;
 
         if(location.search !== '') {
-            target = '/' + location.query.goback;
+            if('goback' in location.query) {
+                target = '/' + location.query.goback;
+            }
+            if('activityId' in location.query){
+                queryParams += '&activityId=' + location.query.activityId
+            }
         }
 
-
-        window.app.routerGoTo(target + '?itemId=' + item.itemId);
+        window.app.routerGoTo(target + queryParams);
     }
 
     render() {
@@ -122,10 +138,7 @@ class ModelList extends Component {
         if(propsList.length > 0) {
             if(propsList.length !== SelectArr.length) {
                 let tmpGroup = propsList[curIndex];
-
                 currentList = tmpGroup.values;
-
-    
                 SelectArr[curIndex] = {
                     groupId:tmpGroup.groupId,
                     propNameId:tmpGroup.propNameId
@@ -134,26 +147,28 @@ class ModelList extends Component {
                 currentList = this.stores.state.carItemList     
             }
         }
+
+        let Grayicon = 'https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png';
         
         let sidebar = (<List>
-            <List.Item thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
+            <List.Item thumb={Grayicon}
                     >已选：{this.state.hasSelect.text}</List.Item>
             {currentList.map((item, index) => {
                 return (<List.Item key={'prop_' + item.propValueId} onClick={e=>this.setSelectProps(item)}
-                                   thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
+                                   thumb={Grayicon}
                 >{item.propValue}</List.Item>);
             })}
         </List>);
 
         if(this.state.isSelectEnd) {
             sidebar = (<List>
-                <List.Item thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
+                <List.Item thumb={Grayicon}
                         >已选：{this.state.hasSelect.text}</List.Item>
-                {currentList.map((item, index) => {
+                {currentList.length > 0 ? currentList.map((item, index) => {
                     return (<List.Item key={`${item.itemId}_${index}`} onClick={e=>this.gotoDetail(item)}
-                                       thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
+                                       thumb={Grayicon}
                     >{item.name}</List.Item>);
-                })}
+                }) : <List.Item thumb={Grayicon} className="color-gray">暂无匹配车型</List.Item>}
             </List>);
         }
 
@@ -172,7 +187,7 @@ class ModelList extends Component {
                         onOpenChange={e => this.onOpenChange(e)}
                     >
                         <div className="search-box">
-                            <SearchBar placeholder="搜索您关注的车型" showCancelButton />
+                            <SearchBar placeholder="搜索您关注的车型" onFocus={()=>{window.app.routerGoTo('/search')}}  showCancelButton />
                         </div>
                         <div className="model-list">
                             {

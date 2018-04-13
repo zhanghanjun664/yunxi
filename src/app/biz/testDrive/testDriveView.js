@@ -2,68 +2,10 @@ import React, {PropTypes, Component} from 'react'
 import {Link, IndexLink} from 'react-router';
 import { inject ,observer} from 'mobx-react';
 import Style from './TestDriveLess.less';
-import {cloneDeep, get} from 'lodash';
-import { InputItem ,TextareaItem ,ActionSheet ,Modal ,List ,Button ,PickerView,DatePickerView   } from 'antd-mobile';
+import {cloneDeep, get, extend} from 'lodash';
+import { InputItem ,TextareaItem ,ActionSheet ,Modal ,List ,Button ,PickerView,DatePickerView,Toast} from 'antd-mobile';
 import { StarRange } from 'widget';
-
-function closest(el, selector) {
-    const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
-    while (el) {
-        if (matchesSelector.call(el, selector)) {
-            return el;
-        }
-        el = el.parentElement;
-    }
-    return null;
-}
-
-const buyDate = [
-    [
-        {
-            label: '一个月内',
-            value: 1,
-        },
-        {
-            label: '三个月内',
-            value: 2,
-        },
-        {
-            label: '半年内',
-            value: 3,
-        },
-        {
-            label: '一年内',
-            value: 4,
-        },
-        {
-            label: '未定',
-            value: 5,
-        }
-    ]
-];
-const buyDateArr = buyDate[0].map(x=>x.label);
-const buyBuget = [
-    [
-        {
-            label: '10万元以内',
-            value: 1,
-        },
-        {
-            label: '10~15万',
-            value: 2,
-        },
-        {
-            label: '15~20万',
-            value: 3,
-        },
-        {
-            label: '20万以上',
-            value: 4,
-        },
-    ]
-];
-const buyBugetArr = buyBuget[0].map(x=>x.label);
-
+import PickerOption from 'pubBiz/pickerOption/PickerOption'
 @inject("testDrive")
 //将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
 @observer
@@ -80,12 +22,14 @@ class testDrice extends Component {
         apptimemodal:false, // 预约时间弹出 状态
         inputIndex:0,
         dealindex:0,
-
+        hasBind : false, // 是否绑定手机号
         selBuget: '',
         selBuyTime: '',
         formData: {
             vehicleModel:'',
+            vehicleModelName:'',
             dealer: '',
+            dealerName:'',
             memberName: '',
             memberMobile: '',
             appointmentTime:'',
@@ -108,7 +52,36 @@ class testDrice extends Component {
             return x<10?('0'+x):x;
         }
          
-        return `${full}-${getZero(month)}-${getZero(month)} ${getZero(hour)}:${getZero(min) }`;
+        return `${full}-${getZero(month)}-${getZero(date)} ${getZero(hour)}:${getZero(min) }`;
+    }
+
+    getCoordinate() {
+        let tmp = localStorage.getItem('myPosition');
+        if(tmp !==  null) {
+            let {longitude, latitude} = JSON.parse(tmp);
+            return {
+                longitude,
+                latitude
+            };
+        } else {
+            // 默认坐标
+            return {
+                longitude:23.10674,
+                latitude:113.440332,
+            }
+        }
+    }
+
+    getCityID() {
+        let tmp = localStorage.getItem('myCity');
+        if(tmp !==  null) {
+            let {postCode} = JSON.parse(tmp);
+            return {
+                cityId:postCode
+            };
+        } else {
+            return {}
+        }
     }
 
     componentDidMount() {
@@ -122,22 +95,43 @@ class testDrice extends Component {
 
             let params = location.query;
 
-            this.stores.getDetail(params);
+            if('itemId' in params) {
+                this.stores.getDetail(params, (x)=> {
+                    formData.vehicleModelName = x.name
+                });
+                formData.vehicleModel = params.itemId
+            }
+            if('dealer' in params) {
+                formData.dealer = params.dealer;
+            }
 
             formData.vehicleModel = params.itemId
-
         }
 
-        
-
-        this.stores.getDealer({
+        let parm2 = {
+            carId: formData.vehicleModel,
             pageSize:20,
             pageNum:1,
-            cityId:'440000000000',
-            longitude:40,
-            latitude:120,
             type:1
+        }
+
+        extend(parm2, this.getCityID(), this.getCoordinate())
+
+        this.stores.getDealer(parm2, x=>{
+            if(x.length > 0) {
+                formData.dealer = x[0].id;
+                formData.dealerName = x[0].dealerName;
+            }
         })
+
+        // 自动填充姓名和手机号，并判断是否要输入验证码
+        this.stores.getUserInfo('', (data) => {
+            formData.memberMobile = data.mobile;
+            formData.memberName = data.name
+            if(data.mobile) {
+                this.setState({hasBind:false})
+            }
+        });
     }
 
     showModal = key => (e) => {
@@ -147,21 +141,18 @@ class testDrice extends Component {
         });
     }
 
-    onClose = key => () => {
+    onClose = key => (flag) => {
         this.setState({
             [key]: false,
         });
-    }
 
-    onWrapTouchStart = (e) => {
-        // fix touch to scroll background page on iOS
-        if (!/iPhone|iPod|iPad/i.test(navigator.userAgent)) {
-            return;
+        if(flag) {
+
+            let {formData} = this.state;
+            this.onChange(formData.appointmentTime, 'appointmentTime')
         }
-        const pNode = closest(e.target, '.am-modal-content');
-        if (!pNode) {
-            e.preventDefault();
-        }
+
+
     }
 
     onFocus(value){
@@ -170,11 +161,19 @@ class testDrice extends Component {
 
     // 取验证码
     getVerCode(e) {
-        const params = {
-            mobile: this.state.formData.memberMobile
-        }
 
-        this.stores.getVerCode(params)
+        let mobile = this.state.formData.memberMobile;
+        let reg = /^1[3758]\d{9}$/g;
+
+        if(mobile!=='' && reg.test(mobile)) {
+            const params = {
+                mobile
+            }
+            this.stores.getVerCode(params)
+
+        } else {
+            Toast.fail('请输入正确的手机号', 1.5);
+        }
     }
 
 
@@ -189,13 +188,13 @@ class testDrice extends Component {
 
         if(key === 'budgetRange') {
             this.setState({
-                selBuget : buyBugetArr[value[0]]
+                selBuget : value[1]
             })
         }
 
         if(key === 'purchaseTime') {
             this.setState({
-                selBuyTime : buyDateArr[value[0]]
+                selBuyTime : value[1]
             })
         }
 
@@ -205,13 +204,14 @@ class testDrice extends Component {
     }
 
     // 设置选中的经销商ID
-    dealerSelect = (key, id) =>{
+    dealerSelect = (key, item) => {
 
         this.setState({dealindex:key});
 
         let { formData } = this.state;
         
-        formData.dealer = id;
+        formData.dealer = item.id;
+        formData.dealerName = item.dealerName;
 
         this.setState({formData})
         
@@ -225,42 +225,40 @@ class testDrice extends Component {
     onSubmit (e) {
         e.preventDefault();
         let {formData} = this.state;
+        let {isLoading } = this.stores.state;
         let formSub = cloneDeep(formData);
+
+        // 仅供测试用
+        formSub.verifyCode = this.stores.state.verCode
 
         formSub.budgetRange = formSub.budgetRange[0];
 
         formSub.purchaseTime = formSub.purchaseTime[0];
 
-        formSub.appointmentTime = this.getFormatDate(formSub.appointmentTime).replace(/-/g, '/') + ':00';
+        if(formSub.appointmentTime) {
+            formSub.appointmentTime = this.getFormatDate(formSub.appointmentTime).replace(/-/g, '/') + ':00';
+        }
 
-        this.stores.submitAppointMent(formSub)
+
+        if(!isLoading) {
+            this.stores.submitAppointMent(formSub, () => {
+                Toast.success('提交成功！', 2.5)
+            })
+        }
     }
-
 
     render() {
         let dealindex = this.state.dealindex;
         let inputIndex = this.state.inputIndex;
         let activityList = this.props.activityList ;
-        let carDetail = this.stores.state.modelDetail;
+        let { modelDetail} = this.stores.state;
+        let { formData } = this.state;
         return (
             <div>
-                <Modal
-                    className="ask-price-modal-page"
-                    visible={this.state.costmodal}
-                    transparent
-                    maskClosable={false}
-                    onClose={this.onClose('costmodal')}
-                    title="预算区间"
-                    footer={[{ text: '取消', onPress: () => { this.onClose('costmodal')(); } },{ text: '确定', onPress: () => { this.onClose('costmodal')(); } }]}
-                    wrapProps={{ onTouchStart: this.onWrapTouchStart }}
-                > <PickerView
-                            onChange={x => this.onChange(x, 'budgetRange')}
-                            data={buyBuget}
-                            value={this.state.formData.budgetRange}
-                            cascade={false}
-                        />
-                </Modal>
+                <PickerOption name="budgetRange" type="budget" visible={this.state.costmodal} onPickClose={this.onClose('costmodal')} onChange={(a, b) => this.onChange(a, b)}/>
 
+                <PickerOption name="purchaseTime" type="buytime" visible={this.state.buytimemodal} onPickClose={this.onClose('buytimemodal')} onChange={(a, b) => this.onChange(a, b)}/>
+                
                 <Modal
                     className="ask-price-modal-page"
                     visible={this.state.apptimemodal}
@@ -268,42 +266,22 @@ class testDrice extends Component {
                     maskClosable={false}
                     onClose={this.onClose('apptimemodal')}
                     title="预约时间"
-                    footer={[{ text: '取消', onPress: () => { this.onClose('apptimemodal')(); } },{ text: '确定', onPress: () => { this.onClose('apptimemodal')(); } }]}
-                    wrapProps={{ onTouchStart: this.onWrapTouchStart }}
+                    footer={[{ text: '取消', onPress: () => { this.onClose('apptimemodal')(false); } },{ text: '确定', onPress: () => { this.onClose('apptimemodal')(true); } }]}
                 > <DatePickerView
                     onChange={x => this.onChange(x, 'appointmentTime')}
                     mode="datetime"
                     minDate={(x=> {let m = new Date(x); m.setHours(m.getHours()+1);m.setMinutes(0); return m})(Date.now())}
                     maxDate={(x=> {let m = new Date(x); m.setFullYear(m.getFullYear()+1); return m})(Date.now())}
                     minuteStep={20}
-                    value={this.state.formData.appointmentTime}
+                    value={formData.appointmentTime} 
                     />
                 </Modal>
-
-                <Modal
-                    className="ask-price-modal-page"
-                    visible={this.state.buytimemodal}
-                    transparent
-                    maskClosable={false}
-                    onClose={this.onClose('buytimemodal')}
-                    title="购车时间"
-                    footer={[{ text: '取消', onPress: () => { this.onClose('buytimemodal')(); } },{ text: '确定', onPress: () => { this.onClose('buytimemodal')(); } }]}
-                    wrapProps={{ onTouchStart: this.onWrapTouchStart }}
-                >
-                        <PickerView
-                            onChange={ x => this.onChange(x, 'purchaseTime') }
-                            value={this.state.formData.purchaseTime}
-                            data={buyDate}
-                            cascade={false}
-                        />
-                </Modal>
-
                 <div className="ask-price-page">
                     <div className="fill-info">
                         <div className="fill-form">
                             <div className={inputIndex == 3 ? 'selected cost-time-range' : 'cost-time-range'} data-index="3" onClick={this.showModal('modal')}>
                                 <span className="title required"><span>*</span>车型</span>
-                                <input className="cost-selected" value={carDetail.name} onClick={e=>this.gotoSelect(e)}/>
+                                <input className="cost-selected" value={modelDetail.name} onClick={e=>this.gotoSelect(e)}/>
                                 <i className="arrow"></i>
                             </div>
                             <InputItem
@@ -311,6 +289,7 @@ class testDrice extends Component {
                                 ref={el => this.labelFocusInst = el}
                                 onClick={()=>this.onFocus(0)}
                                 className={inputIndex == 0 ? 'selected' : ''}
+                                value={formData.memberName}
                                 onChange={val => this.onChange(val, 'memberName') }
                                 data-index="0"
                             ><div className="required" onClick={() => this.labelFocusInst.focus()}><span>*</span>姓名</div></InputItem>
@@ -320,10 +299,13 @@ class testDrice extends Component {
                                 ref={el => this.labelFocusInst = el}
                                 data-index="1"
                                 onClick={()=>this.onFocus(1)}
+                                value={formData.memberMobile}
                                 onChange={val => this.onChange(val, 'memberMobile') }
                                 className={inputIndex == 1 ? 'selected' : ''}
                             ><div className="required" onClick={(e) => { this.labelFocusInst.focus(); this.onFocus()} }><span>*</span>手机号码</div></InputItem>
+                            {this.state.hasBind ?'':
                             <InputItem
+                                className={inputIndex == 2 ? 'selected' : ''}
                                 placeholder="请输入验证码"
                                 ref={el => this.labelFocusInst = el}
                                 onClick={()=>this.onFocus(2)}
@@ -332,12 +314,13 @@ class testDrice extends Component {
                                 data-index="2"
                                 value={this.stores.state.verCode}
                                 onChange={val => this.onChange(val, 'verifyCode') }
-                                className={inputIndex == 2 ? 'selected' : ''}
-                            ><div className="code" onClick={() => this.labelFocusInst.focus()}>验证码<span className="get-code" onClick={x=>this.getVerCode(x)}>获取验证码</span></div></InputItem>
+                            >
+                            <div className="code" onClick={() => this.labelFocusInst.focus()}>验证码<span className="get-code" onClick={x=>this.getVerCode(x)}>获取验证码</span></div>
+                            </InputItem>}                
                             <p className="fill-more">填写更多信息，以便为您更好的规划试驾过程</p>
                             <div className={inputIndex == 8 ? 'selected cost-time-range' : 'cost-time-range'} data-index="8" onClick={this.showModal('apptimemodal')}>
                                 <span className="title">预计试驾时间</span>
-                                <input className="cost-selected" id="time" value={this.getFormatDate(this.state.formData.appointmentTime)}/>
+                                <input className="cost-selected" id="time" value={this.getFormatDate(formData.appointmentTime)}/>
                                 <i className="arrow"></i>
                             </div>
                             <div className={inputIndex == 3 ? 'selected cost-time-range' : 'cost-time-range'} data-index="3" onClick={this.showModal('costmodal')}>
@@ -364,24 +347,25 @@ class testDrice extends Component {
                         <div className="select-type">
                             <p>经销商:<span>共<i>{ this.stores.state.dealerList.length}</i>家经销商</span></p>
                             <div className="address">
-                                <i></i>广州市
+                                <i className="iconfont icon-dizhi"></i>广州市
                             </div>
                         </div>
                         <div className="ask-price-page-dealer-list">
                             <ul>
                                 {
                                     this.stores.state.dealerList.map((item, index) => {
-                                        return <li key={item.id} onClick={() => this.dealerSelect(index, item.id)}
-                                                   className={dealindex == index ? 'selected' : ''}>
-                                                    <span className="dealer-name">{item.dealerName}</span>
-                                                    <span className="dealer-star">
-                                                        <StarRange number={item.score} />
-                                                    </span>
-                                                    <p className="dealer-tel"><i></i>{item.salePhone}</p>
-                                                    <p className="dealer-address"><i></i>{item.shops[0].address}<span>&lt;{(item.shops[0].distance/1000).toFixed(2)}km</span>
-                                                    </p>
-                                                    <p className="dealer-test"><i></i>体验上门试驾</p>
-                                                </li>
+                                        return <li key={item.id} onClick={() => this.dealerSelect(index, item)}
+                                                className={dealindex == index ? 'selected' : ''}>
+                                                <span className="dealer-name">{item.dealerName}</span>
+                                                <span className="dealer-star">
+                                                    <StarRange number={item.score} />
+                                                </span>
+                                                <p className="dealer-tel"><i className="iconfont icon-dianhua"></i>{item.salePhone}</p>
+                                                {item.shops.length > 0?
+                                                <p className="dealer-address"><i className="iconfont icon-dizhi"></i>{item.shops[0].address}<span>&lt;{(item.shops[0].distance/1000).toFixed(2)}km</span>
+                                                </p>:''}
+                                                <p className="dealer-test"><i className="iconfont icon-Checkbox1"></i>体验上门试驾</p>
+                                            </li>
                                     })
                                 }
                             </ul>
@@ -389,7 +373,7 @@ class testDrice extends Component {
                     </div>
 
                     <div className="submit-btn">
-                        <a href="#" onClick={e=>this.onSubmit(e)}>提 交</a>
+                        <Button  onClick={e=>this.onSubmit(e)} loading={this.stores.state.isLoading}>提 交</Button>
                         <p className="agree"><i></i>点击提交则视为同意<span>《福特购个人信息保护声明》</span></p>
                         <p className="have-tel"><i></i>提交后，经销商会尽快回访，请留意接听电话</p>
                     </div>

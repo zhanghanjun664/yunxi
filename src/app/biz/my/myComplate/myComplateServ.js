@@ -1,18 +1,28 @@
-import React, { PropTypes, Component } from 'react';
 import Request from "util/Request";
 
 export default class {
-    static MockServ() {
+    static getVerifyCode(params) {
         return Request({
-            url: "http://192.168.33.11:8004/mocking/caf/api/v1/caf/jdcloud/item/car/list-by-page",
-            type: "GET"
+            url : 'verify/code/get',
+            data:params,
+            type:'GET'
         })
     }
-    static testServ2() {
+
+    static getMemberinfo(params) {
         return Request({
-            url: "yundt/mgmt/item/list-by-page",
-            type: "GET",
-            data: {xx: 1, bb: 2}
+            url : 'members/info',
+            data: params,
+            type:'GET'
+        })
+    }
+    
+
+    static submitBind(params) {
+        return Request({
+            url : 'caf/jdcloud/member',
+            data: params,
+            type:'POST'
         })
     }
 };

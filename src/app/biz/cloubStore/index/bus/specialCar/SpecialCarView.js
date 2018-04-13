@@ -26,15 +26,15 @@ class SpecialCar extends Component{
     goToDetail = (e) => {
         
         let itemCode = e.currentTarget.getAttribute('carid') ;
-        let itemId = '1171328588805309440' ;
+        let itemId = '1172240777573572608' ;
         
         //使用此方法可以传递任意数据到下一个页面
         //通过this.prop.location.state 获取
         let path = {
             pathname:`/cloubStore/carModelDetail`,
             query:{
-                "itemCode":itemCode,
-                itemId
+                itemId,
+                'dealerId':this.stores.state.dealerId
             }
         }
 
@@ -47,7 +47,7 @@ class SpecialCar extends Component{
         
         return(
 
-            <MaskTitle className='specialCar' iconClass='icon icon-discount'  titleName='特惠车专区'>
+            <MaskTitle className='specialCar' iconClass='icon icon-discount'  titleName='超值好车'>
                 <div className="product-list">
                 
                 {

@@ -30,9 +30,7 @@
     align-items: center;
     height: 80px;
     border-bottom: 1px solid #e6e6e6;
-    >div{
-      margin-right: 30px;
-    }
+    
     .iconBox{
       .iconfont{
         font-size: 36px;
@@ -45,6 +43,14 @@
       &>div:nth-of-type(2){
         color: #FD5C0E;
       }
+    }
+    .am-list-content{
+      >div{
+        margin-right: 30px;
+        font-size: 28px;
+      }
+      display: flex;
+      align-items: center;
     }
   }
   .active{
@@ -67,14 +73,22 @@
     width: 100%;
     padding: 0 30px;
     background-color: #fff;
-    div{
+    .ac_footerBtn{
       width: 160px;
+      height: 60px;
       line-height: 60px;
       color: #fff;
       background-color: #FD5C0E;
       text-align: center;
       border-radius: 10px;
       font-size: 28px;
+      span{
+        line-height: 1;
+      }
     }
+  }
+  // radio勾勾图标
+  .am-radio-inner{
+    display: none;
   }
 }

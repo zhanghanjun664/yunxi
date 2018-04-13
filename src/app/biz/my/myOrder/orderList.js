@@ -3,6 +3,8 @@
  */
 import React, { PropTypes, Component } from 'react';
 import { RefreshListView } from 'widget';
+import { inject, observer } from 'mobx-react';
+import { Toast } from 'antd-mobile';
 
 @inject('myOrder')
 @observer
@@ -33,9 +35,7 @@ class OrderList extends Component {
     };
 
     let { data } = await this.props.fetchData(params);
-    console.log(data)
     success(data.list, data.pageNum, data.total);
-    error(e)
 
   }
   // fetchData = (pageNum, success, error) => {
@@ -50,6 +50,10 @@ class OrderList extends Component {
   //   })
 
   // }
+
+  noOpen(){
+    Toast.info('此功能暂未开放')
+  }
 
 
   renderRow = (rowData, sectionID, rowID) => {
@@ -88,7 +92,7 @@ class OrderList extends Component {
               <span className='iconfont icon-dizhi'></span>
               <span>重庆市萝岗区科丰路31号花卉阿萨德</span>
             </div>
-            <div className='mo_listInfo_map'>
+            <div className='mo_listInfo_map' onClick={this.noOpen.bind(this)}>
               <span className='iconfont icon-ditu'></span>
               <span>地图</span>
             </div>
@@ -113,7 +117,7 @@ class OrderList extends Component {
 
         </div>
 
-        <div className='mo_btnBox'>
+        <div className='mo_btnBox' onClick={this.noOpen.bind(this)}>
           <div>查看详情</div>
           <div className='mo_goPay'>去支付</div>
         </div>

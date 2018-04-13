@@ -4,6 +4,7 @@ import { Carousel, WhiteSpace, WingBlank } from 'antd-mobile';
 
 import AppServ from './InformationServ' ;
 
+import IndexUtil from './../../../global/IndexUtil' ;
 import './InformationLess.less' ;
 import { inject, observer } from 'mobx-react';
 /**
@@ -35,35 +36,43 @@ class Information extends Component{
         
         let {informationList} = this.stores.state ;    
         //防止Carousel内没有list的时候占位100的高度
-        if(informationList.length===0)return;
-        return(
-            <Carousel vertical
-                            dots={false}
-                            dragging={false}
-                            swiping={false}
-                            autoplay
-                            infinite>
-                        
-                        
-                        {
-                           informationList.map((val,i)=>{
-                               //val.redirectUrl 点击跳转的页面
-                               return(
-                                <div 
-                                    key={val.id} 
-                                    className="v-item ellipsis"
-                                    onClick={window.app.routerGoTo.bind(this,val.redirectUrl)}
-                                >
-                                    {/* <span className='tag'>围观</span> */}
-                                    <span>{val.title}</span>
-                                </div>
-                               ) ;
-                           })
-                           
+        if(informationList.length===0){
+            return(
+                <span>暂无消息</span>
+            )
+        }else{
+            return(
+                <Carousel vertical
+                                dots={false}
+                                dragging={false}
+                                swiping={false}
+                                autoplay
+                                infinite>
                             
-                        }
-                    </Carousel>
-        )
+                            
+                            {
+                               informationList.map((val,i)=>{
+                                   //val.redirectUrl 点击跳转的页面
+                                   return(
+                                    <div 
+                                        key={val.id} 
+                                        className="v-item ellipsis"
+                                        onClick={e=>{
+                                            IndexUtil.toUrl(val.redirectUrl)                                      
+                                            //window.app.routerGoTo(val.redirectUrl)
+                                        }}
+                                    >
+                                        {/* <span className='tag'>围观</span> */}
+                                        <span>{val.title}</span>
+                                    </div>
+                                   ) ;
+                               })
+                               
+                                
+                            }
+                        </Carousel>
+            )
+        }
     }
 
     render(){
