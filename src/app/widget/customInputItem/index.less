@@ -1,0 +1,80 @@
+@import "../../assets/css/commonCss";
+
+.form-input-widget.am-list-item.am-input-item {
+  height: auto;
+  border: 1px solid @color_line;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  &.active {
+    border-color: #0F68B0 ;
+  }
+
+  &.form-input-vertical, &.form-input-horizontal {
+    .am-list-line {
+      .am-input-label {
+        font-size: 24px;
+        color: #0F68B0;
+        line-height: 34px;
+      }
+      .necessary:after {
+        content: '*';
+        color: @color_orange;
+      }
+    }
+    .am-input-control {
+      font-size: 25px;
+      width: 100%;
+      input {
+        font-size: 28px;
+      }
+    }
+  }
+
+  &.form-input-vertical {
+    .am-list-line {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 14px 0px;
+      .am-input-label {
+        width: 100%;
+      }
+    }
+  }
+
+  &.form-input-horizontal {
+    min-height: 80px;
+    .am-input-label {
+      width: auto;
+      margin-right: 20px;
+      line-height: 28px;
+    }
+  }
+
+  &.form-code {
+    .am-list-line {
+      flex-direction: row-reverse;
+    }
+    .am-input-label {
+      font-size: 28px;
+      color: @color_orange;
+      width: auto;
+      margin-right: 0px;
+    }
+    .am-input-control {
+      font-size: 25px;
+      width: 100%;
+      margin-bottom: 3px;
+      input {
+        font-size: 28px;
+      }
+    }
+  }
+
+  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #999;
+    font-size: 24px;
+  }
+
+
+}

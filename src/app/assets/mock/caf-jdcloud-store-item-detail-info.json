@@ -1,0 +1,47 @@
+{
+  "data": {
+    "itemCode": "128022556482",
+    "introduce": "<div>富文本框类型的介绍</div>",
+    "propGroups": [
+      {
+        "groupId": 1,
+        "name": "基本参数",
+        "props": [
+          {
+            "id": 1,
+            "name": "厂家指导价",
+            "value": "￥15.58万"
+          },
+          {
+            "id": 2,
+            "name": "乘员人数（区间）（个）",
+            "value": "6"
+          },
+          {
+            "id": 3,
+            "name": "变速箱",
+            "value": "6挡手自一体"
+          }
+        ]
+      },
+      {
+        "groupId": 2,
+        "name": "车身",
+        "props": [
+          {
+            "id": 3,
+            "name": "能源类型",
+            "value": "锂电池"
+          },
+          {
+            "id": 4,
+            "name": "最大功率",
+            "value": "666666W"
+          }
+        ]
+      }
+    ]
+  },
+  "resultCode": 0,
+  "resultMsg": "success"
+}

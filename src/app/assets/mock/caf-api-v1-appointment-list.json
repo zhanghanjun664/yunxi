@@ -1,0 +1,221 @@
+{
+  "resultCode": 0,
+  "resultMsg": "success",
+  "data": {
+    "total": 2,
+    "pages": 1,
+    "pageNum": 1,
+    "pageSize": 10,
+    "list": [
+      {
+        "appointmentId": 180122001,
+        "appointmentNo": 9527,
+        "memberName": "刘备",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 2,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      },
+      {
+        "appointmentId": 180122001,
+        "appointmentNo": 9527,
+        "memberName": "刘备",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 2,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      },
+      {
+        "appointmentId": 180122002,
+        "appointmentNo": 9528,
+        "memberName": "刘备sa",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 0,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      },
+      {
+        "appointmentId": 180122001,
+        "appointmentNo": 9527,
+        "memberName": "刘备r",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 2,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      },
+      {
+        "appointmentId": 180122002,
+        "appointmentNo": 9528,
+        "memberName": "刘备q",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 0,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      },
+      {
+        "appointmentId": 180122001,
+        "appointmentNo": 9527,
+        "memberName": "刘q备",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 2,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      },
+      {
+        "appointmentId": 180122002,
+        "appointmentNo": 9528,
+        "memberName": "刘s备",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 0,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      },
+      {
+        "appointmentId": 180122001,
+        "appointmentNo": 9527,
+        "memberName": "刘备as",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 2,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      },
+      {
+        "appointmentId": 180122002,
+        "appointmentNo": 9528,
+        "memberName": "刘备ca",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 0,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      },
+      {
+        "appointmentId": 180122001,
+        "appointmentNo": 9527,
+        "memberName": "刘备d",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 2,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      },
+      {
+        "appointmentId": 180122002,
+        "appointmentNo": 9528,
+        "memberName": "刘备a",
+        "memberMobile": 13556139969,
+        "vehicleModel": "福特福克斯 三厢 EcoBoost 1.5T 自动旗舰型",
+        "createTime": "2018-01-22 10:00:00",
+        "arrivalTime": "2018-03-26 10:10:00",
+        "appointmentType": 1,
+        "appointmentItem": 1,
+        "appointmentStatus": 0,
+        "dealer": {
+          "name": "广州长安福特4S店",
+          "phone": "021-12345678",
+          "address": "重庆市萝岗区科丰路31号",
+          "lon": 34.3432432,
+          "lat": 57.3432232
+        }
+      }
+    ]
+  }
+}

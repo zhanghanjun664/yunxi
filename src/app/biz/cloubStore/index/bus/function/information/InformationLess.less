@@ -1,0 +1,41 @@
+
+@title-width:100px;
+@title-margin:2.7% ;
+
+@more-width:60px;
+
+.Information{
+    display: flex ;
+    justify-content: space-between;
+    align-items: center ;
+    padding: 20px 20.25px 0px;
+    font-size: 24px;
+    .Information-title{
+
+        width: @title-width ;
+        //margin: 0 @title-margin ;
+        color: #0F68B0 ;
+        
+    }
+    .Information-carousel{
+        flex: 1 ;
+        margin: 0 20px 0 20px ;
+        //width: calc(~"100% - @{title-width} - @{title-margin}*4 - @{more-width}") ;
+        .tag{
+            color: #FD5C0E;
+            border: 1px solid #FD5C0E ;
+            padding: 0 4px;
+            margin-right: 8px;
+        }
+    }
+    .Information-sep{
+        width: 1px;
+        height: 20px;
+        background: #e6e6e6 ;
+        margin-right: 20px;
+    }
+    .Information-more{
+        width:@more-width ;
+        //margin: 0 @title-margin ;
+    }
+}

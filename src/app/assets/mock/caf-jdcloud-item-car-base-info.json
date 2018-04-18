@@ -1,0 +1,217 @@
+{
+  "data": {
+    "itemId": 13245,
+    "name": "福克斯 2018款 三厢 EcoBoost 180 自动旗舰型",
+    "adWord": "重庆安福大石坝店冬季送温暖活动，直降5000",
+    "catalogId": 132,
+    "brandId": 132,
+    "tags": "1.5T涡轮增压,紧凑型轿车,自动变速箱,无钥匙启动,全景天窗,17寸轮毂",
+    "skus": [
+    {
+      "id": 453,
+      "officialSellPrice": 178000,
+      "sellerSellPrice": 156000,
+      "adWord": "重庆安福大石坝店冬季送温暖活动，直降5000",
+      "props": [
+      {
+        "nameId": 1,
+        "name": "排量",
+        "valueId": 1,
+        "value": "3.5L"
+      },
+      {
+        "nameId": 3,
+        "name": "车身",
+        "valueId": 998,
+        "value": "2.0m"
+      },
+      {
+        "nameId": 2,
+        "name": "颜色",
+        "valueId": 106,
+        "value": "绿色"
+      }],
+      "cmpMedias": [
+      {
+        "id": 1,
+        "fileType": 1,
+        "fileUrl": "assets/images/productDetail/baseInfo.png"
+      },
+      {
+        "id": 2,
+        "fileType": 2,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 3,
+        "fileType": 3,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 4,
+        "fileType": 4,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 5,
+        "fileType": 5,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      }]
+    },
+    {
+      "id": 456,
+      "officialSellPrice": 10000,
+      "sellerSellPrice": 10000,
+      "adWord": "重庆安福大石坝店冬季送温暖活动，直降5000",
+      "props": [
+      {
+        "nameId": 1,
+        "name": "排量",
+        "valueId": 8,
+        "value": "1.5L"
+      },
+      {
+        "nameId": 3,
+        "name": "车身",
+        "valueId": 997,
+        "value": "2.5m"
+      },
+      {
+        "nameId": 2,
+        "name": "颜色",
+        "valueId": 107,
+        "value": "红色"
+      }],
+      "cmpMedias": [
+      {
+        "id": 1,
+        "fileType": 1,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 2,
+        "fileType": 2,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 3,
+        "fileType": 3,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 4,
+        "fileType": 4,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 5,
+        "fileType": 5,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      }]
+    },
+    {
+      "id": 458,
+      "officialSellPrice": 178000,
+      "sellerSellPrice": 156000,
+      "adWord": "重庆安福大石坝店冬季送温暖活动，直降5000",
+      "props": [
+      {
+        "nameId": 1,
+        "name": "排量",
+        "valueId": 1,
+        "value": "3.5L"
+      },
+      {
+        "nameId": 3,
+        "name": "车身",
+        "valueId": 998,
+        "value": "2.0m"
+      },
+      {
+        "nameId": 2,
+        "name": "颜色",
+        "valueId": 107,
+        "value": "红色"
+      }],
+      "cmpMedias": [
+      {
+        "id": 1,
+        "fileType": 1,
+        "fileUrl": "assets/images/productDetail/baseInfo.png"
+      },
+      {
+        "id": 2,
+        "fileType": 2,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 3,
+        "fileType": 3,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 4,
+        "fileType": 4,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 5,
+        "fileType": 5,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      }]
+    },
+    {
+      "id": 459,
+      "officialSellPrice": 178000,
+      "sellerSellPrice": 156000,
+      "adWord": "重庆安福大石坝店冬季送温暖活动，直降5000",
+      "props": [
+      {
+        "nameId": 1,
+        "name": "排量",
+        "valueId": 1,
+        "value": "3.5L"
+      },
+      {
+        "nameId": 3,
+        "name": "车身",
+        "valueId": 999,
+        "value": "3.0m"
+      },
+      {
+        "nameId": 2,
+        "name": "颜色",
+        "valueId": 109,
+        "value": "橙色"
+      }],
+      "cmpMedias": [
+      {
+        "id": 1,
+        "fileType": 1,
+        "fileUrl": "assets/images/productDetail/baseInfo.png"
+      },
+      {
+        "id": 2,
+        "fileType": 2,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 3,
+        "fileType": 3,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 4,
+        "fileType": 4,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      },
+      {
+        "id": 5,
+        "fileType": 5,
+        "fileUrl": "https://avatar.csdn.net/C/9/9/3_qq_33451004.jpg"
+      }]
+    }]
+  },
+  "resultCode": 0,
+  "resultMsg": "success"
+}

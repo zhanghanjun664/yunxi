@@ -1,0 +1,85 @@
+@import "~assets/css/commonCss";
+.search-page {
+    width: 100%;
+    .search-item {
+        padding: 12px 45px;
+        background: #F4F5F7;
+        border-radius: 10px;
+    }
+    .title {
+        .search-box {
+            padding: 20px 30px;
+            height: 120px;
+            font-size: 30px;
+            background: #fff;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 12px 0 rgba(224, 224, 224, 0.50);
+            .am-search {
+                height: 100%;
+                padding: 0 1px;
+                border-radius: 10px;
+                background-color: @color_line;
+                .am-search-value,
+                .am-search-input {
+                    height: 78px;
+                    line-height: 78px;
+                    border-radius: 10px;
+                    padding-left: 20px;
+                    input[type="search"] {
+                        padding: 0 0.28rem 0 0.2rem;
+                    }
+                    .am-search-synthetic-ph {
+                        line-height: 72px;
+                        text-align: left;
+                        width: 100% !important;
+                        padding-left: 0;
+                        .am-search-synthetic-ph-icon {
+                            width: 40px;
+                            height: 40px;
+                            float: right;
+                            background-size: 100%;
+                            margin: 20px;
+                        }
+                    }
+                }
+            }
+            .am-search-synthetic-ph-placeholder,
+            am-search-cancel {
+                font-size: 24px;
+                padding-left: 20px;
+            }
+            .am-search-cancel-show {
+                display: none;
+            }
+        }
+    }
+    .title,
+    .content {
+        background: #fff;
+    }
+    .content {
+        height: 100%;
+        margin-top: 30px;
+        padding: 20px 30px;
+        .search-history-head {
+            margin-bottom: 30px;
+            font-size: 30px;
+            color: @color_dark_grey;
+        }
+        .search-history-list {
+            margin-bottom: 20px;
+        }
+        .search-history-item {
+            display: inline-block;
+            margin-bottom: 20px;
+            margin-right: 30px;
+            padding: 12px 45px;
+            background: #F4F5F7;
+            border-radius: 10px;
+            font-family: PingFangSC-Light;
+            font-size: 28px;
+            color: #666666;
+            text-align: center;
+        }
+    }
+}

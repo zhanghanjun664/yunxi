@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "imgUrl": "assets/images/home/shichengshijia.png",
+      "id": 1,
+      "redirectUrl": "/testdrive",
+      "name": "预约试驾",
+      "type":"1"
+    },
+    {
+      "imgUrl": "assets/images/home/xundijia.png",
+      "id": 2,
+      "redirectUrl": "/askprice",
+      "name": "查询底价",
+      "type":"1"
+    },
+    {
+      "imgUrl": "assets/images/home/kefuzhongxin.png",
+      "id": 3,
+      "redirectUrl": "/advanced/advanced?action=table&token=1596945391&lang=zh_CN",
+      "name": "在线客服",
+      "type":"1"
+    },
+    {
+      "imgUrl": "assets/images/home/gouchejisuanqi.png",
+      "id": 4,
+      "redirectUrl": "/advanced/advanced?action=table&token=1596945391&lang=zh_CN",
+      "name": "金融方案",
+      "type":"1"
+    }
+    
+  ],
+  "resultCode": 0,
+  "resultMsg": "success"
+}

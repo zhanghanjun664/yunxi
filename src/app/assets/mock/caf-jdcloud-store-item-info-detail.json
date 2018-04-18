@@ -1,0 +1,78 @@
+{
+  "data": {
+    "itemCode": "128022556482",
+    "introduce": "富文本",
+    "propGroups": [
+      {
+        "groupId": 1,
+        "name": "基本参数",
+        "props": [
+          {
+            "id": 1,
+            "name": "厂商",
+            "value": "长安福特"
+          },
+          {
+            "id": 1,
+            "name": "厂商",
+            "value": "长安福特"
+          }
+        ]
+      },
+      {
+        "groupId": 2,
+        "name": "车身",
+        "props": [
+          {
+            "id": 3,
+            "name": "能源类型",
+            "value": "锂电池"
+          },
+          {
+            "id": 4,
+            "name": "最大功率",
+            "value": "666666W"
+          }
+        ]
+      },
+      {
+        "groupId": 2,
+        "name": "卓越性能",
+        "props": [
+          {
+            "id": 3,
+            "name": "能源类型",
+            "value": "锂电池"
+          },
+          {
+            "id": 4,
+            "name": "最大功率",
+            "value": "666666W"
+          },
+          {
+            "id": 3,
+            "name": "变速箱",
+            "value": "6挡于一体"
+          },
+          {
+            "id": 4,
+            "name": "排量（L）",
+            "value": "1.5"
+          },
+          {
+            "id": 3,
+            "name": "最高车速（km/h）",
+            "value": "260"
+          },
+          {
+            "id": 4,
+            "name": "综合工况油耗（L/100km）",
+            "value": "7.2"
+          }
+        ]
+      }
+    ]
+  },
+  "resultCode": 0,
+  "resultMsg": "success"
+}

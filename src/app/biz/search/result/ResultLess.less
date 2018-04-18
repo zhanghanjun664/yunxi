@@ -1,0 +1,78 @@
+@import "../../../assets/css/commonCss";
+.search-result {
+    width: 100%;
+    .title {
+        height: 185px;
+        background: #fff;
+        box-shadow: 0 1px 1px 0 rgba(230, 230, 230, 0.50);/*no*/
+        margin-bottom: 30px;
+        .search-box {
+            padding: 20px 30px;
+            height: 120px;
+            font-size: 30px;
+            .am-search {
+                height: 100%;
+                padding: 0 1px;
+                border-radius: 10px;
+                background-color: @color_line;
+                .am-search-value,
+                .am-search-input {
+                    height: 78px;
+                    line-height: 78px;
+                    border-radius: 10px;
+                    padding-left: 20px;
+                    input[type="search"] {
+                        padding: 0 0.28rem 0 0.2rem;
+                    }
+                    .am-search-synthetic-ph {
+                        line-height: 72px;
+                        text-align: left;
+                        width: 100% !important;
+                        padding-left: 0;
+                        .am-search-synthetic-ph-icon {
+                            width: 40px;
+                            height: 40px;
+                            float: right;
+                            background-size: 100%;
+                            margin: 20px;
+                        }
+                    }
+                }
+            }
+            .am-search-synthetic-ph-placeholder,
+            am-search-cancel {
+                font-size: 24px;
+                padding-left: 20px;
+            }
+            .am-search-cancel-show {
+                display: none;
+            }
+        }
+        .search-result-tabs {
+            .am-tabs-default-bar-tab {
+                font-size: 28px;
+                color: #666666;
+                box-shadow: 0 1px 1px 0 rgba(230,230,230,0.50);/*no*/
+            }
+            .am-tabs-default-bar-tab-active {
+                color: @color_orange;
+                position: relative;
+                .changAnt_tabs {
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0px;
+                        right: 50%;
+                        transform: translateX(50%);
+                        width: 72px;
+                        height: 3px; /*no*/
+                        background-color: @color_orange;
+                    }
+                }
+            }
+            .am-tabs-default-bar-underline {
+                display: none;
+            }
+        }
+    }
+}

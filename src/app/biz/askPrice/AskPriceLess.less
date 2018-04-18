@@ -1,0 +1,341 @@
+@import "../../assets/css/commonCss";
+.ask-price-page {
+  p {
+    //font-family: PingFangSC-Regular;
+    //font-size: 30px;
+    //color: #333333;
+    //letter-spacing: -0.38px;
+    //line-height: 36px;
+  }
+  i {
+    display: inline-block;
+  }
+
+  .cost-selected{
+    border: 0;
+    font-size: 28px;
+    margin-left:20px;
+    display: inline-block;
+    color:#666;
+    flex:1;
+  }
+  //意向车型
+  .aim-model {
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+    padding:30px 30px 10px;
+    background: white;
+    margin-bottom: 30px;
+    p {
+      margin-bottom: 23px;
+      overflow: hidden;
+      span{
+        font-size: 28px;
+        font-family: PingFangSC-Light;
+      }
+      a{
+        font-size: 28px;
+        color: @color_orange;
+        line-height: 36px;
+        float: right;
+      }
+    }
+  }
+
+  //选择经销商
+  .select-dealer{
+    padding:20px 30px;
+    background: white;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+    margin-bottom: 30px;
+    //标题
+    .select-type{
+      overflow: hidden;
+      margin-bottom: 30px;
+      p{
+        float: left;
+        // line-height: 60px;
+        height: 60px;
+        line-height: 50px;
+        font-size: 30px;
+      }
+      .type{
+        float: right;
+        span{
+          display: inline-block;
+          font-size: 24px;
+          line-height: 30px;
+          padding:14px 34px;
+          i{
+            font-size: 24px;
+            margin-right: 10px;
+            color: #333;
+          }
+          &.selected{
+            border: 1px solid @color_orange;
+            color: @color_orange;
+          }
+        }
+        .distance{
+          border: 1px solid @color_line;
+          border-radius: 10px 0 0 10px;
+          &.selected{
+            border-radius: 10px 0 0 10px;
+            i{
+              color: @color_orange;
+            }
+          }
+        }
+        .score{
+          border: 1px solid @color_line;
+          border-radius: 0 10px 10px 0;
+          &.selected{
+            border-radius: 0 10px 10px 0;
+            i{
+              color: @color_orange;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //填写信息
+  .fill-info{
+    background: #FFFFFF;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+    .fill-title{
+      font-size: 30px;
+      padding: 22px 30px;
+      box-shadow: inset 0 -1px 0 0 @color_line;
+    }
+    .fill-form{
+      padding: 30px;
+      .am-list-item{
+        border: 1px solid @color_line;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        &.selected{
+          border: 1px solid #0F68B0;
+        }
+        &.am-textarea-item{
+          //min-height: 160px;
+        }
+        &.am-input-item{
+          height: 80px;
+          padding-left: 20px;
+          .am-input-control{
+            line-height: 0.36rem;
+            input{
+              color: @color_dark_grey;
+              font-size: 0.28rem;
+            }
+          }
+        }
+        .am-input-label,.am-textarea-label{
+          font-size: 24px;
+          color: #0F68B0;
+          margin-right: 15px;
+          &.am-input-label-5{
+            width: 107px;
+          }
+          &.am-textarea-label{
+            width: 107px;
+            margin-right: 0;
+          }
+        }
+        .required{
+          display: inline-block;
+          position: relative;
+          span {
+            color: @color_orange;
+            position: absolute;
+            right: -10px;
+          }
+        }
+        .code{
+          overflow: hidden;
+          .get-code{
+            cursor: pointer;
+            font-size: 28px;
+            color: @color_orange;
+            position: absolute;
+            right: 20px;
+          }
+        }
+      }
+      .cost-time-range{
+        font-size: 24px;
+        color: #0F68B0;
+        padding: 22px 20px;
+        border: 1px solid @color_line;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        position: relative;
+        .arrow{
+          display: inline-block;
+          width: 22px;
+          height:20px;
+          background: url("../../assets/images/askPrice/down.png") no-repeat center;
+          position: absolute;
+          top:34px;
+          right:30px;
+          background-size: 100%;
+        }
+      }
+      .fill-tips{
+        color: @color_orange;
+      }
+    }
+  }
+
+  //提交按钮
+  .submit-btn{
+    text-align: center;
+    padding: 30px 60px 40px;
+    .sub-span{
+      color: #FFFFFF;
+      background: @color_orange;
+      border-radius: 10px;
+      box-shadow: 0 18px 18px 0 rgba(253, 92, 14, 0.3);
+    }
+    p{
+      text-align: left;
+      color: @color_light_grey;
+      margin-top: 30px;
+      line-height: 26px;
+      i{
+        display: inline-block;
+        width: 26px;
+        height:26px;
+        background: url("../../assets/images/askPrice/checkbox_on.png");
+        background-size: 100%;
+        margin-right: 12px;
+        vertical-align: bottom;
+      }
+      span{
+        color: #0F68B0;
+      }
+    }
+  }
+}
+
+//查看更多
+.ask-price-page-popup-list{
+  text-align: left;
+  padding-top: 30px;
+  .ask-price-page-title{
+    font-size: 30px;
+    color: @color_dark_grey;
+    margin-bottom: 30px;
+    padding: 0 30px;
+  }
+  .ask-price-page-dealer-list{
+    height: 804px;
+    overflow: scroll;
+    margin-bottom: 30px;
+    padding: 0 30px;
+  }
+  .ask-price-page-grey{
+    height: 10px;
+    background: rgba(0,0,0,0.25);
+  }
+  .ask-price-page-cancel-btn{
+    text-align: center;
+    background: white;
+    p{
+      font-size: 36px;
+      color: @color_orange;
+      padding: 23px 249px;
+    }
+  }
+}
+
+//经销商列表
+.ask-price-page-dealer-list{
+  ul{
+    li{
+      padding: 30px;
+      border: 1px solid @color_line;
+      position: relative;
+      margin-bottom: 20px;
+      i{
+        display: inline-block;
+      }
+      .dealer-name{
+        font-size: 30px;
+        color: @color_dark_grey;
+        line-height: 36px;
+      }
+      .dealer-star{
+        float: right;
+        margin-right: -4px;
+      }
+      .dealer-tel{
+        color: #666666;
+        margin: 20px 0 30px;
+        i{
+          font-size: 24px;
+          margin-right: 10px;
+        }
+      }
+      .dealer-address{
+        font-size: 24px;
+        color: @color_light_grey;
+        line-height: 24px;
+        overflow: hidden;
+        i{
+          font-size: 24px;
+          margin-right: 10px;
+          float: left;
+        }
+        .txt-left{
+          float: left;
+          max-width: 350px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .txt-right{
+          float: right;
+        }
+        // span{
+        //   float: right;
+        // }
+      }
+      &.selected{
+        border: 1px solid @color_orange;
+        &:before{
+          background: url("../../assets/images/askPrice/cb_selected.png") no-repeat center center;
+          background-size: 100%;
+        }
+      }
+      &:before{
+        content: '';
+        position: absolute;
+        width: 64px;
+        height: 50px;
+        top: -2px;
+        right: -1px;
+        background: url("../../assets/images/askPrice/cb_select.png") no-repeat center center;
+        background-size: 100%;
+      }
+    }
+  }
+  .dealer-more{
+    text-align: center;
+    margin: 30px 0 10px;
+    .more-btn{
+      display: inline-block;
+      font-size: 24px;
+      color: @color_orange;
+      line-height: 36px;
+      padding: 11px 31px;
+      border: 1px solid @color_orange;
+      border-radius: 10px;
+    }
+    .popup-list{
+      height:900px;
+    }
+  }
+}
+

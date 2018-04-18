@@ -1,0 +1,129 @@
+{
+	"data": {
+		"list": [{
+			"appointmentId": "1172230723642335232",
+			"appointmentItem": null,
+			"appointmentNo": null,
+			"appointmentStatus": 2,
+			"appointmentType": 2,
+			"arrivalTime": "2018-04-04 15:40:00",
+			"comment": null,
+			"createTime": "2018-04-09 14:53:35",
+			"dealer": {
+				"code": null,
+				"id": "1171413594100749312",
+				"sellerName": null,
+				"shops": [{
+					"bindingThirdShopId": null,
+					"businessHours": "",
+					"channelId": null,
+					"cityCode": "440100000000",
+					"code": "201803311453580001",
+					"contactPerson": "",
+					"contactPhone": "",
+					"countyCode": "32",
+					"createPerson": "",
+					"createTime": "2018-03-31 14:54:29",
+					"deliveryWarehouseId": null,
+					"detailAddress": "广州市黄埔区魚珠智谷",
+					"dr": 0,
+					"id": "1171414345068860416",
+					"latitude": "33.123154",
+					"longitude": "42.123131",
+					"name": "长安福特第仨店",
+					"orderBy": null,
+					"orderByDesc": null,
+					"provinceCode": "12",
+					"rejectReason": null,
+					"sellerId": "1171413594100749312",
+					"shopIntroduction": "",
+					"shopUpdateAuditStatus": 1,
+					"shopUrl": "",
+					"shopchoicestatus": null,
+					"shopqq": null,
+					"signedSeller": "B008",
+					"sqlFilters": null,
+					"status": 2,
+					"storeId": null,
+					"streetCode": "0",
+					"tenantId": 1,
+					"type": 1,
+					"updatePerson": "",
+					"updateTime": "2018-03-31 14:54:29"
+				}]
+			},
+			"memberMobile": "13726261358",
+			"memberName": "按摩",
+			"vehicleModel": null
+		}],
+		"pageNum": 3,
+		"pageSize": 10,
+		"pages": null,
+		"total": 64
+	},
+	"resultCode": 0,
+	"resultMsg": "success"
+}
+接口备注
+"data": {
+    "list": [{
+        "appointmentId": "1172230723642335232",//预约单id
+        "appointmentItem": null,//预约项目
+        "appointmentNo": null,//预约单号
+        "appointmentStatus": 2,//预约状态
+        "appointmentType": 2,//预约类型
+        "arrivalTime": "2018-04-04 15:40:00",//到店时间
+        "comment": null,//备注
+        "createTime": "2018-04-09 14:53:35",//预约时间
+        "dealer": {
+            "code": null,//经销商编码
+            "id": "1171413594100749312",//经销商id
+            "sellerName": null,//经销商名称
+            "shops": [{
+                "bindingThirdShopId": null,
+                "businessHours": "",
+                "channelId": null,
+                "cityCode": "440100000000",
+                "code": "201803311453580001",
+                "contactPerson": "",
+                "contactPhone": "",
+                "countyCode": "32",
+                "createPerson": "",
+                "createTime": "2018-03-31 14:54:29",
+                "deliveryWarehouseId": null,
+                "detailAddress": "广州市黄埔区魚珠智谷",//门店地址
+                "dr": 0,
+                "id": "1171414345068860416",
+                "latitude": "33.123154",//经度
+                "longitude": "42.123131",//纬度
+                "name": "长安福特第仨店",//门店名称
+                "orderBy": null,
+                "orderByDesc": null,
+                "provinceCode": "12",
+                "rejectReason": null,
+                "sellerId": "1171413594100749312",
+                "shopIntroduction": "",
+                "shopUpdateAuditStatus": 1,
+                "shopUrl": "",
+                "shopchoicestatus": null,
+                "shopqq": null,
+                "signedSeller": "B008",
+                "sqlFilters": null,
+                "status": 2,
+                "storeId": null,
+                "streetCode": "0",
+                "tenantId": 1,
+                "type": 1,
+                "updatePerson": "",
+                "updateTime": "2018-03-31 14:54:29"
+            }]
+        },
+        "memberMobile": "13726261358",//手机
+        "memberName": "按摩",//用户名
+        "vehicleModel": null//意向商品
+    }],
+    "pageNum": 3,
+    "pageSize": 10,
+    "pages": null,
+    "total": 64
+}
