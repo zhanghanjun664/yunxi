@@ -247,7 +247,31 @@ export default [
           },
           onEnter: rootOnEnter,
           onLeave: rootOnLeave
-        }, {
+        },
+        {
+          //车型图文
+          path: '/cloubCarImages',
+          getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+              cb(null, require('./biz/cloubStore/carImages/CarImagesView'))
+              titleText("商品图片")
+            })
+          },
+          onEnter: rootOnEnter,
+          onLeave: rootOnLeave
+        },
+        {
+          path: '/cloubSwitchSpec',
+          getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+              cb(null, require('./biz/cloubStore/switchSpec/SwitchSpecView'))
+              titleText("切换规格")
+            })
+          },
+          onEnter: rootOnEnter,
+          onLeave: rootOnLeave
+        },
+        {
           //云店车型详情
           path: 'carModelDetail',
           getComponent: (nextState, cb) => {
@@ -258,7 +282,9 @@ export default [
           },
           onEnter: rootOnEnter,
           onLeave: rootOnLeave
-        }]
+        }
+      //云店的都写在这里
+      ]
       }, {
         path: '/mySubscribe',
         getComponent: (nextState, cb) => {
@@ -380,6 +406,30 @@ export default [
           require.ensure([], (require) => {
             cb(null, require('./biz/staffs/StaffsView'))
             titleText("客服聊天")
+          })
+        },
+        onEnter: rootOnEnter,
+        onLeave: rootOnLeave
+      },
+      // 支付成功 
+      {
+        path: '/paymentSuccess',
+        getComponent: (nextState, cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./biz/carModel/paymentSuccess/PaymentSuccessView'))
+            titleText("支付成功")
+          })
+        },
+        onEnter: rootOnEnter,
+        onLeave: rootOnLeave
+      },
+      // 预约详情 
+      {
+        path: '/subscribeDetail',
+        getComponent: (nextState, cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./biz/my/mySubscribeDetailComplete/mySubscribeDetailCompleteView'))
+            titleText("预约详情")
           })
         },
         onEnter: rootOnEnter,

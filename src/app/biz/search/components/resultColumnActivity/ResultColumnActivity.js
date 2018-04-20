@@ -1,12 +1,16 @@
 import React, {PropTypes, Component} from 'react';
 import {Tabs, WhiteSpace, Badge} from 'antd-mobile';
-import {PullToRefreshListView} from 'widget';
+import {RefreshListView} from 'widget';
 import Util from 'util';
 import './ResultColumnActivityLess.less';
+import {inject, observer} from 'mobx-react';
 
+@inject('search')
+@observer
 class ResultColumnActivity extends Component {
     constructor(props, context) {
         super(props, context);
+        this.stores = this.props.search
         // 排序配置
         this.tabs = [
             {
@@ -18,10 +22,10 @@ class ResultColumnActivity extends Component {
     };
     // 在此生命周期里调用了fetchData（数据初始化），具体代码在PullToRefreshListView组件
     componentDidMount() {
-        this
-            .refs
-            .list
-            .start();
+        this.stores.setStyle({
+            height: Util.getScrollHeight(['search-box', 'am-tabs-top', 'sort-box'])-30
+        })
+        this.refs.list.start();
     };
     fetchData(pageNum, success, error) {
         success([
@@ -83,9 +87,7 @@ class ResultColumnActivity extends Component {
         )
     };
     render() {
-        let style = this.props.style || {
-            height: 1300
-        };
+        const { style } = this.stores.state
         return (
             <div className="resultColumn-wrap">
                 <div className="sort-box">
@@ -93,7 +95,7 @@ class ResultColumnActivity extends Component {
                 </div>
                 <div className="content-box">
                     <ul>
-                        <PullToRefreshListView
+                        <RefreshListView
                             fetchData={this.fetchData}
                             renderRow={this.renderRow}
                             ref="list"

@@ -13,6 +13,7 @@ import ProductConfig from 'biz/carModel/carModelDetail/productConfig/ProductConf
 import ActivityList from 'biz/carModel/carModelDetail/activityList/ActivityListView';
 import CarTestList from 'biz/carModel/carModelDetail/activityList/CarTestListView';
 import { get } from 'lodash';
+import { StarRange } from 'widget';
 
 
 
@@ -31,6 +32,7 @@ class ProductDetailIndex extends Component {
 		}
 		this.itemId = this.props.location.query.itemId ; 
 		this.skusId = this.props.location.query.skusId ; 
+		this.dealerId = this.props.location.query.dealerId
 	}
 	handleScroll(e) {
 		let scrollTop = Util.getScrollTop()
@@ -91,11 +93,21 @@ class ProductDetailIndex extends Component {
 		})
 
 		// 评论
-		this.stores.getCommentData({
-			itemCode: this.itemId,
-			pageNum: 1,
-			pageSize: 3
-		})
+		// this.stores.getCommentData({
+		// 	itemCode: this.itemId,
+		// 	pageNum: 1,
+		// 	pageSize: 3
+		// })
+
+		// 特惠车
+		if(this.dealerId){
+			let { longitude, latitude } =  Util.getCoordinate()
+			this.stores.getDealerInfo({
+				longtitude: longitude ,
+				latitude: latitude ,
+				dealerId: this.dealerId
+			});
+		}
 
 	}
 	componentWillUnmount() {
@@ -128,7 +140,7 @@ class ProductDetailIndex extends Component {
 						</div>
 						<div className='iconfont icon-right'></div>
 					</li>
-					<li className='pdSelectBox_item' onClick={this.toUrl.bind(this, '/switchSpec?skusId='+this.skusId+'&itemId='+this.itemId)}>
+					<li className='pdSelectBox_item' onClick={this.toUrl.bind(this, '/switchSpec?skusId='+this.skusId+'&itemId='+this.itemId+'&dealerId='+this.dealerId)}>
 						<div>已选颜色：</div>
 						<div className='pdSelectBox_item2'>
 							<div className='pdSelectBox_color'>
@@ -157,7 +169,13 @@ class ProductDetailIndex extends Component {
 	}
 	renderNearbyInfo = (data) => {
 		let { skusId } = this.stores.state
-		let sellPrice = get(data, `lowestPriceItemSkus[${skusId}].sellPrice`)
+		console.log(skusId)
+		console.log( data.lowestPriceItemSkus&&Object.values(data.lowestPriceItemSkus))
+		// let sellPrice = get(data, `lowestPriceItemSkus[${skusId}].sellPrice`, data.lowestPriceItemSkus&&Object.values(data.lowestPriceItemSkus)[0].sellPrice)
+		let sellPrice = '';
+		if(skusId&&data.lowestPriceItemSkus&&data.lowestPriceItemSkus[skusId]){
+			sellPrice = data.lowestPriceItemSkus[skusId].sellPrice
+		}
 		return (
 			<div className='nearbyInfo box_shadow' ref='productDetailIntroduce' >
 				<div className='nearbyInfo1'>附近共有 <span className='color_orange'>{data.dealerNum}</span> 家特约经销商</div>
@@ -196,12 +214,44 @@ class ProductDetailIndex extends Component {
 			</div>
 		)
 	}
+	renderDealerInfo(data){
+		return(
+			<div className='disInfo'>
+				<div className='disInfo1'>
+					<div className='disInfo1-name'>
+						<span className='ellipsis-two'>{data.dealerName}</span>
+					</div>
+					<StarRange number={data.score}/>
+				</div>
+				<div className='disInfo2'>
+					<i className='iconfont icon-dianhua'></i>
+					<span>{data.salePhone}</span>
+				</div>
+				{
+					data.shops && data.shops.map((item, index)=>{
+						return (
+							<div className='disInfo3' key={index}>
+								<div className='disInfo3-1 ellipsis'>
+									<i className='iconfont icon-dizhi'></i>
+									<span>{item.address}</span>
+								</div>
+								<div className='disInfo3-2'>
+									<span>&lt;{data.longitude}km</span>
+								</div>
+							</div>
+						)
+					})
+				}
+				
+			</div>
+		)
+	}
 	noOpen(){
 		Toast.info('此功能暂未开放')
 	}
 
 	render() {
-		const { nearbyInfo, navTab, carConfig } = this.stores.state
+		const { nearbyInfo, navTab, carConfig, dealerInfo } = this.stores.state
 		return (
 			<div className="productDetail">
 				<div className={this.stores.state.navTab == 0 ? 'hidden' : 'pd_nav'}>
@@ -216,6 +266,9 @@ class ProductDetailIndex extends Component {
 				<Baseinfo />
 				{this.renderSelectBox()}
 				{this.renderNearbyInfo(nearbyInfo)}
+
+				{/* 经销商信息 */}
+				{this.dealerId&&this.renderDealerInfo(dealerInfo)}
 
 
 				{<div className='component_pdc box_shadow'>
@@ -244,18 +297,53 @@ class ProductDetailIndex extends Component {
 					<ActivityList />
 				</div>
 
-				<div className='pd_footer'>
-					<div className='pd_footerItem1' onClick={this.noOpen.bind(this)}>
-						<img src="assets/images/productDetail/icon_jisuanqi.png" />
-						<p>购车<br/>计算器</p>
+				{/* 特惠车没门店 */}
+				{
+					this.dealerId && <div className='dealerStore'>
+						<div>销售门店</div>
+						<div>
+							抱歉，该车型不在本地区销售
+						</div>
 					</div>
-					<div className='pd_footerItem1 last-item' onClick={this.noOpen.bind(this)}>
-						<img src="assets/images/productDetail/icon_kefu.png" />
-						<p>在线<br/>咨询</p>
+
+				}
+
+
+			  {
+					this.dealerId?
+					<div className='pd_footer'>
+						<div className='pd_footerItem1' onClick={this.noOpen.bind(this)}>
+							<img src="assets/images/productDetail/icon_jisuanqi.png" />
+							<p>购车<br/>计算器</p>
+						</div>
+						<div className='pd_footerItem1 last-item' onClick={this.noOpen.bind(this)}>
+							<img src="assets/images/productDetail/icon_kefu.png" />
+							<p>在线<br/>咨询</p>
+						</div>
+
+						<div className='btn_goPay'>
+							<div className='' onClick={this.toUrl.bind(this, '/confirmOrder?carId='+this.itemId+'&dealerId='+this.dealerId)}>立即订车￥5000</div>
+							<div className='hide'>不在本地区销售</div>
+						</div>
+						
 					</div>
-					<div className='pd_footerItem3' onClick={this.toUrl.bind(this, '/askprice?from=carModelDetail&itemId='+this.itemId)}>询底价</div>
-					<div className='pd_footerItem4' onClick={this.toUrl.bind(this, '/testdrive?from=carModelDetail&itemId='+this.itemId)}>预约试驾</div>
-				</div>
+					:
+					<div className='pd_footer'>
+						<div className='pd_footerItem1' onClick={this.noOpen.bind(this)}>
+							<img src="assets/images/productDetail/icon_jisuanqi.png" />
+							<p>购车<br/>计算器</p>
+						</div>
+						<div className='pd_footerItem1 last-item' onClick={this.noOpen.bind(this)}>
+							<img src="assets/images/productDetail/icon_kefu.png" />
+							<p>在线<br/>咨询</p>
+						</div>
+						<div className='pd_footerItem3' onClick={this.toUrl.bind(this, '/askprice?from=carModelDetail&itemId='+this.itemId)}>询底价</div>
+						<div className='pd_footerItem4' onClick={this.toUrl.bind(this, '/testdrive?from=carModelDetail&itemId='+this.itemId)}>预约试驾</div>
+					</div>
+					
+
+
+				}
 
 
 			</div>

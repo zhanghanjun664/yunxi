@@ -17,8 +17,8 @@ let envConfig = {
   loc: {
     // api接口主机地址
     // host: document.location.origin,
-    // host: 'https://wxdev.dtyunxi.cn/ford/test/caf-trade-application',
-    host: 'https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application',
+    host: 'https://wxdev.dtyunxi.cn/ford/test/caf-trade-application',
+    // host: 'https://wxdev.dtyunxi.cn/ford/dev/caf-trade-application',
     // 进行IM通讯的主机
     imSocketHost: 'http://localhost:7002',
     // 请求IM REST数据

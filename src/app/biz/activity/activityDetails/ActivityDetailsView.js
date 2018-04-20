@@ -308,7 +308,11 @@ class ActivityDetailsView extends Component {
         if (!params.memberName) {
             Toast.info('请输入姓名')
             return
-        }
+				}
+				if (!Verify.isCNorEng(params.memberName)) {
+					Toast.info('请输入正确的姓名')
+					return
+				}
         if (!Verify.isPhoneNum(params.memberMobile)) {
             Toast.info('请输入正确的手机号')
             return
@@ -360,7 +364,17 @@ class ActivityDetailsView extends Component {
             this.stores.setLoadingStatus('code', false)
         })
 
-    }
+		}
+		getCoupon(item){
+			this.stores.getCoupon({
+				couponId: item.id,
+				activityId: this.activityId
+			}).then(()=>{
+				Toast.info('领取成功！')
+			}, ()=>{
+				this.stores.setLoadingStatus('getCoupon', false)
+			})
+		}
 
     getData(type) {
         let { longitude, latitude } = Util.getCoordinate();
@@ -437,7 +451,7 @@ class ActivityDetailsView extends Component {
         console.log(showSignUp)
 
         return (
-            <div>
+            <div className='activityDetail_page'>
                 <PickerOption name="budgetRange" type="budget" visible={this.state.costmodal} onPickClose={this.onClose('costmodal')} onChange={(a, b) => this.onChange(a, b)} />
 
                 <PickerOption name="purchaseTime" type="buytime" visible={this.state.buytimemodal} onPickClose={this.onClose('buytimemodal')} onChange={(a, b) => this.onChange(a, b)} />
@@ -485,7 +499,26 @@ class ActivityDetailsView extends Component {
                                 </div>
                             </Flex>
                             {info.type == 1 && (
-                                <div className="color_orange">优惠券</div>
+															info.couponList.map((item, index)=>{
+																return (
+																	<div className='item couponType_1' key={index} onClick={this.getCoupon.bind(this, item)}>
+																			<div className='itemBox box_shadow'>
+																			<div className='item_money'>
+																					<p>{123}元</p>
+																					<p>{item.name}</p>
+																			</div>
+													
+																			<div className='item_info'>
+																					<div></div>
+																					<p>使用范围：{1213}</p>
+																					<p>过期时间:{1212&&Util.formatDate('2018-12-12 12:12:11')}</p>
+																			</div>
+													
+																			</div>
+																	</div>
+
+																)
+															})
                             )}
                             {/* <div className="activity-text" dangerouslySetInnerHTML={{__html: info.content}}></div> */}
                             <div className="activity-text" dangerouslySetInnerHTML={{__html:info.content}} ></div>

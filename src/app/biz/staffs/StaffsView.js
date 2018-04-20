@@ -7,6 +7,9 @@ import { createForm } from 'rc-form'
 import Util from 'util'
 import Config from 'config/Config'
 import Style from './StaffsLess.less'
+// 滚动条滚动到底部
+import { resetScroll } from './ChatSetting'
+
 
 /**
  * 视图层，功能逻辑，html代码将存放于此
@@ -34,12 +37,10 @@ class StaffsView extends Component {
   // 发送消息
   sendMsg(e){
     let self = this
+    // 发送消息完成，消息列表滚动到底部
     self.stores.send2Server(() => {
       // 需等待虚拟dom innerHTML完成之后
-      setTimeout(() => {
-        let lct = document.getElementById('msgListItem')
-        lct.scrollTop  = lct.scrollHeight + 10000
-      }, 50)
+      resetScroll()
     })
   }
 
@@ -50,7 +51,42 @@ class StaffsView extends Component {
 
   // 组件载入完成
   componentDidMount(){
-    this.stores.getStaffId()
+    // 地址栏传的经销商ID
+    let dealerId = window.app.router.location.query.dealerId
+
+    // 地址栏没有传经销商ID，则获取平台客服
+    if(!dealerId){
+      // 获取空闲客服ID - 平台
+      this.stores.getStaffId()
+
+    // 若传了经销商ID，则获取经销商客服
+    }else{
+      // 获取经销商客服ID - 经销商
+      this.stores.getStaffId(dealerId)
+    }
+
+    // 监听键盘Enter键输入 - 触发发送
+    this.onKeyBoardListener()
+  }
+
+  // 键盘监听
+  onKeyBoardListener(){
+    let self  = this
+    // 监听键盘释放事件
+    $(document).on({
+      keyup: function(event){
+        switch(event.keyCode) { 
+          case 13:
+            self.sendMsg(1)
+          return
+        } 
+      }
+    })
+  }
+
+  // 组件将被卸载 - 解除绑定的键盘事件 
+  componentWillUnmount(){
+    $(document).off('keyup')
   }
 
   render() {
@@ -64,7 +100,7 @@ class StaffsView extends Component {
               <img src='assets/images/staffs/staffs.png'/>
             </div>
             <div className='title-label'>{staffInfo.staffType}：</div>
-            <div className='title-name'>{staffInfo.staffName}</div>
+            <div className='title-name'>{staffInfo.nickname}</div>
           </Flex>
         </div>
 
@@ -139,8 +175,8 @@ class StaffsView extends Component {
               </List>
             </Flex.Item>
             <div className='mgl20'>
-              <div className='send-btn-wrap'>
-                <div className='send-btn' onClick={ e => this.sendMsg(e) }>发送</div>
+              <div className='send-btn-wrap' onClick={ e => this.sendMsg(e) }>
+                <div className='send-btn'>发送</div>
               </div>
             </div>
           </Flex>

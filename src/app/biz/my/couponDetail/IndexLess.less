@@ -1,0 +1,113 @@
+@import '~assets/css/commonCss.less';
+.couponDetail_page{
+
+  .itemBox{
+    padding-bottom: 20px;
+  }
+  .couponType_1{
+    .itemBox{
+      background-image: url('~assets/images/my/myCoupon_bg.png');  
+    }
+  }
+  .couponType_2{
+    .itemBox{
+      background-image: url('~assets/images/my/myCoupon_bg2.png');  
+    }
+  }
+  .item{
+    padding: 30px;
+    .itemBox{
+      padding: 10px;
+      height: 208px;
+      display: flex;
+      align-items: center;
+      background-size: 100% 100%;
+      .item_money{
+        color: #fff;
+        flex: 1;
+        padding-left: 64px;
+        line-height: 1;
+        &>p:nth-of-type(1){
+          font-size: 80px;
+          margin-bottom: 20px;
+          position: relative;
+          &:after{
+            display: block;
+            position: absolute;
+            left: -44px;
+            content:  "￥";
+            font-size: 44px;
+            top: 6px;
+          }
+        }
+        &>p:nth-of-type(2){
+          font-size: 30px;
+        }
+      }
+      .item_info{
+        width: 29.8%;
+        padding: 14px;
+        div{
+          width: 80px;
+          height: 80px;
+          background-image: url('~assets/images/my/myCoupon_logo.png');
+          background-size: 100% 100%;
+          margin: 18px auto 15px;
+        }
+        p{
+          font-size: 18px;
+          line-height: 36px;
+        }
+      }
+    }
+  }
+
+  .detailInfo{
+    padding-bottom: 80px;
+    background-color: #fff;
+    .title{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 88px;
+      border-bottom: 1px solid @color_line;
+      padding: 0 30px;
+      font-size: 30px;
+      .noUse{
+        color: #0F68B0;
+      }
+    }
+
+  }
+
+  .desc{
+    padding: 30px 0;
+    margin:  0 30px;
+    line-height: 36px;
+    border-bottom: 1px solid @color_line;
+    font-size: 28px;
+    >div{
+      margin-bottom: 20px;
+      display: flex;
+      >div:nth-of-type(1){
+        text-align: justify;
+        width: 140px;
+      }
+    }
+  }
+
+  .qrCodeBox{
+    padding-top: 40px;
+    text-align: center;
+    color: #999;
+    img{
+      width: 240px;
+      height: 240px;
+      margin-bottom: 20px;
+    }
+  }
+  .fl_right{
+    float: right;
+  }
+
+}

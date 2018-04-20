@@ -3,8 +3,15 @@ import { observable, action, runInAction, useStrict, autorun } from 'mobx'
 
 import Config from 'config/Config'
 import Serv from './StaffsServ'
-import { get, cloneDeep } from 'lodash'
+import { get, cloneDeep, isArray } from 'lodash'
 import Util  from 'util'
+import moment from 'moment'
+// 本地化
+moment.locale('zh-cn')
+// 模拟消息列表
+import MockMsgList from './MockMsgList'
+// 滚动条滚动到底部
+import { resetScroll } from './ChatSetting'
 
 /**
  * mod层-业务逻辑，数据逻辑应该存储于此
@@ -12,6 +19,9 @@ import Util  from 'util'
 
 //定义为严格模式
 useStrict(true)
+
+// 本地消息队列 - 用于重发
+let ackQueue = {}
 
 // 模型对象
 class StaffsMod {
@@ -21,11 +31,11 @@ class StaffsMod {
     // 客服信息
     staffInfo: {
       // 客服ID
-      staffId: '',
+      _id: '',
       // 客服类型
-      staffType: '平台客服',
+      staffType: '',
       // 客服昵称
-      staffName: '小福',
+      nickname: '',
     },
 
     // 用户信息
@@ -37,61 +47,126 @@ class StaffsMod {
     // 消息输入框的值
     msgContent: '',
     // 消息列表
-    msgList: [
-      {
-        type: 'receive',
-        createAt: '3月29日 20:00',
-        avatar: 'assets/images/staffs/girl.png',
-        readStatus: 'readed',
-        content: '我是客服【小福】，请问有什么可以帮到您？'
-      },
-      {
-        type: 'receive',
-        createAt: '昨天',
-        avatar: 'assets/images/staffs/girl.png',
-        readStatus: 'readed',
-        content: `
-          <div>常见问题：</div>
-          <div class='msg-link'>
-            <ul>
-              <li><a href='about:blank;'>如何支付定金？</a></li>
-              <li><a href='about:blank;'>如何完成尾款支付？</a></li>
-              <li><a href='about:blank;'>预约试驾需要</a></li>
-            </ul>
-          </div>
-        `
-      },
-      {
-        type: 'send',
-        createAt: '18:30',
-        avatar: 'assets/images/staffs/boy.png',
-        readStatus: 'reading',
-        content: '请问经销商报价真实吗？到店是否有现车？'
-      }
-    ],
+    msgList: [],
     // socket连接对象
-    socket: null,
+    socket: null
   }
 
-  // 获取空闲的客服ID - 平台客服
+  // 获取用户信息
   @action
-  async getStaffId(){
+  async getUserInfo(){
+    // 4位随机数
     let random = Math.ceil(Math.random() * 10000)
     // 用户信息
     let user_id = 'c_shaowin_' + random
 
+    // 非开发环境，则获取用户的信息
+    if('loc' !== '' + ENV){
+      let res = await Serv.getUserInfo({})
+      user_id = res.id
+    }
+    return user_id
+  }
+
+  // 获取空闲的客服ID - 平台客服
+  @action
+  async getStaffId(dealerId){
+    // 用户ID
+    let user_id = await this.getUserInfo()
     // 默认的初始客服信息
     let defStaffInfo = cloneDeep(this.state.staffInfo)
     // 返回的客服信息
-    let staffRes  =  await Serv.getStaffId(user_id)
+    let staffRes  =  {}
+
+    // 无经销商ID，则获取平台客服
+    if(!dealerId){
+      staffRes = await Serv.getStaffId(user_id)
+
+    // 有经销商ID，则获取经销商客服
+    }else{
+      staffRes = await Serv.getStaffId(user_id, dealerId)
+    }
+    // 取出客服ID
+    let staffId = staffRes.payload.staffId
+
+    // 判空
+    if(!staffId) return false
+    // 根据客服id获取客服信息
+    let tmpStaffInfo = await Serv.getStaffInfoById(staffId)
+    // 合并属性
+    tmpStaffInfo = Object.assign(defStaffInfo, tmpStaffInfo.payload)
+    // 客服类型
+    tmpStaffInfo.staffType = dealerId? '经销商客服': '平台客服'
+
+    // 欢迎语
+    let welcome = this.getWelcomeMsg(tmpStaffInfo)
 
     // 设置到状态机
     runInAction(() => {
-      this.state.staffInfo = Object.assign(defStaffInfo, staffRes.payload)
+      // 客服信息
+      this.state.staffInfo = tmpStaffInfo
+      // 用户信息
       this.state.userInfo = { user_id }
+      // 设置欢迎语
+      this.state.msgList.push(welcome)
+
       // 初始化socket
       this.initSocket()
     })
+  }
+
+  // 设置欢迎语
+  getWelcomeMsg(staffInfo){
+    return {
+      userId: staffInfo._id,
+      type: 'receive',
+      createAt: moment().format('MMM Do YY, h:mm'),
+      avatar: staffInfo.photo || 'assets/images/staffs/girl.png',
+      readStatus: 'readed',
+      content: `我是客服【${staffInfo.nickname}】，请问有什么可以帮到您？`
+    }
+  }
+
+  // 获取常见问题内容
+  getQuestionContent(data){
+    // 从结果集取出常见问题列表
+    let questions = data.payload.docs || get(data, 'payload.docs', [])
+
+    // 空值判断
+    if(0 === questions.length) return ''
+
+    // 拼接内容
+    let contentArr = []
+    contentArr.push('<div>常见问题：</div>')
+    contentArr.push(`<div class='msg-link'>`)
+    contentArr.push('<ul>')
+    // 遍历问题列表
+    questions.map((que, i) => {
+      contentArr.push(`<li><a href='about:blank;'>${que.topic}</a></li>`)
+    })
+    contentArr.push('</ul>')
+    contentArr.push('</div>')
+
+    return contentArr.join('')
+  }
+
+  // 获取常见问题消息
+  @action
+  async getCommonQuestions(){
+    // 常见问题查询结果
+    let data = await Serv.getCommonQuestions()
+    // 拼接常见问题内容
+    let content = this.getQuestionContent(data)
+ 
+    // 返回常见问题
+    return {
+      userId: this.state.staffInfo._id,
+      type: 'receive',
+      createAt: moment().format('MMM Do YY, h:mm'),
+      avatar: this.state.staffInfo.photo || 'assets/images/staffs/girl.png',
+      readStatus: 'readed',
+      content
+    }
   }
 
   // 获取发送的消息内容
@@ -99,13 +174,49 @@ class StaffsMod {
   getSendMsgContent(sendMsg){
     // 消息协议,通讯格式
     let r = Math.ceil(Math.random() * 100000)
+    let uuid = this.state.userInfo.user_id + Date.now() + r
+
     let message = {
-      uuid: this.state.userInfo.user_id + Date.now() + r, //uuid
+      uuid: uuid, // uuid
       type: 'txt',
       data: sendMsg,
-      targetUid: this.state.staffInfo.staffId
+      targetUid: this.state.staffInfo._id
     }
-    return message
+    //本地存储ackQueue
+    let msg = Object.assign({}, message)
+    // 重发计数器
+    msg["count"] = 0
+    // 放入队列
+    ackQueue[msg.uuid] = msg
+
+    // 返回消息
+    return msg
+  }
+
+  // 消息重发定时器 扫描ackQueue, 到达重发时间则进行重发
+  @action
+  scanToReSend(){
+    let t1 = window.setInterval(()=> {
+      for (let key in ackQueue) {
+        let msg = ackQueue[key]
+        console.log('msg.uuid:', msg.uuid, 'msg.count:', msg.count)
+        // 只重发3次
+        if (msg.count >= 3) {
+          delete(ackQueue[key])
+          continue
+        }
+
+        //开始重发
+        console.log(`重发消息[uuid=${msg.uuid},count=${msg.count}]:`)
+        let msgBuffer = msgpack5().encode(msg)
+
+        this.state.socket.emit('chat', msgBuffer, (msgUuid)=> {
+          msgUuid = msgpack5().decode(msgUuid)
+          delete(ackQueue[msgUuid])
+        })
+        msg.count ++
+      }
+    }, 30000)
   }
 
   // 发送消息到后台
@@ -128,20 +239,62 @@ class StaffsMod {
       // 添加到已发送消息列表
       this.state.msgList.push({
         type: 'send',
-        createAt: '18:30',
+        createAt: moment().format('MMM Do YY, h:mm'),
         avatar: 'assets/images/staffs/boy.png',
         readStatus: 'reading',
         content: sendMsg
       })
-      // 情况输入框的值
+      // 清空输入框的值
       this.state.msgContent = ''
-      // 发送事件
+      // 触发服务器端chat聊天事件，把buffer内容传过去
       this.state.socket.emit('chat', buffer, (msgUuid)=> {
-        msgUuid = msgpack5().decode(msgUuid);
+        msgUuid = msgpack5().decode(msgUuid)
+        // 收到ack后从队列中删除
+        delete(ackQueue[msgUuid])
         console.log(`收到服务器ack:${msgUuid}`)
       })
-      cbf()
+      // 回调函数
+      if(cbf){
+        cbf()
+      }
     })
+  }
+
+  // 处理收到图片时的展示
+  getReceiveContent(message){
+    let msg = message.data, content = ''
+    // 无内容判断
+    if(!msg) return ''
+    // 若内容含图片，则拼接img标签
+    if(/^.*[^a][^b][^c]\.(?:png|jpg|bmp|gif|jpeg)$/g.test(msg)){
+      content = `<img src='${msg}'/>`
+    // 普通文本，则直接返回
+    }else{
+      content = msg
+    }
+
+    return {
+      userId: message.senderUid,
+      type: 'receive',
+      createAt: moment().format('MMM Do YY, h:mm'),
+      avatar: 'assets/images/staffs/girl.png',
+      readStatus: 'reading',
+      content
+    }
+  }
+
+  // 处理返回消息
+  handlerReceiveMsg(message){
+    // 处理返回内容
+    let recContent = this.getReceiveContent(message)
+    // 设置到状态机
+    runInAction(() => {
+      // 添加到消息列表
+      this.state.msgList.push(recContent)
+      // 滚动到底部
+      resetScroll()
+    })
+    return false
   }
 
   // 启动socket
@@ -162,10 +315,22 @@ class StaffsMod {
       console.log('失去连接')
     })
 
-    socket.on('connect', function (data) {
-      console.log('连接成功11111')
+    // 建立连接之后，给用户显示常见问题
+    socket.on('connect', async function(data) {
+      console.log('连接上服务器')
+      // 常见问题
+      let ques = await self.getCommonQuestions()
+      // 设置到状态机
+      runInAction(() => {
+        self.state.msgList.push(ques)
+        // 滚动到底部
+        resetScroll()
+        // 启动定时重发定时器
+        self.scanToReSend()
+      })
     })
 
+    // 重连钩子
     socket.on('reconnecting', function (data) {
       console.log('....重连....')
     })
@@ -173,27 +338,12 @@ class StaffsMod {
     // 接收服务端传来数据
     socket.on('res', function (message) {
       console.log('接收到服务器发来的消息')
-      message = msgpack5().decode(message); // 解压内容
-      console.log('message:', message)
-
-      runInAction(() => {
-        // 添加到消息列表
-        self.state.msgList.push({
-          userId: message.senderUid,
-          type: 'receive',
-          createAt: Date.now(),
-          avatar: 'assets/images/staffs/girl.png',
-          readStatus: 'reading',
-          content: message.data
-        })
-        // 需等待虚拟dom innerHTML完成之后
-        setTimeout(() => {
-          let lct = document.getElementById('msgListItem')
-          lct.scrollTop  = lct.scrollHeight + 10000
-        }, 50)
-      })
-      //ack回应服务器
-      socket.emit('ack', msgpack5().encode(message.uuid)) // 发送消息uuid 作为ack内容
+      // 解压内容
+      message = msgpack5().decode(message)
+      // 处理返回消息
+      self.handlerReceiveMsg(message)
+      //ack回应服务器 - 发送消息uuid 作为ack内容
+      socket.emit('ack', msgpack5().encode(message.uuid))
     })
 
     // 放到状态机

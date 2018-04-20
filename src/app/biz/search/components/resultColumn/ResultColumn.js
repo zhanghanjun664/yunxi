@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { PullToRefreshListView } from 'widget';
+import { RefreshListView } from 'widget';
 import Util from 'util';
 import './ResultColumnLess.less';
 
@@ -20,7 +20,7 @@ class ResultColumn extends Component {
         return (
             <div className="resultColumn">
 				<ul>
-					<PullToRefreshListView
+					<RefreshListView
 						fetchData={this.fetchData}
 						renderRow={this.renderRow}
 						ref="list"

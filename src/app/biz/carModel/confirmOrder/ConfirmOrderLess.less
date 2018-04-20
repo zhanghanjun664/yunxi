@@ -1,0 +1,327 @@
+@import "../../../assets/css/commonCss";
+
+.confirm-order{
+  @padding_2030: 20px 30px;
+  @margin_t30:30px;
+
+  &-page{
+    // common
+    .f-borderb{
+      border-bottom: 1px solid @color_line;
+    }
+    .orange_tip{
+      font-size: 24px;
+      color: #FD5C0E;
+      letter-spacing: 0;
+      line-height: 28px;
+    }
+    .iconfont{
+      color: #999;
+      margin-right: 8px;
+      font-size: 26px;
+    }
+    //必填
+    .required:after {
+      content: '*';
+      color: @color_orange;
+    }
+    //输入框
+    .confirm-order-form-input{
+      border: 1px solid @color_line;
+      border-radius: 10px;
+
+      +.confirm-order-form-input{
+        margin-top: 20px;
+      }
+
+      .am-list-line{
+        display: flex;
+        padding: 14px 0;
+      }
+
+      .am-input-label{
+        width: auto;
+        font-size: 24px;
+        color: #0F68B0;
+        line-height: 34px;
+      }
+
+    }
+  }
+
+  //modules
+  &-module{
+    padding: 20px 30px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+
+    &.padding03020{
+      padding: 0 30px 20px;
+    }
+
+    &:not(:first-child){
+      margin-top: @margin_t30;
+    }
+
+    &-head{
+      height: 80px;
+      font-size: 30px;
+    }
+  }
+
+  //下单车配置
+  &-car-config{
+    padding: 30px;
+    //文字
+    .title{
+      font-size: 30px;
+      color: @color_dark_grey;
+      letter-spacing: -0.38px;
+      line-height: 36px;
+      margin-bottom: 10px;
+    }
+    .descr{
+      font-size: 24px;
+      color: @color_light_grey;
+      letter-spacing: -0.38px;
+      line-height: 28px;
+    }
+    .price{
+      font-size: 28px;
+      color: @color_dark_grey;
+    }
+    .detailBtn{
+      font-size: 28px;
+      color: @color_orange;
+    }
+
+    .car-config-head{
+      .leftImg{
+        //padding: 0 0 0 0;
+        img{
+          width: 240px;
+          height: 120px;
+        }
+      }
+      .right{
+        padding-right: 20px;
+      }
+    }
+    .car-config-descr{
+      padding-top: 20px;
+    }
+    .car-config-foot{
+        padding-top: 30px;
+      .left{
+      }
+      .right{
+        text-align: right;
+      }
+    }
+  }
+
+  //经销商
+  &-dealer{
+    padding: 0 30px;
+    .dealer-info{
+      padding: 30px 0;
+    }
+    .store{
+      font-size: 30px;
+      color: @color_dark_grey;
+      letter-spacing: 0;
+      line-height: 36px;
+    }
+    .phone{
+      font-size: 24px;
+      color: @color_grey;
+      letter-spacing: 0;
+      line-height: 28px;
+    }
+    .addressinfo,.distance{
+      font-size: 24px;
+      color: @color_light_grey;
+      letter-spacing: 0;
+      line-height: 1;
+      &>span:nth-of-type(2){
+        display: inline-block;
+        width: 70%;
+      }
+    }
+    .phone{
+      margin-top: 10px;
+    }
+    .address{
+      margin-top: 30px;
+    }
+  }
+
+  //确认信息
+  &-data{
+    padding: 0;
+    .confirm-order-module-head{
+      padding: 20px 30px;
+    }
+    .list{
+      padding: 30px 20px;
+      .am-list-item{
+        border: 1px solid #E6E6E6;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        &.selected{
+          border: 1px solid #0F68B0;
+        }
+        &.am-textarea-item{
+          //min-height: 160px;
+        }
+        &.am-input-item{
+          height: 80px;
+          padding-left: 20px;
+          .am-input-control{
+            line-height: 0.36rem;
+            input{
+              color: #333333;
+              font-size: 0.28rem;
+            }
+          }
+        }
+        .am-input-label,.am-textarea-label{
+          font-size: 24px;
+          color: #0F68B0;
+          margin-right: 15px;
+          &.am-input-label-5{
+            width: 130px;
+          }
+          &.am-textarea-label{
+            width: 107px;
+            margin-right: 0;
+          }
+        }
+        .required{
+          display: inline-block;
+          position: relative;
+          span {
+            color: #FD5C0E;
+            position: absolute;
+            right: -10px;
+          }
+        }
+        .code{
+          overflow: hidden;
+          color: #333;
+          .get-code{
+            cursor: pointer;
+            font-size: 28px;
+            color: #FD5C0E;
+            position: absolute;
+            right: 20px;
+          }
+        }
+      }
+      .fill-more{
+        font-size: 24px;
+        color: #999999;
+        padding: 20px 0;
+      }
+      .cost-time-range{
+        font-size: 24px;
+        color: #0F68B0;
+        padding: 22px 20px;
+        border: 1px solid #E6E6E6;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        position: relative;
+        display: flex;
+        .cost-selected{
+          border: 0;
+          font-size: 28px;
+          margin-left:20px;
+          display: inline-block;
+          color:#666;
+          flex:1;
+        }
+        .arrow{
+          display: inline-block;
+          width: 22px;
+          height:20px;
+          background: url("~assets/images/askPrice/down.png") no-repeat center;
+          position: absolute;
+          top:34px;
+          right:30px;
+          background-size: 100%;
+        }
+        .required{
+          display: inline-block;
+          position: relative;
+          span {
+            color: #FD5C0E;
+            position: absolute;
+            right: -10px;
+          }
+        }
+      }
+    }
+    .orange_tip{
+      margin-top: 20px;
+    }
+  }
+
+  //支付金额
+  &-payment{
+    padding: 30px;
+
+    .price{
+      font-size: 28px;
+      color: @color_dark_grey;
+      letter-spacing: 0;
+      line-height: 36px;
+    }
+    .price_number{
+      font-size: 28px;
+      color: @color_dark_grey;
+      letter-spacing: 0;
+      text-align: right;
+      line-height: 36px;
+    }
+    .amount{
+      font-size: 28px;
+      color: @color_dark_grey;
+      letter-spacing: -0.35px;
+      line-height: 36px;
+    }
+    .amount_number{
+      font-size: 36px;
+      color: @color_orange;
+      letter-spacing: 0;
+      line-height: 40px;
+    }
+
+    .item + .item{
+      margin-top: 20px;
+    }
+  }
+
+  //支付按钮
+  &-submit{
+    height: 90px;
+    margin-top: @margin_t30;
+    font-size: 36px;
+    color: #fff;
+    background: #F33037;
+    border-color: #F33037;
+    border-radius: 0;
+
+    &::before{
+      border-color: transparent!important;
+    }
+  }
+
+  //填写信息
+  .fill-info{
+    background: #FFFFFF;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+    .fill-form{
+      
+    }
+  }
+}

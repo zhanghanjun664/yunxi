@@ -11,7 +11,7 @@ export default class {
 
     static getMemberInfo() {
         return Request({
-            url: "members/info",
+            url: "personal/members/info",
             type: "GET"
         })
     }

@@ -1,0 +1,30 @@
+{
+  "data": {
+    "total": 2,
+    "pages": 1,
+    "pageSize": 10,
+    "pageNum": 1,
+    "list": [
+      {
+        "id": 1,
+        "imgUrl": "assets/images/cloubStore/banner02.png",
+        "name": "福特福克斯 1.5T 三厢 EcoBoost 自动旗舰型",
+        "adWord":"库存车型，数量有限",
+        "sellPrice": 160000.58,
+        "dealerId":123,
+        "advicePrice": 500000.88
+      },
+      {
+        "id": 2,
+        "imgUrl": "assets/images/cloubStore/banner02.png",
+        "name": "福特福克斯 1.5T 三厢 EcoBoost 自动旗舰型",
+        "adWord":"库存车型，数量有限",
+        "sellPrice": 160000.58,
+        "advicePrice": 500000.88,
+        "dealerId":123
+      }
+    ]
+  },
+  "resultCode": 0,
+  "resultMsg": "success"
+}

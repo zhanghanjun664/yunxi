@@ -1,0 +1,210 @@
+@import "~assets/css/commonCss";
+//@color_orange:#FD5C0E;  //橘红色,主色调，如按钮颜色
+//@color_red:#fa3d4f;       //深红色,部分文字颜色，和点缀色，如商品价格等
+//@color_dark_grey:#333;    //深灰色，主要文字颜色，如标题
+//@color_grey:#777;         //灰色，内容文字颜色，如商品名字
+//@color_light_grey:#999;   //浅灰色，辅助文字颜色，如提醒类文字
+//@color_line:#e6e6e6;      //类别分割线颜色，和部分高亮颜色
+//@color_bg:#f3f3f3;        //背景底色
+
+
+.payment-success {
+  @padding_2030: 20px 30px;
+  @margin_t30:30px;
+
+  &-page{
+    &.btnoptions-fixed{
+      padding-bottom: 84+30px;
+
+      .payment-success-btnoptions{
+        width: 100%;
+        height: 120px;
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+      // common
+    .f-borderb{
+      border-bottom: 1px solid @color_line;
+    }
+    .iconfont{
+      color: #999;
+      margin-right: 8px;
+      font-size: 26px;
+    }
+  }
+
+  //modules
+  &-module{
+    //padding: @padding_2030;
+    background: #FFFFFF;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+
+    &.padding_2030{
+      padding: @padding_2030;
+    }
+
+    &:not(:first-child){
+      margin-top: @margin_t30;
+    }
+
+    &-head{
+      height: 80px;
+      font-size: 30px;
+    }
+  }
+
+  //支付成功状态
+  &-status{
+    &__success{
+      padding: 62px 0;
+      background-color: #fff;
+
+      .status-images{
+        img{
+          width: 136px;
+          height: 96px;
+        }
+      }
+      .status-descr{
+        width: 541px;
+        margin: 0 auto;
+        margin-top: 62px;
+
+        font-size: 28px;
+        color: #666666;
+        letter-spacing: 0;
+        text-align: center;
+        line-height: 36px;
+      }
+    }
+  }
+
+  //订单信息
+  &-order-data{
+
+    //文字
+    .title{
+      font-size: 30px;
+      color: @color_dark_grey;
+      letter-spacing: -0.38px;
+      line-height: 36px;
+      margin-bottom: 10px;
+    }
+    .descr{
+      font-size: 24px;
+      color: @color_light_grey;
+      letter-spacing: -0.38px;
+      line-height: 28px;
+      margin-bottom: 10px;
+    }
+
+    //订单信息 头部
+    .payment-success-module-head{
+      padding: 0 30px;
+    }
+
+    //订单信息 主体
+    .order-data-list{
+      padding: 0 30px 30px;
+    }
+
+    //订单信息 车信息
+    .car-config-head{
+      .leftImg{
+        padding: 20px 0;
+        img{
+          width: 240px;
+          height: 120px;
+        }
+      }
+      .right{
+        padding-right: 20px;
+      }
+    }
+
+    //订单信息 经销商
+    .car-config-dealer{
+      padding: 30px 0;
+      .left{
+        //padding: 20px 0;
+        font-size: 28px;
+      }
+      .store{
+        font-size: 28px;
+        color: @color_dark_grey;
+        letter-spacing: 0;
+        line-height: 36px;
+      }
+      .phone,.addressinfo{
+        font-size: 24px;
+        color: @color_light_grey;
+        letter-spacing: 0;
+        line-height: 28px;
+      }
+      .addressinfo{
+        margin-top: 20px;
+      }
+    }
+
+    //订单信息 用户
+    .info-list{
+      padding-top: 30px;
+      .item + .item{
+        margin-top: 20px;
+      }
+      .label,.value{
+        font-size: 28px;
+        color: @color_dark_grey;
+        letter-spacing: 0;
+        line-height: 36px;
+      }
+    }
+  }
+
+  //底部按钮
+  &-btnoptions{
+    margin-top: @margin_t30;
+    padding: 12px 0;
+    background-color: #fff;
+
+    &.fixed{
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+    .am-button-small{
+      line-height: 72px;
+      height: 72px;
+      font-size: 30px;
+    }
+    
+
+    .btn_detail,.btn_shop{
+      border: 1px solid @color_orange!important;
+      color: @color_orange;
+      margin-right: 30px;
+      span{
+        display: block;
+      }
+    }
+    .btn_home{
+      border: 1px solid @color_orange;
+      color: #fff;
+      background-color: @color_orange;
+      width: 180px;
+    }
+    .btn_shop{
+      width: 180px;
+    }
+    .btn_detail{
+      width: 240px;
+    }
+  }
+}
+html:not([data-scale]) .am-button-ghost::before{
+  display: none;
+}

@@ -10,7 +10,7 @@ export default class {
     //获取预约列表
     static getAppointment(params) {
         return Request({
-            url: "appointment/list",
+            url: "personal/appointment/list",
             type: "GET",
             data: params,
         });

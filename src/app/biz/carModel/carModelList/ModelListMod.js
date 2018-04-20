@@ -14,7 +14,7 @@ class model {
         list: [],
         total: 0,
         propsList : [],
-        carItemList: []
+        carItemList: {}, // 属性与车型之间的映射 
     };
 
     @action
@@ -27,33 +27,16 @@ class model {
             }
         })
     }
-    //如果设定了useStrict严格模式，那么所有observable的值的修改必须在action定义的方法内，否则可以直接修改
-    //用action定义事件
-    @action
-    async listProps(params) {
-        let {resultCode,data} = await Serv.listProps(params);
-        //如果是异步，必须在runInAction
-        runInAction(()=> {
-            this.state.propsList = data;
-        })
-        //监控数据变化的回调,读取什么参数，即代表将要监控什么数据
-        autorun(() => {
-
-        })
-    }
 
     @action
-    async listItems(params, dealerId) {
-        let {resultCode,data} = await Serv.getItemByprops(params, dealerId);
-        //如果是异步，必须在runInAction
+    async getPropsItem(params) {
+        let {resultCode, data} = await Serv.listSelItem(params);
         runInAction(()=> {
-            this.state.carItemList = data;
+            if(resultCode === 0) {
+                this.state.propsList = data.props;
+                this.state.carItemList = data.propItems;
+            }
         })
-        //监控数据变化的回调,读取什么参数，即代表将要监控什么数据
-        autorun(() => {
-            // console.log('carItemList->', this.state.carItemList)
-        })
-
     }
  }
 

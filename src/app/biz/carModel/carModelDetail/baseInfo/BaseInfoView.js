@@ -17,7 +17,7 @@ class ProductDetailBaseInfo extends Component {
 		this.stores = this.props.productDetailIndex;
 		this.itemId = window.app.router.location.query.itemId
 		this.skusId = window.app.router.location.query.skusId
-		
+		this.dealerId = window.app.router.location.query.dealerId
 	}
 	componentDidMount(){
 		// this.stores.getBaseInfo({itemId: this.stores.currentItemCode})
@@ -55,21 +55,41 @@ class ProductDetailBaseInfo extends Component {
 				</div>
 				<div className='pdb2'>
 					<div className='pdb2_1'>{baseInfo.name}</div>
-
+					<div className='color_orange'>{baseInfo.adWord}</div>
 					<div className='pdb2_2'>{baseInfo.tags}</div>
 
 				</div>
-				<div className='pdb3'>
-					<div className='pdb3_1'>官方指导价：￥<span className='pdb3_price'>{imgDetail.data?Util.changeMoney(imgDetail.data.officialSellPrice):""}万</span> </div>
-					<div className='pdb3_2' onClick={this.noOpen.bind(this)}>
-						<div className='icon icon_follow'></div>
-						<div>关注</div>
-					</div>
-					<div className='pdb3_3' onClick={this.noOpen.bind(this)}>
-						<div className='icon icon_pk'></div>
-						<div>加入对比</div>
-					</div>
-				</div>
+				{
+					this.dealerId?
+						<div className='pdb4'>
+							<div className='pdb3_1'>
+								<div>官方指导价：￥<span className='pdb3_price'>{imgDetail.data?Util.changeMoney(imgDetail.data.officialSellPrice):""}万</span></div>
+								<div>经销商报价：￥{imgDetail.data?Util.changeMoney(imgDetail.data.officialSellPrice):""}万</div>
+							</div>
+							<div className='pdb3_2' onClick={this.noOpen.bind(this)}>
+								<div className='icon icon_follow'></div>
+								<div>关注</div>
+							</div>
+							<div className='pdb3_3' onClick={this.noOpen.bind(this)}>
+								<div className='icon icon_pk'></div>
+								<div>加入对比</div>
+							</div>
+						</div>
+						:
+						<div className='pdb3'>
+							<div className='pdb3_1'>官方指导价：￥<span className='pdb3_price'>{imgDetail.data?Util.changeMoney(imgDetail.data.officialSellPrice):""}万</span> </div>
+							<div className='pdb3_2' onClick={this.noOpen.bind(this)}>
+								<div className='icon icon_follow'></div>
+								<div>关注</div>
+							</div>
+							<div className='pdb3_3' onClick={this.noOpen.bind(this)}>
+								<div className='icon icon_pk'></div>
+								<div>加入对比</div>
+							</div>
+						</div>
+
+				}
+
 			</div>
 		);
 	}

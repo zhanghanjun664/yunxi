@@ -28,7 +28,7 @@ export default class {
 
     static priceSubmit(params) {
         return Request({
-            url: "appointment/drive",
+            url: "personal/appointment/drive",
             type: "POST",
             processData:false,
             contentType:'application/json',
@@ -38,7 +38,7 @@ export default class {
 
     static getUserInfo(params) {
         return Request({
-            url : 'members/info',
+            url : 'personal/members/info',
             data: params,
             type: 'GET'
         })

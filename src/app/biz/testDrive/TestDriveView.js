@@ -140,7 +140,7 @@ class testDrice extends Component {
         // 自动填充姓名和手机号，并判断是否要输入验证码
         this.stores.getUserInfo('', (data) => {
             formData.memberMobile = data.mobile;
-            formData.memberName = data.name
+            formData.memberName = data.name;
             if(data.mobile) {
                 this.setState({hasBind:true})
             }
@@ -175,12 +175,11 @@ class testDrice extends Component {
     getVerCode(e) {
 
         let mobile = this.state.formData.memberMobile;
-        let reg = /^1[3758]\d{9}$/g;
         // 是否正在倒计时
         let {showCountdown} = this.refs.countDown.state;
         
 
-        if(mobile!=='' && reg.test(mobile)) {
+        if(mobile!=='' && Util.checkInput(mobile, 'mobile')) {
             const params = {
                 mobile
             }
@@ -203,6 +202,10 @@ class testDrice extends Component {
         let { formData } = this.state;
         
         formData[key] = value;
+
+        if(key === 'memberName') {
+            formData[key] = value.replace(/[^a-z\u4e00-\u9fa5]/g, '');
+        }
 
         if(key === 'memberMobile') {
             formData[key] = value.replace(/\s/g, '');
@@ -301,6 +304,9 @@ class testDrice extends Component {
             }
         }
 
+         // 加上 areaCode
+        formSub.areaCode = this.getCityID().cityId;
+        console.log(this.getCityID())
 
         if(!isLoading) {
             this.stores.submitAppointMent(formSub).then((data)=> {

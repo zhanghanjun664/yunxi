@@ -1,40 +1,44 @@
 {
-  "data": {
-    "id": "1169249611702874112",
-    "type":2,
-    "name": "日内瓦车展首发 新福克斯有望2018年上市",
-    "publishTime": "2018.03.10",
-    "content": "<p>日前有国内媒体报道称，全新长安福特福克斯有望在2018年内正式投放国内市场。根据此前报道，全新福克斯预计会在3月份开幕的日内瓦车展期间正式发布。</p><p><img src='assets/images/activity/banner01.png' /></p>",
-    "readTotal": 11,
-    "commentTotal": 1,
-    "qrCode": "sfkjksdfdsjdfksdf",
-    "infoType": [1,2,3],
-    "couponList": [
-      {
-        "id":1,
-        "name": "456",
-        "discountValue": 10,
-        "lowestOrderAmt": 100
-      },
-      {
-        "id":2,
-        "name": "4116",
-        "discountValue": 100,
-        "lowestOrderAmt": 1000
-      }
-    ],
-    "commentList": [
-      {
-        "id":1,
-        "userName": "用户1",
-        "imageUrl": "https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/jpg/%E9%80%9A%E6%A0%8F38pc.jpg",
-        "commentTime": "2018-03-10 16:48:00",
-        "commentContent": "太好了，支持福特！！",
-        "replyTime": "2018-03-10 16:48:00",
-        "replyContent": "感谢支持！"
-      }
-    ]
+  "data":{
+      "activityLabel":null,
+      "activityScope":null,
+      "activityScopeName":null,
+      "commentList":null,
+      "commentTotal":0,
+      "content":"",
+      "couponList":[
+          {
+              "areaList":[
+
+              ],
+              "beginDate":null,
+              "couponType":1,
+              "discountValue":12,
+              "endDate":null,
+              "id":"1172896986255336448",
+              "includeFiltersCar":null,
+              "includeFiltersCarDesc":null,
+              "lowestOrderAmt":0,
+              "lowestOrderAmtDesc":null,
+              "name":"满876减32",
+              "qrCode":null,
+              "status":0
+          }
+      ],
+      "enrollBeginTime":"2018-04-17 15:59:54",
+      "enrollEndTime":"2018-04-17 15:59:54",
+      "id":null,
+      "image":"https://zn-image.oss-cn-shenzhen.aliyuncs.com/supplychain-dev/test/home/ZzXB3RWjdb.jpg? ,m_pad,h_165,w_375,color_FFFFFF",
+      "image1":null,
+      "infoType":null,
+      "name":"领券活动-审批测试",
+      "publishTime":"2018-04-17 16:03:24",
+      "qrCode":null,
+      "readTotal":7,
+      "sellerId":null,
+      "subhead":null,
+      "type":1
   },
-  "resultCode": 0,
-  "resultMsg": "success"
+  "resultCode":0,
+  "resultMsg":"success"
 }

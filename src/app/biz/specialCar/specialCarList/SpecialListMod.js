@@ -2,19 +2,16 @@ import React, { PropTypes, Component } from 'react';
 import {observable,action,runInAction,useStrict,autorun} from 'mobx';
 import Serv from './SpecialListServ';
 import Config from 'config/Config';
-/**
- * mod层
- * 业务逻辑，数据逻辑应该存储于此
- */
-//定义为严格模式
+
+
 useStrict(true)
 class SpecialList {
-    //将数据设为被观察者，这意味着数据将成为公共数据
     @observable state = {
         list: [],
         bannerList:[],
         specialList: [],
         position: { label: '广州', postCode: '440100000000' },
+        style:{}
     };
 
     //获取首页数据
@@ -22,6 +19,16 @@ class SpecialList {
     getSpecialData = () => {
         this.getList();
         this.getBannerList();
+    }
+
+    @action
+    setStyle(style){
+        this.state.style = style
+    }
+
+    @action
+    getSpecialList = (params) => {
+        return Serv.getSpecialList(params);
     }
 
     @action

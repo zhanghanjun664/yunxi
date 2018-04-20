@@ -1,0 +1,182 @@
+@import "../../../assets/css/commonCss";
+
+.myorder-detail-complete{
+  @padding_2030: 20px 30px;
+  @margin_t30:30px;
+
+  &-page{
+    padding-top: 30px;
+    // common
+    .f-borderb{
+      border-bottom: 1px solid @color_line;
+    }
+    .text-complete{
+      font-size: 28px;
+      color: #1AAD19;
+      letter-spacing: 0;
+      line-height: 36px;
+    }
+    .text-light-grey{
+      color: @color_light_grey;
+    }
+    .text-grey{
+      color: #666;
+    }
+    .text-dark-grey{
+      color: @color_dark_grey;
+    }
+    .iconfont{
+      color: #999;
+      margin-right: 8px;
+      font-size: 26px;
+    }
+    .mt20{
+      margin-top: 20px;
+    }
+    //底部按钮股定在底部
+    &.btnoptions-fixed{
+      padding-bottom: 90+30px;
+
+      .myorder-detail-complete-btnoptions{
+        width: 100%;
+        height: 90px;
+        position: fixed;
+        bottom: 0;
+        margin-top: 0;
+      }
+    }
+    //必填
+    .required:after {
+      content: '*';
+      color: @color_orange;
+    }
+  }
+
+  //modules
+  &-module{
+    padding: 20px 30px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 12px 0 rgba(224,224,224,0.50);
+
+    &.padding03020{
+      padding: 0 30px 20px;
+    }
+
+    &:not(:first-child){
+      margin-top: @margin_t30;
+    }
+
+    &-head{
+      height: 80px;
+      font-size: 30px;
+    }
+  }
+
+  //预约订单详情
+  &-orderinfo{
+    padding: 0 30px;
+
+    .store{
+      font-size: 30px;
+      color: @color_dark_grey;
+      letter-spacing: 0;
+      line-height: 36px;
+    }
+    .phone{
+      font-size: 24px;
+      color: @color_grey;
+      letter-spacing: 0;
+      line-height: 28px;
+    }
+    .addressinfo,.distance{
+      font-size: 24px;
+      color: @color_light_grey;
+      letter-spacing: 0;
+      line-height: 28px;
+    }
+    .phone{
+      margin-top: 10px;
+    }
+    .address{
+      margin-top: 30px;
+    }
+
+
+    .orderinfo-list{
+      padding: 30px 0;
+
+      .item{
+        +.item{
+          margin-top: 20px;
+        }
+
+        .label,.value{
+          font-size: 28px;
+          color: #333333;
+          letter-spacing: 0;
+          line-height: 36px;
+        }
+      }
+
+
+    }
+  }
+
+  //支付金额
+  &-payment{
+    padding: 30px;
+
+    .price{
+      font-size: 28px;
+      color: @color_dark_grey;
+      letter-spacing: 0;
+      line-height: 36px;
+    }
+    .price_number{
+      font-size: 28px;
+      color: @color_dark_grey;
+      letter-spacing: 0;
+      text-align: right;
+      line-height: 36px;
+    }
+    .amount{
+      font-size: 28px;
+      color: @color_dark_grey;
+      letter-spacing: -0.35px;
+      line-height: 36px;
+    }
+    .amount_number{
+      font-size: 36px;
+      color: @color_orange;
+      letter-spacing: 0;
+      line-height: 40px;
+    }
+
+    .item + .item{
+      margin-top: 20px;
+    }
+  }
+
+  //底部按钮
+  &-btnoptions{
+    padding: 15px 30px;
+    .btn{
+      margin-left: 30px;
+    }
+    .btn_refund::before,
+    .btn_cancel::before{
+      border-color: #FD5C0E !important;
+    }
+    .btn_cancel {
+      border: 1px solid #FD5C0E;
+      color: #FD5C0E;
+      background-color: #fff;
+    }
+    .btn_refund {
+      border: 1px solid #FD5C0E;
+      color: #fff;
+      background-color: #FD5C0E;
+    }
+  }
+
+}

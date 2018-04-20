@@ -181,6 +181,20 @@ Verify.regexPassword = function(str){
     }
 };
 
+/**
+ * 中，英文字符串
+ * @param str
+ * @returns {boolean}
+ */
+Verify.isCNorEng = function(str){
+    var reg = new RegExp(/^[\u4e00-\u9fa5a-zA-Z]+$/)
+    if (reg.test(str)) {
+        return true;
+    }else {
+        return false;
+    }
+};
+
 
 
 export default Verify;

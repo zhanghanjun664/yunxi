@@ -78,7 +78,6 @@ class RefreshListView extends Component {
 
     //加载数据函数
     _fetchData = (pageNum = 1) => {
-
         this.props.fetchData && this.props.fetchData(pageNum, (list, pageNum=1, pages=0) => {
             console.log("pages:"+pages+" pageNum:"+ pageNum)
             //请求成功

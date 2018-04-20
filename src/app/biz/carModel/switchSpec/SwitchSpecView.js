@@ -44,6 +44,18 @@ class SwitchSpec extends Component {
     this.stores.getCheckAndDisableList(item)
   }
 
+  handleSubmit(){
+    this.stores.submit((skusId) => {
+      let urls = `/carModelDetail?itemId=${this.itemId}&skusId=${skusId}`
+      let dealerId = window.app.router.location.query.dealerId
+      if(dealerId&&dealerId!='undefined'){
+        urls += '&dealerId='+dealerId
+      }
+      window.app.routerGoTo(urls)
+      
+    })
+  }
+
 
   render() {
     const { switchSpec, baseInfo, dataSource, canSubmitSku } = this.stores.state
@@ -87,10 +99,7 @@ class SwitchSpec extends Component {
           <Button
            className='ac_footerBtn'
            disabled={!canSubmitSku}
-           onClick={e=> this.stores.submit(e, (skusId) => {
-            window.app.routerGoTo(`/carModelDetail?itemId=${this.itemId}&skusId=${skusId}`)
-            
-          })}>确定</Button>
+           onClick={e=> this.handleSubmit()}>确定</Button>
         </div>
 
       </div>

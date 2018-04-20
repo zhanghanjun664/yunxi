@@ -1,0 +1,201 @@
+@import "../../assets/css/commonCss";
+.bjsend-ok  {
+  .top-block {
+    text-align: center;
+    background: #fff;
+    font-size: 28px;
+    color:#666;
+    padding: 20px 0 60px;
+    box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.3);
+    .iconfont {
+      color:#F33037;
+      font-size: 160px;
+      margin-left:-40px;
+    }
+  }
+  .mid-block {
+    position: absolute;
+    bottom: 0;
+    top:370px;
+    width:100%;
+    margin-top:40px;
+    background: #fff;
+    text-align: center;
+    padding:100px 0 0 0;
+    .gray-text {
+      font-size: 28px;
+      color:#9999;
+    }
+  }
+  .bot-block{
+    position: absolute;
+    bottom: 0;
+    padding: 20px 0 15px;
+    width: 100%;
+    border-top:1px solid #e0e0e0;
+    .am-button {
+      background: #FD5C0E;
+      display: inline-block;
+      color:#fff;
+      font-size: 28px;
+      height: 72px;
+      line-height: 72px;
+      width: 180px;
+    }
+  }
+}
+.bj-page-warpper {
+  height: 100%;
+  background: url(~assets/images/bjexhi/bjbg.png) no-repeat;
+  background-size: cover;
+  .top-logo {
+    text-align: center;
+    font-size: 120px;
+    padding:50px 0 0;
+    color:#13487C;
+  }
+  .bj-page{
+    margin: 30px 0 0;
+  }
+  
+}
+  .fill-form{
+    padding: 40px 30px 30px;
+    .am-list-item{
+      border: 1px solid #E6E6E6;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      &.selected{
+        border: 1px solid #0F68B0;
+      }
+      &.am-textarea-item{
+        //min-height: 160px;
+      }
+      &.am-input-item{
+        height: 80px;
+        padding-left: 20px;
+        .am-input-control{
+          line-height: 0.36rem;
+          input{
+            color: #333333;
+            font-size: 0.28rem;
+          }
+        }
+      }
+      .am-input-label,.am-textarea-label{
+        font-size: 24px;
+        color: #0F68B0;
+        margin-right: 15px;
+        &.am-input-label-5{
+          width: 107px;
+        }
+        &.am-textarea-label{
+          width: 107px;
+          margin-right: 0;
+        }
+      }
+      .required{
+        display: inline-block;
+        position: relative;
+        span {
+          color: #FD5C0E;
+          position: absolute;
+          right: -10px;
+        }
+      }
+      .code{
+        overflow: hidden;
+        color: #333;
+        .get-code{
+          cursor: pointer;
+          font-size: 28px;
+          color: #FD5C0E;
+          position: absolute;
+          right: 20px;
+        }
+      }
+    }
+    .fill-more{
+      font-size: 24px;
+      color: #999999;
+      padding: 20px 0;
+    }
+    .cost-time-range{
+      font-size: 24px;
+      color: #0F68B0;
+      padding: 22px 20px;
+      background-color: #fff;
+      border: 1px solid #E6E6E6;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      position: relative;
+      display: flex;
+      .cost-selected{
+        border: 0;
+        font-size: 28px;
+        margin-left:20px;
+        display: inline-block;
+        color:#666;
+        flex:1;
+      }
+      .arrow{
+        display: inline-block;
+        width: 22px;
+        height:20px;
+        background: url("../../assets/images/askPrice/down.png") no-repeat center;
+        position: absolute;
+        top:34px;
+        right:30px;
+        background-size: 100%;
+      }
+      .required{
+        display: inline-block;
+        position: relative;
+        span {
+          color: #FD5C0E;
+          position: absolute;
+          right: -10px;
+        }
+      }
+    }
+  }
+
+//提交按钮
+.submit-btn{
+  text-align: center;
+  margin-top:40px;
+  padding: 0 20px 40px;
+  a {
+    color:#fff;
+    background: #FD5C0E;
+    box-shadow: 0 18px 18px 0 rgba(253, 92, 14, 0.3);
+  }
+  p{
+    font-size: 24px;
+    color: #666666;
+    margin-top: 30px;
+    line-height: 26px;
+    text-align: left;
+    i{
+      display: inline-block;
+      width: 26px;
+      height:26px;
+      background: url("~assets/images/askPrice/checkbox_on.png");
+      background-size: 100%;
+      margin-right: 12px;
+      vertical-align: bottom;
+    }
+    span{
+      color: #0F68B0;
+    }
+  }
+  .have-tel{
+    color: #999999;
+    i{
+      width: 24px;
+      height: 24px;
+      background: url("~assets/images/askPrice/tips.png") no-repeat;
+      background-size: 100%;
+    }
+  }
+}

@@ -101,8 +101,8 @@ class InquireDealerView extends Component {
 
     fetchData = (pageNum, success, error) => {
         let params = {   //在这里添加剩余的参数就好了
-            pageSize:20,
-            pageNum:1,
+            pageSize:10,
+            pageNum:pageNum,
             cityId:'440000000000',
             longitude:23.10674,
             latitude:113.440332,

@@ -46,7 +46,7 @@ export default class {
     //特惠车型
     static getDiscountCarList(params) {
         return Request({
-            url: "caf/jdcloud/index/specialItem",
+            url: "caf/jdcloud/item/special-cars",
             type: "GET",
             data: params
         })

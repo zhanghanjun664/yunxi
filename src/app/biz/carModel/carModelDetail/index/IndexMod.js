@@ -7,12 +7,13 @@ useStrict(true)
 class ProductDetailIndex {
   @observable state = {
     navTab: 0,
-    skusId: '',
-    baseInfo: {},
-    commentData: {},
-    nearbyInfo: {},
-    carConfig: {},
-    activityList: [],
+    skusId: '',//
+    baseInfo: {},//
+    commentData: {},//评论
+    nearbyInfo: {},//附近经销商
+    carConfig: {},//detail-info
+    activityList: [],//活动
+    dealerInfo: {}, //经销商信息
     imgDetail: {
       activeIndex: 0,
       data: {},
@@ -438,10 +439,9 @@ class ProductDetailIndex {
   }
 
   @action
-  submit(e, cbf) {
+  submit(cbf) {
     let { selectedSkusIdList } = this.state
     let newSkuIdList = []
-    console.log(selectedSkusIdList)
     Object.keys(selectedSkusIdList).map((k, i) => {
       newSkuIdList.push(...selectedSkusIdList[k])
     })
@@ -510,6 +510,23 @@ class ProductDetailIndex {
       this.state.activityList = data.data.list
     })
   }
+
+  /**
+     * 经销商查询 
+     * @param {*} params {
+     *  dealerId:云店id
+     *  longtitude:经度
+     *  latitude:纬度
+     *  areaCode:城市编码
+     * }
+     */
+    @action
+    async getDealerInfo(params) {
+        let {data, resultCode, resultMsg} = await Serv.getDealerInfo(params);
+        runInAction(() => {
+            this.state.dealerInfo = data ;
+        })
+    }
 
 
 }

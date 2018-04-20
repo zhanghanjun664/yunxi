@@ -6,14 +6,13 @@ import Config from 'config/Config';
 import Util from 'util';
 import './IndexLess.less';
 
-// const SearchItem = () => (   <div className={search - item}>Block</div> );
 
 /*
 * qinglang - lyf
 * 搜索页
 */
 
-//将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
+@inject('search')
 @observer
 class HomeView extends Component {
     constructor(props, context) {
@@ -45,7 +44,7 @@ class HomeView extends Component {
             <div className="search-page">
                 <div className="title">
                     <div className="search-box">
-                        <SearchBar placeholder="搜索经销商、新闻或您关注的车型" showCancelButton/>
+                        <SearchBar placeholder="搜索经销商、新闻或您关注的车型" />
                     </div>
                 </div>
                 <div className="content">

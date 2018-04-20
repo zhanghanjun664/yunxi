@@ -16,17 +16,17 @@ class ModelList extends Component {
   constructor(props, context) {
     super(props, context)
     this.stores = this.props.productDetailIndex;
-    this.state = {
-      qjList: [],
-      wgList: [],
-      zkList: [],
-      zyList: [],
-      xjList: [],
-      spList: []
-    }
     this.itemId = this.props.location.query.itemId
     this.skusId = this.props.location.query.skusId
     this.sellPrice = this.props.location.query.sellPrice
+    this.tabsBox = [
+      { title: "全景", isShow: true },
+        { title: "外观", isShow: true },
+        { title: "中控", isShow: true },
+        { title: "座椅", isShow: true },
+        { title: "细节", isShow: true },
+        { title: "视频", isShow: false },
+      ]
   }
   type = Util.getQueryString('ci_type')
   renderTabs = tab => (
@@ -45,7 +45,6 @@ class ModelList extends Component {
         this.stores.getCarConfig({
           itemId: this.itemId
         })
-    console.log(baseInfo)
 
   }
   componentDidMount() {
@@ -102,19 +101,19 @@ class ModelList extends Component {
     if(data.length){
       return (
         <div>
-                  <ul>
-                    {
-                      data.map(((item, index) => {
-                        return (
-                          <li className='ci_imgItem' key={index}>
-                            <img src={item.fileUrl} />
-                          </li>
-                        )
-                      }))
-                    }
-  
-                  </ul>
-                </div>
+          <ul>
+            {
+              data.map(((item, index) => {
+                return (
+                  <li className='ci_imgItem' key={index}>
+                    <img src={item.fileUrl} />
+                  </li>
+                )
+              }))
+            }
+
+          </ul>
+        </div>
       )
 
     }
@@ -123,12 +122,14 @@ class ModelList extends Component {
   render() {
     const { data, tabsBox } = this.stores.state.imgDetail
     const { qjList, wgList, zkList, zyList, xjList, spList } = this.stores.state.imgDetail.imgList
-    const lsTabsBox = tabsBox.filter(item => item.isShow)
+    const lsTabsBox = this.tabsBox.filter(item => item.isShow)
     console.log(lsTabsBox)
     return (
       <div className='carImages'>
 
-        <Tabs tabs={lsTabsBox}
+      {
+        lsTabsBox&&lsTabsBox.length>0&& (
+          <Tabs tabs={lsTabsBox}
           renderTab={this.renderTabs}
           initialPage={this.type == 'video' ? 5 : 0}
           onTabClick={(tab, index) => this.changeTab(tab, index)}
@@ -223,6 +224,9 @@ class ModelList extends Component {
             )
           }
         </Tabs>
+        )
+      }
+        
 
 
         <div className='ci_footer'>

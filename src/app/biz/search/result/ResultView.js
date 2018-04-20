@@ -13,7 +13,7 @@ import ResultColumnCar from '../components/resultColumnCar/ResultColumnCar';
 * 搜索结果页
 */
 
-//将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
+@inject('search')
 @observer
 class SearchResultView extends Component {
     constructor(props, context) {
@@ -42,13 +42,18 @@ class SearchResultView extends Component {
         let url = tab.title.props['data-url'];
         this.toUrl('/searchResult/' + url);
     };
+    handleSubmit(){
+        console.log(11111111)
+    }
     render() {
         // const { adList, style } = this.stores.state
         return (
             <div className="search-result">
                 <div className="title">
                     <div className="search-box">
-                        <SearchBar showCancelButton/>
+                        <SearchBar 
+                            onSubmit={this.handleSubmit.bind(this)}
+                        />
                     </div>
                     <div className="search-result-tabs">
                         <Tabs

@@ -11,7 +11,7 @@ export default class {
 
     static getMemberinfo(params) {
         return Request({
-            url : 'members/info',
+            url : 'personal/members/info',
             data: params,
             type:'GET'
         })

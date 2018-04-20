@@ -27,7 +27,7 @@ export default class {
     static postActivityInfo(params) {
         console.log(params)
         return Request({
-            url: "mall/activity/attend",
+            url: "mall/activity/personal/attend",
             type: "POST",
             data: params
         })
@@ -35,7 +35,7 @@ export default class {
     // 获取用户信息
     static getUserInfo() {
         return Request({
-            url: "members/info",
+            url: "personal/members/info",
             type: "GET"
         })
     }
@@ -51,6 +51,20 @@ export default class {
     static getDealers(params) {
         return Request({
             url: "caf/jdcloud/dealer/offers",
+            type: "GET",
+            data:params
+        })
+    }
+     /**
+     * 领取优惠券
+     * @param {*} params {
+     *   couponId  --优惠券id
+     *   activityId  --活动id
+     * }
+     */
+    static getCoupon(params) {
+        return Request({
+            url: "mall/coupon/add",
             type: "GET",
             data:params
         })

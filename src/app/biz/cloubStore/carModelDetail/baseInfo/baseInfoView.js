@@ -21,15 +21,19 @@ class ProductDetailBaseInfo extends Component {
 			sku:{
 				officialSellPrice:0,
 				sellerSellPrice:0
-			}
+			},
+			adWord:''
 		}
 		this.itemId = Util.getQueryString('itemId') ;
 		this.dealerId = Util.getQueryString('dealerId') ;
+		//this.skusId = window.app.router.location.query.skusId
 	}
 
 	componentWillReceiveProps(newProps){
 		let carDetailBaseInfo  = newProps.carDetailBaseInfo ;
-		
+		this.setState({
+			adWord:carDetailBaseInfo.adWord
+		}) ;
 		if (carDetailBaseInfo.skus!=null&&carDetailBaseInfo.skus.length>0){
 			this.setState({sku:carDetailBaseInfo.skus[0]}) ;
 		}
@@ -40,7 +44,7 @@ class ProductDetailBaseInfo extends Component {
 		return(
 			<div className='pdbc'>
 				<span>
-					{this.state.sku.adWord}
+					{(this.state.sku.adWord==null ||this.state.sku.adWord=='') ? this.state.adWord : this.state.sku.adWord}
 				</span> 
 			</div>
 		) ;
@@ -92,7 +96,7 @@ class ProductDetailBaseInfo extends Component {
 //<div className='pdb2_1'>福特福克斯 1.5T <span className='pdb2_Type'>EcoBoost</span> 自动旗舰型</div>
 	render() {
 		let {carDetailBaseInfo,followFlag,carDetailInfo}  = this.props ;	
-			
+		
 
 		return (
 			<div className="productDetailBaseInfo">
@@ -107,7 +111,7 @@ class ProductDetailBaseInfo extends Component {
 						</div>
 						<div onClick={
 							()=>
-							this.toUrl(`/carImages?itemId=${this.itemId}&dealerId=${this.dealerId}&sellPrice=${this.state.sku.sellerSellPrice}`)
+							this.toUrl(`/cloubStore/cloubCarImages?itemId=${this.itemId}&dealerId=${this.dealerId}&sellPrice=${this.state.sku.sellerSellPrice}`)
 						}>图片</div>
 					</div>
 				</div>

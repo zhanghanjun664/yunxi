@@ -37,7 +37,7 @@ export default function(obj) {
       contentType: parameter.contentType,
       processData:parameter.processData,
       data: parameter.data,
-      timeout:25000,
+      timeout:20000,
       statusCode: {
         401: function(r) {
           //跳注册页面
@@ -47,6 +47,7 @@ export default function(obj) {
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
         reject("失败了");
+        Toast.fail('服务器开小差了！');
       },
       success: function(data) {
         if ('resultCode' in data) {

@@ -22,6 +22,15 @@ import { List , Toast } from 'antd-mobile';
 @observer */
 class SelectBox extends Component{
 
+	constructor(props){
+		super(props);
+
+	}
+
+	onSwitchSpecClick = (e) => {
+		window.app.routerGoTo(`/cloubStore/cloubSwitchSpec?itemId=`+this.props.itemId+'&dealerId='+this.props.dealerId) ; 
+	}
+
 	drawLine(carDetailBaseInfo){
 
 		let skus = carDetailBaseInfo.skus||[] ; 
@@ -34,7 +43,7 @@ class SelectBox extends Component{
 			let labelName = (props.length>1) ? '已选规格':`已选${props[0].name}`  ;
 			
 			return(
-				<li className='pdSelectBox_item'>
+				<li className='pdSelectBox_item' onClick={this.onSwitchSpecClick}>
 						<div>{labelName}：</div>
 						<div className='pdSelectBox_item2'>
 							<span className='hidden'>未选择</span>
@@ -64,15 +73,19 @@ class SelectBox extends Component{
 		return '' ;
 	}
 
+	onCarModelListClick = (e) => {
+		window.app.routerGoTo(`/carModelList?itemId=`+this.props.itemId+'&dealerId='+this.props.dealerId+'&tabBarType=1') ; 
+	}
+
 	render(){
 		let {carDetailBaseInfo} = this.props ; 
 		
 		return (
 			<div>
 				<ul className='pdSelectBox'>
-					<li className='pdSelectBox_item'>
+					<li className='pdSelectBox_item' onClick={this.onCarModelListClick}>
 						<div>已选车型：</div>
-						<div className='pdSelectBox_item2'>
+						<div className='pdSelectBox_item2' >
 							<span className='hidden'>未选择</span>
 							{/* <span>1.8T/紧凑型/自动变速箱</span> */}
 							<span>{carDetailBaseInfo.name}</span>
@@ -517,8 +530,8 @@ class ProductDetailIndex extends Component {
 					<div className={navTab===2?'active':''} onClick={() => this.changeNavTab(2)}>详细配置</div>
 					<div className={navTab===3?'active':''} onClick={() => this.changeNavTab(3)}>活动信息</div>
 				</div>
-				<Baseinfo carDetailBaseInfo={carDetailBaseInfo} followFlag={followFlag} carDetailInfo={carDetailInfo} />
-				<SelectBox carDetailBaseInfo={carDetailBaseInfo} />
+				<Baseinfo dealerId={this.dealerId} carDetailBaseInfo={carDetailBaseInfo} followFlag={followFlag} carDetailInfo={carDetailInfo} />
+				<SelectBox carDetailBaseInfo={carDetailBaseInfo}  itemId={this.itemId} dealerId={this.dealerId} />
 				<DistributorInfo dealerInfo={dealerInfo} />
 				<div className='component_pdc'>
 					<div className='component_pdc_title'>评论</div>

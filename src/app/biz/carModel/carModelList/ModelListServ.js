@@ -12,6 +12,7 @@ export default class {
         })
     }
 
+    // 即将弃用
     static listProps(params) {
         return Request({
             url: "caf/jdcloud/item/car/filter-props",
@@ -20,6 +21,7 @@ export default class {
         })
     }
 
+     // 即将弃用
     static getItemByprops(params, d) {
         return Request({
             url: "caf/jdcloud/item/car?dealerId=" + d,
@@ -27,6 +29,15 @@ export default class {
             data: JSON.stringify(params),
             contentType:'application/json', 
             processData:false,
+        })
+    }
+
+    // 列出可筛选属性和车型
+    static listSelItem(params) {
+        return Request({
+            url: "caf/jdcloud/item/car/list",
+            type: "GET",
+            data: params
         })
     }
 

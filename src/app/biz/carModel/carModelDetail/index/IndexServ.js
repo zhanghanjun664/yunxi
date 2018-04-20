@@ -50,4 +50,22 @@ export default class {
             data: params
         })
     }
+
+    /**
+     * 经销商查询 
+     * @param {*} params {
+     *  dealerId:云店id
+     *  longtitude:经度
+     *  latitude:纬度
+     *  areaCode:城市编码
+     * }
+     */
+    static getDealerInfo(params){
+        return Request({
+            url: "caf/jdcloud/dealer",
+            type: "GET",
+            data: params
+        })
+            
+    }
 };

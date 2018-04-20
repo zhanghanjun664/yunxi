@@ -4,7 +4,8 @@ import { inject ,observer} from 'mobx-react';
 import Style from './SpecialListLess.less';
 import { SearchBar,Drawer, List , Flex, Carousel } from 'antd-mobile';
 import TabBar from 'pubBiz/tabBar/TabBarView'
-import cx from 'classnames'
+import { RefreshListView } from 'widget';
+import Util from 'util';
 
 @inject("specialList")
 //将组件设置为响应式组件，成为观察者，以便响应被观察数据的变化
@@ -16,6 +17,10 @@ class SpecialList extends Component {
     }
 
     componentDidMount() {
+        this.refs.list.start()
+        this.stores.setStyle({
+            height: Util.getScrollHeight(['banner', 'discount-header'])
+        })
         this.getData();
     }
 
@@ -35,6 +40,42 @@ class SpecialList extends Component {
             let urls = '/carModelDetail?itemId='+data.itemId
             window.app.routerGoTo(urls)
         }
+    }
+
+    fetchData = async (pageNum, success, error) => {
+        let params = {
+            pageNum: pageNum,
+            pageSize: 5,
+            cityCode: '0000'
+        };
+
+        let { data, resultCode, resultMsg } = await this.stores.getSpecialList(params);
+        success(data.list, data.pageNum, data.pages);
+    }
+
+    toUrl(url){
+        window.app.routerGoTo(url)
+    }
+
+    renderRow = (rowData, sectionID, rowID) => {
+        return (
+            <div className="product-item" onClick={this.toUrl.bind(this, '/carModelDetail?itemId='+rowData.id+"&dealerId="+rowData.dealerId)}>
+                <div className="img-wrap">
+                    <img src={rowData.imgUrl} />
+                </div>
+                <div className="product-name ellipsis-two">
+                    {rowData.name}<span className="color-sky">({rowData.adWord})</span>
+                </div>
+                <div className="product-price">
+                    <span>￥{rowData.advicePrice}</span>
+                    <del>￥{rowData.sellPrice}</del>
+                </div>
+                {/* <div className='product-item-label'>
+                    <i className='iconfont icon-remenhaoche' />
+                    <span>热门好车</span>
+                </div> */}
+            </div>
+        )
     }
 
     render() {
@@ -71,46 +112,19 @@ class SpecialList extends Component {
                 <div className="home-module discount-cars">
                     <div className="discount-header">
                         <span className="discount-title">超值好车</span>
-                        <span className="discount-address"><i className="icon iconfont  icon-dingwei"></i>城市名</span>
+                        <span className="discount-address"><i className="icon iconfont  icon-dingwei"></i>{Util.getCityID().cityName}</span>
                     </div>
-                    <div className="product-list">
-                        {specialList.map((item, index) => {
-                            return (
-                                <div className="product-item" key={'discountcar' + index}>
-                                    <div className="img-wrap">
-                                        <img src="assets/images/home/car02.png" />
-                                    </div>
-                                    <div className="product-name ellipsis-two">
-                                        福克斯 2015款 1.5T自动精英型<span className="color-sky">(库存车型，数量有限)</span>
-                                    </div>
-                                    <div className="product-price">
-                                        <span>￥95,800</span>
-                                        <del>￥100,000</del>
-                                    </div>
-                                    <div className='product-item-label'>
-                                        <i className='iconfont icon-remenhaoche' />
-                                        <span>热门好车</span>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                        <div className="product-item">
-                            <div className="img-wrap">
-                                <img src="assets/images/home/car02.png" />
-                            </div>
-                            <div className="product-name ellipsis-two">
-                                福克斯 2015款 1.5T自动精英型<span className="color-sky">(库存车型，数量有限)</span>
-                            </div>
-                            <div className="product-price">
-                                <span>￥95,800</span>
-                                <del>￥100,000</del>
-                            </div>
-                            <div className='product-item-label'>
-                                <i className='iconfont icon-remenhaoche' />
-                                <span>热门好车</span>
-                            </div>
-                        </div>
-
+                    
+                    <div className='product-list'>
+                        <RefreshListView
+                            fetchData={this.fetchData}
+                            renderRow={this.renderRow}
+                            ref="list"
+                            first={false}
+                            useBodyScroll={false}
+                            style={this.stores.state.style}
+                            pullToRefresh={true}
+                        />
                     </div>
                 </div>
             </div>

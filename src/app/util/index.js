@@ -118,6 +118,10 @@ class util {
     static changeMoney(str) {
         return (Number(str)/10000).toFixed(2);
     }
+    // 米->千米
+    static changeDistance(str) {
+        return (Number(str)/1000).toFixed(2);
+    }
     // 处理url
     static getUrl(url) {
         console.log(url)

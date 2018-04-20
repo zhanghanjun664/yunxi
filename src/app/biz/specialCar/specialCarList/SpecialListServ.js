@@ -18,6 +18,13 @@ export default class {
             data: params
         })
     }
+    static getSpecialList(params) {
+        return Request({
+            url: "caf/jdcloud/item/special-cars",
+            type: "GET",
+            data: params
+        })
+    }
 
 
 };

@@ -137,7 +137,7 @@ class HomeView extends Component {
 					<div className="logo" onClick={this.logoBannerToUrl.bind(this, logoData)}>
 						<img src={logoData.imgUrl} />
 					</div>
-					<Flex.Item className="input-wrap" onClick={this.noOpen.bind(this)}>
+					<Flex.Item className="input-wrap" onClick={this.toUrl.bind(this, '/search')}>
 						<div className="input-box">
 							<span>搜索您想要的车型</span>
 							<i className="iconfont icon-sousuo"></i>
@@ -273,16 +273,16 @@ class HomeView extends Component {
 						<div className="product-list">
 							{discountCarList.map((item, index) => {
 								return (
-									<div className="product-item" key={'discountcar' + index}>
+									<div className="product-item" key={'discountcar' + index} onClick={this.toUrl.bind(this, '/carModelDetail?itemId='+item.id+'&dealerId='+item.dealerId)}>
 										<div className="img-wrap">
-											<img src="assets/images/home/car02.png" />
+											<img src={item.imgUrl} />
 										</div>
 										<div className="product-name ellipsis-two">
-											福克斯 2015款 1.5T自动精英型<span className="color-sky">(库存车型，数量有限)</span>
+											{item.name}<span className="color-sky">({item.adWord})</span>
 										</div>
 										<div className="product-price">
-											<span>￥95,800</span>
-											<del>￥100,000</del>
+											<span>￥{item.advicePrice}</span>
+											<del>￥{item.sellPrice}</del>
 										</div>
 									</div>
 								)
@@ -320,7 +320,7 @@ class HomeView extends Component {
 											<img src={item.image} />
 										</div>
 										<div className="card-footer activity-footer">
-											<div className='ellipsis'>{item.name}</div>
+											<div className='ellipsis'><span>{item.subhead}</span>{item.name}</div>
 										</div>
 									</div>
 								)

@@ -36,14 +36,20 @@ class complateInfo extends Component {
         if(key==='phone') {
             formData[key] = val.replace(/\s+/g, '')
         }
+
+        if(key === 'name') {
+            formData[key] = val.replace(/[^a-z\u4e00-\u9fa5]/g, '');
+        }
+
+        this.setState({
+            formData
+        })
     }
 
     getVercode(e) {
         let { phone } = this.state.formData;
 
-        let reg = /^1[3758]\d{9}$/g;
-
-        if(phone!=='' && reg.test(phone)) {
+        if(phone!=='' && Util.checkInput(phone, 'mobile')) {
             const params = {
                 mobile:phone
             }
@@ -70,8 +76,16 @@ class complateInfo extends Component {
         if(!formData.phone) {
             return Toast.fail('请输入手机号')
         }
+        if(!Util.checkInput(formData.memberMobile, 'mobile')) {
+            return Toast.info('请输入正确的手机号', 1.5)
+        }
+
         if(!formData.verifyCode) {
             return Toast.fail('请输入验证码')
+        }
+
+        if(!Util.checkInput(formData.verifyCode, 'verifyCode')) {
+            return Toast.info('验证码为6位数字', 1.5)
         }
 
         if(!isLoading) {
@@ -87,6 +101,7 @@ class complateInfo extends Component {
     render() {
         let labelname = this.state.labelname;
         let {imgUrl} = this.stores.state.curUser;
+        let {formData} = this.state;
         return (
             <div className="complate-height">
             <div className="complate-info-page">
@@ -98,6 +113,7 @@ class complateInfo extends Component {
                     <InputItem
                         maxLength={20}
                         onChange={x=>this.onChange(x, 'name')}
+                        value={formData.name}
                         placeholder="请输入姓名"
                     />
                 </div>
@@ -106,6 +122,7 @@ class complateInfo extends Component {
                     <InputItem
                         type="phone"
                         onChange={x=>this.onChange(x, 'phone')}
+                        value={formData.phone}
                         placeholder="请输入手机号码 "
                     />
                 </div>
@@ -114,6 +131,7 @@ class complateInfo extends Component {
                     <InputItem
                         placeholder="请输入验证码"
                         type="number"
+                        value={formData.verifyCode}
                         maxLength={6}
                         onChange={x=>this.onChange(x, 'verifyCode')}
                     />

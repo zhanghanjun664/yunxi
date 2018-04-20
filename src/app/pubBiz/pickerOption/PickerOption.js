@@ -28,7 +28,8 @@ class PickerOption extends Component {
         this.state = {
             titles : {
                 'budget' : '预算区间',
-                'buytime' : '期望购车时间'
+                'buytime' : '期望购车时间',
+                'fastitem' : '意向车型'
             },
             mapsArr:[],
             value:[1],
@@ -76,6 +77,42 @@ class PickerOption extends Component {
                             value: 5,
                         }
                     ]
+                ],
+                'fastitem': [
+                    [
+                        {
+                            label:'福特福睿斯',
+                            value:1
+                        },
+                        {
+                            label:'福特福克斯',
+                            value:2
+                        },
+                        {
+                            label:'福特新蒙迪欧',
+                            value:3
+                        },
+                        {
+                            label:'福特新蒙迪欧插电混动版',
+                            value:4
+                        },
+                        {
+                            label:'福特金牛座',
+                            value:5
+                        },
+                        {
+                            label:'福特翼搏',
+                            value:6
+                        },
+                        {
+                            label:'新福特翼虎',
+                            value:7
+                        },
+                        {
+                            label:'福特锐界',
+                            value:8
+                        }
+                    ]
                 ]
             }
         };
@@ -87,7 +124,8 @@ class PickerOption extends Component {
         this.setState({
             mapsArr: {
                 budget: datas.budget[0].map(x=>x.label),
-                buytime: datas.buytime[0].map(x=>x.label)
+                buytime: datas.buytime[0].map(x=>x.label),
+                fastitem: datas.fastitem[0].map(x=>x.label)
             }
         })
     }
@@ -116,6 +154,7 @@ class PickerOption extends Component {
     }
 
     onChange(val, name) {
+        
         let { onChange, type } = this.props;
         let arr = this.state.mapsArr[type];
         

@@ -1,3 +1,5 @@
+import paymentSuccess from 'biz/carModel/paymentSuccess/PaymentSuccessMod';
+import confirmOrder from 'biz/carModel/confirmOrder/ConfirmOrderMod';
 import modelList from 'biz/carModel/carModelList/ModelListMod';
 import productDetailIndex from 'biz/carModel/carModelDetail/index/IndexMod';
 import home from 'biz/home/index/IndexMod';
@@ -17,9 +19,13 @@ import inquireDealer from 'biz/store/inquireDealer/InquireDealerMod';
 import staffs from 'biz/staffs/StaffsMod';
 import myCoupon from 'biz/my/myCoupon/MyCouponMod';
 import specialList from 'biz/specialCar/specialCarList/SpecialListMod';
+import search from 'biz/search/index/IndexMod';
+import bjexhi from 'biz/bjexhi/BjexhiMod';
 
 // 在这里为所有的组件进行导出，将其注册到根组件
 export default{
+    paymentSuccess,
+    confirmOrder,
     modelList,
     productDetailIndex,
     home,
@@ -39,4 +45,6 @@ export default{
     staffs,
     myCoupon,
     specialList,
+    search,
+    bjexhi,
 }

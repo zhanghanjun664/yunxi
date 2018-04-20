@@ -26,7 +26,8 @@ class ActivityDetails {
         checkCode: null,            //验证码
         sending:{
             code: false,
-            signUp: false
+            signUp: false,
+            getCoupon: false
         },
         userInfo: {},
         modelDetail: {},
@@ -75,6 +76,21 @@ class ActivityDetails {
             this.state.dealerList = data.list
             cbf&&cbf(data.list)
         })
+    }
+
+    /**
+     * 领取优惠券
+     * @param {*} params {
+     *   couponId  --优惠券id
+     *   activityId  --活动id
+     * }
+     */
+    @action
+    async getCoupon(params) {
+        if(this.state.sending.getCoupon) return
+        this.state.sending.getCoupon = true;
+        await Serv.getCoupon(params) ;
+        this.state.sending.getCoupon = false;
     }
 
     // 获取验证码

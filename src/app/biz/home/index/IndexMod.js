@@ -14,7 +14,7 @@ class Home {
         newsList: [],
         quickLinkList: [],
         hotCarList: [],
-        discountCarList: [1,2,3],
+        discountCarList: [],
         hotActivityList: [],
         position: { label: '广州', postCode: '440100000000', provinceCode: "" },
         logoData: {},
@@ -103,8 +103,8 @@ class Home {
     @action
     async getDiscountCarList() {
         let params = {
-            type: '1',
-            areaCode: this.state.position.postCode
+            pageSize: '4',
+            cityCode: this.state.position.postCode
         };
         let {data, resultCode, resultMsg} = await Serv.getDiscountCarList(params);
         runInAction(()=> {
