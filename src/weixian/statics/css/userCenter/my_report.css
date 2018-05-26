@@ -1,0 +1,16 @@
+@charset "utf-8";
+.publish .m_icon{background-position: -100px 0;}
+.w658{width:658px;_width:655px;}
+.publish .barea{width: 658px; _width:655px;height: 176px; overflow: auto;}
+.publish .button{height: 31px; background: #4d8dd7;padding: 0 20px; color: #fff;border: none; cursor: pointer; border-radius: 3px;}
+.sel_city{margin-top: 15px;}
+.sel_city p{ float:left;position: relative; width:60px; height: 25px; line-height: 25px;text-align: center; border:2px solid #adcff2; margin-right: 10px; margin-bottom: 10px;}
+.sel_city span{font-weight: bold;}
+.sel_city .close_icon{ display:none; position: absolute;width: 12px; height: 12px; background: url(../../images/uCenter/ucenter_icon.png) no-repeat -145px -4px; top:-6px;right: -6px; cursor: pointer;}
+.b_set p{float: left;}
+.b_set .btext{float:left;display:block; width:88px; height: 34px; text-align: center; color: #667079; cursor: pointer; background: #c7e3ff;border-radius: 3px;}
+.b_set .res_icon{background-position: -120px 0;margin:6px 8px;}
+.b_set .rel{float:left; width: 128px;}
+.b_set .abs{display:none; top:0;right: -65px;width:100px; border:2px solid #c7e3ff; border-bottom-width: 1px; background: #fff; z-index: 2; overflow: hidden;}
+.b_set .abs li{border-bottom: 1px solid #c7e3ff; padding-left:10px; cursor: pointer;}
+.b_set .warms{color: #ff6147;}

@@ -1,0 +1,18 @@
+@charset "utf-8";
+.popcard{position:absolute; width:386px; overflow: hidden;}
+.popcard .b_card{width:360px; padding: 8px 12px;border:1px solid #4c8dd6;border-radius: 3px; overflow: hidden;}
+.popcard .card_icon{width:20px; height: 13px; background: url(../images/uCenter/ucenter_icon.png) no-repeat -37px -24px; margin-top: -1px; margin-left:20px;}
+.popcard .card_info{padding-bottom:10px; border-bottom: 1px dashed #ddd; overflow: hidden;}
+.popcard .card_info img{float: left;width: 50px; height: 50px; margin-right: 12px;}
+
+.popcard .user_info{margin-left: 62px;}
+.popcard .user_info .c_name{padding: 10px 0 5px; color: #3278c6; font-weight: bold;}
+.popcard .user_info ul{width: 100%;}
+.popcard .user_info li{float:left; display:block;padding-right:12px; padding-left: 10px;margin-top:4px;line-height: 13px;border-right: 1px solid #ccc; overflow: hidden;}
+.popcard .user_info .nopd{padding-left: 0;}
+.popcard .user_info .nobdd{border-right: 0;}
+
+.popcard .c_intro{margin:8px 0;line-height: 18px;height: auto !important;_height:54px; max-height: 54px;overflow : hidden;
+text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;}
+.popcard .card_btn{ padding-top: 10px; border-top: 1px dashed #ddd; overflow: hidden;}
+.popcard .c_btn{float:right;margin-left: 8px;padding:0 10px; border-radius:3px;background: #3278c6;line-height: 25px; color:#fff; cursor: pointer;}

@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+.b_file {position: relative; width: 87px;height: 34px;background: #4c8dd6; text-align: center; border-radius:3px;}
+.b_file .text {display: inline-block;color: #fff;line-height: 34px; font-weight: bold;}
+.b_file .file {display: block; position: absolute;top: 0;left: 0;width: 87px; height: 34px; opacity: 0; -moz-opacity: 0; filter: Alpha(opacity=0); }
+.b_upload .tips{line-height: 20px; padding: 10px 0;}
+.b_upload .def_pic{width:302px; padding-right: 30px;}
+.def_pic .default{margin-bottom: 15px;}
+.b_upload .def_pic .def_img{width: 300px; height: 300px;}
+.def_pic input{float:left;width:50px; height: 28px; margin-right: 12px; cursor: pointer; border-radius: 3px; border:1px solid #ccc;background: #eee;}
+.def_pic .save{background: #4c8dd6; border:1px solid #2c51bd; color: #fff;}
+
+
+.min_pic{margin-left: 332px;}
+.def_pic .default img, .min_pic .b_thum img{text-align: center;background: #f8f8f8;}
+.min_pic .b_pic{width:180px; float:left; margin-right:45px; }
+.min_pic .tips{padding-top: 0;}
+.min_pic span{line-height: 14px;padding: 10px 0 20px; display: block; text-align: center;}
+.def_pic .default,.b_thum .big,.b_thum .middle,.b_thum .small{border: 1px solid #ccc;}
+.b_pic .big, .b_pic img{width:180px; height: 180px; }
+.min_pic .m_pic,.min_pic .s_pic{width: 100px; overflow: hidden;text-align: center;}
+.b_thum .middle, .m_pic img{width:50px; height: 50px; }
+.b_thum .small, .s_pic img{width:30px; height: 30px; }
+

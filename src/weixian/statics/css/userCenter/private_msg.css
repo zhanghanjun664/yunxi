@@ -1,0 +1,18 @@
+@charset "utf-8";
+.b_private .m_icon{background-position: -60px 0;}
+.b_private .opt{border-bottom: 1px dashed #e5e5e5;padding: 10px 0; overflow: hidden;zoom:1;}
+.b_private .opt p{display:inline;float: right; background: #4c8dd6; line-height: 27px;border-radius: 3px; margin-left: 15px; cursor: pointer;}
+.b_private .b_list li{padding: 10px 0; border-bottom: 1px dashed #e5e5e5; overflow: hidden;zoom:1;}
+.b_private .b_opt .btn{margin-left: 15px; color:#515567; cursor: pointer;}
+.b_private .b_opt .time{color:#b4b4b4}
+.b_private .b_list .name{float: left;}
+.b_private .b_list .b_cont{width: 560px; line-height: 18px; padding-top: 8px;}
+.b_private .b_list .b_num{padding-top: 8px; line-height: 18px; }
+.b_weixian{width: 640px; height: 320px;}
+.parea{width: 568px; height: 132px;}
+.b_weixian .pinput{width: 440px;border-radius:3px 0 0 3px;}
+.ps{padding-top:15px; overflow: hidden;}
+#ptips{float: right;line-height: 26px; padding-right: 10px;}
+.p_bd a{float:right; display: block;height:26px; padding: 0 15px; line-height: 26px; background: #3278c6; border-radius: 3px; color: #fff;}
+.p_bd a:hover{color: #fff;}
+.green{color:#73bd04; font-weight: bold; font-size: 14px;}

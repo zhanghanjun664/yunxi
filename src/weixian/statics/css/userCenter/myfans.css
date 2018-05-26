@@ -1,0 +1,38 @@
+@charset "utf-8";
+.bg{background: url(../../images/uCenter/ucenter_icon.png ) no-repeat; }
+.myfans .b_search{height: 34px; background: #e0effd;}
+.b_search .btn_arrow{position:relative; display:inline-block;padding:0 8px; margin:6px 3px 0 0; line-height: 20px; border:1px solid #ccc; border-radius: 3px; color: #666; background: #fff;*display: inline;  zoom:1; }
+.b_search .btn_arrow i{float:left;line-height: 20px;}
+.icon{display:inline-block;*display: inline;width:10px; height: 20px; background: url(../../images/uCenter/ucenter_icon.png ) no-repeat -244px 0; zoom:1; }                             
+.up{background-position: -264px 0;}
+.myfans .input_search{height: 20px;border-radius: 10px; margin:6px 10px 0 0; border:1px solid #ccc;background: #fff;}
+.input_search .input{width:150px; height: 20px; line-height: 20px;padding-left: 8px; padding-right: 5px; border-radius: 10px; color:#666;border:0;}
+.input_search .search{width:15px; height: 20px; background: url(../../images/uCenter/ucenter_icon.png ) no-repeat -284px 0; border: none; cursor: pointer;}
+.b_search .b_select{z-index: 9;left: 8px; padding-right: 8px;}
+.b_search .a_popup{display:none; position: absolute; top:30px;background: #fff; border:1px solid #ccc; overflow: hidden; }
+.b_search .a_popup a{display: block;line-height: 29px;padding:0 6px; border:1px solid #fff; color: #666;}
+.b_search .a_popup a:hover{background: #eee;}
+.b_search .action{ left:0;width:62px;}
+.b_search .sort{ left:0;}
+
+/*列表*/
+.b_list li{padding-top:10px;padding-bottom: 13px; margin-bottom:5px; border-bottom: 1px solid #d9d9d9; overflow:auto; }
+.list .user_img{float:left; width:50px; height: 50px; background: #ccc;}
+.list .b_info{margin-left: 65px;}
+.list .b_left{margin-right: 260px;}
+.list .b_left .name,.list .b_left .connect,.list .b_left .from{line-height: 23px;}
+.list .line{padding:0 8px;}
+.list .b_left .icon{height: 12px;background-position:-244px -1px;*background-position:-244px -5px; }
+.list .b_left .up{background-position:-264px -1px; *background-position:-264px -5px;}
+.list .more{ margin-left:12px;color: #3278C6;}
+
+.b_info .tips{display:none; padding-top: 5px; }
+.b_info .b_icon{width:11px; height: 6px; top:0; left:162px; background: url(../../images/uCenter/ucenter_icon.png ) no-repeat -305px -6px; z-index: 2; }
+.b_info .tips .tip_cont{line-height: 18px; background: #f2f2f2;border:1px solid #ddd; padding:5px 10px;box-shadow:inset -3px 5px 8px -3px #eaeaea;}
+.mbspace span, .txt_nohide a{float: left;}
+.txt_nohide a,.txt_nohide span{ line-height: 22px;}
+.list .b_right{margin-top: 5px;}
+.b_right .c_btn{background: #f2f2f2;border:1px solid #d9d9d9;line-height: 20px;border-radius: 3px;padding:0 10px;margin-right: 8px;}
+.b_right .add_icon{width:15px; height: 15px;margin-top:2px;background-position: -5px -22px;}
+.b_right .b_stat{width:6px; height: 6px;background:#ddd; border:1px solid #bbb; border-radius: 2px; margin-right: 3px;margin-top:7px; overflow: hidden;}
+.b_right .mutual{background-position: -24px -21px;}

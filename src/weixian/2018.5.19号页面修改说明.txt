@@ -1,0 +1,25 @@
+================================需求====================================
+加伸缩:
+index.html
+my_report.html
+publish_issue.html
+
+
+用户属性（用户姓名，手机号码，性别，年龄，地区，微信号，跟进的销售人员），情感类型，客服号，渠道号，价值（高），情感问题描述
+输入： 
+性别，地区，渠道号，价值（高）
+
+
+
+==============================结果=============================================
+说明：
+1.publish_issue.html中jquery版本换到了3.2.1
+2.添加的样式都在head标签里面那层style标签
+3.publish_issue.html添加的js在最后一个script标签
+
+加伸缩步骤
+1，引入样式
+2.引入js
+3.添加一层<div class='close_box hover'>包住左边菜单下面这一层（class='b_lt l"'）
+4.content层加个class:  flex_box
+5.在上面添加那层div下加入<div class="btn_close_box"><div class='btn_close'><< 收起</div></div>

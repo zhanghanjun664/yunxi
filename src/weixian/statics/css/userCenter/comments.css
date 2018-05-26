@@ -1,0 +1,39 @@
+@charset "utf-8";
+.b_comments .m_icon{background-position: -180px 0;}
+.comments{border: 1px solid #dbdee1;_width:744px; overflow: hidden;}
+.comments .tab{position:relative; height: 35px; background: url(../../images/uCenter/tit_bg.png) repeat-x; overflow: hidden;}
+.comments .tab li{float:left;height:34px; font:bold 14px/34px arial;border-left: 1px solid #dbdee1; border-bottom: 1px solid #dbdee1; color: #7c8091;padding: 0 20px;margin-left:-1px;cursor:pointer;}
+.comments .tab li.cur{position:relative; border-top: 3px solid #ff8400;height: 31px;line-height: 29px;border-bottom:1px solid #fff;background: #fff;z-index:2;border-right: 1px solid #dbdee1;}
+.comments .tab .blank_tab{width:432px;_width:429px; border-left: 0;}
+.b_list li{margin: 20px 22px 0 22px;padding-bottom:20px;border-bottom: 1px dashed #e5e5e5; overflow: hidden;}
+.b_list li:last-child{border-bottom: 0;}
+.b_list .b_tit{color: #4c8dd6; line-height: 18px; overflow: hidden;}
+.b_list .date{line-height: 20px;}
+.t_comment{width:480px;}
+
+/*我的课题*/
+.b_report .m_icon{background-position: -160px 0;}
+.b_report .tab .blank_tab{width:508px;_width:504px;}
+.b_report .table{margin: 15px 10px;width:728px; table-layout:fixed;border:1px solid #c7e3ff;border-right: 0;}
+.b_report .table td, .b_report .table th{line-height: 18px; padding: 7px 0;}
+.b_report .table th{background: #e0effd;border-right: 1px solid #c7e3ff}
+.b_report .table td{border-right: 1px solid #c7e3ff; border-bottom: 1px dashed #f4f4f4; text-align: center;}
+.b_report .table .title{float: left; text-align: left;padding-left: 12px;padding-right: 12px;}
+.b_report .title a{color: #7c8091;}
+.b_report .title a:hover{color: #3278c6;}
+
+.b_report .opt_btn{display: inline-block; margin:0 5px; padding:0 5px; border-radius:3px; line-height:21px; cursor: pointer; border:1px solid #e8e8e8;background: #f8f8f8; *display:inline;zoom:1;}
+.b_report .b_page{border-top:1px solid #3278c6; margin-left:10px; margin-right: 10px;}
+
+.w248{width: 248px;}
+.w73{width: 73px;}
+.w76{width: 76px;}
+.w120{width: 120px;}
+.w68{width: 68px;}
+.w45{width: 45px;}
+
+/*系统消息*/
+.b_messages .m_icon{background-position: -200px 0;}
+.b_messages .comments{border:none;}
+.b_messages .table{margin: 0; width: 750px;}
+.b_messages .b_page{margin: 10px 0;}

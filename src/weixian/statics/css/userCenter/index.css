@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+.b_matter .mod_tit{ color: #ffa047; border-color: #ffa047;}
+.b_list li{ display:inline; height: 40px; line-height: 40px;padding-right: 40px;font-weight: bold;}
+.b_matter li a{color: #ffa047; }
+.b_devote li a{color: #3278c6; }
+
+.b_matter .m_icon{background-position: -20px 0; }
+.b_devote .m_icon{background-position: -40px 0; }
+

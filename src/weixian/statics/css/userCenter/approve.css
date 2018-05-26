@@ -1,0 +1,34 @@
+@charset "utf-8";
+.b_approve .m_icon{background-position: -80px 0; }
+.progress{border-bottom: 1px dashed #ddd;}
+.progress ul{width:450px; height:30px;background: url(../../images/uCenter/progress.png) no-repeat;}
+.second ul{background-position: 0 -31px;}
+.progress li{float: left; line-height:30px; color: #fff;}
+.progress .w140{width: 140px;}
+.progress .cl7{color: #777;}
+.table{width: 100%; table-layout:fixed;}
+.table td{line-height:33px;padding-bottom: 18px;}
+.w65{width: 65px;}
+.w85{width: 85px;}
+.btype label, .btype input{float: left; display: inline; zoom:1;}
+.btype input{margin-top: 10px;*margin-top:5px;margin-right: 5px;}
+.btype label{padding-right: 30px;}
+.input,.select,.barea{width: 205px; border:1px solid #b1b5c4;padding: 0 5px; font-style: arial;color: #666; border-radius: 3px;}
+.input,select{height: 31px;line-height: 31px;}
+.select{float:left; width:102px; margin-right: 10px; padding: 0; outline:none;}
+.barea{height:110px;line-height: 22px; resize:none; overflow: auto; outline:none;}
+.mar{margin:24px 0 0 10px; }
+
+.b_file {float:left; position: relative; width: 87px;height: 34px;background: #4c8dd6; text-align: center; border-radius:3px;}
+.b_file .text {display: inline-block;color: #fff; font-weight: bold;}
+.b_file .file {display: block; position: absolute;top: 0;left: 0;width: 87px; height: 34px; opacity: 0; -moz-opacity: 0; filter: Alpha(opacity=0); }
+.b_info .b_img{float:left;width:60px; height: 60px;padding: 10px; border:1px dashed #ddd; border-radius: 5px;}
+.b_info .img{width:60px; height: 60px;background: url(../../images/uCenter/member_icon.png) no-repeat -84px 1px;}
+.b_info .tips{float:left; line-height:34px; padding-left:15px; color: #808a94}
+.b_info .b_btn{border-top:1px solid #3278c6; padding-top: 25px; text-align: center;}
+.b_info .sbtn{ height: 34px;padding: 0 60px; background: #4c8dd6;border-radius:3px; font-size: 14px;  border: none;cursor: pointer;}
+
+.b_info .check{line-height: 100px;}
+
+/*修改资料*/
+.modify .m_icon{background-position: -100px 0;}
